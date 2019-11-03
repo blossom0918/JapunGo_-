@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/main.css">
-  <title>JapunGo sign in</title>
+  <title>JapunGo login</title>
 </head>
 <body>
   <div class="wrap">
@@ -21,46 +21,23 @@
     
     <div class="content">
       <img src="img/logo.png" alt="">  
-      <h1>註冊</h1>
-      <div class="file-uploader">
-        <label class="upload">
-          頭貼
-          <input id="upload_img" style="display:none;" type="file" data-target="file-uploader" accept="image/*">
-          <img src="img/camera.png"/>
-        </label>    
-      </div>
-      <div class="name">
-        <p>暱稱</p>
-        <input type="text" class="txt">
-      </div>
+      <h1>登入</h1>
       <div class="id">
           <p>帳號</p>
           <input type="text" class="txt">
       </div>
       <div class="psw">
           <p>密碼</p>
-          <input type="text" class="txt">
-      </div>
-      <div class="email">
-          <p>信箱</p>
-          <input type="email" class="txt">
+          <input type="password" class="txt">
       </div>
       <div class="tip">
-        <button onclick="signIn()" class="sign_in">註冊</button>
+        <button>登入</button>
+        <p>還沒有帳號嗎？快來<a href="sign_in.html">註冊</a>｜不小心<a href="forget_psw.html">忘記密碼</a>了</p>
       </div>
       
     </div>
     
   </div>
-
-  <script>
-    // $(document).ready(function(){
-    //   $('#upload').click(function(){
-    //     $('#file-uploader').click();
-    //   });
-
-    // });
-  </script>
   
 </body>
 </html>
