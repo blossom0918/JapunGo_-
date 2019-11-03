@@ -1,0 +1,256 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.wrap{
+    float: none;
+    margin: 0;
+    color: dimgray;
+    font-family: "華康細圓體", sans-serif;
+    background-image: url("../img/login_bg.png");
+    background-repeat:no-repeat;
+    background-size:cover;
+  }
+  
+  .header{
+    margin: 0;
+    background-color: #EDF7FF;
+    height: 50px;
+  }
+
+  .header p{
+    float: left;
+    font-size: 20px;  
+    margin-left: 15px;
+    line-height: 50px;
+  }
+  
+  .menu li a{
+    float: right;
+    text-decoration: none;
+    margin-left: 20px;
+    margin-right: 20px;
+    line-height: 50px;
+    color: dimgray;
+    font-size: 20px;
+  }
+  
+  .clear{
+    clear: both;
+  }
+
+  .content{
+    float: none;
+    margin: 0;
+    background-color: rgba(236, 236, 236, 0.4);
+  }
+
+  .content img{
+    display: block;
+    margin: auto;
+    width: 450px;
+    padding-top: 50px;
+    background-size: contain;
+  }
+
+  .content h1{
+    text-align: center;
+    font-size: 50px;
+    margin-top: 30px;
+  }
+
+   .file-uploader{
+    float: none;
+    margin: auto;
+    width: 340px;
+    margin-top: 50px;
+  }
+/*
+  .file-uploader p{
+    float: left;
+    text-align: center;
+    font-size: 30px;
+    line-height: 40px;
+  } */
+
+  .upload{
+    float: none;
+    margin: auto;
+    width: 240px;
+    font-size: 30px;
+  }
+
+  .upload img{
+    width: 70px;
+    height: 70px;
+  }
+
+  .id{
+    float: none;
+    margin: auto;
+    width: 340px;
+    height: 40px;
+    margin-top: 50px;
+  }
+
+  .id p{
+    float: left;
+    text-align: center;
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  input{
+    float: left;
+    width: 250px;
+    height: 40px;
+    background: none;  
+    border: 1px solid dimgray;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    outline: none;
+    font-size: 22px;
+    font-family: "華康細圓體", sans-serif;
+    color: dimgray;
+    margin-left: 20px;
+  }
+
+  .psw{
+    float: none;
+    margin: auto;
+    width: 340px;
+    height: 40px;
+    margin-top: 50px;
+  }
+
+  .psw p{
+    float: left;
+    text-align: center;
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  .email{
+    float: none;
+    margin: auto;
+    width: 340px;
+    height: 40px;
+    margin-top: 50px;
+  }
+
+  .email p{
+    float: left;
+    text-align: center;
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  .name{
+    float: none;
+    margin: auto;
+    width: 340px;
+    height: 40px;
+    margin-top: 50px;
+  }
+
+  .name p{
+    float: left;
+    text-align: center;
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  .tip{
+    float: none;
+    margin: auto;
+    width: 500px;
+    margin-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  button{
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    margin: auto;
+    display:block;
+    font-size: 22px;
+    width: 115px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px;
+    font-family: "華康細圓體", sans-serif;
+  }
+
+  .tip p{
+    text-align: center;
+    margin-top: 30px;
+    font-size: 22px;
+  }
+
+  .tip p a{
+    text-decoration: none;
+    color: 	rgb(62, 133, 156);
+    font-size: 22px;
+  }
+
+  @media (max-width:1100px){
+    .header{
+      width: 100%;
+    }
+    
+    .content img{
+      max-width: 100%;
+    }
+    
+    .content{
+      width: 100%;
+    }
+
+    .tip{
+      width: 96%;
+      margin-left: 2%;
+      margin-right: 2%;
+    }
+  }
