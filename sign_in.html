@@ -6,6 +6,28 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/main.css">
   <title>JapunGo sign in</title>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <!--firebase核心js-->
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+  <script src="jquery-3.3.1.min.js"></script>
+  <!--選擇使用realtime database功能-->
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  <script src="http://code.changer.hk/jquery/plugins/jquery.cookie.js"></script>
+  <script type="text/javascript">
+
+    var firebaseConfig = {
+        apiKey: "AIzaSyCcIFB1orespqziBWnX8kUWyihopdBw8jM",
+        authDomain: "japungo.firebaseapp.com",
+        databaseURL: "https://japungo.firebaseio.com",
+        projectId: "japungo",
+        storageBucket: "japungo.appspot.com",
+        messagingSenderId: "238647383425",
+        appId: "1:238647383425:web:cd43c3708893b6e052c480"
+      };
+      // Initialize Firebase 初始化
+      firebase.initializeApp(firebaseConfig);
+      </script>
 </head>
 <body>
   <div class="wrap">
@@ -31,36 +53,72 @@
       </div>
       <div class="name">
         <p>暱稱</p>
-        <input type="text" class="txt">
+        <input type="text" class="txt" id="Name">
       </div>
       <div class="id">
           <p>帳號</p>
-          <input type="text" class="txt">
+          <input type="text" class="txt" id="ID">
       </div>
       <div class="psw">
           <p>密碼</p>
-          <input type="text" class="txt">
+          <input type="text" class="txt" id="PassWd">
       </div>
       <div class="email">
           <p>信箱</p>
-          <input type="email" class="txt">
+          <input type="email" class="txt" id="Email">
       </div>
       <div class="tip">
-        <button onclick="signIn()" class="sign_in">註冊</button>
+        <button id="btn" class="sign_in">註冊</button>
       </div>
       
     </div>
     
   </div>
 
-  <script>
-    // $(document).ready(function(){
-    //   $('#upload').click(function(){
-    //     $('#file-uploader').click();
-    //   });
+  <script type="text/javascript">
+  $(document).ready(function(){
+  var data=firebase.database().ref('/會員資料/');
+  data.once('value').then(function(snapshot){
+    var val=snapshot.val();
+    var obj = Object.keys(val).map(function(_) { return val[_]; });
 
-    // });
+  $("#btn").on('click',function(){
+    var ID= $('#ID').val();
+    var PassWd= $('#PassWd').val();
+    var Name=$('#Name').val();
+    var Email=$('#Email').val();
+    var count=0;
+    function sendValue(){
+      window.open("FriendList.html","ID");
+    }
+
+    if(PassWd.replace(/(^s*)|(s*$)/g, "").length ==0||ID.replace(/(^s*)|(s*$)/g, "").length ==0||Name.replace(/(^s*)|(s*$)/g, "").length ==0||Email.replace(/(^s*)|(s*$)/g, "").length ==0){
+      alert("please enter something");
+    }else{
+    for(var i=0;i<obj.length;i++){
+      if(ID==obj[i].ID){
+        alert("Dont use the ID");
+        count++;
+      }
+    }
+     
+    if(count==0){
+      data.push({
+      ID:ID,
+      PassWd:PassWd,
+      Name:Name,
+      Email:Email,
+      });
+        window.location.href= "login.html" ;  
+        
+        
+      }
+    } 
+    });
+    });
+ 
+});
+   
   </script>
-  
 </body>
 </html>
