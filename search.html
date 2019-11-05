@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/search.css">
+    <title>搜尋美食</title>
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            <p>JapunGo</p>
+            <ul class="menu">
+                <li><a href="">登出</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+
+        <div class="search">
+            <h1>搜尋美食</h1>
+            <p>肚子餓了嗎？快來搜搜附近有什麼美食</p>
+            <div class="inputArea">
+                <input type="text" class="searchTerm">
+                <button type="submit" class="searchBtn"><img src="img/search.png" alt=""></button>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- h2、line寫入js，同搜尋結果一起出現 -->
+            <h2 class="inputItem">輸入食物</h2>        
+            <div class="line"></div>
+            <div class="list"></div>
+        </div>
+        <div class="clear"></div>
+        
+        <div class="footer">
+            <div class="left">
+                <img src="img/logo_mini.png" alt="" class="logo">
+                <h3>聯絡我們</h3>
+                <p>如有任何問題，請於右方留下您的問題與聯絡信箱，我們將儘速與您聯繫</p>
+            </div>
+            
+            <div class="right">
+                <input type="text" class="questionTerm" placeholder="您的問題">
+                <div class="emailArea">
+                    <input type="email" class="emailTerm" placeholder="您的信箱">
+                    <button type="submit" class="submitBtn"><img src="img/send.png" alt="" class="contact"></button>
+                </div> 
+            </div>  
+        </div>
+    </div>
+</body>
+</html>

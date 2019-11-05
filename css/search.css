@@ -1,0 +1,272 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.wrap{
+    float: none;
+    margin: 0;
+    color: dimgray;
+    font-family: "華康細圓體", sans-serif;
+    background-color: WhiteSmoke;
+  }
+  
+  .header{
+    margin: 0;
+    background-color: #EDF7FF;
+    height: 50px;
+  }
+  
+  .header p{
+    float: left;
+    font-size: 20px;  
+    margin-left: 15px;
+    line-height: 50px;
+  }
+  
+  .menu li a{
+    float: right;
+    text-decoration: none;
+    margin-left: 20px;
+    margin-right: 20px;
+    line-height: 50px;
+    color: dimgray;
+    font-size: 20px;
+  }
+  
+  .clear{
+    clear: both;
+  }
+
+  .search{
+    float: none;
+    margin: auto;
+    width: 1100px;
+    height: 350px;
+    background-image: url("../img/bg2.png");
+    background-repeat:no-repeat;
+    background-size: cover;
+  }
+
+  .search h1{
+    text-align: center;
+    font-size: 50px;
+    padding-top: 90px;
+  }
+
+  .search p {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+
+  .inputArea{
+    width: 340px;
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+    position: relative;
+    display: flex;
+  }
+
+  .searchTerm{
+    outline: none;
+    width: 100%;
+    height: 40px;
+    background: none;  
+    border: 1px solid dimgray;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    outline: none;
+    font-size: 24px;
+    font-family: "華康細圓體", sans-serif;
+    color: dimgray;
+  }
+  
+  .searchBtn {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 0px;
+    outline: none;
+  }
+
+  .searchBtn img{
+    width: 40px;
+    height: 40px;
+  } 
+
+  .content{
+    width: 1100px;
+    margin: auto;
+    background-color:	#fff;
+  }
+  
+  .inputItem{
+    font-size: 36px;
+    color: rgb(62, 133, 156);
+    text-align: center;
+    padding-top: 50px;
+  }
+
+  .line{
+    width: 900px;
+    border: 1px solid rgb(62, 133, 156);
+    border-style: dashed;
+    display: block;
+    margin: auto;
+    margin-top: 50px;
+  }  
+
+  .list{
+    float: left;
+    width: 1024px;
+    background-color: #F8F8FF;
+  }
+  
+  .list div{
+    float: left;
+    max-width: 450px;
+    height: 320px;
+    background-color: #fff;
+    margin: 30px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.20);
+    border-radius: 2px;
+    font-size: 16px;
+    font-family: "華康細圓體" ,sans-serif;
+    position: relative;
+  }
+
+  .footer{
+    max-width: 1100px;
+    height: 280px;
+    margin: auto;
+    background-color: #EDF7FF;
+  }
+
+  .left{
+    float: left;
+    width: 500px;
+  }
+
+  .logo{
+    width: 200px;
+    margin-top: 40px;
+    margin-left: 50px;
+  }
+
+  .left h3{
+    margin-left: 50px;
+    margin-top: 30px;
+    font-size: 30px;
+  }
+
+  .left p{
+    margin-left: 50px;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  .right{
+    float: left;
+    width: 400px;
+    margin-left: 20px;
+    margin-top: 65px;
+  }
+
+  ::placeholder {
+    color: rgb(165, 165, 165, 0.6);
+  }
+
+  .questionTerm{
+    outline: none;
+    margin-left: 50px;
+    margin-top: 30px;
+    width: 340px;
+    height: 80px;
+    background: transparent;  
+    border: 0.1px solid dimgray;
+    font-size: 16px;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    font-family: "華康細圓體", sans-serif;
+    color: dimgray;
+  }
+  
+  .emailArea{
+    width: 340px;
+    margin-left: 50px;
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+  }
+
+  .emailTerm{
+    outline: none;
+    width: 100%;
+    height: 40px;
+    background: none;  
+    border: 0.1px solid dimgray;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    font-size: 16px;
+    font-family: "華康細圓體", sans-serif;
+    color: dimgray;
+  }
+  
+  .submitBtn {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 0px;
+    outline: none;
+  }
+
+  .contact{
+    width: 30px;
+    height: 30px;
+  }
