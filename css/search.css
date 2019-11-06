@@ -161,21 +161,211 @@ table {
 
   .list{
     float: left;
-    width: 1024px;
-    background-color: #F8F8FF;
+    width: 1100px;
+    background-color: #FFF;
   }
   
-  .list div{
+  .info{
     float: left;
-    max-width: 450px;
-    height: 320px;
+    width: 450px;
+    min-height: 230px;
     background-color: #fff;
-    margin: 30px;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.20);
+    margin: 50px 30px 30px 55px;
+    box-shadow: 0 1px 3px 0 rgba(28, 128, 185, 0.404);
     border-radius: 2px;
     font-size: 16px;
     font-family: "華康細圓體" ,sans-serif;
     position: relative;
+  }
+
+  .info h3{
+    width: 400px;
+    font-size: 24px;
+    margin-left: 10px;
+    margin-top: 18px;
+    color: rgb(15, 87, 129);
+  }
+
+  .address{
+    width: 400px;
+    font-size: 20px;
+    margin-top: 25px;
+  }
+
+  .tel{
+    width: 400px;
+    font-size: 20px;
+    margin-top: 25px;
+  }
+
+  .addIcon {
+    width: 25px;
+    height: 25px;
+    float: left;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .telIcon {
+    width: 25px;
+    height: 25px;
+    float: left;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .btn{
+    width: 350px;
+    display: block;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+
+  .btn button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 18px;
+    width: 110px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 30px;
+    font-family: "華康細圓體", sans-serif;
+  }
+
+  .postArea{
+    margin-bottom: 30px;
+  }
+
+  .postInput{
+    margin-top: 30px;
+    height: 150px;
+    display: table;
+  }
+
+  .postArea img{
+    width: 50px;
+    height: 50px;
+    float: left;
+    display:table-cell;
+    vertical-align: middle;
+    margin-left: 20px;
+  }
+
+  .postTerm{
+    width: 300px;
+    height: 130px;
+    float: left;
+    display: table-cell;
+    vertical-align: middle;
+    background: none;  
+    border: 0.5px solid gray;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    font-family: "華康細圓體", sans-serif;
+    color: dimgray;
+    margin-left: 40px;
+  }
+
+  .btn2 button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 18px;
+    width: 60px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 5px;
+    font-family: "華康細圓體", sans-serif;
+  }
+
+  .btn2{
+    width: 130px;
+    margin-left: 40px;
+  }
+
+  .commentArea{
+    margin-bottom: 30px;
+  }
+
+  .commentInput{
+    margin-top: 30px;
+    height: 50px;
+    display: table;
+  }
+
+  .commentArea img{
+    width: 50px;
+    height: 50px;
+    float: left;
+    display:table-cell;
+    vertical-align: middle;
+    margin-left: 20px;
+  }
+
+  .commentTerm{
+    width: 300px;
+    height: 50px;
+    float: left;
+    display: table-cell;
+    vertical-align: middle;
+    background: none;  
+    border: 0.5px solid gray;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    font-family: "華康細圓體", sans-serif;
+    color: dimgray;
+    margin-left: 40px;
+  }
+
+  .btn3 button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 18px;
+    width: 100px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 5px;
+    font-family: "華康細圓體", sans-serif;
+  }
+
+  .btn3{
+    width: 300px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+  }
+
+  .btnOption{
+    width: 300px;
+    display: block;
+    margin: auto;
+    margin-top: 5px;
+  }
+
+  .btnOption button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 16px;
+    width: 85px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 8px;
+    font-family: "華康細圓體", sans-serif;
   }
 
   .footer{
@@ -212,7 +402,7 @@ table {
     float: left;
     width: 400px;
     margin-left: 20px;
-    margin-top: 65px;
+    margin-top: 70px;
   }
 
   ::placeholder {
@@ -269,4 +459,42 @@ table {
   .contact{
     width: 30px;
     height: 30px;
+  }
+
+  .toTop {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 33%;
+    opacity: 0.6;
+    background: dimgray;
+    cursor: pointer;
+    position:fixed;
+    right: 1rem;
+    bottom: 1rem;
+    display: none;
+  }
+  .toTop::before, .toTop::after {
+    width: 18px;
+    height: 5px;
+    border-radius: 3px;
+    background: aliceblue;
+    position: absolute;
+    content: "";
+  }
+  .toTop::before {
+    transform: rotate(-45deg) translate(0, -50%);
+    left: 0.5rem;
+  }
+  .toTop::after {
+    transform: rotate(45deg) translate(0, -50%);
+    right: 0.5rem;
+  }
+  .toTop:focus {outline: none;}
+
+  @media (max-width:1100px){
+    
+
   }
