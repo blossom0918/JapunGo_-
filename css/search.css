@@ -108,6 +108,8 @@ table {
     color: dimgray;
     font-size: 20px;
     line-height: 50px;
+    display: block;
+    width: 100%;
   }
 
   ::-webkit-scrollbar{
@@ -157,7 +159,6 @@ table {
     display: block;
     margin: auto;
     margin-top: 40px;
-    position: relative;
     display: flex;
   }
 

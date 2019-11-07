@@ -1,0 +1,356 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.wrap{
+    float: none;
+    margin: 0;
+    color: dimgray;
+    font-family: "華康細圓體", sans-serif;
+    background-color: WhiteSmoke;
+  }
+  
+  .header{
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    position: fixed;
+    background-color: #EDF7FF;
+    z-index: 1;
+  }
+  
+  .header p{
+    float: left;
+    font-size: 20px;  
+    margin-left: 15px;
+    line-height: 50px;
+  }
+  
+  #toggle {
+    float: right;
+    margin-right: 15px;
+    width: 28px;
+    margin-top: 8px;
+    margin-bottom: 10px;
+  }
+  
+  #toggle div {
+    width: 100%;
+    height: 1px;
+    background: dimgray;
+    margin-top: 8px;
+  }
+
+  #menu{
+    top: 50px;
+    left: 70%;
+    width: 30%;
+    height: 90%;
+    background-color: #EDF7FF;
+    border-radius: 0px 0px 0px 8px;
+    position: fixed;
+    overflow: auto;
+  }
+
+  #menu li{
+    height: 50px;
+  }
+
+  #menu li img{
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin: 10px;
+  }
+
+  #menu li a{
+    float: left;
+    text-decoration: none;
+    color: dimgray;
+    font-size: 20px;
+    line-height: 50px;
+    display: block;
+    width: 100%;
+  }
+
+  ::-webkit-scrollbar{
+    width: 7px;
+    height: 16px;
+    background-color: aliceblue;
+  }
+
+  ::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background-color: aliceblue;
+  }
+
+  ::-webkit-scrollbar-thumb{
+    border-radius:10px;
+    background-color: dimgray;
+  }
+
+  .clear{
+    clear: both;
+  }
+
+  .content{
+    top: 50px;
+    float: none;
+    margin: auto;
+    width: 1100px;
+    min-height: 554px;
+    background-image: url("../img/bg2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .start{
+    width: 340px;
+    height: 180px;
+    float: none;
+    margin: auto;
+    padding-top: 200px;
+  }
+
+  .start h1{
+    z-index: 0;
+    text-align: center;
+    font-size: 50px;
+  }
+
+  .start p {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+
+  button{
+    display: block;
+    margin: auto;
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 28px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px 20px 10px 20px;
+    min-width: 160px;
+    min-height: 50px;
+    margin-top: 40px;
+    font-family: "華康細圓體", sans-serif;
+  }
+
+  #q2_prev{
+    margin-bottom: 100px;
+  }
+
+  #q3_prev{
+    margin-bottom: 100px;
+  }
+
+  #q4_prev{
+    margin-bottom: 100px;
+  }
+
+  .q1 {
+    width: 100%;
+    max-width: 1100px;
+    height: 440px; 
+    margin: auto;
+    display: block;
+    padding-top: 100px;
+    background-image: url(../img/bg3.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    padding-bottom: 15px;
+  }
+
+  .q1 h2{
+    text-align: center;
+    font-size: 28px;  
+  }
+
+  .q2{
+    width: 100%;
+    max-width: 1100px;
+    height: 440px; 
+    margin: auto;
+    display: block;
+    padding-top: 100px;
+    background-image: url(../img/bg4.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    padding-bottom: 15px;
+  }
+
+  .q2 h2{
+    text-align: center;
+    font-size: 28px;
+    margin-top: -60px;
+  }
+
+  .q3{
+    width: 100%;
+    max-width: 1100px;
+    height: 440px; 
+    margin: auto;
+    display: block;
+    padding-top: 100px;
+    background-image: url(../img/bg3.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    padding-bottom: 15px;
+  }
+
+  .q3 h2{
+    text-align: center;
+    font-size: 28px;
+    margin-top: -60px;
+  }
+
+  .q4{
+    width: 100%;
+    max-width: 1100px;
+    height: 440px; 
+    margin: auto;
+    display: block;
+    padding-top: 100px;
+    background-image: url(../img/bg4.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    padding-bottom: 15px;
+  }
+
+  .q4 h2{
+    text-align: center;
+    font-size: 28px;
+    margin-top: -60px;
+  }
+
+  .q5{
+    width: 100%;
+    max-width: 1100px;
+    height: 440px; 
+    margin: auto;
+    display: block;
+    padding-top: 100px;
+    background-image: url(../img/bg5.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    padding-bottom: 15px;
+  }
+
+  .q5 h2{
+    text-align: center;
+    font-size: 28px;
+  }
+
+  .game h3{
+    z-index: 0;
+    margin-left: 10px;
+    font-size: 36px; 
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    border-radius: 999em;
+    background-color: wheat;
+    text-align: center;
+    color: whitesmoke;
+  }
+
+  .circleOne{
+    z-index: 0;
+    margin-left: 110px;
+    width: 25px;
+    height: 25px;
+    border-radius: 999em;
+    background-color: rgb(241, 162, 189);
+  }
+
+  .circleThree{
+    z-index: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 999em;
+    background-color: lightgoldenrodyellow;
+  }
+
+  .circle{
+    width: 140px;
+    position: relative;
+    top: 0px;
+    left: 200px;
+  }
+
+  @media (max-width:1100px){
+    .content{
+      width: 100%;
+    }
+
+    .game{
+      width: 100%;
+    }
+
+    .circle{
+      top: 8%;
+      left: 18%;
+    }
+
+    #menu{
+      left: 62%;
+      min-width: 38%;
+    }
+  }
+
+  @media (max-width:480px){
+    .circle{
+      top: 8%;
+      left: 8%;
+    }
+
+    #menu{
+      left: 40%;
+      min-width: 60%;
+    }
+  }
