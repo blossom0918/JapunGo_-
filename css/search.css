@@ -51,9 +51,11 @@ table {
   }
   
   .header{
-    margin: 0;
-    background-color: #EDF7FF;
+    width: 100%;
     height: 50px;
+    margin: 0;
+    position: fixed;
+    background-color: #EDF7FF;
   }
   
   .header p{
@@ -167,22 +169,21 @@ table {
   
   .info{
     float: left;
-    width: 450px;
+    max-width: 450px;
     min-height: 230px;
     background-color: #fff;
-    margin: 50px 30px 30px 55px;
+    margin: 50px 30px 30px 85px;
     box-shadow: 0 1px 3px 0 rgba(28, 128, 185, 0.404);
     border-radius: 2px;
     font-size: 16px;
     font-family: "華康細圓體" ,sans-serif;
-    position: relative;
   }
 
   .info h3{
     width: 400px;
     font-size: 24px;
     margin-left: 10px;
-    margin-top: 18px;
+    padding-top: 18px;
     color: rgb(15, 87, 129);
   }
 
@@ -238,7 +239,7 @@ table {
   }
 
   .postArea{
-    margin-bottom: 30px;
+    padding-bottom: 30px;
   }
 
   .postInput{
@@ -292,7 +293,7 @@ table {
   }
 
   .commentArea{
-    margin-bottom: 30px;
+    padding-bottom: 30px;
   }
 
   .commentInput{
@@ -370,39 +371,37 @@ table {
 
   .footer{
     max-width: 1100px;
-    height: 280px;
     margin: auto;
     background-color: #EDF7FF;
+    padding-bottom: 30px;
   }
 
   .left{
-    float: left;
-    width: 500px;
+    max-width: 480px;
   }
 
   .logo{
     width: 200px;
     margin-top: 40px;
-    margin-left: 50px;
+    margin-left: 85px;
   }
 
   .left h3{
-    margin-left: 50px;
+    margin-left: 85px;
     margin-top: 30px;
     font-size: 30px;
   }
 
   .left p{
-    margin-left: 50px;
+    margin-left: 85px;
     margin-top: 10px;
     font-size: 16px;
   }
 
   .right{
-    float: left;
-    width: 400px;
-    margin-left: 20px;
-    margin-top: 70px;
+    max-width: 400px;
+    margin-left: 535px;
+    margin-top: -120px;
   }
 
   ::placeholder {
@@ -461,6 +460,47 @@ table {
     height: 30px;
   }
 
+  .listBtn {
+    width: 2.5rem;
+    height: 2.5rem;
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    border-radius: 33%;
+    border: 0px;
+    opacity: 0.6;
+    background: dimgray;
+    outline: none;
+  }
+
+  .listBtn img{
+    width: 1.5rem;
+    height: 1.5rem;
+    background-size: cover;
+    background-position: bottom;
+    padding-top: 0.3rem;
+  }
+
+  .mapBtn {
+    width: 2.5rem;
+    height: 2.5rem;
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    border-radius: 33%;
+    border: 0px;
+    opacity: 0.6;
+    background: dimgray;
+    outline: none;
+  }
+
+  .mapBtn img{
+    width: 1.8rem;
+    height: 1.8rem;
+    background-size: cover;
+    background-position: inherit;
+  }
+
   .toTop {
     width: 2.5rem;
     height: 2.5rem;
@@ -471,11 +511,12 @@ table {
     opacity: 0.6;
     background: dimgray;
     cursor: pointer;
-    position:fixed;
+    position: fixed;
     right: 1rem;
-    bottom: 1rem;
+    bottom: 4rem;
     display: none;
   }
+
   .toTop::before, .toTop::after {
     width: 18px;
     height: 5px;
@@ -484,17 +525,65 @@ table {
     position: absolute;
     content: "";
   }
+
   .toTop::before {
     transform: rotate(-45deg) translate(0, -50%);
     left: 0.5rem;
   }
+
   .toTop::after {
     transform: rotate(45deg) translate(0, -50%);
     right: 0.5rem;
   }
-  .toTop:focus {outline: none;}
+
+  .toTop:focus {
+    outline: none;
+  }
+
+  .mapContent{
+    width: 1100px;
+    height: 1000px;
+    margin: auto;
+    background-color:	#fff;
+  }
 
   @media (max-width:1100px){
-    
+    .search{
+      width: 100%;
+    }
+
+    .content{
+      width: 100%;
+    }
+
+    .mapContent{
+      width: 100%;
+    }
+
+    .line{
+      width: 93%;
+    }
+
+    .list{
+      width: 100%;
+    }
+
+    .info{
+      float: none;
+      margin: auto;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      width: 90%;
+    }
+
+    .left{
+      width: 100%;
+      margin: auto;
+    }
+
+    .right{
+      width: 100%;
+      margin: auto;
+    }
 
   }
