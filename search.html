@@ -11,19 +11,26 @@
     <div class="wrap">
         <div class="header">
             <p>JapunGo</p>
-            <ul class="menu">
-                <li><a href="">登出</a></li>
-                <li><a href="#menu" class="toggle"><span>Menu</span></a></li>
-            </ul>
+            <div id="toggle">
+                    <div class="one"></div>
+                    <div class="two"></div>
+                    <div class="three"></div>
+            </div>
 
-            <!-- <nav id="menu">
-                <ul class="links">
-                    <li><a href="index.html">首頁</a></li>
-                    <li><a href="game.html">今天吃什麼</a></li>
-                    <li><a href="search.html">搜尋美食</a></li>
+            <nav id="menu">
+                 <ul>
+                    <li><a href="index.html"><img src="img/home.png" alt="">首頁</a></li>
+                    <li><a href="game.html"><img src="img/game.png" alt="">今天吃什麼</a></li>
+                    <li><a href="posts.html"><img src="img/posts.png" alt="">我的動態</a></li>
+                    <li><a href="search.html"><img src="img/search.png" alt="">搜尋美食</a></li>
+                    <li><a href="foodlist.html"><img src="img/foodlist.png" alt="">美食清單</a></li>
+                    <li><a href="friendlist.html"><img src="img/friendlist.png" alt="">好友清單</a></li>
+                    <li><a href="member.html"><img src="img/member.png" alt="">修改會員資料</a></li>
+                    <li><a href="friend_request.html"><img src="img/friend_request.png" alt="">好友邀請</a></li>
+                    <li><a href="comment.html"><img src="img/comment.png" alt="">我的評論</a></li>
+                    <li><a href="#"><img src="img/logout.png" alt="">登出</a></li>
                 </ul>
-            </nav> -->
-
+            </nav>
         </div>
         <div class="clear"></div>
 
@@ -119,6 +126,11 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script>
         $( document ).ready(function() {
+            $('#menu').hide();
+            $('#toggle').click(function() {
+                $('#menu').slideToggle();
+            });
+
             $('#listView').hide();
             $('.mapContent').hide();
             $('#mapView').click(function() {
