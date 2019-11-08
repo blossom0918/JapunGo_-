@@ -6,6 +6,24 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/main.css">
   <title>JapunGo login</title>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+  <script src="jquery-3.3.1.min.js"></script>
+  <!--選擇使用realtime database功能-->
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+  <script type="text/javascript">
+
+    var firebaseConfig = {
+        apiKey: "AIzaSyCcIFB1orespqziBWnX8kUWyihopdBw8jM",
+        authDomain: "japungo.firebaseapp.com",
+        databaseURL: "https://japungo.firebaseio.com",
+        projectId: "japungo",
+        storageBucket: "japungo.appspot.com",
+        messagingSenderId: "238647383425",
+        appId: "1:238647383425:web:cd43c3708893b6e052c480"
+      };
+      // Initialize Firebase 初始化
+      firebase.initializeApp(firebaseConfig);
+      </script>
 </head>
 <body>
   <div class="wrap">
@@ -24,20 +42,52 @@
       <h1>登入</h1>
       <div class="id">
           <p>帳號</p>
-          <input type="text" class="txt">
+          <input type="text" class="txt" id="ID">
       </div>
       <div class="psw">
           <p>密碼</p>
-          <input type="password" class="txt">
+          <input type="password" class="txt" id="PassWd">
       </div>
       <div class="tip">
-        <button>登入</button>
+        <button id="btn">登入</button>
         <p>還沒有帳號嗎？快來<a href="sign_in.html">註冊</a>｜不小心<a href="forget_psw.html">忘記密碼</a>了</p>
       </div>
       
     </div>
     
   </div>
+  <script type="text/javascript">
+
+  $(document).ready(function(){
+  
+  data=firebase.database();
+  data.ref('/會員資料/').once('value',function(snapshot){
+    var data=snapshot.val();
+
+    $("#btn").on('click',function(){
+      var ID= $('#ID').val();
+      var PassWd=$('#PassWd').val();
+      
+      var obj = Object.keys(data).map(function(_) { return data[_]; });
+      
+      var flag=0;
+      // console.log(ID);
+      // console.log(PassWd);
+      for(var i=0;i<obj.length;i++){
+        document.cookie="ID="+ID;
+        flag++;
+        window.location.href="FriendList.html";
+        
+      }
+      if(flag==0){
+        alert("wrong number");
+      }
+   });
+  });
+    
+
+});
+  </script>
   
 </body>
 </html>
