@@ -136,7 +136,7 @@ table {
   .content{
     top: 50px;
     float: none;
-    margin: auto;
+    margin: 0 auto;
     width: 1100px;
     min-height: 554px;
     background-image: url("../img/bg2.png");
