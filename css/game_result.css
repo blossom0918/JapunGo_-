@@ -170,6 +170,13 @@ table {
     padding-bottom: 30px;
   }
 
+  .circle{
+    width: 140px;
+    position: relative;
+    top: 0px;
+    left: 100px;
+  }
+
   .circle h3{
     z-index: 0;
     margin-left: 10px;
@@ -198,13 +205,6 @@ table {
     height: 15px;
     border-radius: 999em;
     background-color: lightgoldenrodyellow;
-  }
-
-  .circle{
-    width: 140px;
-    position: relative;
-    top: 0px;
-    left: 100px;
   }
 
   @media (max-width:1100px){
