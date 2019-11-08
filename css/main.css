@@ -48,7 +48,7 @@ table {
     color: dimgray;
     font-family: "華康細圓體", sans-serif;
     background-image: url("../img/login_bg.png");
-    background-repeat:no-repeat;
+    background-repeat:repeat;
     background-size:cover;
   }
   
@@ -98,6 +98,9 @@ table {
   .content{
     float: none;
     margin: 0;
+	  margin-left: 1px;
+	  margin-right: 1px;
+	  margin-bottom: 1px;
     background-color: rgba(236, 236, 236, 0.4);
   }
 
@@ -226,6 +229,7 @@ table {
   }
 
   button{
+    outline: none;
     border: 0;
     background-color: rgb(234, 245, 255);
     color: dimgray;
