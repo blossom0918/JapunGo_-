@@ -98,6 +98,10 @@ table {
   .content{
     float: none;
     margin: 0;
+	  height: 100%;
+	  margin-left: 1px;
+	  margin-right: 1px;
+	  margin-bottom: 1px;
     background-color: rgba(236, 236, 236, 0.4);
   }
 
