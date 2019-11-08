@@ -137,8 +137,10 @@ table {
     top: 50px;
     float: none;
     margin: 0 auto;
-    width: 1100px;
-    min-height: 554px;
+    margin-left: 20px;
+    margin-right: 20px;
+/*     width: 1100px; */
+/*     min-height: 554px; */
     background-image: url("../img/bg2.png");
     background-repeat: no-repeat;
     background-size: cover;
