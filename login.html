@@ -57,6 +57,15 @@
     
   </div>
   <script type="text/javascript">
+  function getCookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+
+    if (arr = document.cookie.match(reg))
+
+        return unescape(arr[2]);
+    else
+        return null;
+}
 
   $(document).ready(function(){
   
@@ -74,11 +83,13 @@
       // console.log(ID);
       // console.log(PassWd);
       for(var i=0;i<obj.length;i++){
-        document.cookie="ID="+ID;
-        flag++;
-        window.location.href="FriendList.html";
-        
+        if(PassWd==obj[i].PassWd&&ID==obj[i].ID){
+            flag++;
+            document.cookie="ID="+ID;
+            window.location.href="FriendList.html";
+        }
       }
+
       if(flag==0){
         alert("wrong number");
       }
