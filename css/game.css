@@ -144,7 +144,7 @@ table {
     display: block;
     margin: auto;
     padding-top: 200px;
-    min-height: 400px;
+    min-height: 440px;
     background-image: url("../img/bg2.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -192,7 +192,7 @@ table {
   .q1 {
     margin: auto;
     display: block;
-    height: 440px;
+    height: 465px;
     padding-top: 100px;
     background-image: url(../img/bg3.png);
     background-position: right;
@@ -208,7 +208,7 @@ table {
   .q2{
     margin: auto;
     display: block;
-    height: 440px; 
+    height: 465px; 
     padding-top: 100px;
     background-image: url(../img/bg4.png);
     background-position: left;
@@ -225,7 +225,7 @@ table {
   .q3{
     margin: auto;
     display: block;
-    height: 440px;
+    height: 465px;
     padding-top: 100px;
     background-image: url(../img/bg3.png);
     background-position: left;
@@ -242,7 +242,7 @@ table {
   .q4{
     margin: auto;
     display: block;
-    height: 440px;
+    height: 465px;
     padding-top: 100px;
     background-image: url(../img/bg4.png);
     background-position: right;
@@ -259,7 +259,7 @@ table {
   .q5{
     margin: auto;
     display: block;
-    height: 440px;
+    height: 465px;
     padding-top: 100px;
     background-image: url(../img/bg5.png);
     background-position: right;

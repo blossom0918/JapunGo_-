@@ -152,7 +152,8 @@ table {
   }
 
   button{
-    float: left;
+    float: none;
+    display: block;
     margin: auto;
     outline: none;
     border: 0;
@@ -161,13 +162,15 @@ table {
     font-size: 24px;
     border-radius: 5px;
     text-align: center;
-    padding: 10px 20px 10px 20px;
+    width: 154px;
+    height: 52px;
     margin: 40px 8px 0px 8px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
   .btn {
-    max-width: 480px;
+    width: 160px;
+    margin-top: 30px;
     display: block;
     margin: auto;
   }
