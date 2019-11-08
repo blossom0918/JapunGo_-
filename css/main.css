@@ -48,7 +48,7 @@ table {
     color: dimgray;
     font-family: "華康細圓體", sans-serif;
     background-image: url("../img/login_bg.png");
-    background-repeat:no-repeat;
+    background-repeat:repeat;
     background-size:cover;
   }
   
