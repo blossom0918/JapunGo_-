@@ -46,7 +46,7 @@ table {
     float: none;
     margin: 0;
     color: dimgray;
-    font-family: "../font/yuanlight.ttc", sans-serif;
+    font-family: "Microsoft JhengHei UI", sans-serif;
     background-image: url("../img/login_bg.png");
     background-repeat:repeat;
     background-size:cover;
