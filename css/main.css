@@ -98,9 +98,6 @@ table {
   .content{
     float: none;
     margin: 0;
-	  margin-left: 1px;
-	  margin-right: 1px;
-	  margin-bottom: 1px;
     background-color: rgba(236, 236, 236, 0.4);
   }
 
@@ -170,7 +167,7 @@ table {
     border-right-style: none;
     outline: none;
     font-size: 22px;
-    font-family: "華康細圓體", sans-serif;
+    font-family: "Microsoft JhengHei UI", sans-serif;
     color: dimgray;
     margin-left: 20px;
   }
@@ -240,7 +237,7 @@ table {
     border-radius: 5px;
     text-align: center;
     padding: 10px;
-    font-family: "華康細圓體", sans-serif;
+    font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
   .tip p{
