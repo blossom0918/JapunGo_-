@@ -24,7 +24,9 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
+  width: 96%;
+  height: 100%;
 }
 ol, ul {
 	list-style: none;
@@ -46,8 +48,13 @@ table {
     float: none;
     margin: 0;
     color: dimgray;
-    font-family: "華康細圓體", sans-serif;
+    font-family: "Microsoft JhengHei UI", sans-serif;
     background-color: WhiteSmoke;
+  }
+
+  .wrap div{
+    width: 96%;
+    height: 100%;
   }
   
   .header{
@@ -160,7 +167,6 @@ table {
     text-align: center;
     padding: 10px 20px 10px 20px;
     margin: 40px 8px 0px 8px;
-    font-family: "華康細圓體", sans-serif;
   }
 
   .result{
