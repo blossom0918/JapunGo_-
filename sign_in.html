@@ -44,13 +44,14 @@
     <div class="content">
       <img src="img/logo.png" alt="">  
       <h1>註冊</h1>
-      <div class="file-uploader">
-        <label class="upload">
-          頭貼
-          <input id="upload_img" style="display:none;" type="file" data-target="file-uploader" accept="image/*">
-          <img src="img/camera.png"/>
-        </label>    
-      </div>
+      <div class="uploader">
+        <p>頭貼</p>
+        <input id="upload" style="display: none;" type="file" data-target="file-uploader" accept="image/*">
+        <label for="upload">
+          <img src="img/camera.png" alt="" style="width: 70px; height: 70px; margin-left: 135px;">          
+        </label>
+        <img id="previewImg" src="#" alt="">
+        </div>
       <div class="name">
         <p>暱稱</p>
         <input type="text" class="txt" id="Name">
@@ -62,6 +63,10 @@
       <div class="psw">
           <p>密碼</p>
           <input type="text" class="txt" id="PassWd">
+      </div>
+      <div class="pswConfirm">
+          <p>確認密碼</p>
+          <input type="text" class="txt" placeholder="請再次輸入密碼以確認">
       </div>
       <div class="email">
           <p>信箱</p>

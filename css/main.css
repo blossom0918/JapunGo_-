@@ -115,30 +115,25 @@ table {
     margin-top: 30px;
   }
 
-   .file-uploader{
+   .uploader{
     float: none;
     margin: auto;
     width: 340px;
     margin-top: 50px;
   }
-/*
-  .file-uploader p{
+
+  .uploader p{
     float: left;
     text-align: center;
     font-size: 30px;
     line-height: 40px;
-  } */
-
-  .upload{
-    float: none;
-    margin: auto;
-    width: 240px;
-    font-size: 30px;
   }
 
-  .upload img{
-    width: 70px;
-    height: 70px;
+  #previewImg{
+    width: 180px;
+    height: 130px;
+    background-color: rgba(105, 105, 105, 0.3);
+    margin-top: 30px;
   }
 
   .id{
@@ -187,6 +182,42 @@ table {
     line-height: 40px;
   }
 
+  .pswConfirm{
+    float: none;
+    margin: auto;
+    width: 340px;
+    height: 70px;
+    margin-top: 50px;
+  }
+
+  .pswConfirm p{
+    float: left;
+    text-align: center;
+    font-size: 30px;
+    line-height: 40px;
+  } 
+
+  .pswConfirm input{
+    float: left;
+    width: 250px;
+    height: 40px;
+    background: none;  
+    border: 1px solid dimgray;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    outline: none;
+    font-size: 22px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    color: dimgray;
+    margin-left: 80px;
+  } 
+
+  ::placeholder{
+    color: rgb(165, 165, 165, 0.6);
+    font-size: 18px;
+  }
+
   .email{
     float: none;
     margin: auto;
@@ -207,7 +238,7 @@ table {
     margin: auto;
     width: 340px;
     height: 40px;
-    margin-top: 50px;
+    margin-top: 30px;
   }
 
   .name p{
