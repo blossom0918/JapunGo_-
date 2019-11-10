@@ -46,7 +46,8 @@
       </div>
       <div class="psw">
           <p>密碼</p>
-          <input type="password" class="txt" id="PassWd">
+          <input type="password" class="password" id="PassWd">
+          <button class="show_password glyphicon eye_open"></button>
       </div>
       <div class="tip">
         <button id="btn">登入</button>
@@ -68,6 +69,17 @@
 }
 
   $(document).ready(function(){
+    $('.show_password').click(function () {
+        let pass_type = $('input.password').attr('type');
+
+        if (pass_type === 'password'){
+            $('input.password').attr('type', 'text');
+            $('.show_password').removeClass('eye_open').addClass('eye_close');
+        } else {
+            $('input.password').attr('type', 'password');
+            $('.show_password').removeClass('eye_close').addClass('eye_open');
+        }
+    });
   
   data=firebase.database();
   data.ref('/會員資料/').once('value',function(snapshot){
