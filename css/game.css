@@ -113,6 +113,10 @@ table {
     width: 100%;
   }
 
+  #menu li a:hover{
+    background-color: rgb(215, 237, 253);
+  }
+
   ::-webkit-scrollbar{
     width: 7px;
     height: 16px;
@@ -201,7 +205,8 @@ table {
 
   .q1 h2{
     text-align: center;
-    font-size: 28px;  
+    font-size: 28px; 
+    margin-top: -60px; 
   }
 
   .q2{
@@ -253,14 +258,13 @@ table {
   }
 
   .q5{
-
     background-image: url(../img/bg5.png);
-    
   }
 
   .q5 h2{
     text-align: center;
     font-size: 28px;
+    margin-top: -60px;
   }
 
   .circle{
@@ -310,8 +314,11 @@ table {
     }
 
     .circle{
-      top: 8%;
       left: 18%;
+    }
+
+    h2{
+      margin-top: 30px;
     }
 
     #menu{
@@ -322,7 +329,7 @@ table {
 
   @media (max-width:480px){
     .circle{
-      top: 8%;
+      top: -10%;
       left: 8%;
     }
 

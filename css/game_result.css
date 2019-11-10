@@ -113,6 +113,10 @@ table {
     display: block;
     width: 100%;
   }
+  
+  #menu li a:hover{
+    background-color: rgb(215, 237, 253);
+  }
 
   ::-webkit-scrollbar{
     width: 7px;
