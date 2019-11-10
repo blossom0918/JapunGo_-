@@ -58,11 +58,14 @@ table {
     height: 50px;
   }
 
-  .header p{
-    float: left;
-    font-size: 20px;  
-    margin-left: 15px;
-    line-height: 50px;
+  .logo{
+    height: 46px; 
+    margin-left: 1.5%; 
+    margin-top: 2px;
+  }
+
+  .menu{
+    margin-top: -50px;
   }
   
   .menu li a{

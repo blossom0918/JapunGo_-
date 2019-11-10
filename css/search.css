@@ -58,11 +58,10 @@ table {
     background-color: #EDF7FF;
   }
   
-  .header p{
-    float: left;
-    font-size: 20px;  
-    margin-left: 15px;
-    line-height: 50px;
+  .logo{
+    height: 46px; 
+    margin-left: 1.5%; 
+    margin-top: 2px;
   }
 
   #toggle {
