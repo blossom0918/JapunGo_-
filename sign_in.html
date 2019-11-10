@@ -62,11 +62,11 @@
       </div>
       <div class="psw">
           <p>密碼</p>
-          <input type="text" class="txt" id="PassWd">
+          <input type="password" class="txt" id="PassWd">
       </div>
       <div class="pswConfirm">
           <p>確認密碼</p>
-          <input type="text" class="txt" placeholder="請再次輸入密碼以確認">
+          <input type="password" class="txt" placeholder="請再次輸入密碼以確認" id="RepassWd">
       </div>
       <div class="email">
           <p>信箱</p>
@@ -92,21 +92,25 @@
     var PassWd= $('#PassWd').val();
     var Name=$('#Name').val();
     var Email=$('#Email').val();
+    var RepassWd=$('#RepassWd').val();
     var count=0;
     function sendValue(){
       window.open("FriendList.html","ID");
     }
 
     if(PassWd.replace(/(^s*)|(s*$)/g, "").length ==0||ID.replace(/(^s*)|(s*$)/g, "").length ==0||Name.replace(/(^s*)|(s*$)/g, "").length ==0||Email.replace(/(^s*)|(s*$)/g, "").length ==0){
-      alert("please enter something");
+      alert("尚有欄位未填寫");
     }else{
-    for(var i=0;i<obj.length;i++){
-      if(ID==obj[i].ID){
-        alert("Dont use the ID");
-        count++;
+      for(var i=0;i<obj.length;i++){
+        if(ID==obj[i].ID){
+          alert("此帳號已被使用");
+          count++;
+        }
       }
+    if(count==0&&PassWd!=RepassWd){
+      alert('確認密碼輸入錯誤');
+      count++;
     }
-     
     if(count==0){
       data.push({
       ID:ID,
