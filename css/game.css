@@ -177,30 +177,39 @@ table {
     border-radius: 5px;
     text-align: center;
     padding: 10px 20px 10px 20px;
+    min-width: 215px;
     margin-top: 40px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
   #q2_prev{
+    font-size: 24px;
     margin-bottom: 100px;
   }
 
   #q3_prev{
+    font-size: 24px;
     margin-bottom: 100px;
   }
 
   #q4_prev{
+    font-size: 24px;
     margin-bottom: 100px;
   }
 
   .q1 {
-    margin: auto;
-    display: block;
-    height: 510px;
-    padding-top: 100px;
+    height: 565px;
+    padding-top: 50px;
     background-image: url(../img/bg3.png);
     background-position: right;
     background-repeat: no-repeat;
+  }
+
+  .question{
+    margin: auto;
+    display: block;
+    width: 300px;
+    margin-top: 60px;
   }
 
   .q1 h2{
@@ -210,10 +219,8 @@ table {
   }
 
   .q2{
-    margin: auto;
-    display: block;
-    height: 510px; 
-    padding-top: 100px;
+    height: 565px; 
+    padding-top: 30px;
     background-image: url(../img/bg4.png);
     background-position: left;
     background-repeat: no-repeat;
@@ -226,10 +233,8 @@ table {
   }
 
   .q3{
-    margin: auto;
-    display: block;
-    height: 510px;
-    padding-top: 100px;
+    height: 565px;
+    padding-top: 30px;
     background-image: url(../img/bg3.png);
     background-position: left;
     background-repeat: no-repeat;
@@ -242,10 +247,8 @@ table {
   }
 
   .q4{
-    margin: auto;
-    display: block;
-    height: 510px;
-    padding-top: 100px;
+    height: 565px;
+    padding-top: 30px;
     background-image: url(../img/bg4.png);
     background-position: right;
     background-repeat: no-repeat;
@@ -258,7 +261,11 @@ table {
   }
 
   .q5{
+    height: 565px;
+    padding-top: 30px;
     background-image: url(../img/bg5.png);
+    background-position: left;
+    background-repeat: no-repeat;
   }
 
   .q5 h2{
@@ -270,7 +277,7 @@ table {
   .circle{
     width: 140px;
     position: relative;
-    top: 0px;
+    top: 60px;
     left: 200px;
   }
 
@@ -314,11 +321,11 @@ table {
     }
 
     .circle{
-      left: 18%;
+      left: 8%;
     }
 
-    h2{
-      margin-top: 30px;
+    .question{
+      margin-top: 10%;
     }
 
     #menu{
@@ -329,8 +336,12 @@ table {
 
   @media (max-width:480px){
     .circle{
-      top: -10%;
+      top: 4%;
       left: 8%;
+    }
+
+    .question{
+      margin-top: 80px;
     }
 
     #menu{
