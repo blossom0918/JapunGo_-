@@ -408,7 +408,6 @@ function answer(u) {
     }
 
     const r = parseInt(Math.random() * (list.length));
-    alert(list[r]);
     console.log(r);
     console.log(list);
     document.cookie='food='+list[r];
@@ -431,6 +430,7 @@ document.getElementById('enter').addEventListener('click', function () {
     } else {
         console.log(u_choice);
         answer(u_choice);
+        window.location.href= "game_result.html"
     }
 })
 
