@@ -253,13 +253,9 @@ table {
   }
 
   .q5{
-    margin: auto;
-    display: block;
-    height: 510px;
-    padding-top: 100px;
+
     background-image: url(../img/bg5.png);
-    background-position: right;
-    background-repeat: no-repeat;
+    
   }
 
   .q5 h2{
