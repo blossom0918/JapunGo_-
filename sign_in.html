@@ -62,11 +62,13 @@
       </div>
       <div class="psw">
           <p>密碼</p>
-          <input type="password" class="txt" id="PassWd">
+          <input type="password" class="password" id="PassWd">
+          <button class="show_password glyphicon eye_open"></button>
       </div>
       <div class="pswConfirm">
           <p>確認密碼</p>
-          <input type="password" class="txt" placeholder="請再次輸入密碼以確認" id="RepassWd">
+          <input type="password" class="password_confirm" placeholder="請再次輸入密碼以確認" id="RepassWd">
+          <button class="show_password_confirm glyphicon eye_open_confirm"></button>
       </div>
       <div class="email">
           <p>信箱</p>
@@ -82,49 +84,76 @@
 
   <script type="text/javascript">
   $(document).ready(function(){
-  var data=firebase.database().ref('/會員資料/');
-  data.once('value').then(function(snapshot){
-    var val=snapshot.val();
-    var obj = Object.keys(val).map(function(_) { return val[_]; });
+    $('.show_password').click(function () {
+        let pass_type = $('input.password').attr('type');
 
-  $("#btn").on('click',function(){
-    var ID= $('#ID').val();
-    var PassWd= $('#PassWd').val();
-    var Name=$('#Name').val();
-    var Email=$('#Email').val();
-    var RepassWd=$('#RepassWd').val();
-    var count=0;
-    function sendValue(){
-      window.open("FriendList.html","ID");
-    }
-
-    if(PassWd.replace(/(^s*)|(s*$)/g, "").length ==0||ID.replace(/(^s*)|(s*$)/g, "").length ==0||Name.replace(/(^s*)|(s*$)/g, "").length ==0||Email.replace(/(^s*)|(s*$)/g, "").length ==0){
-      alert("尚有欄位未填寫");
-    }else{
-      for(var i=0;i<obj.length;i++){
-        if(ID==obj[i].ID){
-          alert("此帳號已被使用");
-          count++;
+        if (pass_type === 'password'){
+            $('input.password').attr('type', 'text');
+            $('.show_password').removeClass('eye_open').addClass('eye_close');
+        } else {
+            $('input.password').attr('type', 'password');
+            $('.show_password').removeClass('eye_close').addClass('eye_open');
         }
+    });
+
+    $('.show_password_confirm').click(function () {
+        let pass_type = $('input.password_confirm').attr('type');
+
+        if (pass_type === 'password'){
+            $('input.password_confirm').attr('type', 'text');
+            $('.show_password_confirm').removeClass('eye_open_confirm').addClass('eye_close_confirm');
+        } else {
+            $('input.password_confirm').attr('type', 'password');
+            $('.show_password_confirm').removeClass('eye_close_confirm').addClass('eye_open_confirm');
+        }
+    });
+
+    var data=firebase.database().ref('/會員資料/');
+    data.once('value').then(function(snapshot){
+      var val=snapshot.val();
+      var obj = Object.keys(val).map(function(_) { return val[_]; });
+
+    
+      
+
+    $("#btn").on('click',function(){
+      var ID= $('#ID').val();
+      var PassWd= $('#PassWd').val();
+      var Name=$('#Name').val();
+      var Email=$('#Email').val();
+      var RepassWd=$('#RepassWd').val();
+      var count=0;
+      function sendValue(){
+        window.open("FriendList.html","ID");
       }
-    if(count==0&&PassWd!=RepassWd){
-      alert('確認密碼輸入錯誤');
-      count++;
-    }
-    if(count==0){
-      data.push({
-      ID:ID,
-      PassWd:PassWd,
-      Name:Name,
-      Email:Email,
+
+      if(PassWd.replace(/(^s*)|(s*$)/g, "").length ==0||ID.replace(/(^s*)|(s*$)/g, "").length ==0||Name.replace(/(^s*)|(s*$)/g, "").length ==0||Email.replace(/(^s*)|(s*$)/g, "").length ==0){
+        alert("尚有欄位未填寫");
+      }else{
+        for(var i=0;i<obj.length;i++){
+          if(ID==obj[i].ID){
+            alert("此帳號已被使用");
+            count++;
+          }
+        }
+      if(count==0&&PassWd!=RepassWd){
+        alert('確認密碼輸入錯誤');
+        count++;
+      }
+      if(count==0){
+        data.push({
+        ID:ID,
+        PassWd:PassWd,
+        Name:Name,
+        Email:Email,
+        });
+          window.location.href= "login.html" ;  
+          
+          
+        }
+      } 
       });
-        window.location.href= "login.html" ;  
-        
-        
-      }
-    } 
-    });
-    });
+      });
  
 });
    

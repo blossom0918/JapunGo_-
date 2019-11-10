@@ -182,6 +182,32 @@ table {
     line-height: 40px;
   }
 
+  .eye_open{
+    background-image: url(../img/eye.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    margin-left: 290px;
+    position: absolute;
+  }
+
+  .eye_close{
+    background-image: url(../img/eyelash.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    margin-left: 290px;
+    position: absolute;
+  }
+
   .pswConfirm{
     float: none;
     margin: auto;
@@ -212,6 +238,34 @@ table {
     color: dimgray;
     margin-left: 80px;
   } 
+
+  .eye_open_confirm{
+    background-image: url(../img/eye.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    margin-left: 290px;
+    margin-top: 40px;
+    position: absolute;
+  }
+
+  .eye_close_confirm{
+    background-image: url(../img/eyelash.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    margin-left: 290px;
+    margin-top: 40px;
+    position: absolute;
+  }
 
   ::placeholder{
     color: rgb(165, 165, 165, 0.6);
