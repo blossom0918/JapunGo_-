@@ -1,0 +1,706 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.wrap{
+    float: none;
+    margin: 0;
+    color: dimgray;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    background-color: WhiteSmoke;
+  }
+  
+  .header{
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    position: fixed;
+    background-color: #EDF7FF;
+  }
+  
+  .logo{
+    height: 46px; 
+    margin-left: 1.5%; 
+    margin-top: 2px;
+  }
+
+  #toggle {
+    float: right;
+    margin-right: 15px;
+    width: 28px;
+    margin-top: 8px;
+    margin-bottom: 10px;
+  }
+  
+  #toggle div {
+    width: 100%;
+    height: 2px;
+    background: dimgray;
+    margin-top: 8px;
+  }
+
+  #menu{
+    top: 50px;
+    left: 70%;
+    width: 30%;
+    height: 90%;
+    background-color: #EDF7FF;
+    border-radius: 0px 0px 0px 8px;
+    position: fixed;
+    overflow: auto;
+  }
+
+  #menu li{
+    height: 50px;
+  }
+
+  #menu li img{
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin: 10px;
+  }
+
+  #menu li a{
+    float: left;
+    text-decoration: none;
+    color: dimgray;
+    font-size: 20px;
+    line-height: 50px;
+    display: block;
+    width: 100%;
+  }
+
+  #menu li a:hover{
+    background-color: rgb(215, 237, 253);
+  }
+
+  ::-webkit-scrollbar{
+    width: 7px;
+    height: 16px;
+    background-color: aliceblue;
+  }
+
+  ::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background-color: aliceblue;
+  }
+
+  ::-webkit-scrollbar-thumb{
+    border-radius:10px;
+    background-color: dimgray;
+  }
+  
+  .clear{
+    clear: both;
+  }
+
+  .title{
+    float: none;
+    margin: auto;
+    width: 98%;
+    height: 350px;
+    background-image: url("../img/bg.png");
+    background-repeat:no-repeat;
+    background-size: cover;
+  }
+
+  .title h1{
+    text-align: center;
+    font-size: 50px;
+    padding-top: 110px;
+  }
+
+  .title p{
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+
+  
+  .inputArea{
+    width: 340px;
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+    display: flex;
+  }
+
+  .searchTerm{
+    outline: none;
+    width: 100%;
+    height: 40px;
+    background: none;  
+    border: 1px solid dimgray;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    outline: none;
+    font-size: 24px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    color: dimgray;
+  }
+  
+  .searchBtn {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 0px;
+    outline: none;
+  }
+
+  .searchBtn img{
+    width: 40px;
+    height: 40px;
+  } 
+
+  .content{
+    width: 98%;
+    margin: auto;
+    background-color:	#fff;
+  }
+  
+  .list{
+    float: left;
+    width: 100%;
+    background-color: #FFF;
+  }
+  
+  .info{
+    float: left;
+    max-width: 450px;
+    min-height: 230px;
+    background-color: #fff;
+    margin: 50px 30px 30px 85px;
+    padding-bottom: 20px;
+    box-shadow: 0 1px 3px 0 rgba(28, 128, 185, 0.404);
+    border-radius: 2px;
+    font-size: 16px;
+    font-family: "Microsoft JhengHei UI" ,sans-serif;
+  }
+
+  .info h3{
+    width: 400px;
+    font-size: 24px;
+    margin-left: 10px;
+    padding-top: 18px;
+    color: rgb(15, 87, 129);
+  }
+
+  .address{
+    width: 400px;
+    font-size: 20px;
+    margin-top: 25px;
+  }
+
+  .tel{
+    width: 400px;
+    font-size: 20px;
+    margin-top: 25px;
+  }
+
+  .addIcon {
+    width: 25px;
+    height: 25px;
+    float: left;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .telIcon {
+    width: 25px;
+    height: 25px;
+    float: left;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .commentIcon{
+    height: 25px;
+    float: left;
+    margin-right: 3px;
+  }
+
+  #showAllComments{
+    float: right;
+    margin-right: 15px;
+    line-height: 28px;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    color: rgb(138, 138, 138);
+    font-size: 18px;
+    text-align: center;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
+  .btn{
+    width: 350px;
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .btn button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 18px;
+    width: 110px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 30px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
+  .postArea{
+    margin: auto;
+    width: 420px;
+    padding-bottom: 30px;
+  }
+
+  .postInput{
+    margin-top: 30px;
+    height: 150px;
+    display: table;
+  }
+
+  .postArea img{
+    width: 50px;
+    height: 50px;
+    float: left;
+    display:table-cell;
+    vertical-align: middle;
+    margin-left: 20px;
+  }
+
+  .postTerm{
+    width: 280px;
+    min-height: 130px;
+    float: left;
+    display: table-cell;
+    vertical-align: middle;
+    background-color: aliceblue;  
+    border: 0.5px solid rgb(208, 232, 253);
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    color: dimgray;
+    margin-left: 40px;
+  }
+
+  .btn2 button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 18px;
+    width: 60px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 5px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
+  .btn2{
+    width: 130px;
+    margin-left: 40px;
+  }
+
+  .commentArea{
+    margin: auto;
+    width: 420px;
+    padding-bottom: 30px;
+  }
+
+  .commentInput{
+    margin-top: 30px;
+    height: 50px;
+    display: table;
+  }
+
+  .commentArea img{
+    width: 50px;
+    height: 50px;
+    float: left;
+    display:table-cell;
+    vertical-align: middle;
+    margin-left: 20px;
+  }
+
+  .commentTerm{
+    width: 280px;
+    min-height: 50px;
+    float: left;
+    display: table-cell;
+    vertical-align: middle;
+    background-color: aliceblue;  
+    border: 0.5px solid rgb(208, 232, 253);
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    color: dimgray;
+    margin-left: 40px;
+  }
+
+  .allComments{
+    width: 400px;
+    margin-bottom: 30px;
+    margin: auto;
+  }
+
+  .comments{
+    min-height: 60px;
+    margin-bottom: 20px;
+  }
+
+  .comments img{
+    width: 50px;
+    height: 50px;
+    float: left;
+    display:table-cell;
+    vertical-align: middle;
+    margin-left: 20px;
+  }
+
+  .commentContent{
+    width: 280px;
+    min-height: 50px;
+    float: left;
+    background-color: aliceblue;  
+    border: 0.5px solid rgb(208, 232, 253);
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    color: dimgray;
+    margin-left: 20px;
+  }
+
+  .commentContent p{
+    padding: 10px;
+  }
+
+  .btn3 button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 18px;
+    width: 100px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 5px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
+  .btn3{
+    width: 300px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+  }
+
+  .btnOption{
+    width: 300px;
+    display: block;
+    margin: auto;
+    margin-top: 5px;
+  }
+
+  .btnOption button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 16px;
+    width: 85px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 8px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
+  .footer{
+    max-width: 98%;
+    margin: auto;
+    background-color: #EDF7FF;
+    padding-bottom: 30px;
+  }
+
+  .left{
+    max-width: 480px;
+  }
+
+  .logo_footer{
+    width: 200px;
+    margin-top: 40px;
+    margin-left: 80px;
+  }
+
+  .left h3{
+    width: 340px;
+    margin-left: 80px;
+    margin-top: 30px;
+    font-size: 30px;
+  }
+
+  .left p{
+    width: 340px;
+    margin-left: 80px;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  .right{
+    max-width: 400px;
+    margin-left: 555px;
+    margin-top: -120px;
+  }
+
+  ::placeholder {
+    color: rgb(165, 165, 165);
+  }
+
+  .questionTerm{
+    outline: none;
+    margin-left: 50px;
+    margin-top: 30px;
+    width: 340px;
+    height: 80px;
+    background: transparent;  
+    border: 0.1px solid dimgray;
+    font-size: 16px;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    color: dimgray;
+  }
+  
+  .emailArea{
+    width: 340px;
+    margin-left: 50px;
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+  }
+
+  .emailTerm{
+    outline: none;
+    width: 100%;
+    height: 40px;
+    background: none;  
+    border: 0.1px solid dimgray;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    font-size: 16px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    color: dimgray;
+  }
+  
+  .submitBtn {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 0px;
+    outline: none;
+  }
+
+  .contact{
+    width: 30px;
+    height: 30px;
+  }
+
+  .listBtn {
+    width: 2.5rem;
+    height: 2.5rem;
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    border-radius: 33%;
+    border: 0px;
+    opacity: 0.6;
+    background: dimgray;
+    outline: none;
+  }
+
+  .listBtn img{
+    width: 1.5rem;
+    height: 1.5rem;
+    background-size: cover;
+    background-position: bottom;
+    padding-top: 0.3rem;
+  }
+
+  .mapBtn {
+    width: 2.5rem;
+    height: 2.5rem;
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    border-radius: 33%;
+    border: 0px;
+    opacity: 0.6;
+    background: dimgray;
+    outline: none;
+  }
+
+  .mapBtn img{
+    width: 1.8rem;
+    height: 1.8rem;
+    background-size: cover;
+    background-position: inherit;
+  }
+
+  .toTop {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 33%;
+    opacity: 0.6;
+    background: dimgray;
+    cursor: pointer;
+    position: fixed;
+    right: 1rem;
+    bottom: 4rem;
+    display: none;
+  }
+
+  .toTop::before, .toTop::after {
+    width: 18px;
+    height: 5px;
+    border-radius: 3px;
+    background: aliceblue;
+    position: absolute;
+    content: "";
+  }
+
+  .toTop::before {
+    transform: rotate(-45deg) translate(0, -50%);
+    left: 0.5rem;
+  }
+
+  .toTop::after {
+    transform: rotate(45deg) translate(0, -50%);
+    right: 0.5rem;
+  }
+
+  .toTop:focus {
+    outline: none;
+  }
+
+  .mapContent{
+    width: 98%;
+    height: 1000px;
+    margin: auto;
+    background-color:	#fff;
+  }
+
+  @media (max-width:1100px){
+    #menu{
+      left: 62%;
+      min-width: 38%;
+    }
+
+    .search{
+      width: 100%;
+    }
+
+    .content{
+      width: 100%;
+    }
+
+    .mapContent{
+      width: 100%;
+    }
+
+    .line{
+      width: 93%;
+    }
+
+    .list{
+      width: 100%;
+    }
+
+    .info{
+      float: none;
+      margin: auto;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      width: 90%;
+    }
+
+    .left{
+      width: 100%;
+      margin: auto;
+    }
+
+    .right{
+      width: 100%;
+      margin: auto;
+    }
+
+  }
+
+  @media (max-width:480px){
+    #menu{
+      left: 40%;
+      min-width: 60%;
+    }
+
+  }

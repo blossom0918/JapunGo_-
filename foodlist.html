@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/foodlist.css">
+    <title>我的美食清單</title>
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            <img src="img/logo_header.png" class="logo">
+            <div id="toggle">
+                    <div class="one"></div>
+                    <div class="two"></div>
+                    <div class="three"></div>
+            </div>
+
+            <nav id="menu">
+                 <ul>
+                    <li><a href="index.html"><img src="img/home.png" alt="">首頁</a></li>
+                    <li><a href="game.html"><img src="img/game.png" alt="">今天吃什麼</a></li>
+                    <li><a href="posts.html"><img src="img/posts.png" alt="">我的動態</a></li>
+                    <li><a href="search.html"><img src="img/search.png" alt="">搜尋美食</a></li>
+                    <li><a href="foodlist.html"><img src="img/foodlist.png" alt="">美食清單</a></li>
+                    <li><a href="friendlist.html"><img src="img/friendlist.png" alt="">好友清單</a></li>
+                    <li><a href="member.html"><img src="img/member.png" alt="">修改會員資料</a></li>
+                    <li><a href="friend_request.html"><img src="img/friend_request.png" alt="">好友邀請</a></li>
+                    <li><a href="comment.html"><img src="img/comment.png" alt="">我的評論</a></li>
+                    <li><a href="#"><img src="img/logout.png" alt="">登出</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="clear"></div>
+
+        <div class="title">
+            <h1>我的美食清單</h1>
+            <p>輸入餐點或店家名稱，迅速找出你喜愛的店家</p>
+            <div class="inputArea">
+                <input type="text" class="searchTerm">
+                <button type="submit" class="searchBtn"><img src="img/search.png" alt=""></button>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div class="content">
+            <div class="list">
+                <div class="info">
+                    <h3>餐廳名</h3>
+                    <img src="img/pin.png" class="addIcon">
+                    <p class="address">地址</p>
+                    <img src="img/tel.png" class="telIcon">
+                    <p class="tel">電話</p>
+                    <button id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>
+                    <div class="btn">
+                        <button id="post">發起動態</button>
+                        <button id="comment">我要評論</button>
+                        <button id="delete">自清單移除</button>
+                    </div>
+
+                    <div class="postArea">
+                        <div class="postInput">
+                            <input type="text" class="postTerm" placeholder="請輸入動態內容">
+                            <img src="img/pic.png" alt="">
+                        </div>
+                        <div class="btn2">
+                            <button>確定</button>
+                            <button>取消</button>
+                        </div>
+                    </div>
+                    
+                    <div class="commentArea">
+                        <div class="commentInput">
+                            <input type="text" class="commentTerm" placeholder="請輸入評論內容">
+                            <img src="img/pic.png" alt="">
+                        </div>
+                        <div class="btn3">
+                            <button id="option">評論選項</button>
+                            <button>我要評論</button>
+                        </div>
+                        <div class="btnOption">
+                            <button>環境乾淨</button>
+                            <button>環境骯髒</button>
+                            <button>餐點美味</button>
+                            <button>餐點糟糕</button>
+                            <button>親切店家</button>
+                            <button>服務極差</button>
+                        </div>
+                    </div>
+
+                    <div class="allComments">
+                        <div class="comments">
+                            <img src="img/pic.png" alt="">
+                            <div class="commentContent">
+                                <p>內容</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mapContent">
+            <!-- 地圖顯示 -->
+        </div>
+
+        <div class="clear"></div>
+        
+        <div class="footer">
+            <div class="left">
+                <img src="img/logo_mini.png" alt="" class="logo_footer">
+                <h3>聯絡我們</h3>
+                <p>如有任何問題，請留下您的問題與聯絡信箱，我們將儘速與您聯繫</p>
+            </div>
+            
+            <div class="right">
+                <input type="text" class="questionTerm" placeholder="您的問題">
+                <div class="emailArea">
+                    <input type="email" class="emailTerm" placeholder="您的信箱">
+                    <button type="submit" class="submitBtn"><img src="img/send.png" alt="" class="contact"></button>
+                </div> 
+            </div> 
+            
+            <button id="backTop" class="toTop"></button>
+            <button id="listView" class="listBtn"><img src="img/list.png" alt=""></button>
+            <button id="mapView" class="mapBtn"><img src="img/map.png" alt=""></button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        $( document ).ready(function() {
+            $('#menu').hide();
+            $('#toggle').click(function() {
+                $('#menu').slideToggle();
+            });
+
+            $('#listView').hide();
+            $('.mapContent').hide();
+            $('#mapView').click(function() {
+                $('.mapContent').toggle();
+                $('#listView').toggle();
+                $('.list').hide();
+                $('#mapView').hide();
+            });
+
+            $('#listView').click(function() {
+                $('#listView').hide();
+                $('.mapContent').hide();
+                $('.list').toggle();
+                $('#mapView').toggle();
+            });
+
+            $('.postArea').hide();
+            $('#post').click(function() {
+                $('.postArea').slideToggle();
+                $('.commentArea').hide();
+                $('.allComments').hide();
+            });
+
+            $('.commentArea').hide();
+            $('#comment').click(function() {
+                $('.commentArea').slideToggle();
+                $('.postArea').hide();
+                $('.allComments').hide();
+            });
+
+            $('.btnOption').hide();
+            $('#option').click(function() {
+                $('.btnOption').slideToggle();
+            });
+
+            $('.allComments').hide();
+            $('#showAllComments').click(function() {
+                $('.allComments').slideToggle();
+                $('.commentArea').hide();
+                $('.postArea').hide();
+            });
+        });
+
+        $(function(){
+            $('#backTop').click(function(){ 
+                $('html,body').animate({scrollTop:0}, 333);
+            });
+
+            $(window).scroll(function() {
+                if ( $(this).scrollTop() > 300 ){
+                    $('#backTop').fadeIn(222);
+                } else {
+                    $('#backTop').stop().fadeOut(222);
+                }
+            }).scroll();
+
+        });
+    </script>
+</body>
+</html>
