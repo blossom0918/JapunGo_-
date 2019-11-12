@@ -532,7 +532,6 @@ table {
     width: 340px;
     margin-left: 50px;
     margin-top: 20px;
-    position: relative;
     display: flex;
   }
 
@@ -551,7 +550,6 @@ table {
   }
   
   .submitBtn {
-    cursor: pointer;
     width: 40px;
     height: 40px;
     background-color: transparent;
