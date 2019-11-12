@@ -143,6 +143,7 @@ table {
     width: 98%;
     min-height: 450px;
     background-image: url("../img/bg5.png");
+    background-position: right;
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 130px;
