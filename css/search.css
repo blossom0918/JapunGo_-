@@ -148,7 +148,7 @@ table {
   .search h1{
     text-align: center;
     font-size: 50px;
-    padding-top: 90px;
+    padding-top: 110px;
   }
 
   .search p {
@@ -271,10 +271,30 @@ table {
     margin-right: 10px;
   }
 
+  .commentIcon{
+    height: 25px;
+    float: left;
+    margin-right: 3px;
+  }
+
+  #showAllComments{
+    float: right;
+    margin-right: 15px;
+    line-height: 28px;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    color: rgb(138, 138, 138);
+    font-size: 18px;
+    text-align: center;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
   .btn{
     width: 350px;
     display: block;
     margin: auto;
+    margin-top: 30px;
     margin-bottom: 30px;
   }
 
@@ -293,6 +313,8 @@ table {
   }
 
   .postArea{
+    margin: auto;
+    width: 420px;
     padding-bottom: 30px;
   }
 
@@ -312,13 +334,13 @@ table {
   }
 
   .postTerm{
-    width: 300px;
-    height: 130px;
+    width: 280px;
+    min-height: 130px;
     float: left;
     display: table-cell;
     vertical-align: middle;
-    background: none;  
-    border: 0.5px solid gray;
+    background-color: aliceblue;  
+    border: 0.5px solid rgb(208, 232, 253);
     border-radius: 5px;
     outline: none;
     font-size: 16px;
@@ -347,6 +369,8 @@ table {
   }
 
   .commentArea{
+    margin: auto;
+    width: 420px;
     padding-bottom: 30px;
   }
 
@@ -366,19 +390,57 @@ table {
   }
 
   .commentTerm{
-    width: 300px;
-    height: 50px;
+    width: 280px;
+    min-height: 50px;
     float: left;
     display: table-cell;
     vertical-align: middle;
-    background: none;  
-    border: 0.5px solid gray;
+    background-color: aliceblue;  
+    border: 0.5px solid rgb(208, 232, 253);
     border-radius: 5px;
     outline: none;
     font-size: 16px;
     font-family: "Microsoft JhengHei UI", sans-serif;
     color: dimgray;
     margin-left: 40px;
+  }
+
+  .allComments{
+    width: 400px;
+    margin-bottom: 30px;
+    margin: auto;
+  }
+
+  .comments{
+    min-height: 60px;
+    margin-bottom: 20px;
+  }
+
+  .comments img{
+    width: 50px;
+    height: 50px;
+    float: left;
+    display:table-cell;
+    vertical-align: middle;
+    margin-left: 20px;
+  }
+
+  .commentContent{
+    width: 280px;
+    min-height: 50px;
+    float: left;
+    background-color: aliceblue;  
+    border: 0.5px solid rgb(208, 232, 253);
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    color: dimgray;
+    margin-left: 20px;
+  }
+
+  .commentContent p{
+    padding: 10px;
   }
 
   .btn3 button{
@@ -461,7 +523,7 @@ table {
   }
 
   ::placeholder {
-    color: rgb(165, 165, 165, 0.6);
+    color: rgb(165, 165, 165);
   }
 
   .questionTerm{
