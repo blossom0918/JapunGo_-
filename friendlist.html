@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/friendlist.css">
+    <title>我的好友清單</title>
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            <img src="img/logo_header.png" class="logo">
+            <div id="toggle">
+                    <div class="one"></div>
+                    <div class="two"></div>
+                    <div class="three"></div>
+            </div>
+
+            <nav id="menu">
+                 <ul>
+                    <li><a href="index.html"><img src="img/home.png" alt="">首頁</a></li>
+                    <li><a href="game.html"><img src="img/game.png" alt="">今天吃什麼</a></li>
+                    <li><a href="posts.html"><img src="img/posts.png" alt="">我的動態</a></li>
+                    <li><a href="search.html"><img src="img/search.png" alt="">搜尋美食</a></li>
+                    <li><a href="foodlist.html"><img src="img/foodlist.png" alt="">美食清單</a></li>
+                    <li><a href="friendlist.html"><img src="img/friendlist.png" alt="">好友清單</a></li>
+                    <li><a href="member.html"><img src="img/member.png" alt="">修改會員資料</a></li>
+                    <li><a href="friend_request.html"><img src="img/friend_request.png" alt="">好友邀請</a></li>
+                    <li><a href="comment.html"><img src="img/comment.png" alt="">我的評論</a></li>
+                    <li><a href="#"><img src="img/logout.png" alt="">登出</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="clear"></div>
+
+        <div class="title">
+            <h1>我的好友清單</h1>
+            <p>以帳號搜尋好友，立即發送好友邀請</p>
+            <div class="inputArea">
+                <input type="text" class="searchTerm">
+                <button type="submit" class="searchBtn" onclick="friendInfo()"><img src="img/search.png" alt=""></button>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div id="friendInfo">
+            <button id="close"><img src="img/cross.png" alt=""></button>
+            <img src="img/pic.png" alt="">
+            <h3>用戶名</h3>
+            <button id="addFriend">加入好友</button>
+        </div>
+
+        <div class="content">
+            <div class="friendlist">
+                <div class="info">
+                    <img src="img/pic.png" class="addIcon">
+                    <h3>用戶名</h3>
+                    <button><a href="foodlist.html">查看美食清單</a></button>
+                    <!-- <title>我的美食清單</title>和<h1>我的美食清單</h1>
+                        改<title>xxx的美食清單</title>和<h1>xxx的美食清單</h1>-->
+                    <button>刪除</button>
+                </div>
+            </div>
+
+            <!-- <div class="friendRequest">
+                <div class="info">
+                     若無邀請，顯示：
+                    <h2>目前尚無未確認之邀請</h2>
+
+                    <img src="img/pic.png" class="addIcon">
+                    <h3>用戶名</h3>
+                    <button>接受</button>
+                    <button>拒絕</button>
+                </div>
+            </div> -->
+        </div>
+
+        <div class="clear"></div>
+        
+        <div class="footer">
+            <div class="left">
+                <img src="img/logo_mini.png" alt="" class="logo_footer">
+                <h3>聯絡我們</h3>
+                <p>如有任何問題，請留下您的問題與聯絡信箱，我們將儘速與您聯繫</p>
+            </div>
+            
+            <div class="right">
+                <input type="text" class="questionTerm" placeholder="您的問題">
+                <div class="emailArea">
+                    <input type="email" class="emailTerm" placeholder="您的信箱">
+                    <button type="submit" class="submitBtn"><img src="img/send.png" alt="" class="contact"></button>
+                </div> 
+            </div> 
+            
+            <button id="backTop" class="toTop"></button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        $( document ).ready(function() {
+            $('#menu').hide();
+            $('#toggle').click(function() {
+                $('#menu').slideToggle();
+            });
+        });
+
+        $(function friendInfo (){
+            var friendInfo = document.getElementById("friendInfo");
+            friendInfo.style.display = "none";
+            
+            $('.searchBtn').click(function centerHandler(){ 
+                friendInfo.style.display = "block";
+                var scrollDist = $(window).scrollTop();
+                var myTop = "100px";
+                var myLeft = ($(window).width()-$("#friendInfo").width())/2;
+                $("#friendInfo").offset({left:myLeft});
+                
+                
+                $(window).resize(centerHandler);
+            });
+ 
+            $('#close').click(function(){
+                friendInfo.style.display = "none";
+            });
+        });
+
+        $(function(){
+            $('#backTop').click(function(){ 
+                $('html,body').animate({scrollTop:0}, 333);
+            });
+
+            $(window).scroll(function() {
+                if ( $(this).scrollTop() > 300 ){
+                    $('#backTop').fadeIn(222);
+                } else {
+                    $('#backTop').stop().fadeOut(222);
+                }
+            }).scroll();
+
+        });
+    </script>
+</body>
+</html>
