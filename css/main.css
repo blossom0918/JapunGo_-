@@ -104,11 +104,18 @@ table {
     background-color: rgba(236, 236, 236, 0.4);
   }
 
+  .bigLogo{
+    display: block;
+    margin: auto;
+    width: 450px;
+    background-size: contain;
+    padding-top: 50px;
+  }
+
   .content img{
     display: block;
     margin: auto;
     width: 450px;
-    padding-top: 50px;
     background-size: contain;
   }
 
@@ -133,10 +140,9 @@ table {
   }
 
   #previewImg{
-    width: 180px;
-    height: 130px;
-    background-color: rgba(105, 105, 105, 0.3);
-    margin-top: 30px;
+    max-width: 180px;
+    max-height: 180px;
+    margin-top: 10px;
   }
 
   .id{
