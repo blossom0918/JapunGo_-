@@ -279,7 +279,7 @@ table {
 
   .info img{
     width: 90px;
-    max-height: 90px;
+    height: 90px;
     display: block;
     margin: auto;
     margin-top: 30px;
