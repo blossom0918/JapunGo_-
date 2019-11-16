@@ -6,6 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/friendlist.css">
     <title>我的好友清單</title>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+  <!--選擇使用realtime database功能-->
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+  <script type="text/javascript">
+
+    var firebaseConfig = {
+        apiKey: "AIzaSyCcIFB1orespqziBWnX8kUWyihopdBw8jM",
+        authDomain: "japungo.firebaseapp.com",
+        databaseURL: "https://japungo.firebaseio.com",
+        projectId: "japungo",
+        storageBucket: "japungo.appspot.com",
+        messagingSenderId: "238647383425",
+        appId: "1:238647383425:web:cd43c3708893b6e052c480"
+      };
+      // Initialize Firebase 初始化
+      firebase.initializeApp(firebaseConfig);
+      </script>
+      
 </head>
 <body>
     <div class="wrap">
@@ -74,10 +92,10 @@
             </div>
             
             <div class="right">
-                <input type="text" class="questionTerm" placeholder="您的問題">
+                <input type="text" class="questionTerm" id='questionTerm' placeholder="您的問題">
                 <div class="emailArea">
-                    <input type="email" class="emailTerm" placeholder="您的信箱">
-                    <button type="submit" class="submitBtn"><img src="img/send.png" alt="" class="contact"></button>
+                    <input type="email" class="emailTerm" id='emailTerm' placeholder="您的信箱">
+                    <button type="submit" class="submitBtn" id='submitBtn'><img src="img/send.png" alt="" class="contact"></button>
                 </div> 
             </div> 
             
@@ -129,4 +147,5 @@
         });
     </script>
 </body>
+<script type="text/javascript" src='js/contact_us.js'></script>
 </html>
