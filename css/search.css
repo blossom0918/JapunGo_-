@@ -51,6 +51,7 @@ table {
   }
   
   .header{
+    z-index: 1;
     width: 100%;
     height: 50px;
     margin: 0;
@@ -80,6 +81,7 @@ table {
   }
 
   #menu{
+    z-index: 1;
     top: 50px;
     left: 70%;
     width: 30%;
@@ -259,6 +261,25 @@ table {
     margin-top: 25px;
   }
 
+  .recommend{
+    float: right;
+    margin-top: 5px;
+    margin-right: 15px;
+    line-height: 28px;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    color: rgb(138, 138, 138);
+    font-size: 18px;
+    text-align: center;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
+  .bestIcon {
+    height: 30px;
+    margin-right: 5px;
+  }
+
   .addIcon {
     width: 25px;
     height: 25px;
@@ -285,6 +306,7 @@ table {
 
   #showAllComments{
     float: right;
+    margin-top: 15px;
     margin-right: 15px;
     line-height: 28px;
     outline: none;
@@ -300,7 +322,7 @@ table {
     width: 350px;
     display: block;
     margin: auto;
-    margin-top: 30px;
+    margin-top: 45px;
     margin-bottom: 30px;
   }
 
@@ -447,6 +469,7 @@ table {
 
   .commentContent p{
     padding: 10px;
+    word-wrap : break-word;
   }
 
   .btn3 button{
