@@ -11,7 +11,7 @@ submit.addEventListener('click',function(){
         'email':email.value,
         'question':question.value
     })
+    alert('回報成功');
     email.value='';
     question.value='';
-    alert('回報成功');
 })
