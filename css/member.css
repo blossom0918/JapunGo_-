@@ -476,6 +476,7 @@ table {
     width: 365px;
     max-height: 100px;
     word-wrap : break-word;
+    padding: 10px;
   }
 
   .footer{
