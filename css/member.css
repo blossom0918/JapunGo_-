@@ -180,6 +180,10 @@ table {
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
+  .menu2 li a:hover{
+    color: cadetblue;
+  }
+
   .content{
     width: 98%;
     margin: auto;
@@ -201,11 +205,12 @@ table {
     font-size: 18px;
     text-align: center;
     margin-top: 20px; 
+    color: cadetblue;
   }
 
   .line{
     width: 900px;
-    border: 1px solid dimgray;
+    border: 1px solid cadetblue;
     border-style: dashed;
     display: block;
     margin: auto;
@@ -400,13 +405,12 @@ table {
   .info{
     float: left;
     width: 425px;
-    min-height: 180px;
+    height: 200px;
     background-color: #fff;
     margin: 50px 30px 30px 85px;
     box-shadow: 0px 1px 3px 0px rgba(28, 128, 185, 0.404);
     border-radius: 2px;
     font-size: 16px;
-    font-family: "Microsoft JhengHei UI" ,sans-serif;
   }
 
   .info img{
@@ -422,11 +426,12 @@ table {
     font-size: 25px;
     margin-top: 62.5px;
     margin-left: 20px;
+    width: 255px;
   }
 
   .btn{
     float: right;
-    margin-top: 120px;
+    margin-top: 50px;
   }
 
   .btn button{
@@ -442,6 +447,35 @@ table {
     margin-right: 20px;
     margin-bottom: 20px;
     font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
+  .commentContent{
+    float: left;
+    width: 425px;
+    height: 220px;
+    background-color: #fff;
+    margin: 50px 30px 30px 85px;
+    box-shadow: 0px 1px 3px 0px rgba(28, 128, 185, 0.404);
+    border-radius: 2px;
+    font-size: 16px;
+  }
+
+  .commentContent h3{
+    float: left;
+    font-size: 25px;
+    margin-top: 30px;
+    margin-left: 30px;
+    width: 365px;
+  }
+
+  .commentContent p{
+    float: left;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-left: 30px;
+    width: 365px;
+    max-height: 100px;
+    word-wrap : break-word;
   }
 
   .footer{
@@ -609,6 +643,14 @@ table {
       margin-bottom: 30px;
     }
 
+    .commentContent{
+      float: none;
+      display: block;
+      margin: auto;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
     .left{
       width: 100%;
       margin: auto;
@@ -646,5 +688,7 @@ table {
       width: 90%;
     }
 
-
+    .commentContent{
+      width: 90%;
+    }
   }
