@@ -523,13 +523,11 @@ table {
     }
 
     .left{
-      width: 85%;
       margin: auto;
       margin-left: 50px;
     }
 
     .right{
-      width: 90%;
       margin: auto;
       margin-left: -3px;
     }
@@ -540,6 +538,26 @@ table {
     #menu{
       left: 40%;
       min-width: 60%;
+    }
+
+    .left{
+      width: 290px;
+    }
+  
+    .left p{
+      width: 290px;
+    }
+  
+    .right{
+      width: 290px;
+    }
+  
+    .questionTerm{
+      width: 290px;
+    }
+    
+    .emailArea{
+      width: 290px;
     }
 
   }
