@@ -267,10 +267,8 @@ table {
   .info{
     float: left;
     width: 280px;
-    min-height: 300px;
     background-color: #fff;
     margin: 30px 45px 50px 45px;
-    padding-bottom: 20px;
     box-shadow: 0 1px 3px 0 rgba(28, 128, 185, 0.404);
     border-radius: 2px;
     font-size: 16px;
@@ -311,6 +309,7 @@ table {
     text-align: center;
     padding: 5px;
     margin-top: 10px;
+    margin-bottom: 20px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
@@ -508,10 +507,10 @@ table {
     }
 
     .info{
-      float: none;
       margin: auto;
       margin-top: 30px;
       margin-bottom: 30px;
+      margin-left: 5%;
     }
 
     .info img{
@@ -540,24 +539,31 @@ table {
       min-width: 60%;
     }
 
+    .info{
+      width: 90%;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      margin-left: 5%;
+    }
+
     .left{
-      width: 290px;
+      width: 85%;
     }
   
     .left p{
-      width: 290px;
+      width: 85%;
     }
   
     .right{
-      width: 290px;
+      width: 85%;
     }
   
     .questionTerm{
-      width: 290px;
+      width: 85%;
     }
     
     .emailArea{
-      width: 290px;
+      width: 85%;
     }
 
   }

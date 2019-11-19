@@ -493,39 +493,36 @@ table {
   }
 
   .footer{
-    max-width: 98%;
+    width: 98%;
     margin: auto;
     background-color: #EDF7FF;
     padding-bottom: 30px;
   }
 
   .left{
-    max-width: 480px;
+    width: 480px;
+    margin-left: 50px;
+    padding-top: 30px;
   }
 
   .logo_footer{
     width: 200px;
-    margin-top: 40px;
-    margin-left: 80px;
   }
 
   .left h3{
-    width: 340px;
-    margin-left: 80px;
-    margin-top: 30px;
     font-size: 30px;
+    margin-top: 20px;
   }
 
   .left p{
     width: 340px;
-    margin-left: 80px;
     margin-top: 10px;
     font-size: 16px;
   }
 
   .right{
-    max-width: 400px;
-    margin-left: 555px;
+    width: 400px;
+    margin-left: 500px;
     margin-top: -120px;
   }
 
@@ -704,14 +701,72 @@ table {
       width: 90%;
     }
 
-    .left{
+    .btn{
+      width: 90%;
+    }
+  
+    .btn button{
+      padding: 3px;
+      margin-top: 30px;
+    }
+
+    .postArea{
+      width: 90%;
+    }
+
+    .postTerm{
+      width: 250px;
+      margin-left: 20px;
+    }
+
+    .postArea img{
+      margin-left: 10px;
+    }
+
+    /* .btn2{
+      width: 90%;
+    }
+  
+    .btn2 button{
+      padding: 3px;
+      margin-top: 20px;
+    } */
+
+    .commentArea{
+      width: 90%;
+    }
+    
+    .btn3{
+      width: 90%;
+    }
+  
+    .btn3 button{
+      padding: 3px;
+      margin-top: 30px;
+    }
+
+    .btnOption{
+      width: 90%;
+    }
+  
+    .btnOption button{
+      padding: 3px;
+    }
+
+    .footer{
       width: 100%;
+    }
+
+    .left{
+      width: 85%;
       margin: auto;
+      margin-left: 50px;
     }
 
     .right{
-      width: 100%;
+      width: 90%;
       margin: auto;
+      margin-left: -3px;
     }
 
   }
