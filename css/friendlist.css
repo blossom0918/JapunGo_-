@@ -322,7 +322,7 @@ table {
   }
 
   .left{
-    width: 480px;
+    width: 330px;
     margin-left: 50px;
     padding-top: 30px;
   }
@@ -337,13 +337,13 @@ table {
   }
 
   .left p{
-    width: 340px;
+    width: 330px;
     margin-top: 10px;
     font-size: 16px;
   }
 
   .right{
-    width: 400px;
+    width: 330px;
     margin-left: 500px;
     margin-top: -120px;
   }
@@ -356,7 +356,7 @@ table {
     outline: none;
     margin-left: 50px;
     margin-top: 30px;
-    width: 340px;
+    width: 330px;
     height: 80px;
     background: transparent;  
     border: 0.1px solid dimgray;
@@ -369,7 +369,7 @@ table {
   }
   
   .emailArea{
-    width: 340px;
+    width: 330px;
     margin-left: 50px;
     margin-top: 20px;
     display: flex;
@@ -515,7 +515,7 @@ table {
     }
 
     .info img{
-      margin-top: 30px;
+      padding-top: 30px;
     }
 
     .footer{
