@@ -220,7 +220,6 @@ table {
   }
 
   .info h3{
-    width: 400px;
     font-size: 24px;
     margin-left: 10px;
     padding-top: 30px;
@@ -228,13 +227,11 @@ table {
   }
 
   .address{
-    width: 400px;
     font-size: 20px;
     margin-top: 25px;
   }
 
   .tel{
-    width: 400px;
     font-size: 20px;
     margin-top: 25px;
   }
@@ -702,7 +699,6 @@ table {
       margin-bottom: 30px;
     }
 
-    
     .footer{
       width: 100%;
     }
