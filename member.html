@@ -6,6 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/member.css">
     <title>會員專區</title>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="jquery-3.3.1.min.js"></script>
+    <!--選擇使用realtime database功能-->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+    <script src="http://code.changer.hk/jquery/plugins/jquery.cookie.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-storage.js"></script>
+    <script type="text/javascript">
+
+    var firebaseConfig = {
+        apiKey: "AIzaSyCcIFB1orespqziBWnX8kUWyihopdBw8jM",
+        authDomain: "japungo.firebaseapp.com",
+        databaseURL: "https://japungo.firebaseio.com",
+        projectId: "japungo",
+        storageBucket: "japungo.appspot.com",
+        messagingSenderId: "238647383425",
+        appId: "1:238647383425:web:cd43c3708893b6e052c480"
+      };
+      // Initialize Firebase 初始化
+      firebase.initializeApp(firebaseConfig);
+      </script>
 </head>
 <body>
     <div class="wrap">
@@ -140,6 +160,29 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script>
         $( document ).ready(function() {
+            $('.show_password').click(function () {
+        let pass_type = $('input.password').attr('type');
+
+        if (pass_type === 'password') {
+          $('input.password').attr('type', 'text');
+          $('.show_password').removeClass('eye_open').addClass('eye_close');
+        } else {
+          $('input.password').attr('type', 'password');
+          $('.show_password').removeClass('eye_close').addClass('eye_open');
+        }
+      });
+
+      $('.show_password_confirm').click(function () {
+        let pass_type = $('input.password_confirm').attr('type');
+
+        if (pass_type === 'password') {
+          $('input.password_confirm').attr('type', 'text');
+          $('.show_password_confirm').removeClass('eye_open_confirm').addClass('eye_close_confirm');
+        } else {
+          $('input.password_confirm').attr('type', 'password');
+          $('.show_password_confirm').removeClass('eye_close_confirm').addClass('eye_open_confirm');
+        }
+      });
             if(location.hash == "#1"){
                 $('.friendRequest').hide();
                 $('.comment').hide();
@@ -155,41 +198,33 @@
             }else if(location.hash == "#4"){
                 //登出
             }
-
             $('#menu').hide();
             $('#toggle').click(function() {
                 $('#menu').slideToggle();
             });
-
             $('#friendRequest, #friendRequestBtn').click(function() {
                 $('.reviseInfo').hide();
                 $('.comment').hide();
                 $('.friendRequest').show();
             });
-
             $('#reviseInfo, #reviseInfoBtn').click(function() {
                 $('.friendRequest').hide();
                 $('.comment').hide();
                 $('.reviseInfo').show();
             });
-
             $('#comment, #commentBtn').click(function(){
                 $('.reviseInfo').hide();
                 $('.friendRequest').hide();
                 $('.comment').show();
             });
-
             $('#logout, #logoutBtn').click(function(){
                 登出
             });
-
         });
-
         $(function(){
             $('#backTop').click(function(){ 
                 $('html,body').animate({scrollTop:0}, 333);
             });
-
             $(window).scroll(function() {
                 if ( $(this).scrollTop() > 300 ){
                     $('#backTop').fadeIn(222);
@@ -197,8 +232,81 @@
                     $('#backTop').stop().fadeOut(222);
                 }
             }).scroll();
-
         });
+    </script>
+
+    <script type="text/javascript">
+    var storage = firebase.storage();
+      var storageRef = firebase.storage().ref();
+      //fileReader
+      var fileReader = new FileReader();
+      var upload = document.getElementById('upload');
+      var previewImg = document.getElementById('previewImg');
+      upload.addEventListener('change', function (e) {
+        fileReader.readAsDataURL(this.files[0]);
+        fileReader.addEventListener("load", function (event) {
+          //讀取後設定<img>的src
+          previewImg.src = this.result;
+        }, false);
+      })
+
+    //
+    var data=firebase.database().ref('/會員資料/');
+    function getCookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+
+    if (arr = document.cookie.match(reg))
+
+        return unescape(arr[2]);
+    else
+        return null;
+    }
+    
+    
+
+    $(document).ready(function(){
+    $('#confirm').on('click',function(){
+        data.once('value',function(snapshot){
+            var ID=getCookie('ID'); 
+            var Name=$('#Name').val();
+            var PassWd=$('#PassWd').val();
+            var RepassWd=$('#RepassWd').val();
+            var memberInf=snapshot.val();
+            var memberobj = Object.keys(memberInf).map(function(_) { return memberInf[_]; });
+
+            console.log(upload.value);
+              if (upload.value != '') {
+                let myfile = upload.files[0];
+                console.log(myfile);
+                //設定頭貼上傳細節，檔名設為使用者ID
+                var storageRef = firebase.storage().ref('user/' + ID);
+                storageRef.put(myfile);
+              }
+            if(PassWd!=RepassWd){
+                alert('確認密碼不符');
+            }else if(Name==""&&PassWd==""&&RepassWd==""&&upload==""){
+                alert("請輸入要修改的資料");
+            }else{
+            
+                for(var i in memberInf){
+                    if(memberInf[i]["ID"]==ID){
+                        
+                        var pushdata=firebase.database().ref('/會員資料/'+i);
+                        
+                        pushdata.update({
+                            Name:Name,
+                            PassWd:PassWd,
+                        })
+                    alert("修改成功！");
+                    break;
+                    }
+
+                }       
+            }
+    });
+
+});
+});
     </script>
 </body>
 </html>
