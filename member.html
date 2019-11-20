@@ -103,13 +103,15 @@
             
             <div class="friendRequest" id="2">
                 <h2>我的好友邀請</h2>
-                <div class="line"></div>
+                <div class="line">
+                    <ul id="FriendReqList"></ul>
+                </div>
                 <div class="list">
                     <!-- 若無邀請，顯示：
                     <h2>目前尚無未確認之邀請</h2> -->
 
                     <div class="info">
-                        <img src="img/pic.png" class="addIcon">
+                        <img id="friendphoto" class="addIcon">
                         <h3>用戶名</h3>
                         <button>拒絕</button> 
                         <button>接受</button>                                                
@@ -235,6 +237,7 @@
     </script>
 
     <script type="text/javascript">
+    //----------------------------------------------修改會員資料
     var storage = firebase.storage();
       var storageRef = firebase.storage().ref();
       //fileReader
@@ -264,6 +267,7 @@
     
 
     $(document).ready(function(){
+    
     $('#confirm').on('click',function(){
         data.once('value',function(snapshot){
             var ID=getCookie('ID'); 
@@ -283,9 +287,9 @@
               }
             if(PassWd!=RepassWd){
                 alert('確認密碼不符');
-            }else if(Name==""&&PassWd==""&&RepassWd==""&&upload==""){
+            }else if(Name==""&&PassWd==""&&upload==""){
                 alert("請輸入要修改的資料");
-            }else{
+            }else if(Name!=""&&PassWd!=""){
             
                 for(var i in memberInf){
                     if(memberInf[i]["ID"]==ID){
@@ -295,17 +299,59 @@
                         pushdata.update({
                             Name:Name,
                             PassWd:PassWd,
+
                         })
                     alert("修改成功！");
                     break;
                     }
 
                 }       
+            }else if(Name==""&&PassWd!=""){
+                for(var a in memberInf){
+                    if(memberInf[a]["ID"]==ID){
+                        var pushdata=firebase.database().ref('/會員資料/'+a);
+                        pushdata.update({
+                            PassWd:PassWd,
+                        })
+                        alert("修改成功");
+                        break;
+                    }
+                }
+            }else if(Name!=""&&PassWd==""){
+                for(var b in memberInf){
+                    if(memberInf[b]["ID"]==ID){
+                        var pushdata=firebase.database().ref('/會員資料/'+b);
+                        pushdata.update({
+                            Name:Name,
+                        })
+                        alert("修改成功");
+                        break;
+                    }
+                }
+            }else if(Name==""&&PassWd==""&&upload!=""){
+                alert("修改成功");
             }
     });
 
 });
-});
+
+//---------------------------------------------------------------------我的好友邀請
+    // var frienddata=firebase.database().ref('/好友名單資料/');
+    // var friendphoto= document.querySelector('.friendphoto');
+    // frienddata.once('value',function(friendsnapshot){
+    //     var friendInf=friendsnapshot.val();
+    //     var count=0;
+    //     str="";
+    //     for(var j in friendInf){
+    //         if(friendInf[j]["ANo"]==ID||friendInf[j]["SNo"]==ID){
+    //             if(friendInf[j]["Status"]==false){
+    //                 friendphoto+=firebase.storage().ref('images/'+ID);
+    //             }
+    //         }
+    //     }
+    //     });
+   
+});  
     </script>
 </body>
 </html>
