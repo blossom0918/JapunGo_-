@@ -309,7 +309,7 @@ table {
     text-align: center;
     padding: 5px;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
@@ -511,10 +511,6 @@ table {
       margin-top: 30px;
       margin-bottom: 30px;
       margin-left: 5%;
-    }
-
-    .info img{
-      padding-top: 30px;
     }
 
     .footer{

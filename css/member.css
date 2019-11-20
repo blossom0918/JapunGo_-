@@ -155,8 +155,10 @@ table {
 
   .menu2{
     width: 605px;
+    height: 30px;
     display: block;
     margin: auto;
+    margin-top: 30px;
   }
 
   #reviseInfoBtn{
@@ -176,7 +178,6 @@ table {
     width: 140px;
     text-align: center;
     padding: 5px;
-    margin-top: 30px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
@@ -425,7 +426,7 @@ table {
     font-size: 25px;
     margin-top: 62.5px;
     margin-left: 20px;
-    width: 255px;
+    max-width: 250px;
   }
 
   .info button{
@@ -440,8 +441,8 @@ table {
     width: 60px;
     padding: 5px;
     margin-right: 20px;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 130px;
+    margin-bottom: 30px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
@@ -487,7 +488,7 @@ table {
     padding: 5px;
     margin-right: 20px;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
@@ -628,11 +629,6 @@ table {
       width: 100%;
     }
 
-    .menu2{
-      width: 80%;
-      margin-left: 20%;
-    }
-
     .content{
       width: 100%;
     }
@@ -684,14 +680,8 @@ table {
     }
 
     .menu2{
-      width: 85%;
-      margin-left: 15%;
-    }
-
-    .menu2 li a{
-      display: block;
-      margin: auto;
-      margin-top: 30px;
+      width: 305px;
+      height: 120px;
     }
 
     #commentBtn{
