@@ -281,13 +281,33 @@ table {
     width: 420px;
   }
 
+  .postArea_map{
+    float: left;
+    width: 420px;
+  }
+
   .postInput{
     min-width: 100%;
     height: 150px;
     display: table;
   }
 
+  .postInput_map{
+    min-width: 100%;
+    height: 150px;
+    display: table;
+  }
+
   .postArea img{
+    width: 50px;
+    height: 50px;
+    float: left;
+    display:table-cell;
+    vertical-align: middle;
+    margin-left: 20px;
+  }
+
+  .postArea_map img{
     width: 50px;
     height: 50px;
     float: left;
@@ -332,7 +352,32 @@ table {
     margin-bottom: 30px;
   }
 
+  .btn2_map button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 18px;
+    width: 60px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 5px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
+  .btn2_map{
+    width: 130px;
+    margin-left: 40px;
+    margin-bottom: 30px;
+  }
+
   .commentArea{
+    float: left;
+    width: 420px;
+  }
+
+  .commentArea_map{
     float: left;
     width: 420px;
   }
@@ -343,7 +388,22 @@ table {
     display: table;
   }
 
+  .commentInput_map{
+    width: 100%;
+    height: 70px;
+    display: table;
+  }
+
   .commentArea img{
+    width: 50px;
+    height: 50px;
+    float: left;
+    display:table-cell;
+    vertical-align: middle;
+    margin-left: 20px;
+  }
+
+  .commentArea_map img{
     width: 50px;
     height: 50px;
     float: left;
@@ -390,7 +450,34 @@ table {
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
+  .btn3_map{
+    width: 300px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  .btn3_map button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 18px;
+    width: 100px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 5px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
   .allComments{
+    width: 100%;
+    float: left;
+  }
+
+  .allComments_map{
     width: 100%;
     float: left;
   }
@@ -401,6 +488,20 @@ table {
   }
 
   .comments img{
+    width: 50px;
+    height: 50px;
+    float: left;
+    display:table-cell;
+    vertical-align: middle;
+    margin-left: 20px;
+  }
+
+  .comments_map{
+    height: 80px;
+    margin-bottom: 30px;
+  }
+
+  .comments_map img{
     width: 50px;
     height: 50px;
     float: left;
@@ -428,6 +529,25 @@ table {
     word-wrap : break-word;
   }
 
+  .commentContent_map{
+    width: 280px;
+    min-height: 70px;
+    float: left;
+    background-color: aliceblue;  
+    border: 0.5px solid rgb(208, 232, 253);
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    color: dimgray;
+    margin-left: 20px;
+  }
+
+  .commentContent_map p{
+    padding: 10px;
+    word-wrap : break-word;
+  }
+
   .btnOption{
     width: 300px;
     display: block;
@@ -437,6 +557,28 @@ table {
   }
 
   .btnOption button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 16px;
+    width: 85px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 8px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
+  .btnOption_map{
+    width: 300px;
+    display: block;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 30px;
+  }
+
+  .btnOption_map button{
     outline: none;
     border: 0;
     background-color: rgb(234, 245, 255);
@@ -539,6 +681,7 @@ table {
   }
 
   .listBtn {
+    z-index: 5;
     width: 2.5rem;
     height: 2.5rem;
     position: fixed;
@@ -560,6 +703,7 @@ table {
   }
 
   .mapBtn {
+    z-index: 5;
     width: 2.5rem;
     height: 2.5rem;
     position: fixed;
@@ -580,6 +724,7 @@ table {
   }
 
   .toTop {
+    z-index: 5;
     width: 2.5rem;
     height: 2.5rem;
     padding: 0;
@@ -818,6 +963,63 @@ table {
     .commentContent{
       width: 70%;
       margin-left: 5%;
+    }
+
+    .postArea_map{
+        width: 90%;
+    }
+  
+    .postArea_map img{
+      width: 18%;
+      height: auto;
+      margin-left: 5%;
+    }
+
+    .btn2_map{
+      margin-left: 10%;
+    }
+
+    .commentArea_map{
+      width: 90%;
+    }
+  
+    .commentArea_map img{
+      width: 18%;
+      height: auto;
+      margin-left: 5%;
+    }
+
+    .btn3_map{
+      margin-left: 8%;
+    }
+
+    .btnOption_map{
+      margin-left: 8%;
+    }
+    
+    .allComments_map{
+      width: 90%;
+    }
+    
+    .comments_map img{
+      width: 18%;
+      height: auto;
+      margin-left: 5%;
+    }
+      
+    .commentContent_map{
+      width: 70%;
+      margin-left: 5%;
+    }
+
+    .info_detail .btn{
+      width: 285px;
+      margin-left: -142.5px;
+    }
+    
+    .info_detail .btn button{
+      font-size: 16px;
+      width: 90px;
     }
 
     .left{

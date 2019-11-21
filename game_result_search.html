@@ -128,27 +128,27 @@
                         <button>加入清單／自清單移除</button>
                     </div>
                     
-                    <div class="postArea">
-                        <div class="postInput">
+                    <div class="postArea_map">
+                        <div class="postInput_map">
                             <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>
                             <img src="img/pic.png" alt="">
                         </div>
-                            <div class="btn2">
+                            <div class="btn2_map">
                                 <button>確定</button>
                                 <button>取消</button>
                             </div>
                     </div>
                                         
-                    <div class="commentArea">
-                        <div class="commentInput">
+                    <div class="commentArea_map">
+                        <div class="commentInput_map">
                             <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea>
                             <img src="img/pic.png" alt="">
                         </div>                
-                        <div class="btn3">
-                            <button id="option">評論選項</button>
+                        <div class="btn3_map">
+                            <button id="option_map">評論選項</button>
                             <button>我要評論</button>
                         </div>
-                        <div class="btnOption">
+                        <div class="btnOption_map">
                             <button>環境乾淨</button>
                             <button>環境骯髒</button>
                             <button>餐點美味</button>
@@ -158,10 +158,10 @@
                         </div>
                     </div>        
                     
-                    <div class="allComments">
-                        <div class="comments">
+                    <div class="allComments_map">
+                        <div class="comments_map">
                             <img src="img/pic.png" alt="">
-                            <div class="commentContent">
+                            <div class="commentContent_map">
                                 <p>內容</p>
                             </div>
                         </div>
@@ -218,29 +218,55 @@
             });
 
             $('.postArea').hide();
-            $('#post, #post_map').click(function() {
+            $('#post').click(function() {
                 $('.postArea').slideToggle();
                 $('.commentArea').hide();
                 $('.allComments').hide();
             });
 
             $('.commentArea').hide();
-            $('#comment, #comment_map').click(function() {
+            $('#comment').click(function() {
                 $('.commentArea').slideToggle();
                 $('.postArea').hide();
                 $('.allComments').hide();
             });
 
             $('.btnOption').hide();
-            $('#option, #option_map').click(function() {
+            $('#option').click(function() {
                 $('.btnOption').slideToggle();
             });
 
             $('.allComments').hide();
-            $('#showAllComments, #showAllComments_map').click(function() {
+            $('#showAllComments').click(function() {
                 $('.allComments').slideToggle();
                 $('.commentArea').hide();
                 $('.postArea').hide();
+            });
+
+            $('.postArea_map').hide();
+            $('#post_map').click(function() {
+                $('.postArea_map').slideToggle();
+                $('.commentArea_map').hide();
+                $('.allComments_map').hide();
+            });
+
+            $('.commentArea_map').hide();
+            $('#comment_map').click(function() {
+                $('.commentArea_map').slideToggle();
+                $('.postArea_map').hide();
+                $('.allComments_map').hide();
+            });
+
+            $('.btnOption_map').hide();
+            $('#option_map').click(function() {
+                $('.btnOption_map').slideToggle();
+            });
+
+            $('.allComments_map').hide();
+            $('#showAllComments_map').click(function() {
+                $('.allComments_map').slideToggle();
+                $('.commentArea_map').hide();
+                $('.postArea_map').hide();
             });
         });
 
