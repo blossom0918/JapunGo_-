@@ -632,7 +632,6 @@ table {
     margin-top: 50px;
     margin-bottom: 50px;
     margin-left: 5%;
-    background-color: rgb(208, 252, 247);
   }
 
   .info_map{
@@ -735,7 +734,7 @@ table {
     }
     
     .info_detail{
-      width: 90%;
+      width: 100%;
     }
 
     .footer{
@@ -760,11 +759,8 @@ table {
       min-width: 60%;
     }
 
-    .info{
-      width: 90%;
-      margin-left: 5%;
-      margin-top: 30px;
-      margin-bottom: 30px;
+    .map{
+      height: 280px;
     }
 
     .postArea{
