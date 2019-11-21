@@ -236,6 +236,8 @@ table {
     max-width: 180px;
     max-height: 180px;
     margin-top: 10px;
+    display: block;
+    margin: auto;
   }
 
   .reviseInfo input{
@@ -423,6 +425,7 @@ table {
 
   .info h3{
     float: left;
+    width: 230px;
     font-size: 25px;
     margin-top: 62.5px;
     margin-left: 20px;
@@ -440,7 +443,7 @@ table {
     width: 60px;
     padding: 5px;
     margin-right: 20px;
-    margin-top: 140px;
+    margin-top: 40px;
     margin-bottom: 30px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
