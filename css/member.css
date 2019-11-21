@@ -702,6 +702,17 @@ table {
       margin-left: 5%;
     }
 
+    .info img{
+      width: 20%;
+      height: auto;
+      margin-left: 7.5%;
+    }
+  
+    .info h3{
+      width: 60%;
+      margin-left: 7.5%;
+    }
+
     .commentContent{
       width: 90%;
       margin-bottom: 30px;
