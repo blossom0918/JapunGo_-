@@ -276,6 +276,30 @@ table {
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
+  .btn_map{
+    z-index: 1;
+    float: left;
+    width: 325px;
+    position: relative;
+    left: 50%;
+    margin-left: -162.5px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .btn_map button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 18px;
+    width: 105px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
   .postArea{
     float: left;
     width: 420px;
@@ -1012,14 +1036,16 @@ table {
       margin-left: 5%;
     }
 
-    .info_detail .btn{
-      width: 285px;
-      margin-left: -142.5px;
+    .btn_map{
+      width: 305px;
+      margin-left: -152.5px;
     }
     
-    .info_detail .btn button{
-      font-size: 16px;
-      width: 90px;
+    .btn_map button{
+      font-size: 18px;
+      width: 98px;
+      padding-left: 3px;
+      padding-right: 3px;
     }
 
     .left{
