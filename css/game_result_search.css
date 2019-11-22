@@ -833,14 +833,11 @@ table {
   .info_detail{
     z-index: 1;
     float: left;
-    width: 450px;
+    max-width: 450px;
     background-color: #fff;
-    margin: 50px 30px 30px 85px;
-    padding-bottom: 20px;
     box-shadow: 0 1px 3px 0 rgba(28, 128, 185, 0.404);
     border-radius: 2px;
     font-size: 16px;
-    font-family: "Microsoft JhengHei UI" ,sans-serif;
   }
 
   .info_detail h3{
