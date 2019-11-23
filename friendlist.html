@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="css/friendlist.css">
     <title>我的好友清單</title>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="jquery-3.3.1.min.js"></script>
   <!--選擇使用realtime database功能-->
-  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+    <script src="http://code.changer.hk/jquery/plugins/jquery.cookie.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-storage.js"></script>
   <script type="text/javascript">
 
     var firebaseConfig = {
@@ -37,6 +40,7 @@
 
             <nav id="menu">
                  <ul>
+                    <li><a href="index.html"><img src="img/home.png" alt="">首頁</a></li>
                     <li><a href="game.html"><img src="img/game.png" alt="">今天吃什麼</a></li>
                     <li><a href="posts.html"><img src="img/posts.png" alt="">我的動態</a></li>
                     <li><a href="search.html"><img src="img/search.png" alt="">搜尋美食</a></li>
@@ -55,7 +59,7 @@
             <h1>我的好友清單</h1>
             <p>以帳號搜尋好友，立即發送好友邀請</p>
             <div class="inputArea">
-                <input type="text" class="searchTerm">
+                <input type="text" class="searchTerm" id="search">
                 <button type="submit" class="searchBtn" onclick="friendInfo()"><img src="img/search.png" alt=""></button>
             </div>
         </div>
@@ -113,7 +117,10 @@
 
         $(function friendInfo (){
             var friendInfo = document.getElementById("friendInfo");
+            // var search=$('#search').val();
             friendInfo.style.display = "none";
+
+            // var data=firebase.database().ref('/會員資料/');
             
             $('.searchBtn').click(function centerHandler(){ 
                 friendInfo.style.display = "block";
@@ -144,6 +151,64 @@
             }).scroll();
 
         });
+    </script>
+    <script type="text/javascript">
+        function getCookie(name) {
+            var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+
+        if (arr = document.cookie.match(reg))
+
+            return unescape(arr[2]);
+        else
+            return null;
+        }
+        
+        var list=document.querySelector('.friendlist');
+        $(document).ready(function(){
+            var frienddata=firebase.database().ref('/好友名單資料/');
+            var memberdata=firebase.database().ref('/會員資料/');
+            var str='';
+            var MyID=getCookie('ID');
+
+            frienddata.once('value',function(friendsnapshot){
+                memberdata.once('value',function(membersnapshot){
+                var memberInf=membersnapshot.val();
+                var friendInf=friendsnapshot.val();
+                for(var i in friendInf){
+                    if(friendInf[i]["ANo"]==MyID&&friendInf[i]["Status"]==true){
+                        console.log(i);
+                        for(var j in memberInf){
+
+                            if(friendInf[i]["SNo"]==memberInf[j]["ID"]){
+                                str+=memberInf[j]["Name"];
+                                str+='<button onclick=foodlist("'+j+'")>'+"查看美食清單"+'</button>';
+                                str+='<button onclick=delfrined("'+i+'")>'+"刪除好友"+'</button>';
+                            }
+                        }
+                    }else if(friendInf[i]["SNo"]==MyID&&friendInf[i]["Status"]==true){
+                        for(var j in memberInf){
+                            if(frined[i]["ANo"]==memberInf[j]["ID"]){
+                                str+=memberInf[j]["Name"];
+                                str+='<button onclick=foodlist("'+j+'")>'+"查看美食清單"+'</button>';
+                                str+='<button onclick=delfrined("'+i+'")>'+"刪除好友"+'</button>';
+                            }
+
+                        }
+                    }
+                }
+                list.innerHTML=str;
+            });
+        });
+        });
+function foodlist(j){
+    document.cookie="FNo="+j;
+    window.location.href="foodlist.html";
+}
+function delfrined(i){
+    deldata=firebase.database().ref('/好友名單資料/'+i);
+    deldata.remove();
+
+}
     </script>
 </body>
 
