@@ -39,6 +39,7 @@
 
             <nav id="menu">
                  <ul>
+                    <li><a href="index.html"><img src="img/home.png" alt="">首頁</a></li>
                     <li><a href="game.html"><img src="img/game.png" alt="">今天吃什麼</a></li>
                     <li><a href="posts.html"><img src="img/posts.png" alt="">我的動態</a></li>
                     <li><a href="search.html"><img src="img/search.png" alt="">搜尋美食</a></li>
@@ -76,7 +77,7 @@
                     <p>頭貼</p>
                     <input id="upload" style="display: none;" type="file" data-target="file-uploader" accept="image/*">
                     <label for="upload">
-                      <img src="img/camera.png" style="width: 70px; height: 70px; margin-left: 85px;">
+                      <img src="img/camera.png" style="width: 70px; height: 70px; margin-left: 100px;">
                     </label>
                     <img id="previewImg" src="#" alt="">
                 </div>
@@ -101,18 +102,20 @@
                 <button id="confirm">確認</button>            
             </div>   
             
-            <div class="friendRequest" id="2">
+            <div class="list" id="2">
                 <h2>我的好友邀請</h2>
                 <div class="line">
-                    <ul id="FriendReqList"></ul>
+                    <!-- <ul class="FriendReqList">
+
+                    </ul> -->
                 </div>
-                <div class="list">
+                <div class="FriendReqList">
                     <!-- 若無邀請，顯示：
                     <h2>目前尚無未確認之邀請</h2> -->
 
                     <div class="info">
                         <img id="friendphoto" class="addIcon">
-                        <h3>用戶名</h3>
+                        <h3 id="friendName">用戶名</h3>
                         <button>拒絕</button> 
                         <button>接受</button>                                                
                     </div>
@@ -267,10 +270,10 @@
     
 
     $(document).ready(function(){
-    
+    var ID=getCookie('ID');
     $('#confirm').on('click',function(){
         data.once('value',function(snapshot){
-            var ID=getCookie('ID'); 
+             
             var Name=$('#Name').val();
             var PassWd=$('#PassWd').val();
             var RepassWd=$('#RepassWd').val();
@@ -336,22 +339,55 @@
 });
 
 //---------------------------------------------------------------------我的好友邀請
-    // var frienddata=firebase.database().ref('/好友名單資料/');
-    // var friendphoto= document.querySelector('.friendphoto');
-    // frienddata.once('value',function(friendsnapshot){
-    //     var friendInf=friendsnapshot.val();
-    //     var count=0;
-    //     str="";
-    //     for(var j in friendInf){
-    //         if(friendInf[j]["ANo"]==ID||friendInf[j]["SNo"]==ID){
-    //             if(friendInf[j]["Status"]==false){
-    //                 friendphoto+=firebase.storage().ref('images/'+ID);
-    //             }
-    //         }
-    //     }
-    //     });
-   
-});  
+    var frienddata=firebase.database().ref('/好友名單資料/');
+    var memberdata=firebase.database().ref('/會員資料/');
+    var str='';
+    var FriendReqList=document.querySelector('.info');
+    frienddata.once('value',function(friendsnapshot){
+        memberdata.once('value',function(membersnapshot){
+        var memberInf=membersnapshot.val();
+        var friendInf=friendsnapshot.val();
+        var count=0;
+        for(var j in friendInf){
+
+            if(friendInf[j]["ANo"]==ID&&friendInf[j]["Status"]==false){
+                
+                for(var k in memberInf){
+
+                    if(memberInf[k]["ID"]==friendInf[j]["SNo"]){
+
+                        str+='<h3 id="friendName">'+memberInf[k]["Name"];
+                        str+='<button onclick=Reject("'+j+'")>'+"拒絕"+'</button>';
+                        str+='<button onclick=Accept("'+j+'")>'+"接受"+'</button>';
+                    }
+                }
+
+            }else if(friendInf[j]["SNo"]==ID&&friendInf[j]["Status"]==false){
+                for(var r in memberInf){
+                    if(memberInf[r]["ID"]==friend[j]["ANo"]){
+                        str+='<h3 id="friendName">'+memberInf[k]["Name"];
+                        str+='<button onclick=Reject("'+j+'")>'+"拒絕"+'</button>';
+                        str+='<button onclick=Accept("'+j+'")>'+"接受"+'</button>';
+                    }
+                }
+            }
+        }
+         FriendReqList.innerHTML=str;
+        });
+    });
+});
+function Reject(j){
+    var Rejectdata=firebase.database().ref('/好友名單資料/'+j);
+    Rejectdata.remove();
+
+}
+function Accept(j){
+    var Acceptdata=firebase.database().ref('/好友名單資料/'+j);
+    Acceptdata.update({
+        Status:"true",
+    });
+}  
+
     </script>
 </body>
 </html>
