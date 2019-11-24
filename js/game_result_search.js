@@ -81,7 +81,7 @@ function initMap() {
         let data = snapshot.val();
         console.log(data);
         var infowindow = new google.maps.InfoWindow();
-        for (let i = 1; i < data.length; i++) {
+        for (let i = 1; i < data.length; i++) {  //不能用for (i in data),會只抓最後一筆資料
             geocoder.geocode({ 'address': data[i].地址 }, function (results, status) {
                 if (status == 'OK') {
                     map.setCenter(results[0].geometry.location);
@@ -140,6 +140,8 @@ function test(data) { //infowindow點擊後
         document.getElementById('restaurant').innerHTML = data.店名;
         document.getElementById('r_address').innerHTML = data.地址;
         document.getElementById('r_tel').innerHTML = data.電話;
+        // document.getElementById('recommend_a').href=data.網址;
+        // document.getElementById('recommend_a').target="_blank";
 
     })
     
