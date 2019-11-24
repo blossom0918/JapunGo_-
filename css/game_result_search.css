@@ -795,6 +795,7 @@ table {
   }
 
   .map{
+    position: relative;
     float: left;
     width: 90%;
     height: 500px;
@@ -831,6 +832,9 @@ table {
   }
 
   .info_detail{
+    position: absolute;
+    top: 20%;
+    left:374px;
     z-index: 1;
     float: left;
     max-width: 450px;

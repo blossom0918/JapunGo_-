@@ -6,6 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/game_result_search.css">
   <title>結果搜尋</title>
+   <!--firebase核心js-->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+<!--選擇使用realtime database功能-->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyNHGK5W-UIZrhPqLa2POPnisX6tue7rw&libraries=places" ></script>
+<script defer type="text/javascript" src="js/game_result_search.js"></script>
 </head>
 <body>
     <div class="wrap">
@@ -34,7 +40,7 @@
         <div class="clear"></div>
         
         <div class="search">
-            <h1>結果食物名稱</h1>
+            <h1 id='q_answer'>結果食物名稱</h1>
         </div>
         <div class="clear"></div>
         
@@ -98,13 +104,14 @@
         </div>
         
         <div class="mapContent">
-            <div class="map">
+            <div class="map" >
+                <div  class='map' id='map'></div>
                 <!-- 自己 -->
                 <img src="img/me.png" style="height: 80px;">
                 <!-- 餐廳 -->
                 <img src="img/restaurant.png" style="height: 55px;">
                 
-                <div class="info_map">
+                <div class="info_map" id='info_map' style="display: none;">
                     <ul>
                         <li>餐廳名</li>
                         <li>地址</li>
