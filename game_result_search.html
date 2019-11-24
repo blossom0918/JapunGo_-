@@ -105,12 +105,13 @@
         
         <div class="mapContent">
             <div class="map" >
-                <div  class='map' id='map'></div>
-                <!-- 自己 -->
+                <div  class='map' id='map'>
+                    <!-- 自己 -->
                 <img src="img/me.png" style="height: 80px;">
                 <!-- 餐廳 -->
                 <img src="img/restaurant.png" style="height: 55px;">
-                
+                </div>
+ 
                 <div class="info_map" id='info_map' style="display: none;">
                     <ul>
                         <li>餐廳名</li>
@@ -122,13 +123,13 @@
 
                 <div class="info_detail" id="info_detail" style="display: none;">
                     <button id="close"><img src="img/cross.png"></button>
-                    <h3>餐廳名</h3>
+                    <h3 id='restaurant'>餐廳名</h3>
                     <img src="img/pin.png" class="addIcon">
-                    <p class="address">地址</p>
+                    <p id='r_address' class="address">地址</p>
                     <img src="img/tel.png" class="telIcon">
-                    <p class="tel">電話</p>
+                    <p id='r_tel' class="tel">電話</p>
                     <button class="showAllComments" id="showAllComments_map"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>                   
-                    <button class="recommend"><img src="img/best.png" class="bestIcon">查看推薦</button>
+                    <button class="recommend" id='recommend_a'><img src="img/best.png" class="bestIcon" >查看推薦</button>
                     <div class="btn_map">
                         <button id="post_map">發起動態</button>
                         <button id="comment_map">我要評論</button>
