@@ -252,6 +252,16 @@ table {
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
+  .btn0{
+    float: right;
+    width: 325px;
+  }
+
+  .btn0_map{
+    float: right;
+    width: 325px;
+  }
+
   .btn{
     z-index: 1;
     float: left;
@@ -806,6 +816,7 @@ table {
 
   .info_map{
     width: 250px;
+    font-family: "Microsoft JhengHei UI" ,sans-serif;
   }
 
   .info_map ul{
