@@ -346,8 +346,8 @@
                 }
             }else if(friendInf[j]["SNo"]==ID&&friendInf[j]["Status"]==false){
                 for(var r in memberInf){
-                    if(memberInf[r]["ID"]==friend[j]["ANo"]){
-                        str+='<h3 id="friendName">'+memberInf[k]["Name"];
+                    if(memberInf[r]["ID"]==friendInf[j]["ANo"]){
+                        str+='<h3 id="friendName">'+memberInf[r]["Name"];
                         str+='<button onclick=Reject("'+j+'")>'+"拒絕"+'</button>';
                         str+='<button onclick=Accept("'+j+'")>'+"接受"+'</button>';
                     }
