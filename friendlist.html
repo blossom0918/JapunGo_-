@@ -60,15 +60,15 @@
             <p>以帳號搜尋好友，立即發送好友邀請</p>
             <div class="inputArea">
                 <input type="text" class="searchTerm" id="search">
-                <button type="submit" class="searchBtn" onclick="friendInfo()"><img src="img/search.png" alt=""></button>
+                <button type="submit" class="searchBtn" onclick=friendInfo()><img src="img/search.png" alt=""></button>
             </div>
         </div>
         <div class="clear"></div>
 
         <div id="friendInfo">
             <button id="close"><img src="img/cross.png" alt=""></button>
-            <img src="img/pic.png" alt="">
-            <h3>用戶名</h3>
+            <img src="img/pic.png" alt=""  id="memberImg">
+            <h3 class=memberName>用戶名</h3>
             <button id="addFriend">加入好友</button>
         </div>
 
@@ -115,27 +115,7 @@
             });
         });
 
-        $(function friendInfo (){
-            var friendInfo = document.getElementById("friendInfo");
-            // var search=$('#search').val();
-            friendInfo.style.display = "none";
-
-            // var data=firebase.database().ref('/會員資料/');
-            
-            $('.searchBtn').click(function centerHandler(){ 
-                friendInfo.style.display = "block";
-                var scrollDist = $(window).scrollTop();
-                var myTop = "100px";
-                var myLeft = ($(window).width()-$("#friendInfo").width())/2;
-                $("#friendInfo").offset({left:myLeft});
-                
-                $(window).resize(centerHandler);
-            });
- 
-            $('#close').click(function(){
-                friendInfo.style.display = "none";
-            });
-        });
+        
 
         $(function(){
             $('#backTop').click(function(){ 
@@ -153,15 +133,7 @@
         });
     </script>
     <script type="text/javascript">
-        function getCookie(name) {
-            var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-
-        if (arr = document.cookie.match(reg))
-
-            return unescape(arr[2]);
-        else
-            return null;
-        }
+        
         
         var list=document.querySelector('.friendlist');
         $(document).ready(function(){
@@ -176,7 +148,7 @@
                 var friendInf=friendsnapshot.val();
                 for(var i in friendInf){
                     if(friendInf[i]["ANo"]==MyID&&friendInf[i]["Status"]==true){
-                        console.log(i);
+                     
                         for(var j in memberInf){
 
                             if(friendInf[i]["SNo"]==memberInf[j]["ID"]){
@@ -187,7 +159,7 @@
                         }
                     }else if(friendInf[i]["SNo"]==MyID&&friendInf[i]["Status"]==true){
                         for(var j in memberInf){
-                            if(frined[i]["ANo"]==memberInf[j]["ID"]){
+                            if(friendInf[i]["ANo"]==memberInf[j]["ID"]){
                                 str+=memberInf[j]["Name"];
                                 str+='<button onclick=foodlist("'+j+'")>'+"查看美食清單"+'</button>';
                                 str+='<button onclick=delfrined("'+i+'")>'+"刪除好友"+'</button>';
@@ -199,7 +171,54 @@
                 list.innerHTML=str;
             });
         });
+//-------------------------------------------------------
+$('#addFriend').on('click',function(){
+        var search=$('#search').val();
+        var frienddata=firebase.database().ref('/好友名單資料/');
+        var count=0;
+        frienddata.once('value',function(friendsnapshot){
+            var friendInf=friendsnapshot.val();
+            for(var i in friendInf){
+                if(friendInf[i]["ANo"]==search&&friendInf[i]["SNo"]==getCookie('ID')){
+                    if(friendInf[i]["Status"]==true){
+                        alert("此帳號已經是好友了！");
+                        count++;
+                    }else{
+                        alert("已送出邀請等待對方回覆");
+                        count++;
+                    }
+                }else if(friendInf[i]["ANo"]==getCookie('ID')&&friendInf[i]["SNo"]==search){
+                   if(friendInf[i]["Status"]==true){
+                        alert("你們已經是好友囉！");
+                        count++;
+                   }else{
+                        alert("對方已經邀請你，請至我的好友邀請名單中接受邀請");
+                        count++;
+                   } 
+                }
+
+            }
+            if(count==0){
+                    frienddata.push({
+                        ANo:search,
+                        SNo:getCookie('ID'),
+                        Status:false,
+                    });
+                    alert('已送出邀請');
+            }
+            
         });
+    });
+        });
+function getCookie(name) {
+            var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+
+        if (arr = document.cookie.match(reg))
+
+            return unescape(arr[2]);
+        else
+            return null;
+        }
 function foodlist(j){
     document.cookie="FNo="+j;
     window.location.href="foodlist.html";
@@ -208,6 +227,57 @@ function delfrined(i){
     deldata=firebase.database().ref('/好友名單資料/'+i);
     deldata.remove();
 
+}
+function friendInfo (){
+    //----------------------------------------------------------------前端
+            var friendInfo = document.getElementById("friendInfo");
+            friendInfo.style.display = "none";
+            $('.searchBtn').click(function centerHandler(){ 
+                friendInfo.style.display = "block";
+                var scrollDist = $(window).scrollTop();
+                var myTop = "100px";
+                var myLeft = ($(window).width()-$("#friendInfo").width())/2;
+                $("#friendInfo").offset({left:myLeft});
+                
+                $(window).resize(centerHandler);
+            });
+ 
+            $('#close').click(function(){
+                friendInfo.style.display = "none";
+            });
+    //----------------------------------------------------------------
+    var search=$('#search').val();
+    var memberdata=firebase.database().ref('會員資料');
+    var Namestr='';
+    var Name=document.querySelector('.memberName');
+    var memberImg=document.querySelector('.memberImg');
+    memberdata.once('value',function(membersnapshot){
+        memberInf=membersnapshot.val();
+
+        for(var i in memberInf){
+            if(memberInf[i]["ID"]==search){
+                Namestr+=memberInf[i]["Name"];
+                changeImg(memberInf[i]["ID"]);
+                // var storageRef=firebase.storage().ref('/user/'+memberInf[i]["ID"]);
+            }
+        }
+        Name.innerHTML=Namestr; 
+    });
+}
+function changeImg(i){
+    window.onload=function(){
+
+
+    var Imgdata=firebase.storage().ref('/user/'+i);
+    
+        var memberImg=document.querySelector('.memberImg');
+        console.log(Imgdata);
+        // console.log(Imgdata.location.bucket);
+        // console.log(Imgdata.location.path);
+        memberImg.src=Imgdata;
+    
+};
+    
 }
     </script>
 </body>
