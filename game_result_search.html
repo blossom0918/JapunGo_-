@@ -45,8 +45,8 @@
         <div class="clear"></div>
         
         <div class="content">
-            <div class="list">
-                <div class="info">
+            <div class="list" id='list'>
+                <div class="info" style="display:none;">
                     <h3>餐廳名</h3>
 
                     <img src="img/pin.png" class="addIcon">
@@ -234,7 +234,7 @@
                 $('#mapView').toggle();
             });
 
-            $('.postArea').hide();
+           /* $('.postArea').hide();
             $('#post').click(function() {
                 $('.postArea').slideToggle();
                 $('.commentArea').hide();
@@ -258,7 +258,7 @@
                 $('.allComments').slideToggle();
                 $('.commentArea').hide();
                 $('.postArea').hide();
-            });
+            });*/
 
             $('.postArea_map').hide();
             $('#post_map').click(function() {

@@ -144,73 +144,117 @@ function test(data) { //infowindow點擊後
         // document.getElementById('recommend_a').target="_blank";
 
     })
-       
+
 }
 
 //----清單版本-------------------------------------------------------
 var ref = '/店家資料/' + food;
 db.ref(ref).once('value', function (snapshot) {
     let data = snapshot.val();
-    let list_content='';
-    for(i in data){
+    let list_content = '';
+    for (i in data) {
         console.log(data[i].店名);
     }
+    var n = 0;
+    var list = '';
+    for (i in data) {
+
+        var str =
+            '<div class="info">\
+            <h3>'+ data[i].店名 + '</h3>\
+            <img src="img/pin.png" class="addIcon">\
+            <p class="address">'+ data[i].地址 + '</p>\
+            <img src="img/tel.png" class="telIcon">\
+            <p class="tel">'+ data[i].電話 + '</p>\
+            <div class="btn0">\
+                <button class="showAllComments" onclick="showallcomment_list('+ n + ')"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>\
+                <a class="recommend"><img src="img/best.png" class="bestIcon">查看推薦</a>\
+            </div>\
+            <div class="btn">\
+                <button id="post" onclick="show_post('+ n + ')">發起動態</button>\
+                <button id="comment" onclick="my_comment('+ n + ')">我要評論</button>\
+                <button>加入清單／自清單移除</button>\
+                <!-- 已在清單內顯示移除，尚未加入顯示加入 -->\
+            </div>\
+            <div class="postArea" id="postArea'+ n + '">\
+                <div class="postInput">\
+                    <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>\
+                    <img src="img/pic.png" alt="">\
+                </div>\
+                <div class="btn2">\
+                    <button>確定</button>\
+                    <button>取消</button>\
+                </div>\
+            </div>\
+            <div class="commentArea" id="commentArea'+ n + '">\
+                <div class="commentInput">\
+                    <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea>\
+                    <img src="img/pic.png" alt="">\
+                </div>\
+                <div class="btn3">\
+                    <button id="option" onclick="show_option('+ n + ')">評論選項</button>\
+                    <button>我要評論</button>\
+                </div>\
+                <div class="btnOption" id="btnOption'+ n + '">\
+                    <button>環境乾淨</button>\
+                    <button>環境骯髒</button>\
+                    <button>餐點美味</button>\
+                    <button>餐點糟糕</button>\
+                    <button>親切店家</button>\
+                    <button>服務極差</button>\
+                </div>\
+            </div>\
+            <div class="allComments" id="allComments'+ n + '">\
+                <div class="comments">\
+                    <img src="img/pic.png" alt="">\
+                    <div class="commentContent">\
+                        <p>內容</p>\
+                    </div>\
+                </div>\
+            </div>\
+        </div>';
+        list += str;
+        n += 1;
+    }
+    document.getElementById('list').innerHTML = list;
+    setTimeout(() => {
+        $('.commentArea').hide();
+        $('.postArea').hide();
+        $('.allComments').hide();
+        $('.btnOption').hide();
+    }, 0);
 })
 
 
-/*<li>
-                        <div class="info">
-                            <h3>餐廳名</h3>
-                            <img src="img/pin.png" class="addIcon">
-                            <p class="address">地址</p>
-                            <img src="img/tel.png" class="telIcon">
-                            <p class="tel">電話</p>
-                            <button class="showAllComments" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>
-                            <button class="recommend"><img src="img/best.png" class="bestIcon">查看推薦</button>
-                            <div class="btn">
-                                <button id="post">發起動態</button>
-                                <button id="comment">我要評論</button>
-                                <button>加入清單／自清單移除</button>
-                                <!-- 已在清單內顯示移除，尚未加入顯示加入 -->
-                            </div>
 
-                            <div class="postArea">
-                                <div class="postInput">
-                                    <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>
-                                    <img src="img/pic.png" alt="">
-                                </div>
-                                <div class="btn2">
-                                    <button>確定</button>
-                                    <button>取消</button>
-                                </div>
-                            </div>
+function showallcomment_list(i) {
+    var allComments = '#allComments' + i;
+    var postArea = '#postArea' + i;
+    var commentArea = '#commentArea' + i;
+    $(allComments).slideToggle();
+    $(postArea).hide();
+    $(commentArea).hide();
+    
+}
+function show_post(i) {
+    var allComments = '#allComments' + i;
+    var postArea = '#postArea' + i;
+    var commentArea = '#commentArea' + i;
+    $(postArea).slideToggle();
+    $(commentArea).hide();
+    $(allComments).hide();
+    
+}
+function my_comment(i) {
+    var allComments = '#allComments' + i;
+    var postArea = '#postArea' + i;
+    var commentArea = '#commentArea' + i;
+    $(commentArea).slideToggle();
+    $(postArea).hide();
+    $(allComments).hide();
+}
+function show_option(i) {
+    var btnOption = '#btnOption' + i;
+    $(btnOption).slideToggle();
+}
 
-                            <div class="commentArea">
-                                <div class="commentInput">
-                                    <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea>
-                                    <img src="img/pic.png" alt="">
-                                </div>
-                                <div class="btn3">
-                                    <button id="option">評論選項</button>
-                                    <button>我要評論</button>
-                                </div>
-                                <div class="btnOption">
-                                    <button>環境乾淨</button>
-                                    <button>環境骯髒</button>
-                                    <button>餐點美味</button>
-                                    <button>餐點糟糕</button>
-                                    <button>親切店家</button>
-                                    <button>服務極差</button>
-                                </div>
-                            </div>
-
-                            <div class="allComments">
-                                <div class="comments">
-                                    <img src="img/pic.png" alt="">
-                                    <div class="commentContent">
-                                        <p>內容</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>*/
