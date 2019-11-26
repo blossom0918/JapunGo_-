@@ -158,10 +158,10 @@ db.ref(ref).once('value', function (snapshot) {
     for (i in data) {
         console.log(data[i].店名);
     }
-    var n = 0;
+    var n = 1;
     var list = '';
     for (i in data) {
-
+        var clear='<div style="clear:both;"></div>';
         var str =
             '<div class="info">\
             <h3>'+ data[i].店名 + '</h3>\
@@ -217,6 +217,9 @@ db.ref(ref).once('value', function (snapshot) {
             </div>\
         </div>';
         list += str;
+        if(n%2==0){
+            list+=clear;
+        }
         n += 1;
     }
     document.getElementById('list').innerHTML = list;
@@ -224,7 +227,7 @@ db.ref(ref).once('value', function (snapshot) {
     setTimeout(() => {
         //判斷有沒有網址
         //判斷有沒有加清單也要寫在這裡
-        var m=0;
+        var m=1;
         for(i in data){
             if(data[i].網址!=0){
                 var a_id='recommend_a'+m;
