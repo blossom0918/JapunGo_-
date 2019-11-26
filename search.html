@@ -50,12 +50,18 @@
             <div class="list">
                 <div class="info">
                     <h3>餐廳名</h3>
+                    
                     <img src="img/pin.png" class="addIcon">
                     <p class="address">地址</p>
+
                     <img src="img/tel.png" class="telIcon">
                     <p class="tel">電話</p>
-                    <button id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>                   
-                    <button class="recommend"><img src="img/best.png" class="bestIcon">查看推薦</button>
+                    
+                    <div class="btn0">
+                        <button class="showAllComments" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>                   
+                        <a class="recommend"><img src="img/best.png" class="bestIcon">查看推薦</a>
+                    </div>
+
                     <div class="btn">
                         <button id="post">發起動態</button>
                         <button id="comment">我要評論</button>
@@ -99,13 +105,6 @@
                             <div class="commentContent">
                                 <p>內容</p>
                             </div>
-                        </div>
-                        <!-- 待刪 -->
-                        <div class="comments">
-                                <img src="img/pic.png" alt="">
-                                <div class="commentContent">
-                                    <p>內容</p>
-                                </div>
                         </div>  
                     </div>
                 </div>
@@ -113,7 +112,82 @@
         </div>
 
         <div class="mapContent">
-            <!-- 地圖顯示 -->
+            <div  class='map' id='map'>
+                <!-- 自己 -->
+                <img src="img/me.png" style="height: 80px;">
+                <!-- 餐廳 -->
+                <img src="img/restaurant.png" style="height: 55px;">
+            </div>
+ 
+            <div class="info_map" id='info_map' style="display: none;">
+                <ul>
+                    <li>餐廳名</li>
+                    <li>地址</li>
+                    <li>電話</li>
+                </ul>
+                <button id="viewMore">查看更多</button>
+            </div>
+
+            <div class="info_detail" id="info_detail" style="display: none;">
+                <button id="close"><img src="img/cross.png"></button>
+                <h3 id='restaurant'>餐廳名</h3>
+
+                <img src="img/pin.png" class="addIcon">
+                <p id='r_address' class="address">地址</p>
+
+                <img src="img/tel.png" class="telIcon">
+                <p id='r_tel' class="tel">電話</p>
+
+                <div class="btn0_map">
+                    <button class="showAllComments" id="showAllComments_map"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>                   
+                    <a class="recommend" id="map_recommend_a"><img src="img/best.png" class="bestIcon">查看推薦</a>
+                </div>
+
+                <div class="btn_map">
+                    <button id="post_map">發起動態</button>
+                    <button id="comment_map">我要評論</button>
+                    <button>加入清單／自清單移除</button>
+                </div>
+                    
+                <div class="postArea_map">
+                    <div class="postInput_map">
+                        <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>
+                        <img src="img/pic.png" alt="">
+                    </div>
+                        <div class="btn2_map">
+                            <button>確定</button>
+                            <button>取消</button>
+                       </div>
+                </div>
+                                        
+                <div class="commentArea_map">
+                    <div class="commentInput_map">
+                        <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea>
+                        <img src="img/pic.png" alt="">
+                    </div>                    
+                    <div class="btn3_map">
+                        <button id="option_map">評論選項</button>
+                        <button>我要評論</button>
+                    </div>
+                    <div class="btnOption_map">
+                        <button>環境乾淨</button>
+                        <button>環境骯髒</button>
+                        <button>餐點美味</button>
+                        <button>餐點糟糕</button>
+                        <button>親切店家</button>
+                        <button>服務極差</button>
+                    </div>
+                </div>            
+                    
+                <div class="allComments_map">
+                    <div class="comments_map">
+                        <img src="img/pic.png" alt="">
+                        <div class="commentContent_map">
+                            <p>內容</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="clear"></div>

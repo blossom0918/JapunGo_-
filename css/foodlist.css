@@ -293,6 +293,16 @@ table {
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
+  .btn0{
+    float: right;
+    width: 325px;
+  }
+
+  .btn0_map{
+    float: right;
+    width: 325px;
+  }
+
   .btn{
     z-index: 1;
     float: left;
@@ -317,7 +327,36 @@ table {
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
+  .btn_map{
+    z-index: 1;
+    float: left;
+    width: 325px;
+    position: relative;
+    left: 50%;
+    margin-left: -162.5px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .btn_map button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 18px;
+    width: 105px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
   .postArea{
+    float: left;
+    width: 420px;
+  }
+
+  .postArea_map{
     float: left;
     width: 420px;
   }
@@ -328,7 +367,22 @@ table {
     display: table;
   }
 
+  .postInput_map{
+    min-width: 100%;
+    height: 150px;
+    display: table;
+  }
+
   .postArea img{
+    width: 50px;
+    height: 50px;
+    float: left;
+    display:table-cell;
+    vertical-align: middle;
+    margin-left: 20px;
+  }
+
+  .postArea_map img{
     width: 50px;
     height: 50px;
     float: left;
@@ -373,7 +427,32 @@ table {
     margin-bottom: 30px;
   }
 
+  .btn2_map button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 18px;
+    width: 60px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 5px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
+  .btn2_map{
+    width: 130px;
+    margin-left: 40px;
+    margin-bottom: 30px;
+  }
+
   .commentArea{
+    float: left;
+    width: 420px;
+  }
+
+  .commentArea_map{
     float: left;
     width: 420px;
   }
@@ -384,7 +463,22 @@ table {
     display: table;
   }
 
+  .commentInput_map{
+    width: 100%;
+    height: 70px;
+    display: table;
+  }
+
   .commentArea img{
+    width: 50px;
+    height: 50px;
+    float: left;
+    display:table-cell;
+    vertical-align: middle;
+    margin-left: 20px;
+  }
+
+  .commentArea_map img{
     width: 50px;
     height: 50px;
     float: left;
@@ -431,6 +525,28 @@ table {
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
+  .btn3_map{
+    width: 300px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  .btn3_map button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 18px;
+    width: 100px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 5px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
   .btnOption{
     width: 300px;
     display: block;
@@ -453,9 +569,36 @@ table {
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
+  .btnOption_map{
+    width: 300px;
+    display: block;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 30px;
+  }
+
+  .btnOption_map button{
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 16px;
+    width: 85px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 8px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
   .allComments{
     float: left;
     width: 100%;
+  }
+
+  .allComments_map{
+    width: 100%;
+    float: left;
   }
 
   .comments{
@@ -463,7 +606,21 @@ table {
     margin-bottom: 30px;
   }
 
+  .comments_map{
+    height: 80px;
+    margin-bottom: 30px;
+  }
+
   .comments img{
+    width: 50px;
+    height: 50px;
+    float: left;
+    display:table-cell;
+    vertical-align: middle;
+    margin-left: 20px;
+  }
+
+  .comments_map img{
     width: 50px;
     height: 50px;
     float: left;
@@ -486,7 +643,26 @@ table {
     margin-left: 20px;
   }
 
+  .commentContent_map{
+    width: 280px;
+    min-height: 70px;
+    float: left;
+    background-color: aliceblue;  
+    border: 0.5px solid rgb(208, 232, 253);
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    color: dimgray;
+    margin-left: 20px;
+  }
+
   .commentContent p{
+    padding: 10px;
+    word-wrap : break-word;
+  }
+
+  .commentContent_map p{
     padding: 10px;
     word-wrap : break-word;
   }
@@ -663,10 +839,84 @@ table {
   }
 
   .mapContent{
+    position: relative;
+    float: left;
     width: 98%;
-    height: 1000px;
-    margin: auto;
+    margin-left: 1%;
     background-color:	#fff;
+  }
+
+  .map{
+    float: left;
+    width: 90%;
+    height: 500px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 5%;
+  }
+
+  .info_map{
+    width: 250px;
+    font-family: "Microsoft JhengHei UI" ,sans-serif;
+  }
+
+  .info_map ul{
+    margin: 8px;
+  }
+
+  .info_map li{
+    font-size: 18px;
+  }
+
+  .info_map button{
+    display: block;
+    margin: auto;
+    margin-bottom: 8px;
+    outline: none;
+    border: 0;
+    background-color: rgb(234, 245, 255);
+    color: dimgray;
+    font-size: 18px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
+  .info_detail{
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-left:-225px;
+    margin-top:-147px;
+    z-index: 1;
+    float: left;
+    max-width: 450px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px 0 rgba(28, 128, 185, 0.404);
+    border-radius: 2px;
+    font-size: 16px;
+  }
+
+  .info_detail h3{
+    font-size: 24px;
+    margin-left: 10px;
+    padding-top: 18px;
+    color: rgb(15, 87, 129);
+  }
+
+  #close{
+    float: right;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    margin-top: 18px;
+    margin-right: 18px;
+  }
+
+  #close img{
+    width: 20px;
+    height: 20px;
   }
 
   @media (max-width:1100px){
@@ -684,7 +934,7 @@ table {
     }
 
     .mapContent{
-      width: 100%;
+      width: 99%;
     }
 
     .line{
@@ -700,6 +950,15 @@ table {
       margin-left: 5%;
       margin-top: 30px;
       margin-bottom: 30px;
+    }
+
+    .map{
+      width: 90%;
+      margin-left: 5%;
+    }
+    
+    .info_detail{
+      width: 100%;
     }
 
     .footer{
@@ -724,11 +983,8 @@ table {
       min-width: 60%;
     }
 
-    .info{
-      width: 90%;
-      margin-left: 5%;
-      margin-top: 30px;
-      margin-bottom: 30px;
+    .map{
+      height: 280px;
     }
 
     .postArea{
@@ -788,6 +1044,65 @@ table {
       margin-left: 5%;
     }
 
+    .postArea_map{
+        width: 90%;
+    }
+  
+    .postArea_map img{
+      width: 18%;
+      height: auto;
+      margin-left: 5%;
+    }
+
+    .btn2_map{
+      margin-left: 10%;
+    }
+
+    .commentArea_map{
+      width: 90%;
+    }
+  
+    .commentArea_map img{
+      width: 18%;
+      height: auto;
+      margin-left: 5%;
+    }
+
+    .btn3_map{
+      margin-left: 8%;
+    }
+
+    .btnOption_map{
+      margin-left: 8%;
+    }
+    
+    .allComments_map{
+      width: 90%;
+    }
+    
+    .comments_map img{
+      width: 18%;
+      height: auto;
+      margin-left: 5%;
+    }
+      
+    .commentContent_map{
+      width: 70%;
+      margin-left: 5%;
+    }
+
+    .btn_map{
+      width: 305px;
+      margin-left: -152.5px;
+    }
+    
+    .btn_map button{
+      font-size: 18px;
+      width: 98px;
+      padding-left: 3px;
+      padding-right: 3px;
+    }
+
     .left{
       width: 85%;
     }
@@ -807,4 +1122,5 @@ table {
     .emailArea{
       width: 85%;
     }
+
   }
