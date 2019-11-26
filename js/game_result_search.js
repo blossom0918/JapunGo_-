@@ -140,8 +140,11 @@ function test(data) { //infowindow點擊後
         document.getElementById('restaurant').innerHTML = data.店名;
         document.getElementById('r_address').innerHTML = data.地址;
         document.getElementById('r_tel').innerHTML = data.電話;
-        // document.getElementById('recommend_a').href=data.網址;
-        // document.getElementById('recommend_a').target="_blank";
+        if(data.網址!=0){
+            document.getElementById('map_recommend_a').href=data.網址;
+            document.getElementById('map_recommend_a').target="_blank";
+        }
+        
 
     })
 
@@ -168,7 +171,7 @@ db.ref(ref).once('value', function (snapshot) {
             <p class="tel">'+ data[i].電話 + '</p>\
             <div class="btn0">\
                 <button class="showAllComments" onclick="showallcomment_list('+ n + ')"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>\
-                <a class="recommend"><img src="img/best.png" class="bestIcon">查看推薦</a>\
+                <a class="recommend" id="recommend_a'+n+'"><img src="img/best.png" class="bestIcon">查看推薦</a>\
             </div>\
             <div class="btn">\
                 <button id="post" onclick="show_post('+ n + ')">發起動態</button>\
@@ -217,7 +220,20 @@ db.ref(ref).once('value', function (snapshot) {
         n += 1;
     }
     document.getElementById('list').innerHTML = list;
+    
     setTimeout(() => {
+        //判斷有沒有網址
+        //判斷有沒有加清單也要寫在這裡
+        var m=0;
+        for(i in data){
+            if(data[i].網址!=0){
+                var a_id='recommend_a'+m;
+                document.getElementById(a_id).href=data[i].網址;
+                document.getElementById(a_id).target="_blank";
+            }
+            m+=1;
+        }
+        //讓所有DIV一開始都收起來
         $('.commentArea').hide();
         $('.postArea').hide();
         $('.allComments').hide();
