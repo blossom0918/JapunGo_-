@@ -21,6 +21,7 @@ var mylocation;
 
 initMap();
 
+//未寫清除標記，若多次搜尋會覆蓋 sad
 
 //用Text Search來搜尋使用者輸入的關鍵字
 //https://developers.google.com/maps/documentation/javascript/places?hl=zh-TW#TextSearchRequests
@@ -68,7 +69,8 @@ function initMap() {
         var request = {
             location: currentLocation,   //搜尋的中心 自身定位
             radius: '500', //公尺
-            query: food
+            query: food,
+            types:'restaurant'
         };
         service = new google.maps.places.PlacesService(map);
 
@@ -89,13 +91,19 @@ function callback(results, status) {
         for (var i = 0; i < results.length; i++) {
             if (google.maps.geometry.spherical.computeDistanceBetween(results[i].geometry.location, mylocation) <3000) {
                 console.log(results[i]);
-                var request2 = {
-                    placeId: results[i].place_id,
-                };
-                service = new google.maps.places.PlacesService(map);
+                for(n in results[i].types){
+                    if( results[i].types[n]=='restaurant'){
+                        var request2 = {
+                            placeId: results[i].place_id,
+                        };
+                        service = new google.maps.places.PlacesService(map);
+                        
+                        service.getDetails(request2, callback2);
+                        resultCount++;
+                        break;
+                    }
+                }
                 
-                service.getDetails(request2, callback2);
-                resultCount++;
             }
         }
         if(resultCount==0){
