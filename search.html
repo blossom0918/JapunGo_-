@@ -269,6 +269,32 @@
                 $('.commentArea').hide();
                 $('.postArea').hide();
             });
+
+            $('.postArea_map').hide();
+            $('#post_map').click(function() {
+                $('.postArea_map').slideToggle();
+                $('.commentArea_map').hide();
+                $('.allComments_map').hide();
+            });
+
+            $('.commentArea_map').hide();
+            $('#comment_map').click(function() {
+                $('.commentArea_map').slideToggle();
+                $('.postArea_map').hide();
+                $('.allComments_map').hide();
+            });
+
+            $('.btnOption_map').hide();
+            $('#option_map').click(function() {
+                $('.btnOption_map').slideToggle();
+            });
+
+            $('.allComments_map').hide();
+            $('#showAllComments_map').click(function() {
+                $('.allComments_map').slideToggle();
+                $('.commentArea_map').hide();
+                $('.postArea_map').hide();
+            });
         });
 
         $(function(){
@@ -284,6 +310,22 @@
                 }
             }).scroll();
 
+        });
+
+        $(function(){
+            $('#viewMore').click(function centerHandler() {
+                document.getElementById('info_detail').style.display = "block";
+                var scrollDist = $(window).scrollTop();
+                var myTop = ($(window).height())/2;
+                var myLeft = ($(window).width()-$('#info_detail').width())/2;
+                $('#info_detail').offset({top:myTop, left:myLeft});
+                
+                $(window).resize(centerHandler);
+            });
+ 
+            $('#close').click(function(){
+                info_detail.style.display = "none";
+            });
         });
     </script>
 </body>
