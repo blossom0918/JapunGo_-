@@ -6,6 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/foodlist.css">
     <title>我的美食清單</title>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="jquery-3.3.1.min.js"></script>
+  <!--選擇使用realtime database功能-->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+    <script src="http://code.changer.hk/jquery/plugins/jquery.cookie.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-storage.js"></script>
+  <script type="text/javascript">
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCcIFB1orespqziBWnX8kUWyihopdBw8jM",
+        authDomain: "japungo.firebaseapp.com",
+        databaseURL: "https://japungo.firebaseio.com",
+        projectId: "japungo",
+        storageBucket: "japungo.appspot.com",
+        messagingSenderId: "238647383425",
+        appId: "1:238647383425:web:cd43c3708893b6e052c480"
+      };
+      // Initialize Firebase 初始化
+      firebase.initializeApp(firebaseConfig);
+      </script>
+  
 </head>
 <body>
     <div class="wrap">
@@ -37,16 +58,19 @@
             <h1>我的美食清單</h1>
             <p>輸入餐點或店家名稱，迅速找出你喜愛的店家</p>
             <div class="inputArea">
-                <input type="text" class="searchTerm">
-                <button type="submit" class="searchBtn"><img src="img/search.png" alt=""></button>
+                <input type="text" class="searchTerm" id="search">
+                <button type="submit" class="searchBtn" id="searchBtn"><img src="img/search.png" alt=""></button>
             </div>
         </div>
         <div class="clear"></div>
-
+<ul class="foodlist">
         <div class="content">
+               
             <div class="list">
+                
                 <div class="info">
-                    <h3>餐廳名</h3>
+                    
+                    <h3 id="name">餐廳名</h3>
 
                     <img src="img/pin.png" class="addIcon">
                     <p class="address">地址</p>
@@ -103,10 +127,13 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
+                
             </div>
+       
         </div>
-        
+         </ul>
         <div class="mapContent">
             <div  class='map' id='map'>
                 <!-- 自己 -->
@@ -273,6 +300,73 @@
             }).scroll();
 
         });
+        //-------------------------------------------後端
+        $(document).ready(function(){
+            var resdata=firebase.database().ref('/店家資料/');
+            var fooddata=firebase.database().ref('/美食清單資料/');
+            var name=document.getElementById('name');
+            var address=document.getElementById('address');
+            var phone=document.getElementById('phone');
+            var ID=getCookie('ID');
+            var str='';
+            var foodlist=document.querySelector('.foodlist');
+            fooddata.once('value',function(fsnapshot){
+                resdata.once('value',function(ressnapshot){
+                    var foodInf=fsnapshot.val();
+                    var resInf=ressnapshot.val();
+                    $('#searchBtn').on('click',function(){
+                        var search=$('#search').val();
+                        for(var r in resInf){
+                            if(r==search){
+                                for(var i in resInf[r]){
+                                    for(var f in foodInf){
+                                        // console.log(foodInf[f]["Name"]);
+                                        if(foodInf[f]["Name"]==resInf[r][i]["店名"]&&foodInf[f]["UNo"]==ID){
+                                            str+='<div class=wrap><div class=content><div class="list"><ul class="foodlist"><div class="info"><li><h3 id="name">'+foodInf[f]["Name"]+'</h3>';
+                                            str+='<img src="img/pin.png" class="addIcon"><p class="address">'+resInf[r][i]["地址"]+'</p>';
+                                            str+='<img src="img/tel.png" class="telIcon"><p class="tel">'+resInf[r][i]["電話"]+'</p></br>';
+                                            str+='<div class="btn"><button onclick=delfoodlist("'+f+'") id="delete">'+"自清單移除"+'</button>';
+                                            str+='<button onclick=comment("'+foodInf[f]["Name"]+'") id="comment">'+"我要評論"+'</button></li></ul></div></div></div></div></div >';
+                                        }
+                                    }
+                                }
+
+                            }
+                            foodlist.innerHTML=str;
+
+                        }
+                        
+                        
+                    });
+                })
+            });
+        });
+function getCookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg))
+        return unescape(arr[2]);
+    else
+        return null;
+}
+function delfoodlist(f){
+    var delfood=firebase.database().ref('/美食清單資料/'+f);
+    delfood.remove();
+}
+function comment(name){
+    var mycom=window.prompt("請輸入您的評論:");
+    var ID=getCookie('ID');
+    var comdata=firebase.database().ref('/評論區資料/');
+    var Today=new Date();
+    // console.log("今天日期是 " + Today.getFullYear()+ " 年 " + (Today.getMonth()+1) + " 月 " + Today.getDate() + " 日");
+    // console.log(day);
+    comdata.push({
+        Date:Today.getFullYear()+ " / " + (Today.getMonth()+1) + " / " + Today.getDate() + " 日",
+        UNo:ID,
+        Discon:mycom,
+        Name:name,
+    });
+
+}
     </script>
 </body>
 </html>
