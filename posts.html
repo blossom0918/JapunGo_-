@@ -42,49 +42,117 @@
                     <li><a href="search.html"><img src="img/search.png" alt="">搜尋美食</a></li>
                     <li><a href="foodlist.html"><img src="img/foodlist.png" alt="">美食清單</a></li>
                     <li><a href="friendlist.html"><img src="img/friendlist.png" alt="">好友清單</a></li>
-                    <li><a href="member.html#1" id="reviseInfo"><img src="img/member.png" alt="">修改會員資料</a></li>
-                    <li><a href="member.html#2" id="friendRequest"><img src="img/friend_request.png" alt="">好友邀請</a></li>
-                    <li><a href="member.html#3" id="comment"><img src="img/comment.png" alt="">我的評論</a></li>
-                    <li><a href="member.html#4" id="logout"><img src="img/logout.png" alt="">登出</a></li>
+                    <li><a href="member.html#1"><img src="img/member.png" alt="">修改會員資料</a></li>
+                    <li><a href="member.html#2"><img src="img/friend_request.png" alt="">好友邀請</a></li>
+                    <li><a href="member.html#3"><img src="img/comment.png" alt="">我的評論</a></li>
+                    <li><a href="member.html#4"><img src="img/logout.png" alt="">登出</a></li>
                 </ul>
             </nav>
         </div>
         <div class="clear"></div>
 
         <div class="title">
-            <h1>我的動態</h1>
-            <div class="menu2">
-                <ul>
-                    <li><a href="member.html#1" id="reviseInfoBtn">修改會員資料</a></li>
-                    <li><a href="member.html#2" id="friendRequestBtn">我的好友邀請</a></li>
-                    <li><a href="member.html#3" id="commentBtn">我的評論</a></li>
-                    <li><a href="member.html#4" id="logoutBtn">登出</a></li>
-                </ul>
-            </div>    
+            <h1>我的動態</h1> 
+            <p>錯過了好多動態，快來補齊和好友相邀吃飯去</p> 
         </div>
         <div class="clear"></div>
 
         <div class="content">
-            
-
             <div class="status">
-                <h2>我的動態</h2>
-                <div class="line"></div>
-                <div class="list">
-                    <!-- 若無評論，顯示：
-                    <h2>您目前尚未發表過評論</h2> -->
+                <div class="statusContent">
+                    <div class="moreCompanion" id="moreCompanion" style="display: none;">
+                        <img src="img/pic.png" alt="">
+                    </div>
+                    
+                    <div class="companion">
+                        <!-- 放已加入者頭貼處，超過五人顯示<button><img src="img/view_more.png" id="viewMore"></button>
+                                按下後顯示<div class="moreCompanion" style="display: none;"></div>裡頭為剩下未顯示的加入者頭貼-->
+                        <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg"></button>                                             
+                        <img src="img/pic.png" alt="">
+                    </div>
 
-                    <div class="statusContent">
-                        <img src="" alt="">
-                        <h3>餐廳名<br>時間</h3>
-                        <p>內容</p>
-                        <button>刪除</button>
-                        <button>修改</button>                       
+                    <img src="img/pic.png" class="writerImg">
+                    <h3 class="writer">發布者</h3>
+                    <p class="time">時間</p>
+                    <p class="postContent">內容</p>
+
+                    <div class="bottom">
+                        <button id="restaurant">餐廳名</button>
+
+                        <!-- 自己的動態顯示<div class="btn_my_posts">，別人的顯示<div class="btn_others_posts"> -->
+                        <div class="btn_my_posts">
+                            <button>刪除</button>
+                            <button>修改</button>
+                        </div>
+
+                        <div class="btn_others_posts">
+                            <button>加入飯局</button>
+                        </div>
+                    </div>
+                    
+                    <div class="info" id="info" style="display: none;">
+                        <button id="close"><img src="img/cross.png"></button>
+                        <h3>餐廳名</h3>
+            
+                        <img src="img/pin.png" class="addIcon">
+                        <p class="address">地址</p>
+            
+                        <img src="img/tel.png" class="telIcon">
+                        <p class="tel">電話</p>
+            
+                        <div class="btn0">
+                            <button class="showAllComments" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>                   
+                            <a class="recommend"><img src="img/best.png" class="bestIcon">查看推薦</a>
+                        </div>
+            
+                        <div class="btn">
+                            <button id="post">發起動態</button>
+                            <button id="comment">我要評論</button>
+                            <button>加入清單／自清單移除</button>
+                        </div>
+                                
+                        <div class="postArea">
+                            <div class="postInput">
+                                <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>
+                                <img src="img/pic.png" alt="">
+                            </div>
+                            <div class="btn2">
+                                    <button>確定</button>
+                                    <button>取消</button>
+                            </div>
+                        </div>
+                                                    
+                        <div class="commentArea">
+                            <div class="commentInput">
+                                <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea>
+                                <img src="img/pic.png" alt="">
+                            </div>                    
+                            <div class="btn3">
+                                <button id="option">評論選項</button>
+                                    <button>我要評論</button>
+                            </div>
+                            <div class="btnOption">
+                                <button>環境乾淨</button>
+                                <button>環境骯髒</button>
+                                <button>餐點美味</button>
+                                <button>餐點糟糕</button>
+                                <button>親切店家</button>
+                                <button>服務極差</button>
+                            </div>
+                        </div>            
+                                
+                        <div class="allComments">
+                            <div class="comments">
+                                <img src="img/pic.png" alt="">
+                                <div class="commentContent">
+                                    <p>內容</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="clear"></div>
         
         <div class="footer">
@@ -101,7 +169,7 @@
                     <button onclick=suggestion() type="submit" class="submitBtn"><img src="img/send.png" alt="" class="contact"></button>
                 </div> 
             </div> 
-            
+       
             <button id="backTop" class="toTop"></button>
         </div>
     </div>
@@ -109,64 +177,53 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script>
         $( document ).ready(function() {
-            $('.show_password').click(function () {
-        let pass_type = $('input.password').attr('type');
-        if (pass_type === 'password') {
-          $('input.password').attr('type', 'text');
-          $('.show_password').removeClass('eye_open').addClass('eye_close');
-        } else {
-          $('input.password').attr('type', 'password');
-          $('.show_password').removeClass('eye_close').addClass('eye_open');
-        }
-      });
-      $('.show_password_confirm').click(function () {
-        let pass_type = $('input.password_confirm').attr('type');
-        if (pass_type === 'password') {
-          $('input.password_confirm').attr('type', 'text');
-          $('.show_password_confirm').removeClass('eye_open_confirm').addClass('eye_close_confirm');
-        } else {
-          $('input.password_confirm').attr('type', 'password');
-          $('.show_password_confirm').removeClass('eye_close_confirm').addClass('eye_open_confirm');
-        }
-      });
-            if(location.hash == "#1"){
-                $('.friendRequest').hide();
-                $('.comment').hide();
-                $('.reviseInfo').show();
-            }else if(location.hash == "#2"){
-                $('.reviseInfo').hide();
-                $('.comment').hide();
-                $('.friendRequest').show();
-            }else if(location.hash == "#3"){
-                $('.reviseInfo').hide();
-                $('.friendRequest').hide();
-                $('.comment').show();
-            }else if(location.hash == "#4"){
-                //登出
-            }
             $('#menu').hide();
             $('#toggle').click(function() {
                 $('#menu').slideToggle();
             });
-            $('#friendRequest, #friendRequestBtn').click(function() {
-                $('.reviseInfo').hide();
-                $('.comment').hide();
-                $('.friendRequest').show();
+
+            // 以下這些要改成以各別id判斷要不要展開
+
+            $('.postArea').hide();
+            $('#post').click(function() {
+                $('.postArea').slideToggle();
+                $('.commentArea').hide();
+                $('.allComments').hide();
             });
-            $('#reviseInfo, #reviseInfoBtn').click(function() {
-                $('.friendRequest').hide();
-                $('.comment').hide();
-                $('.reviseInfo').show();
+
+            $('.commentArea').hide();
+            $('#comment').click(function() {
+                $('.commentArea').slideToggle();
+                $('.postArea').hide();
+                $('.allComments').hide();
             });
-            $('#comment, #commentBtn').click(function(){
-                $('.reviseInfo').hide();
-                $('.friendRequest').hide();
-                $('.comment').show();
+
+            $('.btnOption').hide();
+            $('#option').click(function() {
+                $('.btnOption').slideToggle();
             });
-            $('#logout, #logoutBtn').click(function(){
-                登出
+
+            $('.allComments').hide();
+            $('#showAllComments').click(function() {
+                $('.allComments').slideToggle();
+                $('.commentArea').hide();
+                $('.postArea').hide();
             });
         });
+
+        $(function(){
+            var moreCompanion = document.getElementById('moreCompanion');
+            
+            $('#viewMore').click(function() {
+                if(moreCompanion.style.display == "none"){
+                    moreCompanion.style.display = "block";
+                }else{
+                    moreCompanion.style.display = "none";
+                }       
+                
+            });
+        });
+
         $(function(){
             $('#backTop').click(function(){ 
                 $('html,body').animate({scrollTop:0}, 333);
@@ -180,94 +237,113 @@
             }).scroll();
         });
 
-        var storedata=firebase.database().ref('/店家資料/');
-    var statusdata=firebase.database().ref('/動態資料/');
-    var memberdata=firebase.database().ref('/會員資料/');
-    var statusstr='';
-    var statusContent=document.querySelector('.statusContent');
-    memberdata.once('value',function(membersnapshot){
-        statusdata.once('value',function(statussnapshot){
-            storedata.once('value',function(storesnapshot){
-                var storeInf=storesnapshot.val();
-                var memberInf=membersnapshot.val();
-                var statusInf=statussnapshot.val();
-                var ID=getCookie('ID');
-                var count=0;
-                // for(var k in storeInf){
-                //     for(var i in storeInf[k]){
-                //         console.log(storeInf[k][i]["店名"]);
-                //     }
-                // }
-                for(var status in statusInf){
-                    if(statusInf[status]["UNo"]==ID){
-                        for(var store in storeInf){
+        $(function(){
+            $('#restaurant').click(function centerHandler() {
+                document.getElementById('info').style.display = "block";
+                var scrollDist = $(window).scrollTop();
+                var myTop = ($(window).height()-$('#info').height())/2;
+                var myLeft = ($(window).width()-$('#info').width())/2;
+                $('#info').offset({top:myTop, left:myLeft});
+                
+                $(window).resize(centerHandler);
+            });
+ 
+            $('#close').click(function(){
+                document.getElementById('info').style.display = "none";
+            });
+        });
 
-                            for(var instore in storeInf[store]){
-                                if(storeInf[store][instore]["店名"]==statusInf[status]["Name"]&&statusInf[status]["UNo"]==ID){
-                                    statusstr+='<div class="content"><div class="status"><div class="list><div class="statusContent"><h3>'+statusInf[status]["Name"]+'</br>';
-                                    statusstr+='<p>'+statusInf[status]["Date_time"]+'</p></br>';
-                                    statusstr+='<button onclick=delcomment("'+status+'")>'+"刪除"+'</button>';
-                                    statusstr+='<button onclick=changecomment("'+status+'")>'+"修改"+'</button></div></div></div></div>';
-                                    count++;
+        var storedata=firebase.database().ref('/店家資料/');
+        var statusdata=firebase.database().ref('/動態資料/');
+        var memberdata=firebase.database().ref('/會員資料/');
+        var statusstr='';
+        var statusContent=document.querySelector('.statusContent');
+        memberdata.once('value',function(membersnapshot){
+            statusdata.once('value',function(statussnapshot){
+                storedata.once('value',function(storesnapshot){
+                    var storeInf=storesnapshot.val();
+                    var memberInf=membersnapshot.val();
+                    var statusInf=statussnapshot.val();
+                    var ID=getCookie('ID');
+                    var count=0;
+                    // for(var k in storeInf){
+                    //     for(var i in storeInf[k]){
+                    //         console.log(storeInf[k][i]["店名"]);
+                    //     }
+                    // }
+                    for(var status in statusInf){
+                        if(statusInf[status]["UNo"]==ID){
+                            for(var store in storeInf){
+                                for(var instore in storeInf[store]){
+                                    if(storeInf[store][instore]["店名"]==statusInf[status]["Name"]&&statusInf[status]["UNo"]==ID){
+                                        statusstr+='<div class="content"><div class="status"><div class="statusContent"><h3>'+statusInf[status]["Name"]+'</br>';
+                                        statusstr+='<p>'+statusInf[status]["Date_time"]+'</p></br>';
+                                        statusstr+='<button onclick=delcomment("'+status+'")>'+"刪除"+'</button>';
+                                        statusstr+='<button onclick=changecomment("'+status+'")>'+"修改"+'</button></div></div></div>';
+                                        count++;
+                                    }
                                 }
                             }
                         }
-
                     }
-                }
-                console.log(count);
-                statusContent.innerHTML=statusstr;
+                    console.log(count);
+                    statusContent.innerHTML=statusstr;
+                });
             });
         });
-    });
-function changecomment(comment){
-    var newcomment=window.prompt('請輸入新的新的:');
-    var flag=1;
-    if(newcomment){
-        var commentdata=firebase.database().ref('/評論區資料/'+comment);
-        commentdata.update({
-            Discon:newcomment,
-        })
-        alert("修改成功");
-    }else{
-        console.log("2");
-        alert("尚未修改原本資料");
-    }
 
-    
-        
-        
-}
-function delcomment(comment){
-    var delcommentdata=firebase.database().ref('/評論區資料/'+comment);
-    delcommentdata.remove();
-}
-function Reject(j){
-    var Rejectdata=firebase.database().ref('/好友名單資料/'+j);
-    Rejectdata.remove();
-}
-function Accept(j){
-    var Acceptdata=firebase.database().ref('/好友名單資料/'+j);
-    Acceptdata.update({
-        Status:"true",
-    });
-}
-function getCookie(name) {
-    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-    if (arr = document.cookie.match(reg))
-        return unescape(arr[2]);
-    else
-        return null;
-    }
-function suggestion(){
-    var suggestion=$('#suggestion').val();
-    var membermail=$('#membermail').val();
-    var problem=firebase.database().ref('/問題回報/');
-    problem.push({
-        question:suggestion,
-        email:membermail,
-    })
-    alert("你問題真多");
-}  
+        function changecomment(comment){
+            var newcomment=window.prompt('請輸入新的新的:');
+            var flag=1;
+            if(newcomment){
+                var commentdata=firebase.database().ref('/評論區資料/'+comment);
+                commentdata.update({
+                    Discon:newcomment,
+                })
+                alert("修改成功");
+            }else{
+                console.log("2");
+                alert("尚未修改原本資料");
+            }         
+                
+        }
+
+        function delcomment(comment){
+            var delcommentdata=firebase.database().ref('/評論區資料/'+comment);
+            delcommentdata.remove();
+        }
+
+        function Reject(j){
+            var Rejectdata=firebase.database().ref('/好友名單資料/'+j);
+            Rejectdata.remove();
+        }
+
+        function Accept(j){
+            var Acceptdata=firebase.database().ref('/好友名單資料/'+j);
+            Acceptdata.update({
+                Status:"true",
+            });
+        }
+
+        function getCookie(name) {
+            var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+            if (arr = document.cookie.match(reg))
+                return unescape(arr[2]);
+            else
+                return null;
+        }
+
+        function suggestion(){
+            var suggestion=$('#suggestion').val();
+            var membermail=$('#membermail').val();
+            var problem=firebase.database().ref('/問題回報/');
+            problem.push({
+                question:suggestion,
+                email:membermail,
+            })
+            alert("你問題真多");
+        } 
+
     </script>
-    </script>
+</body>
+</html>
