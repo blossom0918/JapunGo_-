@@ -310,6 +310,32 @@
             var ID=getCookie('ID');
             var str='';
             var foodlist=document.querySelector('.foodlist');
+
+             fooddata.once('value',function(fsnapshot){
+                resdata.once('value',function(ressnapshot){
+                    var foodInf=fsnapshot.val();
+                    var resInf=ressnapshot.val();
+                        for(var r in resInf){
+                                for(var i in resInf[r]){
+                                    for(var f in foodInf){
+                                        // console.log(foodInf[f]["Name"]);
+                                        if(foodInf[f]["Name"]==resInf[r][i]["店名"]&&foodInf[f]["UNo"]==ID){
+                                            str+='<div class=wrap><div class=content><div class="list"><ul class="foodlist"><div class="info"><li><h3 id="name">'+foodInf[f]["Name"]+'</h3>';
+                                            str+='<img src="img/pin.png" class="addIcon"><p class="address">'+resInf[r][i]["地址"]+'</p>';
+                                            str+='<img src="img/tel.png" class="telIcon"><p class="tel">'+resInf[r][i]["電話"]+'</p></br>';
+                                            str+='<div class="btn"><button onclick=delfoodlist("'+f+'") id="delete">'+"自清單移除"+'</button>';
+                                            str+='<button onclick=comment("'+foodInf[f]["Name"]+'") id="comment">'+"我要評論"+'</button></li></ul></div></div></div></div></div >';
+                                        }
+                                    }
+                                }
+
+                            foodlist.innerHTML=str;
+
+                        }
+                        
+                })
+            });
+
             fooddata.once('value',function(fsnapshot){
                 resdata.once('value',function(ressnapshot){
                     var foodInf=fsnapshot.val();
