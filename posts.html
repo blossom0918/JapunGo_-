@@ -1,0 +1,274 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/member.css">
+    <title>我的動態</title>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="jquery-3.3.1.min.js"></script>
+    <!--選擇使用realtime database功能-->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+    <script src="http://code.changer.hk/jquery/plugins/jquery.cookie.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-storage.js"></script>
+    <script type="text/javascript">
+    var firebaseConfig = {
+        apiKey: "AIzaSyCcIFB1orespqziBWnX8kUWyihopdBw8jM",
+        authDomain: "japungo.firebaseapp.com",
+        databaseURL: "https://japungo.firebaseio.com",
+        projectId: "japungo",
+        storageBucket: "japungo.appspot.com",
+        messagingSenderId: "238647383425",
+        appId: "1:238647383425:web:cd43c3708893b6e052c480"
+      };
+      // Initialize Firebase 初始化
+      firebase.initializeApp(firebaseConfig);
+      </script>
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            <img src="img/logo_header.png" class="logo">
+            <div id="toggle">
+                    <div class="one"></div>
+                    <div class="two"></div>
+                    <div class="three"></div>
+            </div>
+
+            <nav id="menu">
+                 <ul>
+                    <li><a href="index.html"><img src="img/home.png" alt="">首頁</a></li>
+                    <li><a href="game.html"><img src="img/game.png" alt="">今天吃什麼</a></li>
+                    <li><a href="posts.html"><img src="img/posts.png" alt="">我的動態</a></li>
+                    <li><a href="search.html"><img src="img/search.png" alt="">搜尋美食</a></li>
+                    <li><a href="foodlist.html"><img src="img/foodlist.png" alt="">美食清單</a></li>
+                    <li><a href="friendlist.html"><img src="img/friendlist.png" alt="">好友清單</a></li>
+                    <li><a href="member.html#1" id="reviseInfo"><img src="img/member.png" alt="">修改會員資料</a></li>
+                    <li><a href="member.html#2" id="friendRequest"><img src="img/friend_request.png" alt="">好友邀請</a></li>
+                    <li><a href="member.html#3" id="comment"><img src="img/comment.png" alt="">我的評論</a></li>
+                    <li><a href="member.html#4" id="logout"><img src="img/logout.png" alt="">登出</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="clear"></div>
+
+        <div class="title">
+            <h1>我的動態</h1>
+            <div class="menu2">
+                <ul>
+                    <li><a href="member.html#1" id="reviseInfoBtn">修改會員資料</a></li>
+                    <li><a href="member.html#2" id="friendRequestBtn">我的好友邀請</a></li>
+                    <li><a href="member.html#3" id="commentBtn">我的評論</a></li>
+                    <li><a href="member.html#4" id="logoutBtn">登出</a></li>
+                </ul>
+            </div>    
+        </div>
+        <div class="clear"></div>
+
+        <div class="content">
+            
+
+            <div class="status">
+                <h2>我的動態</h2>
+                <div class="line"></div>
+                <div class="list">
+                    <!-- 若無評論，顯示：
+                    <h2>您目前尚未發表過評論</h2> -->
+
+                    <div class="statusContent">
+                        <img src="" alt="">
+                        <h3>餐廳名<br>時間</h3>
+                        <p>內容</p>
+                        <button>刪除</button>
+                        <button>修改</button>                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+        
+        <div class="footer">
+            <div class="left">
+                <img src="img/logo_mini.png" alt="" class="logo_footer">
+                <h3>聯絡我們</h3>
+                <p>如有任何問題，請留下您的問題與聯絡信箱，我們將儘速與您聯繫</p>
+            </div>
+            
+            <div class="right">
+                <textarea id="suggestion" style="overflow:auto" class="questionTerm" placeholder="請輸入您的問題"></textarea>
+                <div class="emailArea">
+                    <input id="membermail" type="email" class="emailTerm" placeholder="請輸入您的信箱">
+                    <button onclick=suggestion() type="submit" class="submitBtn"><img src="img/send.png" alt="" class="contact"></button>
+                </div> 
+            </div> 
+            
+            <button id="backTop" class="toTop"></button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        $( document ).ready(function() {
+            $('.show_password').click(function () {
+        let pass_type = $('input.password').attr('type');
+        if (pass_type === 'password') {
+          $('input.password').attr('type', 'text');
+          $('.show_password').removeClass('eye_open').addClass('eye_close');
+        } else {
+          $('input.password').attr('type', 'password');
+          $('.show_password').removeClass('eye_close').addClass('eye_open');
+        }
+      });
+      $('.show_password_confirm').click(function () {
+        let pass_type = $('input.password_confirm').attr('type');
+        if (pass_type === 'password') {
+          $('input.password_confirm').attr('type', 'text');
+          $('.show_password_confirm').removeClass('eye_open_confirm').addClass('eye_close_confirm');
+        } else {
+          $('input.password_confirm').attr('type', 'password');
+          $('.show_password_confirm').removeClass('eye_close_confirm').addClass('eye_open_confirm');
+        }
+      });
+            if(location.hash == "#1"){
+                $('.friendRequest').hide();
+                $('.comment').hide();
+                $('.reviseInfo').show();
+            }else if(location.hash == "#2"){
+                $('.reviseInfo').hide();
+                $('.comment').hide();
+                $('.friendRequest').show();
+            }else if(location.hash == "#3"){
+                $('.reviseInfo').hide();
+                $('.friendRequest').hide();
+                $('.comment').show();
+            }else if(location.hash == "#4"){
+                //登出
+            }
+            $('#menu').hide();
+            $('#toggle').click(function() {
+                $('#menu').slideToggle();
+            });
+            $('#friendRequest, #friendRequestBtn').click(function() {
+                $('.reviseInfo').hide();
+                $('.comment').hide();
+                $('.friendRequest').show();
+            });
+            $('#reviseInfo, #reviseInfoBtn').click(function() {
+                $('.friendRequest').hide();
+                $('.comment').hide();
+                $('.reviseInfo').show();
+            });
+            $('#comment, #commentBtn').click(function(){
+                $('.reviseInfo').hide();
+                $('.friendRequest').hide();
+                $('.comment').show();
+            });
+            $('#logout, #logoutBtn').click(function(){
+                登出
+            });
+        });
+        $(function(){
+            $('#backTop').click(function(){ 
+                $('html,body').animate({scrollTop:0}, 333);
+            });
+            $(window).scroll(function() {
+                if ( $(this).scrollTop() > 300 ){
+                    $('#backTop').fadeIn(222);
+                } else {
+                    $('#backTop').stop().fadeOut(222);
+                }
+            }).scroll();
+        });
+
+        var storedata=firebase.database().ref('/店家資料/');
+    var statusdata=firebase.database().ref('/動態資料/');
+    var memberdata=firebase.database().ref('/會員資料/');
+    var statusstr='';
+    var statusContent=document.querySelector('.statusContent');
+    memberdata.once('value',function(membersnapshot){
+        statusdata.once('value',function(statussnapshot){
+            storedata.once('value',function(storesnapshot){
+                var storeInf=storesnapshot.val();
+                var memberInf=membersnapshot.val();
+                var statusInf=statussnapshot.val();
+                var ID=getCookie('ID');
+                var count=0;
+                // for(var k in storeInf){
+                //     for(var i in storeInf[k]){
+                //         console.log(storeInf[k][i]["店名"]);
+                //     }
+                // }
+                for(var status in statusInf){
+                    if(statusInf[status]["UNo"]==ID){
+                        for(var store in storeInf){
+
+                            for(var instore in storeInf[store]){
+                                if(storeInf[store][instore]["店名"]==statusInf[status]["Name"]&&statusInf[status]["UNo"]==ID){
+                                    statusstr+='<div class="content"><div class="status"><div class="list><div class="statusContent"><h3>'+statusInf[status]["Name"]+'</br>';
+                                    statusstr+='<p>'+statusInf[status]["Date_time"]+'</p></br>';
+                                    statusstr+='<button onclick=delcomment("'+status+'")>'+"刪除"+'</button>';
+                                    statusstr+='<button onclick=changecomment("'+status+'")>'+"修改"+'</button></div></div></div></div>';
+                                    count++;
+                                }
+                            }
+                        }
+
+                    }
+                }
+                console.log(count);
+                statusContent.innerHTML=statusstr;
+            });
+        });
+    });
+function changecomment(comment){
+    var newcomment=window.prompt('請輸入新的新的:');
+    var flag=1;
+    if(newcomment){
+        var commentdata=firebase.database().ref('/評論區資料/'+comment);
+        commentdata.update({
+            Discon:newcomment,
+        })
+        alert("修改成功");
+    }else{
+        console.log("2");
+        alert("尚未修改原本資料");
+    }
+
+    
+        
+        
+}
+function delcomment(comment){
+    var delcommentdata=firebase.database().ref('/評論區資料/'+comment);
+    delcommentdata.remove();
+}
+function Reject(j){
+    var Rejectdata=firebase.database().ref('/好友名單資料/'+j);
+    Rejectdata.remove();
+}
+function Accept(j){
+    var Acceptdata=firebase.database().ref('/好友名單資料/'+j);
+    Acceptdata.update({
+        Status:"true",
+    });
+}
+function getCookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg))
+        return unescape(arr[2]);
+    else
+        return null;
+    }
+function suggestion(){
+    var suggestion=$('#suggestion').val();
+    var membermail=$('#membermail').val();
+    var problem=firebase.database().ref('/問題回報/');
+    problem.push({
+        question:suggestion,
+        email:membermail,
+    })
+    alert("你問題真多");
+}  
+    </script>
+    </script>
