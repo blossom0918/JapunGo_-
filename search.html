@@ -6,6 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/search.css">
     <title>搜尋美食</title>
+     <!--firebase核心js-->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+<!--選擇使用realtime database功能-->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyNHGK5W-UIZrhPqLa2POPnisX6tue7rw&libraries=places,geometry" ></script>
+<script defer type="text/javascript" src="js/search.js"></script>
+<script defer type="text/javascript" src="js/contact_us.js"></script>
 </head>
 <body>
     <div class="wrap">
@@ -37,8 +44,8 @@
             <h1>搜尋美食</h1>
             <p>肚子餓了嗎？快來搜搜附近有什麼美食</p>
             <div class="inputArea">
-                <input type="text" class="searchTerm">
-                <button type="submit" class="searchBtn"><img src="img/search.png" alt=""></button>
+                <input type="text" class="searchTerm" id="food">
+                <button type="submit" class="searchBtn" id="searchBtn"><img src="img/search.png" alt=""></button>
             </div>
         </div>
         <div class="clear"></div>
@@ -200,10 +207,10 @@
             </div>
             
             <div class="right">
-                <textarea style="overflow:auto" class="questionTerm" placeholder="請輸入您的問題"></textarea>
+                <textarea style="overflow:auto" class="questionTerm" id="questionTerm" placeholder="請輸入您的問題"></textarea>
                 <div class="emailArea">
-                    <input type="email" class="emailTerm" placeholder="請輸入您的信箱">
-                    <button type="submit" class="submitBtn"><img src="img/send.png" alt="" class="contact"></button>
+                    <input type="email" class="emailTerm" id="emailTerm" placeholder="請輸入您的信箱">
+                    <button type="submit" class="submitBtn" id="submitBtn"><img src="img/send.png" alt="" class="contact"></button>
                 </div> 
             </div> 
             
