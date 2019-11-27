@@ -493,51 +493,7 @@ table {
     margin-bottom: 30px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
- .statusContent{
-    float: left;
-    width: 425px;
-    background-color: #fff;
-    margin: 50px 30px 30px 85px;
-    box-shadow: 0px 1px 3px 0px rgba(28, 128, 185, 0.404);
-    border-radius: 2px;
-    font-size: 16px;
-  }
 
-  .statusContent h3{
-    float: left;
-    font-size: 25px;
-    margin-top: 30px;
-    margin-left: 30px;
-    width: 365px;
-  }
-
-  .statusContent p{
-    float: left;
-    font-size: 20px;
-    margin-top: 30px;
-    margin-left: 30px;
-    width: 365px;
-    max-height: 100px;
-    word-wrap : break-word;
-    padding: 10px;
-  }
-
-  .statusContent button{
-    float: right;
-    outline: none;
-    border: 0;
-    background-color: rgb(234, 245, 255);
-    color: dimgray;
-    font-size: 22px;
-    border-radius: 5px;
-    text-align: center;
-    width: 60px;
-    padding: 5px;
-    margin-right: 20px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    font-family: "Microsoft JhengHei UI", sans-serif;
-  }
   .footer{
     width: 98%;
     margin: auto;
@@ -701,12 +657,6 @@ table {
       margin-top: 30px;
       margin-bottom: 30px;
     }
-    .statusContent{
-      display: block;
-      margin: auto;
-      margin-top: 30px;
-      margin-bottom: 30px;
-    }
 
     .footer{
       width: 100%;
@@ -765,12 +715,6 @@ table {
     }
 
     .commentContent{
-      width: 90%;
-      margin-bottom: 30px;
-      margin-top: 30px;
-      margin-left: 5%;
-    }
-    .statusContent{
       width: 90%;
       margin-bottom: 30px;
       margin-top: 30px;

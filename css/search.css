@@ -221,10 +221,6 @@ table {
     float: left;
     width: 100%;
     background-color: #FFF;
-    /* background-image: url(../img/bg7.png); */
-    /* background-size: 260px; */
-    /* background-position: bottom right; */
-    /* background-repeat: no-repeat; */
     padding-bottom: 220px;
   }
   
@@ -258,6 +254,7 @@ table {
   }
 
   .recommend{
+    text-decoration: none;
     float: right;
     margin-top: 5px;
     margin-right: 15px;
