@@ -17,6 +17,7 @@ var my_lat;
 var my_lng;
 var currentLocation;
 var mylocation;
+var marker_count=[];
 
 
 initMap();
@@ -63,7 +64,12 @@ function initMap() {
     //let geocoder = new google.maps.Geocoder();
     var service;
     let button = document.getElementById('searchBtn');
+    
+    
     button.addEventListener('click', function () {
+        for (var i = 0; i < marker_count.length; i++ ) {
+            marker_count[i].setMap(null);
+          }
         var food = document.getElementById('food').value;
 
         var request = {
@@ -87,6 +93,7 @@ function initMap() {
 
 function callback(results, status) {
     var resultCount=0;
+    
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
             if (google.maps.geometry.spherical.computeDistanceBetween(results[i].geometry.location, mylocation) <3000) {
@@ -138,6 +145,7 @@ function createMarker(data) {
         address:data.formatted_address,
         phone: data.formatted_phone_number
     });
+    marker_count.push(marker);
     marker.addListener('click', function() {
         typeof infoWindowsOpenCurrently !== 'undefined' && infoWindowsOpenCurrently.close();
         infowindow.setContent( '<ul><li>'+this.restaurant+'</li><li>'+this.address+'</li><li>'+this.phone+'</li></ul>' );
