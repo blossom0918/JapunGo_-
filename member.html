@@ -361,7 +361,7 @@
     var commentdata=firebase.database().ref('/評論區資料/');
     var memberdata=firebase.database().ref('/會員資料/');
     var commentstr='';
-    var commentContent=document.querySelector('.commentContent');
+    var commentContent=document.querySelector('.list');
     memberdata.once('value',function(membersnapshot){
         commentdata.once('value',function(commentsnapshot){
             storedata.once('value',function(storesnapshot){
