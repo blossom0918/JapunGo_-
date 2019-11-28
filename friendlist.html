@@ -40,6 +40,7 @@
 
             <nav id="menu">
                  <ul>
+                    <!-- <li><a href="index.html"><img src="img/home.png" alt="">首頁</a></li> -->
                     <li><a href="game.html"><img src="img/game.png" alt="">今天吃什麼</a></li>
                     <li><a href="posts.html"><img src="img/posts.png" alt="">我的動態</a></li>
                     <li><a href="search.html"><img src="img/search.png" alt="">搜尋美食</a></li>
@@ -76,7 +77,7 @@
             <ul class="friendlist">
                 
                 <div class="info">
-                    <img src="img/pic.png" class="addIcon" id="image2">
+                    <img src="img/pic.png" class="addIcon" id="image3">
                     <h3 class="UserName">用戶名</h3>
                     <button><a href="foodlist.html">查看美食清單</a></button>
                     <!-- <title>我的美食清單</title>和<h1>我的美食清單</h1>
@@ -136,15 +137,16 @@
         });
     </script>
     <script type="text/javascript">
-        var list=document.querySelector('.friendlist');
+        
         $(document).ready(function(){
+            var list=document.querySelector('.friendlist');
             var frienddata=firebase.database().ref('/好友名單資料/');
             var memberdata=firebase.database().ref('/會員資料/');
             var str='';
             var str2='';
             var MyID=getCookie('ID');
             var UserName=document.getElementById('UserName');
-            // var addIcon=document.querySelector('.addIcon')
+            var addIcon=document.querySelector('.addIcon')
             // var image2=document.getElementById('image2');
             frienddata.once('value',function(friendsnapshot){
                 memberdata.once('value',function(membersnapshot){
@@ -164,28 +166,21 @@
                     }else if(friendInf[i]["SNo"]==MyID&&friendInf[i]["Status"]==true){
                         for(var j in memberInf){
                             if(friendInf[i]["ANo"]==memberInf[j]["ID"]){
-                                var storage=firebase.storage();
-                                var storageRef=firebase.storage().ref()
-                                var img_ref='user/'+memberInf[j]["ID"];
-                                var pathReference = storageRef.child(img_ref);
-                                var image2=document.getElementById('image2');
-                                str+='<image.src=>';
-                                pathReference.getDownloadURL().then(function(url) {  //將路徑轉換為可使用的URL
-                                    
-                                    str+=url;   //圖片網址放進img的src裡即可顯示
-                                });
-                                str+='<ul class="info"><h3>'+memberInf[j]["Name"];
-                                str+='<li><button onclick=foodlist("'+j+'")>'+"查看美食清單"+'</button>';
-                                str+='<button onclick=delfrined("'+i+'")>'+"刪除好友"+'</button></li></ul>';
-
-                            }
+                                str+='<image src='+callimage(memberInf[j]["ID"])+'>';
+                                
+                                    console.log("1");
+                                    str+='<ul class="info"><h3>'+memberInf[j]["Name"];
+                                    str+='<li><button onclick=foodlist("'+j+'")>'+"查看美食清單"+'</button>';
+                                    str+='<button onclick=delfrined("'+i+'")>'+"刪除好友"+'</button></li></ul>';
+                                
+                                
                            
-                        }
-                             list.innerHTML=str;
-                    }
-                }
-                
+                            }
 
+                             list.innerHTML=str;
+                        }
+                    }
+                }   
             });
         });
         });
@@ -198,19 +193,20 @@ function getCookie(name) {
         else
             return null;
 }
-// function callimage(UID){
-//     console.log(UID);
-//     var storage=firebase.storage();
-//     var storageRef=firebase.storage().ref()
-//     var img_ref='user/'+UID;
-//     var pathReference = storageRef.child(img_ref);
-//     var image2=document.getElementById('image2');
-//     pathReference.getDownloadURL().then(function(url) {  //將路徑轉換為可使用的URL
-//         return url;   //圖片網址放進img的src裡即可顯示
+async function callimage(UID){
+    var storage=firebase.storage();
+    var storageRef=firebase.storage().ref();
+    var img_ref='user/'+UID;
+    var pathReference = storageRef.child(img_ref);
+    var str='';
+    var addIcon=document.querySelector('.addIcon');
+    // var image2=document.getElementById('image2');
+    pathReference.getDownloadURL().then(function(url) {  //將路徑轉換為可使用的URL
         
-                                    
-//     });
-// }
+            return url;
+           //圖片網址放進img的src裡即可顯示            
+    });
+}
 function foodlist(j){
     document.cookie="FNo="+j;
     window.location.href="foodlist.html";
@@ -275,15 +271,19 @@ function friendInfo(){
                         
                         NewName.innerHTML=str;
                         $('#addFriend').on('click',function(){
+                            if(ID==search){
+                                flag=1;
+                                alert("請不要加自己好友好嗎?");
+                            }else{
                             for(var i in friendInf){
                                 if(friendInf[i]["ANo"]==search&&friendInf[i]["SNo"]==ID){
                                     if(friendInf[i]["Status"]==true){
                                         alert("你們已經是好友囉");
-                                        console.log('1');
+                                        flag=1;
                                         break;
                                     }else{
                                         alert("已送出邀請，等待對方回應");
-                                        console.log('2');
+                                        flag=1;
                                         break;
                                     }
                                 }else if(friendInf[i]["SNo"]==search&&friendInf[i]["ANo"]==ID){
@@ -298,7 +298,9 @@ function friendInfo(){
                                     }
                                 }
                             }
+                            }
                             if(flag!=1){
+                                alert("已發出交友邀請！");
                                 frienddata.push({
                                     Status:false,
                                     ANo:search,
