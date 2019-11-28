@@ -100,12 +100,9 @@
                 <button id="confirm">確認</button>            
             </div>   
             
-            <div class="list" id="2">
+            <div class="friendRequest" id="2">
                 <h2>我的好友邀請</h2>
-                <div class="line">
-                    <!-- <ul class="FriendReqList">
-                    </ul> -->
-                </div>
+                <div class="line"></div>
                 <div class="FriendReqList">
                     <!-- 若無邀請，顯示：
                     <h2>目前尚無未確認之邀請</h2> -->
@@ -162,25 +159,26 @@
     <script>
         $( document ).ready(function() {
             $('.show_password').click(function () {
-        let pass_type = $('input.password').attr('type');
-        if (pass_type === 'password') {
-          $('input.password').attr('type', 'text');
-          $('.show_password').removeClass('eye_open').addClass('eye_close');
-        } else {
-          $('input.password').attr('type', 'password');
-          $('.show_password').removeClass('eye_close').addClass('eye_open');
-        }
-      });
-      $('.show_password_confirm').click(function () {
-        let pass_type = $('input.password_confirm').attr('type');
-        if (pass_type === 'password') {
-          $('input.password_confirm').attr('type', 'text');
-          $('.show_password_confirm').removeClass('eye_open_confirm').addClass('eye_close_confirm');
-        } else {
-          $('input.password_confirm').attr('type', 'password');
-          $('.show_password_confirm').removeClass('eye_close_confirm').addClass('eye_open_confirm');
-        }
-      });
+                let pass_type = $('input.password').attr('type');
+                if (pass_type === 'password') {
+                    $('input.password').attr('type', 'text');
+                    $('.show_password').removeClass('eye_open').addClass('eye_close');
+                } else {
+                    $('input.password').attr('type', 'password');
+                    $('.show_password').removeClass('eye_close').addClass('eye_open');
+                }
+            });
+            $('.show_password_confirm').click(function () {
+                let pass_type = $('input.password_confirm').attr('type');
+                if (pass_type === 'password') {
+                    $('input.password_confirm').attr('type', 'text');
+                    $('.show_password_confirm').removeClass('eye_open_confirm').addClass('eye_close_confirm');
+                } else {
+                    $('input.password_confirm').attr('type', 'password');
+                    $('.show_password_confirm').removeClass('eye_close_confirm').addClass('eye_open_confirm');
+                }
+            });
+
             if(location.hash == "#1"){
                 $('.friendRequest').hide();
                 $('.comment').hide();
@@ -196,6 +194,7 @@
             }else if(location.hash == "#4"){
                 //登出
             }
+
             $('#menu').hide();
             $('#toggle').click(function() {
                 $('#menu').slideToggle();
@@ -339,9 +338,9 @@
                         addIcon.src = url;
                         })
                         
-                        str+='<h3 id="friendName">'+memberInf[k]["Name"]+'';
+                        str+='<div class="info"><h3 id="friendName">'+memberInf[k]["Name"]+'</h3>';
                         str+='<button onclick=Reject("'+j+'")>'+"拒絕"+'</button>';
-                        str+='<button onclick=Accept("'+j+'")>'+"接受"+'</button>';
+                        str+='<button onclick=Accept("'+j+'")>'+"接受"+'</button></div>';
                     }
                 }
             }else if(friendInf[j]["SNo"]==ID&&friendInf[j]["Status"]==false){

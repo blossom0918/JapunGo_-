@@ -394,15 +394,11 @@ table {
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
-  .list{
+  .friendRequest{
     float: left;
     width: 100%;
     background-color: #FFF;
     padding-bottom: 50px;
-  }
-
-  .list h2{
-    color: dimgray;
   }
 
   .info{
