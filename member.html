@@ -124,7 +124,6 @@
                     <h2>您目前尚未發表過評論</h2> -->
 
                     <div class="commentContent">
-                        <img src="" alt="">
                         <h3>餐廳名</h3>
                         <p>內容</p>
                         <button>刪除</button>
@@ -380,10 +379,10 @@
                         for(var store in storeInf){
                             for(var instore in storeInf[store]){
                                 if(storeInf[store][instore]["店名"]==commentInf[comment]["Name"]){
-                                    commentstr+=commentInf[comment]["Name"]+'</br>';
-                                    commentstr+=commentInf[comment]["Discon"]+'</br>';
+                                    commentstr+='<div class="commentContent"><h3>'+commentInf[comment]["Name"]+'</h3>';
+                                    commentstr+='<p>'+commentInf[comment]["Discon"]+'</p>';
                                     commentstr+='<button onclick=delcomment("'+comment+'")>'+"刪除"+'</button>';
-                                    commentstr+='<button onclick=changecomment("'+comment+'")>'+"修改"+'</button>';
+                                    commentstr+='<button onclick=changecomment("'+comment+'")>'+"修改"+'</button></div>';
                                 }
                             }
                         }
