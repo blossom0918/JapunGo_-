@@ -37,15 +37,16 @@
 
             <nav id="menu">
                  <ul>
+                    <!-- <li><a href="index.html"><img src="img/home.png" alt="">首頁</a></li> -->
                     <li><a href="game.html"><img src="img/game.png" alt="">今天吃什麼</a></li>
                     <li><a href="posts.html"><img src="img/posts.png" alt="">我的動態</a></li>
                     <li><a href="search.html"><img src="img/search.png" alt="">搜尋美食</a></li>
                     <li><a href="foodlist.html"><img src="img/foodlist.png" alt="">美食清單</a></li>
                     <li><a href="friendlist.html"><img src="img/friendlist.png" alt="">好友清單</a></li>
-                    <li><a href="member.html#1"><img src="img/member.png" alt="">修改會員資料</a></li>
-                    <li><a href="member.html#2"><img src="img/friend_request.png" alt="">好友邀請</a></li>
-                    <li><a href="member.html#3"><img src="img/comment.png" alt="">我的評論</a></li>
-                    <li><a href="member.html#4"><img src="img/logout.png" alt="">登出</a></li>
+                    <li><a href="member.html#1" id="reviseInfo"><img src="img/member.png" alt="">修改會員資料</a></li>
+                    <li><a href="member.html#2" id="friendRequest"><img src="img/friend_request.png" alt="">好友邀請</a></li>
+                    <li><a href="member.html#3" id="comment"><img src="img/comment.png" alt="">我的評論</a></li>
+                    <li><a href="member.html#4" id="logout"><img src="img/logout.png" alt="">登出</a></li>
                 </ul>
             </nav>
         </div>
@@ -319,7 +320,7 @@
     var str='';
     var imgstr='';
     var addIcon=document.querySelector('.addIcon')
-    var FriendReqList=document.querySelector('.info');
+    var FriendReqList=document.querySelector('.FriendReqList');
     frienddata.once('value',function(friendsnapshot){
         memberdata.once('value',function(membersnapshot){
         var memberInf=membersnapshot.val();
@@ -338,17 +339,17 @@
                         addIcon.src = url;
                         })
                         
-                        str+='<tr><td colspan="2"><h3 id="friendName">'+memberInf[k]["Name"]+'</td></tr>';
-                        str+='<tr><td><button onclick=Reject("'+j+'")>'+"拒絕"+'</button></td></tr>';
-                        str+='<td><button onclick=Accept("'+j+'")>'+"接受"+'</button></td>';
+                        str+='<h3 id="friendName">'+memberInf[k]["Name"]+'';
+                        str+='<button onclick=Reject("'+j+'")>'+"拒絕"+'</button>';
+                        str+='<button onclick=Accept("'+j+'")>'+"接受"+'</button>';
                     }
                 }
             }else if(friendInf[j]["SNo"]==ID&&friendInf[j]["Status"]==false){
                 for(var r in memberInf){
                     if(memberInf[r]["ID"]==friendInf[j]["ANo"]){
-                        str+='<h3 id="friendName">'+memberInf[r]["Name"];
+                        str+='<div class="info"><h3 id="friendName">'+memberInf[r]["Name"]+'</h3>';
                         str+='<button onclick=Reject("'+j+'")>'+"拒絕"+'</button>';
-                        str+='<button onclick=Accept("'+j+'")>'+"接受"+'</button>';
+                        str+='<button onclick=Accept("'+j+'")>'+"接受"+'</button></div>';
                     }
                 }
             }
