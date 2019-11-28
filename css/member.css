@@ -444,6 +444,12 @@ table {
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
+  .list{
+    float: left;
+    width: 100%;
+    background-color: #FFF;
+  }
+
   .commentContent{
     float: left;
     width: 425px;
