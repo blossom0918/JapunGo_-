@@ -63,11 +63,11 @@
             </div>
         </div>
         <div class="clear"></div>
-<ul class="foodlist">
+
         <div class="content">
                
             <div class="list">
-                
+                <!-- <ul class="foodlist"> -->
                 <div class="info">
                     
                     <h3 id="name">餐廳名</h3>
@@ -100,14 +100,14 @@
                         </div>
                     </div>
                     
-                    <div class="commentArea">
+                    <div class="commentArea" id="commentArea">
                         <div class="commentInput">
                             <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea>
                             <img src="img/pic.png" alt="">
                         </div>
                         <div class="btn3">
                             <button id="option">評論選項</button>
-                            <button>我要評論</button>
+                            <button id="commentBtn">我要評論</button>
                         </div>
                         <div class="btnOption">
                             <button>環境乾淨</button>
@@ -129,11 +129,11 @@
                     </div>
 
                 </div>
-                
+                <!-- </ul> -->
             </div>
        
         </div>
-         </ul>
+         
         <div class="mapContent">
             <div  class='map' id='map'>
                 <!-- 自己 -->
@@ -183,9 +183,9 @@
                        </div>
                 </div>
                                         
-                <div class="commentArea_map">
+                <div class="commentArea_map" style="display:none">
                     <div class="commentInput_map">
-                        <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea>
+                        <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容" id="comment"></textarea>
                         <img src="img/pic.png" alt="">
                     </div>                    
                     <div class="btn3_map">
@@ -309,33 +309,8 @@
             var phone=document.getElementById('phone');
             var ID=getCookie('ID');
             var str='';
-            var foodlist=document.querySelector('.foodlist');
-
-             fooddata.once('value',function(fsnapshot){
-                resdata.once('value',function(ressnapshot){
-                    var foodInf=fsnapshot.val();
-                    var resInf=ressnapshot.val();
-                        for(var r in resInf){
-                                for(var i in resInf[r]){
-                                    for(var f in foodInf){
-                                        // console.log(foodInf[f]["Name"]);
-                                        if(foodInf[f]["Name"]==resInf[r][i]["店名"]&&foodInf[f]["UNo"]==ID){
-                                            str+='<div class=wrap><div class=content><div class="list"><ul class="foodlist"><div class="info"><li><h3 id="name">'+foodInf[f]["Name"]+'</h3>';
-                                            str+='<img src="img/pin.png" class="addIcon"><p class="address">'+resInf[r][i]["地址"]+'</p>';
-                                            str+='<img src="img/tel.png" class="telIcon"><p class="tel">'+resInf[r][i]["電話"]+'</p></br>';
-                                            str+='<div class="btn"><button onclick=delfoodlist("'+f+'") id="delete">'+"自清單移除"+'</button>';
-                                            str+='<button onclick=comment("'+foodInf[f]["Name"]+'") id="comment">'+"我要評論"+'</button></li></ul></div></div></div></div></div >';
-                                        }
-                                    }
-                                }
-
-                            foodlist.innerHTML=str;
-
-                        }
-                        
-                })
-            });
-
+            var foodlist=document.querySelector('.list');
+            var commentArea=document.querySelector('.commentArea');
             fooddata.once('value',function(fsnapshot){
                 resdata.once('value',function(ressnapshot){
                     var foodInf=fsnapshot.val();
@@ -348,11 +323,16 @@
                                     for(var f in foodInf){
                                         // console.log(foodInf[f]["Name"]);
                                         if(foodInf[f]["Name"]==resInf[r][i]["店名"]&&foodInf[f]["UNo"]==ID){
-                                            str+='<div class=wrap><div class=content><div class="list"><ul class="foodlist"><div class="info"><li><h3 id="name">'+foodInf[f]["Name"]+'</h3>';
+                                            str+='<div class="info"><h3 id="name">'+foodInf[f]["Name"]+'</h3>';
                                             str+='<img src="img/pin.png" class="addIcon"><p class="address">'+resInf[r][i]["地址"]+'</p>';
-                                            str+='<img src="img/tel.png" class="telIcon"><p class="tel">'+resInf[r][i]["電話"]+'</p></br>';
+                                            str+='<img src="img/tel.png" class="telIcon"><p class="tel">'+resInf[r][i]["電話"]+'</p>';
+                                            str+='<div class="btn0"><button class=showAllComments id="showAllComments"><img src="img/show_comment.png" class=commentIcon>'+"顯示評論區"+'</button>';
+                                            str+='<a class="recommend"><img src="img/best.png" class=bestIcon>'+"顯示評論區"+'</a></div>';
                                             str+='<div class="btn"><button onclick=delfoodlist("'+f+'") id="delete">'+"自清單移除"+'</button>';
-                                            str+='<button onclick=comment("'+foodInf[f]["Name"]+'") id="comment">'+"我要評論"+'</button></li></ul></div></div></div></div></div >';
+                                            str+='<button>'+"發起動態"+'</button>';
+                                            str+='<button onclick=comment("'+foodInf[f]["Name"]+'") id="comment">'+"我要評論"+'</button></div></div>';
+
+
                                         }
                                     }
                                 }
@@ -379,20 +359,57 @@ function delfoodlist(f){
     delfood.remove();
 }
 function comment(name){
-    var mycom=window.prompt("請輸入您的評論:");
-    var ID=getCookie('ID');
-    var comdata=firebase.database().ref('/評論區資料/');
+    
+
+
     var Today=new Date();
-    // console.log("今天日期是 " + Today.getFullYear()+ " 年 " + (Today.getMonth()+1) + " 月 " + Today.getDate() + " 日");
-    // console.log(day);
-    comdata.push({
-        Date:Today.getFullYear()+ " / " + (Today.getMonth()+1) + " / " + Today.getDate() + " 日",
-        UNo:ID,
-        Discon:mycom,
-        Name:name,
-    });
+    var a=document.querySelector('.commentArea');
+    console.log(a);
+            $('.commentArea').toggle();
+            $(document).ready(function(){
+            $('.postArea').hide();
+            $('.allComments').hide();
+            var mycom=$('#comment').val();
+            var comdata=firebase.database().ref('/評論區資料/');
+            var ID=getCookie('ID');
+            // comdata.once('value',function(snapshot){
+            //     var comInf=snapshot.val();
+            //     for(var i in comInf){
+            //         if(comInf[i]["Name"]==name&&comInf[i]["UNo"]){
+            //             comdata[i].update({
+            //                 Date:Today.getFullYear()+ " / " + (Today.getMonth()+1) + " / " + Today.getDate() + " 日",
+            //                 UNo:ID,
+            //                 Discon:mycom,
+            //                 Name:name,
+            //             });
+            //         }else{
+            //             comdata.push({
+            //                 Date:Today.getFullYear()+ " / " + (Today.getMonth()+1) + " / " + Today.getDate() + " 日",
+            //                 UNo:ID,
+            //                 Discon:mycom,
+            //                 Name:name,
+            //             });
+            //         }
+            //     }
+            });
+
+    
 
 }
+        
+
+
+    // });
+    // console.log("今天日期是 " + Today.getFullYear()+ " 年 " + (Today.getMonth()+1) + " 月 " + Today.getDate() + " 日");
+    // console.log(day);
+    // comdata.push({
+    //     Date:Today.getFullYear()+ " / " + (Today.getMonth()+1) + " / " + Today.getDate() + " 日",
+    //     UNo:ID,
+    //     Discon:mycom,
+    //     Name:name,
+//     });
+
+// }
     </script>
 </body>
 </html>
