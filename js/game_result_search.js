@@ -20,8 +20,10 @@ function getCookie(name) {
     else
         return null;
 }
+var User=getCookie('ID');
 var food = getCookie('food');
 document.getElementById('q_answer').innerHTML = food;
+
 
 var start_map;
 var map;
@@ -140,11 +142,11 @@ function test(data) { //infowindow點擊後
         document.getElementById('restaurant').innerHTML = data.店名;
         document.getElementById('r_address').innerHTML = data.地址;
         document.getElementById('r_tel').innerHTML = data.電話;
-        if(data.網址!=0){
-            document.getElementById('map_recommend_a').href=data.網址;
-            document.getElementById('map_recommend_a').target="_blank";
+        if (data.網址 != 0) {
+            document.getElementById('map_recommend_a').href = data.網址;
+            document.getElementById('map_recommend_a').target = "_blank";
         }
-        
+
 
     })
 
@@ -161,7 +163,7 @@ db.ref(ref).once('value', function (snapshot) {
     var n = 1;
     var list = '';
     for (i in data) {
-        var clear='<div style="clear:both;"></div>';
+        var clear = '<div style="clear:both;"></div>';
         var str =
             '<div class="info">\
             <h3>'+ data[i].店名 + '</h3>\
@@ -171,40 +173,40 @@ db.ref(ref).once('value', function (snapshot) {
             <p class="tel">'+ data[i].電話 + '</p>\
             <div class="btn0">\
                 <button class="showAllComments" onclick="showallcomment_list('+ n + ')"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>\
-                <a class="recommend" id="recommend_a'+n+'"><img src="img/best.png" class="bestIcon">查看推薦</a>\
+                <a class="recommend" id="recommend_a'+ n + '"><img src="img/best.png" class="bestIcon">查看推薦</a>\
             </div>\
             <div class="btn">\
                 <button id="post" onclick="show_post('+ n + ')">發起動態</button>\
                 <button id="comment" onclick="my_comment('+ n + ')">我要評論</button>\
-                <button>加入清單／自清單移除</button>\
+                <button  onclick="favorite(\''+ n + '\')">加入清單／自清單移除</button>\
                 <!-- 已在清單內顯示移除，尚未加入顯示加入 -->\
             </div>\
             <div class="postArea" id="postArea'+ n + '">\
                 <div class="postInput">\
-                    <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>\
+                    <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="post'+ n + '"></textarea>\
                     <img src="img/pic.png" alt="">\
                 </div>\
                 <div class="btn2">\
-                    <button>確定</button>\
-                    <button>取消</button>\
+                    <button onclick="post_enter(\''+ n + '\')">確定</button>\
+                    <button onclick="post_cancel(\''+ n + '\')">取消</button>\
                 </div>\
             </div>\
             <div class="commentArea" id="commentArea'+ n + '">\
                 <div class="commentInput">\
-                    <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea>\
+                    <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容" id="comment'+ n + '"></textarea>\
                     <img src="img/pic.png" alt="">\
                 </div>\
                 <div class="btn3">\
                     <button id="option" onclick="show_option('+ n + ')">評論選項</button>\
-                    <button>我要評論</button>\
+                    <button onclick="comment_enter(\''+ n + '\')">我要評論</button>\
                 </div>\
                 <div class="btnOption" id="btnOption'+ n + '">\
-                    <button>環境乾淨</button>\
-                    <button>環境骯髒</button>\
-                    <button>餐點美味</button>\
-                    <button>餐點糟糕</button>\
-                    <button>親切店家</button>\
-                    <button>服務極差</button>\
+                    <button onclick="opt1(\''+ n + '\')">環境乾淨</button>\
+                    <button onclick="opt2(\''+ n + '\')">環境骯髒</button>\
+                    <button onclick="opt3(\''+ n + '\')">餐點美味</button>\
+                    <button onclick="opt4(\''+ n + '\')">餐點糟糕</button>\
+                    <button onclick="opt5(\''+ n + '\')">親切店家</button>\
+                    <button onclick="opt6(\''+ n + '\')">服務極差</button>\
                 </div>\
             </div>\
             <div class="allComments" id="allComments'+ n + '">\
@@ -217,24 +219,24 @@ db.ref(ref).once('value', function (snapshot) {
             </div>\
         </div>';
         list += str;
-        if(n%2==0){
-            list+=clear;
+        if (n % 2 == 0) {
+            list += clear;
         }
         n += 1;
     }
     document.getElementById('list').innerHTML = list;
-    
+
     setTimeout(() => {
         //判斷有沒有網址
         //判斷有沒有加清單也要寫在這裡
-        var m=1;
-        for(i in data){
-            if(data[i].網址!=0){
-                var a_id='recommend_a'+m;
-                document.getElementById(a_id).href=data[i].網址;
-                document.getElementById(a_id).target="_blank";
+        var m = 1;
+        for (i in data) {
+            if (data[i].網址 != 0) {
+                var a_id = 'recommend_a' + m;
+                document.getElementById(a_id).href = data[i].網址;
+                document.getElementById(a_id).target = "_blank";
             }
-            m+=1;
+            m += 1;
         }
         //讓所有DIV一開始都收起來
         $('.commentArea').hide();
@@ -253,7 +255,7 @@ function showallcomment_list(i) {
     $(allComments).slideToggle();
     $(postArea).hide();
     $(commentArea).hide();
-    
+
 }
 function show_post(i) {
     var allComments = '#allComments' + i;
@@ -262,7 +264,7 @@ function show_post(i) {
     $(postArea).slideToggle();
     $(commentArea).hide();
     $(allComments).hide();
-    
+
 }
 function my_comment(i) {
     var allComments = '#allComments' + i;
@@ -277,3 +279,67 @@ function show_option(i) {
     $(btnOption).slideToggle();
 }
 
+//-------------以下店家資訊裡面的按鈕功能-----------------------------------
+
+//----發起動態---------
+function post_enter(i) { //發起動態 確定
+    var id = 'post' + i;
+    var content = document.getElementById(id).value;  //取得動態內容
+    console.log('user' + User + '輸入的內容是:' + content);
+    const ref = '/店家資料/' + food;
+
+
+}
+function post_cancel(i) { //發起動態 取消
+    var id = 'post' + i;
+    var content = document.getElementById(id);
+    content.value = '';
+
+}
+
+//----我要評論---------
+function comment_enter(i) {
+    var id = 'comment' + i;
+    var content = document.getElementById(id).value; //取得評論內容
+}
+function opt1(i) {
+    var id = 'comment' + i;
+    var content = document.getElementById(id).value;
+    content = content + ' 環境乾淨 ';
+    document.getElementById(id).value = content;
+}
+function opt2(i) {
+    var id = 'comment' + i;
+    var content = document.getElementById(id).value;
+    content = content + ' 環境骯髒 ';
+    document.getElementById(id).value = content;
+}
+function opt3(i) {
+    var id = 'comment' + i;
+    var content = document.getElementById(id).value;
+    content = content + ' 餐點美味 ';
+    document.getElementById(id).value = content;
+}
+function opt4(i) {
+    var id = 'comment' + i;
+    var content = document.getElementById(id).value;
+    content = content + ' 餐點糟糕 ';
+    document.getElementById(id).value = content;
+}
+function opt5(i) {
+    var id = 'comment' + i;
+    var content = document.getElementById(id).value;
+    content = content + ' 親切店家 ';
+    document.getElementById(id).value = content;
+}
+function opt6(i) {
+    var id = 'comment' + i;
+    var content = document.getElementById(id).value;
+    content = content + ' 服務極差 ';
+    document.getElementById(id).value = content;
+}
+
+//----加入清單---------
+function favorite(i) {
+
+}

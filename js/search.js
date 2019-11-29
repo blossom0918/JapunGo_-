@@ -19,6 +19,14 @@ var currentLocation;
 var mylocation;
 var marker_count = [];
 var list_str = "";
+var User=getCookie('ID');
+function getCookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg))
+        return unescape(arr[2]);
+    else
+        return null;
+}
 
 
 initMap();
@@ -43,7 +51,18 @@ function initMap() {
         mylocation = new google.maps.LatLng(my_lat, my_lng);
         map = new google.maps.Map(document.getElementById('map'), {
             center: currentLocation,
-            zoom: 14
+            zoom: 14,
+            mapTypeControl: false,
+            styles: [
+                {
+                    "featureType": "poi.business",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                }
+            ]
         });
         //---------------標記自己的點---------------------------
         var my_image = {
@@ -68,11 +87,13 @@ function initMap() {
 
 
     button.addEventListener('click', function () {
+        var food = document.getElementById('food').value;
+        document.getElementById('input_food').innerHTML=food;
         document.getElementById('list').innerHTML='';
         for (var i = 0; i < marker_count.length; i++) {
             marker_count[i].setMap(null);
         }
-        var food = document.getElementById('food').value;
+        
 
         var request = {
             location: currentLocation,   //搜尋的中心 自身定位
@@ -101,7 +122,7 @@ function callback(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
             if (google.maps.geometry.spherical.computeDistanceBetween(results[i].geometry.location, mylocation) < 3000) {
-                console.log(results[i]);
+               // console.log(results[i]);
                 for (n in results[i].types) {
                     if (results[i].types[n] == 'restaurant') {
                         
@@ -155,7 +176,7 @@ function creat_list1(data) {
     <div class="btn">\
         <button id="post" onclick="show_post(\''+ n + '\')">發起動態</button>\
         <button id="comment" onclick="my_comment(\''+ n + '\')">我要評論</button>\
-        <button>加入清單／自清單移除</button>\
+        <button onclick="favorite(\''+ n + '\')">加入清單／自清單移除</button>\
         <!-- 已在清單內顯示移除，尚未加入顯示加入 -->\
     </div>\
     <div class="postArea" id="postArea'+ n + '">\
@@ -289,19 +310,21 @@ function open_info_div(data) { //infowindow點擊後
 
 
 //-------------以下店家資訊裡面的按鈕功能-----------------------------------
+
 //----發起動態---------
-function post_enter(i){
+function post_enter(i){ //發起動態 確定
     var id='post'+i;
     var content=document.getElementById(id).value;  //取得動態內容
-    console.log('輸入的內容是:'+content);
-    //動態內容 id="post'+ n + '"
-    //發起動態 確定
+    console.log('user'+User+'輸入的內容是:'+content);
+    const ref = '/店家資料/' + food;
+    
+    
 }
-function post_cancel(i){
+function post_cancel(i){ //發起動態 取消
     var id='post'+i;
     var content=document.getElementById(id);
     content.value='';
-    //發起動態 取消
+    
 }
 
 //----我要評論---------
@@ -344,4 +367,9 @@ function opt6(i){
     var content=document.getElementById(id).value;
     content=content+' 服務極差 ';
     document.getElementById(id).value=content;
+}
+
+//----加入清單---------
+function favorite(i){
+
 }
