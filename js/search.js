@@ -19,8 +19,8 @@ var currentLocation;
 var mylocation;
 var marker_count = [];
 var list_str = "";
-//var User=getCookie('ID');
-var User = 'opop';  //為方便更改功能先設為opop
+var User=getCookie('ID');
+//var User = 'opop';  //為方便更改功能先設為opop
 function getCookie(name) {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
     if (arr = document.cookie.match(reg))
@@ -387,7 +387,8 @@ function favorite(i) {
         Uno: User,
         Name: name,
         Address: address,
-        Phone: phone
+        Phone: phone,
+        Url:0
     });
     console.log('加入清單ㄌ');
 

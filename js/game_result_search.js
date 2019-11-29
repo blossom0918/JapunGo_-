@@ -20,8 +20,8 @@ function getCookie(name) {
     else
         return null;
 }
-//var User=getCookie('ID');
-var User = 'opop';  //為方便更改功能先設為opop
+var User=getCookie('ID');
+//var User = 'opop';  //為方便更改功能先設為opop
 var food = getCookie('food');
 document.getElementById('q_answer').innerHTML = food;
 
@@ -354,7 +354,8 @@ function favorite(i) {
         Uno: User,
         Name: name,
         Address: address,
-        Phone: phone
+        Phone: phone,
+        Url:0
     });
     console.log('加入清單ㄌ');
 
