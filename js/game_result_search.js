@@ -167,6 +167,10 @@ db.ref(ref).once('value', function (snapshot) {
         var clear = '<div style="clear:both;"></div>';
         var str =
             '<div class="info">\
+            <input type="hidden" id="name'+ n + '" value="' + data[i].店名 + '">\
+            <input type="hidden" id="address'+ n + '" value="' + data[i].地址 + '">\
+            <input type="hidden" id="phone'+ n + '" value="' + data[i].電話 + '">\
+            <input type="hidden" id="url'+ n + '" value="' + data[i].網址 + '">\
             <h3>'+ data[i].店名 + '</h3>\
             <img src="img/pin.png" class="addIcon">\
             <p class="address">'+ data[i].地址 + '</p>\
@@ -179,7 +183,7 @@ db.ref(ref).once('value', function (snapshot) {
             <div class="btn">\
                 <button id="post" onclick="show_post('+ n + ')">發起動態</button>\
                 <button id="comment" onclick="my_comment('+ n + ')">我要評論</button>\
-                <button  onclick="favorite(\''+ n + '\')">加入清單／自清單移除</button>\
+                <button  onclick="favorite(\''+ n + '\')" id="favorite' + n + '">加入清單</button>\
                 <!-- 已在清單內顯示移除，尚未加入顯示加入 -->\
             </div>\
             <div class="postArea" id="postArea'+ n + '">\
@@ -349,20 +353,22 @@ function favorite(i) {
     var address = document.getElementById(address_id).value;
     var phone_id = 'phone' + i;
     var phone = document.getElementById(phone_id).value;
+    var url_id = 'url' + i;
+    var url = document.getElementById(url_id).value;
     var user_ref = '/美食清單資料/' + User;
     db.ref(user_ref).push({
-        Uno: User,
+        UNo: User,
         Name: name,
         Address: address,
         Phone: phone,
-        Url:0
+        Url: url
     });
     console.log('加入清單ㄌ');
 
     //---將按鈕改成自清單移除-----
     setTimeout(() => {
-        document.getElementById(favorite).innerHTML='自清單移除';
-        document.getElementById(favorite).setAttribute("onclick","javascript: favorite_delete('"+i+"');" );
+        document.getElementById(favorite).innerHTML = '自清單移除';
+        document.getElementById(favorite).setAttribute("onclick", "javascript: favorite_delete('" + i + "');");
     }, 0);
 }
 function favorite_delete(i) {
@@ -371,18 +377,18 @@ function favorite_delete(i) {
     var name = document.getElementById(name_id).value;
     var address_id = 'address' + i;
     var address = document.getElementById(address_id).value;
-    var user_ref = '/美食清單資料/'+User;
+    var user_ref = '/美食清單資料/' + User;
     db.ref(user_ref).once('value', function (snapshot) {
-        var data=snapshot.val();
-        for (i in data){
-            if (data[i].Name==name && data[i].Address==address){
+        var data = snapshot.val();
+        for (i in data) {
+            if (data[i].Name == name && data[i].Address == address) {
                 db.ref(user_ref).child(i).remove();
             }
         }
     })
     setTimeout(() => {
-        document.getElementById(favorite).setAttribute("onclick","javascript: favorite('"+i+"');" );
-        document.getElementById(favorite).innerHTML='加入清單';
+        document.getElementById(favorite).setAttribute("onclick", "javascript: favorite('" + i + "');");
+        document.getElementById(favorite).innerHTML = '加入清單';
     }, 0);
-    
+
 }

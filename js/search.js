@@ -384,7 +384,7 @@ function favorite(i) {
     var phone = document.getElementById(phone_id).value;
     var user_ref = '/美食清單資料/' + User;
     db.ref(user_ref).push({
-        Uno: User,
+        UNo: User,
         Name: name,
         Address: address,
         Phone: phone,
