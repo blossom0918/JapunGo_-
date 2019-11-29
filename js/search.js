@@ -110,9 +110,10 @@ function callback(results, status) {
                         };
                         service = new google.maps.places.PlacesService(map);
                         if(resultCount%2==0){
-                            service.getDetails(request2, callback2_1);
+                            $( "#list" ).append( '<div style="clear:both;"></div>' );
+                            service.getDetails(request2, callback2);
                         }else{
-                            service.getDetails(request2, callback2_2);
+                            service.getDetails(request2, callback2);
                         }
                         
                       
@@ -130,20 +131,14 @@ function callback(results, status) {
     }
 }
 
-function callback2_1(place, status) {
+function callback2(place, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         createMarker(place);
         creat_list1(place);
         
     }
 }
-function callback2_2(place, status) {
-    if (status == google.maps.places.PlacesServiceStatus.OK) {
-        createMarker(place);
-        creat_list2(place);
-        
-    }
-}
+
 
 function creat_list1(data) {
     var n='n'+data.id;
@@ -210,74 +205,6 @@ function creat_list1(data) {
         $('.btnOption').hide();
     }, 0);
 }
-
-//creat_list2 有clear div
-function creat_list2(data) {
-    var n='n'+data.id;
-    var str = '<div class="info">\
-    <h3>'+ data.name + '</h3>\
-    <img src="img/pin.png" class="addIcon">\
-    <p class="address">'+ data.formatted_address + '</p>\
-    <img src="img/tel.png" class="telIcon">\
-    <p class="tel">'+ data.formatted_phone_number + '</p>\
-    <div class="btn0">\
-        <button class="showAllComments" onclick="showallcomment_list(\''+ n + '\')"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>\
-        <a class="recommend" id="recommend_a'+ n + '"><img src="img/best.png" class="bestIcon">查看推薦</a>\
-    </div>\
-    <div class="btn">\
-        <button id="post" onclick="show_post(\''+ n + '\')">發起動態</button>\
-        <button id="comment" onclick="my_comment(\''+ n + '\')">我要評論</button>\
-        <button>加入清單／自清單移除</button>\
-        <!-- 已在清單內顯示移除，尚未加入顯示加入 -->\
-    </div>\
-    <div class="postArea" id="postArea'+ n + '">\
-        <div class="postInput">\
-            <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>\
-            <img src="img/pic.png" alt="">\
-        </div>\
-        <div class="btn2">\
-            <button>確定</button>\
-            <button>取消</button>\
-        </div>\
-    </div>\
-    <div class="commentArea" id="commentArea'+ n + '">\
-        <div class="commentInput">\
-            <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea>\
-            <img src="img/pic.png" alt="">\
-        </div>\
-        <div class="btn3">\
-            <button id="option" onclick="show_option(\''+ n + '\')">評論選項</button>\
-            <button>我要評論</button>\
-        </div>\
-        <div class="btnOption" id="btnOption'+ n + '">\
-            <button>環境乾淨</button>\
-            <button>環境骯髒</button>\
-            <button>餐點美味</button>\
-            <button>餐點糟糕</button>\
-            <button>親切店家</button>\
-            <button>服務極差</button>\
-        </div>\
-    </div>\
-    <div class="allComments" id="allComments'+ n + '">\
-        <div class="comments">\
-            <img src="img/pic.png" alt="">\
-            <div class="commentContent">\
-                <p>內容</p>\
-            </div>\
-        </div>\
-    </div>\
-</div>';
-    str+='<div style="clear:both;"></div>'
-    $( "#list" ).append( str );
-    setTimeout(() => {
-        //讓所有DIV一開始都收起來
-        $('.commentArea').hide();
-        $('.postArea').hide();
-        $('.allComments').hide();
-        $('.btnOption').hide();
-    }, 0);
-}
-
 
 
 function createMarker(data) {
