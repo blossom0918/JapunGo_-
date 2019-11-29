@@ -20,7 +20,8 @@ function getCookie(name) {
     else
         return null;
 }
-var User=getCookie('ID');
+//var User=getCookie('ID');
+var User = 'opop';  //為方便更改功能先設為opop
 var food = getCookie('food');
 document.getElementById('q_answer').innerHTML = food;
 
@@ -341,5 +342,46 @@ function opt6(i) {
 
 //----加入清單---------
 function favorite(i) {
+    var favorite = 'favorite' + i;
+    var name_id = 'name' + i;
+    var name = document.getElementById(name_id).value;
+    var address_id = 'address' + i;
+    var address = document.getElementById(address_id).value;
+    var phone_id = 'phone' + i;
+    var phone = document.getElementById(phone_id).value;
+    var user_ref = '/美食清單資料/' + User;
+    db.ref(user_ref).push({
+        Uno: User,
+        Name: name,
+        Address: address,
+        Phone: phone
+    });
+    console.log('加入清單ㄌ');
 
+    //---將按鈕改成自清單移除-----
+    setTimeout(() => {
+        document.getElementById(favorite).innerHTML='自清單移除';
+        document.getElementById(favorite).setAttribute("onclick","javascript: favorite_delete('"+i+"');" );
+    }, 0);
+}
+function favorite_delete(i) {
+    var favorite = 'favorite' + i;
+    var name_id = 'name' + i;
+    var name = document.getElementById(name_id).value;
+    var address_id = 'address' + i;
+    var address = document.getElementById(address_id).value;
+    var user_ref = '/美食清單資料/'+User;
+    db.ref(user_ref).once('value', function (snapshot) {
+        var data=snapshot.val();
+        for (i in data){
+            if (data[i].Name==name && data[i].Address==address){
+                db.ref(user_ref).child(i).remove();
+            }
+        }
+    })
+    setTimeout(() => {
+        document.getElementById(favorite).setAttribute("onclick","javascript: favorite('"+i+"');" );
+        document.getElementById(favorite).innerHTML='加入清單';
+    }, 0);
+    
 }

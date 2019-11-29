@@ -19,7 +19,8 @@ var currentLocation;
 var mylocation;
 var marker_count = [];
 var list_str = "";
-var User=getCookie('ID');
+//var User=getCookie('ID');
+var User = 'opop';  //為方便更改功能先設為opop
 function getCookie(name) {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
     if (arr = document.cookie.match(reg))
@@ -88,12 +89,12 @@ function initMap() {
 
     button.addEventListener('click', function () {
         var food = document.getElementById('food').value;
-        document.getElementById('input_food').innerHTML=food;
-        document.getElementById('list').innerHTML='';
+        document.getElementById('input_food').innerHTML = food;
+        document.getElementById('list').innerHTML = '';
         for (var i = 0; i < marker_count.length; i++) {
             marker_count[i].setMap(null);
         }
-        
+
 
         var request = {
             location: currentLocation,   //搜尋的中心 自身定位
@@ -104,8 +105,8 @@ function initMap() {
         service = new google.maps.places.PlacesService(map);
 
         service.textSearch(request, callback);
-        
-        
+
+
 
 
     })
@@ -118,28 +119,28 @@ function initMap() {
 
 function callback(results, status) {
     var resultCount = 0;
-    var clear='<div style="clear:both;"></div>'
+    var clear = '<div style="clear:both;"></div>'
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
             if (google.maps.geometry.spherical.computeDistanceBetween(results[i].geometry.location, mylocation) < 3000) {
-               // console.log(results[i]);
+                // console.log(results[i]);
                 for (n in results[i].types) {
                     if (results[i].types[n] == 'restaurant') {
-                        
+
                         var request2 = {
                             placeId: results[i].place_id,
                         };
                         service = new google.maps.places.PlacesService(map);
-                        if(resultCount%2==0){
-                            $( "#list" ).append( '<div style="clear:both;"></div>' );
+                        if (resultCount % 2 == 0) {
+                            $("#list").append('<div style="clear:both;"></div>');
                             service.getDetails(request2, callback2);
-                        }else{
+                        } else {
                             service.getDetails(request2, callback2);
                         }
-                        
-                      
+
+
                         resultCount++;
-                        
+
                     }
                 }
 
@@ -148,7 +149,7 @@ function callback(results, status) {
         if (resultCount == 0) {
             alert('範圍裡找不到符合餐廳');
         }
-        
+
     }
 }
 
@@ -156,14 +157,17 @@ function callback2(place, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         createMarker(place);
         creat_list1(place);
-        
+
     }
 }
 
 
 function creat_list1(data) {
-    var n='n'+data.id;
+    var n = 'n' + data.id;
     var str = '<div class="info">\
+    <input type="hidden" id="name'+ n + '" value="' + data.name + '">\
+    <input type="hidden" id="address'+ n + '" value="' + data.formatted_address + '">\
+    <input type="hidden" id="phone'+ n + '" value="' + data.formatted_phone_number + '">\
     <h3>'+ data.name + '</h3>\
     <img src="img/pin.png" class="addIcon">\
     <p class="address">'+ data.formatted_address + '</p>\
@@ -176,7 +180,7 @@ function creat_list1(data) {
     <div class="btn">\
         <button id="post" onclick="show_post(\''+ n + '\')">發起動態</button>\
         <button id="comment" onclick="my_comment(\''+ n + '\')">我要評論</button>\
-        <button onclick="favorite(\''+ n + '\')">加入清單／自清單移除</button>\
+        <button onclick="favorite(\''+ n + '\')" id="favorite' + n + '">加入清單</button>\
         <!-- 已在清單內顯示移除，尚未加入顯示加入 -->\
     </div>\
     <div class="postArea" id="postArea'+ n + '">\
@@ -216,8 +220,8 @@ function creat_list1(data) {
         </div>\
     </div>\
 </div>';
-    
-    $( "#list" ).append( str );
+
+    $("#list").append(str);
     setTimeout(() => {
         //讓所有DIV一開始都收起來
         $('.commentArea').hide();
@@ -251,10 +255,10 @@ function createMarker(data) {
     marker.addListener('click', function () {
         typeof infoWindowsOpenCurrently !== 'undefined' && infoWindowsOpenCurrently.close();
         infowindow.setContent('<div class="info_map" id="info_map"><ul>' +
-        '<li>餐廳： ' + this.restaurant + '</li>'+
-        '<li>地址： </br>' + this.address + '</li>'+
-        '<li>電話： ' + this.phone + '</li></ul>'+
-        ' <button id="viewMore" >查看更多</button></div>');
+            '<li>餐廳： ' + this.restaurant + '</li>' +
+            '<li>地址： </br>' + this.address + '</li>' +
+            '<li>電話： ' + this.phone + '</li></ul>' +
+            ' <button id="viewMore" >查看更多</button></div>');
         infowindow.open(map, this);
         setTimeout(() => {
             open_info_div(this);
@@ -271,7 +275,7 @@ function showallcomment_list(i) {
     $(allComments).slideToggle();
     $(postArea).hide();
     $(commentArea).hide();
-    
+
 }
 function show_post(i) {
     var allComments = '#allComments' + i;
@@ -280,7 +284,7 @@ function show_post(i) {
     $(postArea).slideToggle();
     $(commentArea).hide();
     $(allComments).hide();
-    
+
 }
 function my_comment(i) {
     var allComments = '#allComments' + i;
@@ -302,7 +306,7 @@ function open_info_div(data) { //infowindow點擊後
         console.log('收到data' + data.restaurant);
         document.getElementById('restaurant').innerHTML = data.restaurant;
         document.getElementById('r_address').innerHTML = data.address;
-        document.getElementById('r_tel').innerHTML =data.phone;
+        document.getElementById('r_tel').innerHTML = data.phone;
 
     })
 
@@ -312,64 +316,105 @@ function open_info_div(data) { //infowindow點擊後
 //-------------以下店家資訊裡面的按鈕功能-----------------------------------
 
 //----發起動態---------
-function post_enter(i){ //發起動態 確定
-    var id='post'+i;
-    var content=document.getElementById(id).value;  //取得動態內容
-    console.log('user'+User+'輸入的內容是:'+content);
-    const ref = '/店家資料/' + food;
-    
-    
+function post_enter(i) { //發起動態 確定
+    var id = 'post' + i;
+    var content = document.getElementById(id).value;  //取得動態內容
+    console.log('user' + User + '輸入的內容是:' + content);
+    let ref = '/動態資料/' + User;
+
+
 }
-function post_cancel(i){ //發起動態 取消
-    var id='post'+i;
-    var content=document.getElementById(id);
-    content.value='';
-    
+function post_cancel(i) { //發起動態 取消
+    var id = 'post' + i;
+    var content = document.getElementById(id);
+    content.value = '';
+
 }
 
 //----我要評論---------
-function comment_enter(i){
-    var id='comment'+i;
-    var content=document.getElementById(id).value; //取得評論內容
+function comment_enter(i) {
+    var id = 'comment' + i;
+    var content = document.getElementById(id).value; //取得評論內容
 }
-function opt1(i){
-    var id='comment'+i;
-    var content=document.getElementById(id).value;
-    content=content+' 環境乾淨 ';
-    document.getElementById(id).value=content;
+function opt1(i) {
+    var id = 'comment' + i;
+    var content = document.getElementById(id).value;
+    content = content + ' 環境乾淨 ';
+    document.getElementById(id).value = content;
 }
-function opt2(i){
-    var id='comment'+i;
-    var content=document.getElementById(id).value;
-    content=content+' 環境骯髒 ';
-    document.getElementById(id).value=content;
+function opt2(i) {
+    var id = 'comment' + i;
+    var content = document.getElementById(id).value;
+    content = content + ' 環境骯髒 ';
+    document.getElementById(id).value = content;
 }
-function opt3(i){
-    var id='comment'+i;
-    var content=document.getElementById(id).value;
-    content=content+' 餐點美味 ';
-    document.getElementById(id).value=content;
+function opt3(i) {
+    var id = 'comment' + i;
+    var content = document.getElementById(id).value;
+    content = content + ' 餐點美味 ';
+    document.getElementById(id).value = content;
 }
-function opt4(i){
-    var id='comment'+i;
-    var content=document.getElementById(id).value;
-    content=content+' 餐點糟糕 ';
-    document.getElementById(id).value=content;
+function opt4(i) {
+    var id = 'comment' + i;
+    var content = document.getElementById(id).value;
+    content = content + ' 餐點糟糕 ';
+    document.getElementById(id).value = content;
 }
-function opt5(i){
-    var id='comment'+i;
-    var content=document.getElementById(id).value;
-    content=content+' 親切店家 ';
-    document.getElementById(id).value=content;
+function opt5(i) {
+    var id = 'comment' + i;
+    var content = document.getElementById(id).value;
+    content = content + ' 親切店家 ';
+    document.getElementById(id).value = content;
 }
-function opt6(i){
-    var id='comment'+i;
-    var content=document.getElementById(id).value;
-    content=content+' 服務極差 ';
-    document.getElementById(id).value=content;
+function opt6(i) {
+    var id = 'comment' + i;
+    var content = document.getElementById(id).value;
+    content = content + ' 服務極差 ';
+    document.getElementById(id).value = content;
 }
 
 //----加入清單---------
-function favorite(i){
+function favorite(i) {
+    var favorite = 'favorite' + i;
+    var name_id = 'name' + i;
+    var name = document.getElementById(name_id).value;
+    var address_id = 'address' + i;
+    var address = document.getElementById(address_id).value;
+    var phone_id = 'phone' + i;
+    var phone = document.getElementById(phone_id).value;
+    var user_ref = '/美食清單資料/' + User;
+    db.ref(user_ref).push({
+        Uno: User,
+        Name: name,
+        Address: address,
+        Phone: phone
+    });
+    console.log('加入清單ㄌ');
 
+    //---將按鈕改成自清單移除-----
+    setTimeout(() => {
+        document.getElementById(favorite).innerHTML='自清單移除';
+        document.getElementById(favorite).setAttribute("onclick","javascript: favorite_delete('"+i+"');" );
+    }, 0);
+}
+function favorite_delete(i) {
+    var favorite = 'favorite' + i;
+    var name_id = 'name' + i;
+    var name = document.getElementById(name_id).value;
+    var address_id = 'address' + i;
+    var address = document.getElementById(address_id).value;
+    var user_ref = '/美食清單資料/'+User;
+    db.ref(user_ref).once('value', function (snapshot) {
+        var data=snapshot.val();
+        for (i in data){
+            if (data[i].Name==name && data[i].Address==address){
+                db.ref(user_ref).child(i).remove();
+            }
+        }
+    })
+    setTimeout(() => {
+        document.getElementById(favorite).setAttribute("onclick","javascript: favorite('"+i+"');" );
+        document.getElementById(favorite).innerHTML='加入清單';
+    }, 0);
+    
 }
