@@ -100,10 +100,10 @@
                 <button id="confirm">確認</button>            
             </div>   
             
-            <div class="friendRequest" id="2">
+            <div class="friendReqList" id="2">
                 <h2>我的好友邀請</h2>
                 <div class="line"></div>
-                <div class="FriendReqList">
+                    <div class="FriendRequest">
                     <!-- 若無邀請，顯示：
                     <h2>目前尚無未確認之邀請</h2> -->
 
@@ -113,7 +113,7 @@
                         <button>拒絕</button> 
                         <button>接受</button>                                                
                     </div>
-                </div>               
+                    </div>               
             </div>
 
             <div class="comment" id="3">
@@ -124,6 +124,7 @@
                     <h2>您目前尚未發表過評論</h2> -->
 
                     <div class="commentContent">
+                        <img src="" alt="">
                         <h3>餐廳名</h3>
                         <p>內容</p>
                         <button>刪除</button>
@@ -158,26 +159,25 @@
     <script>
         $( document ).ready(function() {
             $('.show_password').click(function () {
-                let pass_type = $('input.password').attr('type');
-                if (pass_type === 'password') {
-                    $('input.password').attr('type', 'text');
-                    $('.show_password').removeClass('eye_open').addClass('eye_close');
-                } else {
-                    $('input.password').attr('type', 'password');
-                    $('.show_password').removeClass('eye_close').addClass('eye_open');
-                }
-            });
-            $('.show_password_confirm').click(function () {
-                let pass_type = $('input.password_confirm').attr('type');
-                if (pass_type === 'password') {
-                    $('input.password_confirm').attr('type', 'text');
-                    $('.show_password_confirm').removeClass('eye_open_confirm').addClass('eye_close_confirm');
-                } else {
-                    $('input.password_confirm').attr('type', 'password');
-                    $('.show_password_confirm').removeClass('eye_close_confirm').addClass('eye_open_confirm');
-                }
-            });
-
+        let pass_type = $('input.password').attr('type');
+        if (pass_type === 'password') {
+          $('input.password').attr('type', 'text');
+          $('.show_password').removeClass('eye_open').addClass('eye_close');
+        } else {
+          $('input.password').attr('type', 'password');
+          $('.show_password').removeClass('eye_close').addClass('eye_open');
+        }
+      });
+      $('.show_password_confirm').click(function () {
+        let pass_type = $('input.password_confirm').attr('type');
+        if (pass_type === 'password') {
+          $('input.password_confirm').attr('type', 'text');
+          $('.show_password_confirm').removeClass('eye_open_confirm').addClass('eye_close_confirm');
+        } else {
+          $('input.password_confirm').attr('type', 'password');
+          $('.show_password_confirm').removeClass('eye_close_confirm').addClass('eye_open_confirm');
+        }
+      });
             if(location.hash == "#1"){
                 $('.friendRequest').hide();
                 $('.comment').hide();
@@ -193,7 +193,6 @@
             }else if(location.hash == "#4"){
                 //登出
             }
-
             $('#menu').hide();
             $('#toggle').click(function() {
                 $('#menu').slideToggle();
@@ -316,9 +315,7 @@
     var frienddata=firebase.database().ref('/好友名單資料/');
     var memberdata=firebase.database().ref('/會員資料/');
     var str='';
-    var imgstr='';
-    var addIcon=document.querySelector('.addIcon')
-    var FriendReqList=document.querySelector('.FriendReqList');
+    var FriendReqList=document.querySelector('.FriendRequest');
     frienddata.once('value',function(friendsnapshot){
         memberdata.once('value',function(membersnapshot){
         var memberInf=membersnapshot.val();
@@ -326,33 +323,26 @@
         var count=0;
         for(var j in friendInf){
             if(friendInf[j]["ANo"]==ID&&friendInf[j]["Status"]==false){
-                
+                console.log("1");
                 for(var k in memberInf){
                     if(memberInf[k]["ID"]==friendInf[j]["SNo"]){
-                        // var storageRef=firebase.storage().ref();
-                        // var pic=storageRef.child('/user/'+friendInf[j]["SNo"]).getDownloadURL().then(function(url) {})
-                        // imgstr+=img;
-                        var pathReference = storageRef.child('/user/'+friendInf[j]["SNo"]);
-                        pathReference.getDownloadURL().then(function(url) {
-                        addIcon.src = url;
-                        })
-                        
-                        str+='<div class="info"><h3 id="friendName">'+memberInf[k]["Name"]+'</h3>';
-                        str+='<button onclick=Reject("'+j+'")>'+"拒絕"+'</button>';
-                        str+='<button onclick=Accept("'+j+'")>'+"接受"+'</button></div>';
-                    }
-                }
-            }else if(friendInf[j]["SNo"]==ID&&friendInf[j]["Status"]==false){
-                for(var r in memberInf){
-                    if(memberInf[r]["ID"]==friendInf[j]["ANo"]){
-                        str+='<div class="info"><h3 id="friendName">'+memberInf[r]["Name"]+'</h3>';
+                        count++;
+                        str+='<div class="info">';
+                        str+='<h3 id="friendName">'+memberInf[k]["Name"]+'</h3>';
                         str+='<button onclick=Reject("'+j+'")>'+"拒絕"+'</button>';
                         str+='<button onclick=Accept("'+j+'")>'+"接受"+'</button></div>';
                     }
                 }
             }
+            
         }
-         // addIcon.innerHTML=imgstr;
+        
+        if(count==0){
+            
+            str+='<h2>'+"目前尚無未確認之邀請"+'</h2>';
+            
+        }
+         
          FriendReqList.innerHTML=str;
         });
     });
@@ -361,7 +351,8 @@
     var commentdata=firebase.database().ref('/評論區資料/');
     var memberdata=firebase.database().ref('/會員資料/');
     var commentstr='';
-    var commentContent=document.querySelector('.list');
+    var commentcount=0;
+    var commentContent=document.querySelector('.list' );
     memberdata.once('value',function(membersnapshot){
         commentdata.once('value',function(commentsnapshot){
             storedata.once('value',function(storesnapshot){
@@ -369,16 +360,13 @@
                 var memberInf=membersnapshot.val();
                 var commentInf=commentsnapshot.val();
                 var ID=getCookie('ID');
-                // for(var k in storeInf){
-                //     for(var i in storeInf[k]){
-                //         console.log(storeInf[k][i]["店名"]);
-                //     }
-                // }
+                
                 for(var comment in commentInf){
                     if(commentInf[comment]["UNo"]==ID){
                         for(var store in storeInf){
                             for(var instore in storeInf[store]){
                                 if(storeInf[store][instore]["店名"]==commentInf[comment]["Name"]){
+                                    commentcount++;
                                     commentstr+='<div class="commentContent"><h3>'+commentInf[comment]["Name"]+'</h3>';
                                     commentstr+='<p>'+commentInf[comment]["Discon"]+'</p>';
                                     commentstr+='<button onclick=delcomment("'+comment+'")>'+"刪除"+'</button>';
@@ -388,6 +376,9 @@
                         }
 
                     }
+                }
+                if(commentcount==0){
+                    commentstr+='<h2>'+"您目前尚未發表過評論"+'</h2>';
                 }
                 commentContent.innerHTML=commentstr;
             });
