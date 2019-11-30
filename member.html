@@ -363,17 +363,14 @@
                 
                 for(var comment in commentInf){
                     if(commentInf[comment]["UNo"]==ID){
-                        for(var store in storeInf){
-                            for(var instore in storeInf[store]){
-                                if(storeInf[store][instore]["店名"]==commentInf[comment]["Name"]){
+                        
+                               
                                     commentcount++;
                                     commentstr+='<div class="commentContent"><h3>'+commentInf[comment]["Name"]+'</h3>';
                                     commentstr+='<p>'+commentInf[comment]["Discon"]+'</p>';
                                     commentstr+='<button onclick=delcomment("'+comment+'")>'+"刪除"+'</button>';
                                     commentstr+='<button onclick=changecomment("'+comment+'")>'+"修改"+'</button></div>';
-                                }
-                            }
-                        }
+                               
 
                     }
                 }
@@ -405,13 +402,22 @@ function changecomment(comment){
 }
 function delcomment(comment){
     var delcommentdata=firebase.database().ref('/評論區資料/'+comment);
+    var n=document.querySelector('.commentContent');
+    n.style="display:none";
+    alert("評論已刪除");
     delcommentdata.remove();
 }
 function Reject(j){
+    var n=document.querySelector('.info');
+    n.style="display:none";
+    alert("好友邀請已拒絕");
     var Rejectdata=firebase.database().ref('/好友名單資料/'+j);
     Rejectdata.remove();
 }
 function Accept(j){
+    var n=document.querySelector('.info');
+    n.style="display:none";
+    alert("好友邀請已接受");
     var Acceptdata=firebase.database().ref('/好友名單資料/'+j);
     Acceptdata.update({
         Status:"true",
