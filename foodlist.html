@@ -13,7 +13,6 @@
     <script src="http://code.changer.hk/jquery/plugins/jquery.cookie.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-storage.js"></script>
   <script type="text/javascript">
-
     const firebaseConfig = {
         apiKey: "AIzaSyCcIFB1orespqziBWnX8kUWyihopdBw8jM",
         authDomain: "japungo.firebaseapp.com",
@@ -222,10 +221,10 @@
             </div>
             
             <div class="right">
-                    <textarea style="overflow:auto" class="questionTerm" placeholder="請輸入您的問題"></textarea>
+                    <textarea id="suggestion" style="overflow:auto" class="questionTerm" placeholder="請輸入您的問題"></textarea>
                     <div class="emailArea">
-                    <input type="email" class="emailTerm" placeholder="請輸入您的信箱">
-                    <button type="submit" class="submitBtn"><img src="img/send.png" alt="" class="contact"></button>
+                    <input type="email" class="emailTerm" placeholder="請輸入您的信箱" id="membermail">
+                    <button type="submit" class="submitBtn" onclick=suggestion()><img src="img/send.png" alt="" class="contact"></button>
                 </div> 
             </div> 
             
@@ -242,7 +241,6 @@
             $('#toggle').click(function() {
                 $('#menu').slideToggle();
             });
-
             $('#listView').hide();
             $('.mapContent').hide();
             $('#mapView').click(function() {
@@ -251,33 +249,28 @@
                 $('.list').hide();
                 $('#mapView').hide();
             });
-
             $('#listView').click(function() {
                 $('#listView').hide();
                 $('.mapContent').hide();
                 $('.list').toggle();
                 $('#mapView').toggle();
             });
-
             $('.postArea').hide();
             $('#post').click(function() {
                 $('.postArea').slideToggle();
                 $('.commentArea').hide();
                 $('.allComments').hide();
             });
-
             $('.commentArea').hide();
             $('#comment').click(function() {
                 $('.commentArea').slideToggle();
                 $('.postArea').hide();
                 $('.allComments').hide();
             });
-
             $('.btnOption').hide();
             $('#option').click(function() {
                 $('.btnOption').slideToggle();
             });
-
             $('.allComments').hide();
             $('#showAllComments').click(function() {
                 $('.allComments').slideToggle();
@@ -285,12 +278,10 @@
                 $('.postArea').hide();
             });
         });
-
         $(function(){
             $('#backTop').click(function(){ 
                 $('html,body').animate({scrollTop:0}, 333);
             });
-
             $(window).scroll(function() {
                 if ( $(this).scrollTop() > 300 ){
                     $('#backTop').fadeIn(222);
@@ -298,53 +289,84 @@
                     $('#backTop').stop().fadeOut(222);
                 }
             }).scroll();
-
         });
         //-------------------------------------------後端
         $(document).ready(function(){
-            var resdata=firebase.database().ref('/店家資料/');
             var fooddata=firebase.database().ref('/美食清單資料/');
-            var name=document.getElementById('name');
-            var address=document.getElementById('address');
-            var phone=document.getElementById('phone');
             var ID=getCookie('ID');
             var str='';
-            var foodlist=document.querySelector('.list');
-            var commentArea=document.querySelector('.commentArea');
-            fooddata.once('value',function(fsnapshot){
-                resdata.once('value',function(ressnapshot){
-                    var foodInf=fsnapshot.val();
-                    var resInf=ressnapshot.val();
-                    $('#searchBtn').on('click',function(){
-                        var search=$('#search').val();
-                        for(var r in resInf){
-                            if(r==search){
-                                for(var i in resInf[r]){
-                                    for(var f in foodInf){
-                                        // console.log(foodInf[f]["Name"]);
-                                        if(foodInf[f]["Name"]==resInf[r][i]["店名"]&&foodInf[f]["UNo"]==ID){
-                                            str+='<div class="info"><h3 id="name">'+foodInf[f]["Name"]+'</h3>';
-                                            str+='<img src="img/pin.png" class="addIcon"><p class="address">'+resInf[r][i]["地址"]+'</p>';
-                                            str+='<img src="img/tel.png" class="telIcon"><p class="tel">'+resInf[r][i]["電話"]+'</p>';
-                                            str+='<div class="btn0"><button class=showAllComments id="showAllComments"><img src="img/show_comment.png" class=commentIcon>'+"顯示評論區"+'</button>';
-                                            str+='<a class="recommend"><img src="img/best.png" class=bestIcon>'+"查看推薦"+'</a></div>';
-                                            str+='<div class="btn"><button onclick=delfoodlist("'+f+'") id="delete">'+"自清單移除"+'</button>';
-                                            str+='<button>'+"發起動態"+'</button>';
-                                            str+='<button onclick=comment("'+foodInf[f]["Name"]+'") id="comment">'+"我要評論"+'</button></div></div>';
+            
+            var list=document.querySelector('.list');
+            fooddata.once('value',function(snapshot){
+                var foodInf=snapshot.val();
+                for(var i in foodInf){
+                    if(i==ID){
+                        for(var j in foodInf[i]){
+                            str+='<div class=info><h3 id="name">'+foodInf[i][j]["Name"]+'</h3>';
+                            str+='<img src="img/pin.png" class="addIcon"><p class="address">'+foodInf[i][j]["Address"]+'</p>';
+                            str+='<img src="img/tel.png" class="telIcon"><p class="tel">'+foodInf[i][j]["Phone"]+'</p>';
+                            str+='<div class="btn0"><button class=showAllComments id="showAllComments"><img src="img/show_comment.png" class=commentIcon>'+"顯示評論區"+'</button>';
+                            str+='<a class="recommend" href="'+foodInf[i][j]["Url"]+'"><img src="img/best.png" class=bestIcon>'+"查看推薦"+'</a></div>';
+                            str+='<div class="btn"><button onclick=delfoodlist("'+i+','+j+'") id="delete">'+"自清單移除"+'</button>';
+                            str+='<button>'+"發起動態"+'</button>';
+                            str+='<button onclick=comment("'+foodInf[i][j]["Name"]+'") id="comment"> '+"我要評論"+'</button></div></div>';
+                        }
 
-
+                    }
+                }
+                list.innerHTML=str;
+            $('#searchBtn').on('click',function(){
+                str='';
+                var flag=0;
+                var search=$('#search').val();
+                var storedata=firebase.database().ref('/店家資料/');
+                storedata.once('value',function(stsnapshot){
+                    var stInf=stsnapshot.val();
+                    for(var s in stInf){
+                        if(s==search){
+                            for(var s2 in stInf[s]){
+                                for(var f in foodInf){
+                                    if(f==ID){
+                                        for(var f2 in foodInf[f]){
+                                            if(stInf[s][s2]["店名"]==foodInf[f][f2]["Name"]){
+                                                str+='<div class=info><h3 id="name">'+foodInf[f][f2]["Name"]+'</h3>';
+                                                str+='<img src="img/pin.png" class="addIcon"><p class="address">'+foodInf[f][f2]["Address"]+'</p>';
+                                                str+='<img src="img/tel.png" class="telIcon"><p class="tel">'+foodInf[f][f2]["Phone"]+'</p>';
+                                                str+='<div class="btn0"><button class=showAllComments id="showAllComments"><img src="img/show_comment.png" class=commentIcon>'+"顯示評論區"+'</button>';
+                                                str+='<a class="recommend" href="'+foodInf[f][f2]["Url"]+'"><img src="img/best.png" class=bestIcon>'+"查看推薦"+'</a></div>';
+                                                str+='<div class="btn"><button onclick=delfoodlist("'+i+','+j+'") id="delete">'+"自清單移除"+'</button>';
+                                                str+='<button>'+"發起動態"+'</button>';
+                                                str+='<button onclick=comment("'+foodInf[f][f2]["Name"]+'") id="comment"> '+"我要評論"+'</button></div></div>';
+                                                flag++;
+                                            }
                                         }
                                     }
                                 }
-
                             }
-                            foodlist.innerHTML=str;
-
+                        }else{
+                            for(var f in foodInf){
+                                for(var f2 in foodInf[f]){
+                                    if(foodInf[f][f2]["Name"]==search){
+                                        str+='<div class=info><h3 id="name">'+foodInf[f][f2]["Name"]+'</h3>';
+                                                str+='<img src="img/pin.png" class="addIcon"><p class="address">'+foodInf[f][f2]["Address"]+'</p>';
+                                                str+='<img src="img/tel.png" class="telIcon"><p class="tel">'+foodInf[f][f2]["Phone"]+'</p>';
+                                                str+='<div class="btn0"><button class=showAllComments id="showAllComments"><img src="img/show_comment.png" class=commentIcon>'+"顯示評論區"+'</button>';
+                                                str+='<a class="recommend" href="'+foodInf[f][f2]["Url"]+'"><img src="img/best.png" class=bestIcon>'+"查看推薦"+'</a></div>';
+                                                str+='<div class="btn"><button onclick=delfoodlist("'+i+','+j+'") id="delete">'+"自清單移除"+'</button>';
+                                                str+='<button>'+"發起動態"+'</button>';
+                                                str+='<button onclick=comment("'+foodInf[f][f2]["Name"]+'") id="comment"> '+"我要評論"+'</button></div></div>';
+                                                flag++;
+                                    }
+                                }
+                            }
                         }
-                        
-                        
-                    });
-                })
+                    }
+                    if(flag==0){
+                        str+='<h2>'+"查無相關資料"+'</h2>';
+                    }
+                    list.innerHTML=str;
+                });
+            });
             });
         });
 function getCookie(name) {
@@ -358,17 +380,30 @@ function delfoodlist(f){
     var delfood=firebase.database().ref('/美食清單資料/'+f);
     delfood.remove();
 }
-function comment(name){
+function suggestion(){
+    var suggestion=$('#suggestion').val();
+    var membermail=$('#membermail').val();
+    var problem=firebase.database().ref('/問題回報/');
+    problem.push({
+        question:suggestion,
+        email:membermail,
+    })
+    alert("感謝您的意見");
+}  
+function comment(name,i){
+    console.log(i);
     
-
-
     var Today=new Date();
-    var a=document.querySelector('.commentArea');
-    console.log(a);
-            $('.commentArea').toggle();
-            $(document).ready(function(){
-            $('.postArea').hide();
-            $('.allComments').hide();
+    var commentArea='#commentArea'+i;
+    $(commentArea).slideToggle();
+            
+
+    
+            
+            // $(document).ready(function(){
+            // $('.commentArea').slideToggle();
+            // $('.postArea').hide();
+            // $('.allComments').hide();
             var mycom=$('#comment').val();
             var comdata=firebase.database().ref('/評論區資料/');
             var ID=getCookie('ID');
@@ -391,14 +426,10 @@ function comment(name){
             //             });
             //         }
             //     }
-            });
-
+            // });
     
-
 }
         
-
-
     // });
     // console.log("今天日期是 " + Today.getFullYear()+ " 年 " + (Today.getMonth()+1) + " 月 " + Today.getDate() + " 日");
     // console.log(day);
@@ -408,7 +439,6 @@ function comment(name){
     //     Discon:mycom,
     //     Name:name,
 //     });
-
 // }
     </script>
 </body>
