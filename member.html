@@ -328,6 +328,7 @@
                     if(memberInf[k]["ID"]==friendInf[j]["SNo"]){
                         count++;
                         str+='<div class="info">';
+                        str+='<img src="img/pic.png" id="friendphoto" class="addIcon">';
                         str+='<h3 id="friendName">'+memberInf[k]["Name"]+'</h3>';
                         str+='<button onclick=Reject("'+j+'")>'+"拒絕"+'</button>';
                         str+='<button onclick=Accept("'+j+'")>'+"接受"+'</button></div>';
