@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/search.css">
     <title>搜尋美食</title>
-     <!--firebase核心js-->
-<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
-<!--選擇使用realtime database功能-->
-<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyNHGK5W-UIZrhPqLa2POPnisX6tue7rw&libraries=places,geometry" ></script>
-<script defer type="text/javascript" src="js/search.js"></script>
-<script defer type="text/javascript" src="js/contact_us.js"></script>
+    <!--firebase核心js-->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <!--選擇使用realtime database功能-->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyNHGK5W-UIZrhPqLa2POPnisX6tue7rw&libraries=places,geometry"></script>
+    <script defer type="text/javascript" src="js/search.js"></script>
+    <script defer type="text/javascript" src="js/contact_us.js"></script>
 </head>
+
 <body>
     <div class="wrap">
         <div class="header">
             <img src="img/logo_header.png" class="logo">
             <div id="toggle">
-                    <div class="one"></div>
-                    <div class="two"></div>
-                    <div class="three"></div>
+                <div class="one"></div>
+                <div class="two"></div>
+                <div class="three"></div>
             </div>
 
             <nav id="menu">
-                 <ul>
+                <ul>
                     <li><a href="game.html"><img src="img/game.png" alt="">今天吃什麼</a></li>
                     <li><a href="posts.html"><img src="img/posts.png" alt="">我的動態</a></li>
                     <li><a href="search.html"><img src="img/search.png" alt="">搜尋美食</a></li>
@@ -35,7 +37,7 @@
                     <li><a href="member.html#2"><img src="img/friend_request.png" alt="">好友邀請</a></li>
                     <li><a href="member.html#3"><img src="img/comment.png" alt="">我的評論</a></li>
                     <li><a href="member.html#4"><img src="img/logout.png" alt="">登出</a></li>
-               </ul>
+                </ul>
             </nav>
         </div>
         <div class="clear"></div>
@@ -52,20 +54,20 @@
 
         <div class="content">
             <!-- btn按下後<h2>、<div class="line">、<div class="info">同搜尋結果一起出現 -->
-            <h2 class="inputItem" id="input_food">輸入食物</h2>        
+            <h2 class="inputItem" id="input_food">輸入食物</h2>
             <div class="line"></div>
             <div class="list" id="list">
-                <!-- <div class="info" style="display:none">
+                <div class="info" style="display:none">
                     <h3>餐廳名</h3>
-                    
+
                     <img src="img/pin.png" class="addIcon">
                     <p class="address">地址</p>
 
                     <img src="img/tel.png" class="telIcon">
                     <p class="tel">電話</p>
-                    
+
                     <div class="btn0">
-                        <button class="showAllComments" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>                   
+                        <button class="showAllComments" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>
                         <a class="recommend"><img src="img/best.png" class="bestIcon">查看推薦</a>
                     </div>
 
@@ -78,6 +80,8 @@
 
                     <div class="postArea">
                         <div class="postInput">
+                            <!-- 新增飯局時間 -->
+                            <input type="text" placeholder="請輸入飯局時間" />
                             <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>
                             <img src="img/pic.png" alt="">
                         </div>
@@ -86,7 +90,7 @@
                             <button>取消</button>
                         </div>
                     </div>
-                    
+
                     <div class="commentArea">
                         <div class="commentInput">
                             <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea>
@@ -112,20 +116,20 @@
                             <div class="commentContent">
                                 <p>內容</p>
                             </div>
-                        </div>  
+                        </div>
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
 
         <div class="mapContent">
-            <div  class='map' id='map'>
+            <div class='map' id='map'>
                 <!-- 自己 -->
                 <img src="img/me.png" style="height: 80px;">
                 <!-- 餐廳 -->
                 <img src="img/restaurant.png" style="height: 55px;">
             </div>
- 
+
             <div class="info_map" id='info_map' style="display: none;">
                 <ul>
                     <li>餐廳名</li>
@@ -146,7 +150,7 @@
                 <p id='r_tel' class="tel">電話</p>
 
                 <div class="btn0_map">
-                    <button class="showAllComments" id="showAllComments_map"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>                   
+                    <button class="showAllComments" id="showAllComments_map"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>
                     <a class="recommend" id="map_recommend_a"><img src="img/best.png" class="bestIcon">查看推薦</a>
                 </div>
 
@@ -155,23 +159,25 @@
                     <button id="comment_map">我要評論</button>
                     <button>加入清單／自清單移除</button>
                 </div>
-                    
+
                 <div class="postArea_map">
                     <div class="postInput_map">
-                        <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>
+                        <!-- 新增飯局時間 -->
+                        <input type="text" placeholder="請輸入飯局時間" id="map_date_time" />
+                        <textarea style="overflow:auto" class="postTerm" id="map_postTerm" placeholder="請輸入動態內容"></textarea>
                         <img src="img/pic.png" alt="">
                     </div>
-                        <div class="btn2_map">
-                            <button>確定</button>
-                            <button>取消</button>
-                       </div>
+                    <div class="btn2_map">
+                        <button>確定</button>
+                        <button>取消</button>
+                    </div>
                 </div>
-                                        
+
                 <div class="commentArea_map">
                     <div class="commentInput_map">
-                        <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea>
+                        <textarea style="overflow:auto" class="commentTerm" id="map_commentTerm" placeholder="請輸入評論內容"></textarea>
                         <img src="img/pic.png" alt="">
-                    </div>                    
+                    </div>
                     <div class="btn3_map">
                         <button id="option_map">評論選項</button>
                         <button>我要評論</button>
@@ -184,8 +190,8 @@
                         <button>親切店家</button>
                         <button>服務極差</button>
                     </div>
-                </div>            
-                    
+                </div>
+
                 <div class="allComments_map">
                     <div class="comments_map">
                         <img src="img/pic.png" alt="">
@@ -198,22 +204,22 @@
         </div>
 
         <div class="clear"></div>
-        
+
         <div class="footer">
             <div class="left">
                 <img src="img/logo_mini.png" alt="" class="logo_footer">
                 <h3>聯絡我們</h3>
                 <p>如有任何問題，請留下您的問題與聯絡信箱，我們將儘速與您聯繫</p>
             </div>
-            
+
             <div class="right">
                 <textarea style="overflow:auto" class="questionTerm" id="questionTerm" placeholder="請輸入您的問題"></textarea>
                 <div class="emailArea">
                     <input type="email" class="emailTerm" id="emailTerm" placeholder="請輸入您的信箱">
                     <button type="submit" class="submitBtn" id="submitBtn"><img src="img/send.png" alt="" class="contact"></button>
-                </div> 
-            </div> 
-            
+                </div>
+            </div>
+
             <button id="backTop" class="toTop"></button>
             <button id="listView" class="listBtn"><img src="img/list.png" alt=""></button>
             <button id="mapView" class="mapBtn"><img src="img/map.png" alt=""></button>
@@ -222,22 +228,22 @@
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script>
-        $( document ).ready(function() {
+        $(document).ready(function () {
             $('#menu').hide();
-            $('#toggle').click(function() {
+            $('#toggle').click(function () {
                 $('#menu').slideToggle();
             });
 
             $('#listView').hide();
             $('.mapContent').hide();
-            $('#mapView').click(function() {
+            $('#mapView').click(function () {
                 $('.mapContent').toggle();
                 $('#listView').toggle();
                 $('.content').hide();
                 $('#mapView').hide();
             });
 
-            $('#listView').click(function() {
+            $('#listView').click(function () {
                 $('#listView').hide();
                 $('.mapContent').hide();
                 $('.content').toggle();
@@ -245,65 +251,65 @@
             });
 
             $('.postArea').hide();
-            $('#post').click(function() {
+            $('#post').click(function () {
                 $('.postArea').slideToggle();
                 $('.commentArea').hide();
                 $('.allComments').hide();
             });
 
             $('.commentArea').hide();
-            $('#comment').click(function() {
+            $('#comment').click(function () {
                 $('.commentArea').slideToggle();
                 $('.postArea').hide();
                 $('.allComments').hide();
             });
 
             $('.btnOption').hide();
-            $('#option').click(function() {
+            $('#option').click(function () {
                 $('.btnOption').slideToggle();
             });
 
             $('.allComments').hide();
-            $('#showAllComments').click(function() {
+            $('#showAllComments').click(function () {
                 $('.allComments').slideToggle();
                 $('.commentArea').hide();
                 $('.postArea').hide();
             });
 
             $('.postArea_map').hide();
-            $('#post_map').click(function() {
+            $('#post_map').click(function () {
                 $('.postArea_map').slideToggle();
                 $('.commentArea_map').hide();
                 $('.allComments_map').hide();
             });
 
             $('.commentArea_map').hide();
-            $('#comment_map').click(function() {
+            $('#comment_map').click(function () {
                 $('.commentArea_map').slideToggle();
                 $('.postArea_map').hide();
                 $('.allComments_map').hide();
             });
 
             $('.btnOption_map').hide();
-            $('#option_map').click(function() {
+            $('#option_map').click(function () {
                 $('.btnOption_map').slideToggle();
             });
 
             $('.allComments_map').hide();
-            $('#showAllComments_map').click(function() {
+            $('#showAllComments_map').click(function () {
                 $('.allComments_map').slideToggle();
                 $('.commentArea_map').hide();
                 $('.postArea_map').hide();
             });
         });
 
-        $(function(){
-            $('#backTop').click(function(){ 
-                $('html,body').animate({scrollTop:0}, 333);
+        $(function () {
+            $('#backTop').click(function () {
+                $('html,body').animate({ scrollTop: 0 }, 333);
             });
 
-            $(window).scroll(function() {
-                if ( $(this).scrollTop() > 300 ){
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 300) {
                     $('#backTop').fadeIn(222);
                 } else {
                     $('#backTop').stop().fadeOut(222);
@@ -312,21 +318,22 @@
 
         });
 
-        $(function(){
+        $(function () {
             $('#viewMore').click(function centerHandler() {
                 document.getElementById('info_detail').style.display = "block";
                 var scrollDist = $(window).scrollTop();
-                var myTop = ($(window).height())/2;
-                var myLeft = ($(window).width()-$('#info_detail').width())/2;
-                $('#info_detail').offset({top:myTop, left:myLeft});
-                
+                var myTop = ($(window).height()) / 2;
+                var myLeft = ($(window).width() - $('#info_detail').width()) / 2;
+                $('#info_detail').offset({ top: myTop, left: myLeft });
+
                 $(window).resize(centerHandler);
             });
- 
-            $('#close').click(function(){
+
+            $('#close').click(function () {
                 document.getElementById('info_detail').style.display = "none";
             });
         });
     </script>
 </body>
+
 </html>

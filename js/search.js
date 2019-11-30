@@ -19,8 +19,8 @@ var currentLocation;
 var mylocation;
 var marker_count = [];
 var list_str = "";
-var User=getCookie('ID');
-//var User = 'opop';  //為方便更改功能先設為opop
+//var User=getCookie('ID');
+var User = 'opop';  //為方便更改功能先設為opop
 function getCookie(name) {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
     if (arr = document.cookie.match(reg))
@@ -185,6 +185,7 @@ function creat_list1(data) {
     </div>\
     <div class="postArea" id="postArea'+ n + '">\
         <div class="postInput">\
+            <input type="text"   placeholder="請輸入飯局時間" id="Date_time'+ n + '"/>\
             <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="post'+ n + '"></textarea>\
             <img src="img/pic.png" alt="">\
         </div>\
@@ -307,6 +308,9 @@ function open_info_div(data) { //infowindow點擊後
         document.getElementById('restaurant').innerHTML = data.restaurant;
         document.getElementById('r_address').innerHTML = data.address;
         document.getElementById('r_tel').innerHTML = data.phone;
+        $('#info_detail').append('<input type="hidden" id="name'+ n + '" value="' + data.restaurant + '">\
+        <input type="hidden" id="address'+ n + '" value="' + data.address + '">\
+        <input type="hidden" id="phone'+ n + '" value="' + data.phone + '">');
 
     })
 
@@ -318,7 +322,14 @@ function open_info_div(data) { //infowindow點擊後
 //----發起動態---------
 function post_enter(i) { //發起動態 確定
     var id = 'post' + i;
+    var date_time='Date_time'+i;
     var content = document.getElementById(id).value;  //取得動態內容
+    var name_id = 'name' + i;
+    var name = document.getElementById(name_id).value;
+    var address_id = 'address' + i;
+    var address = document.getElementById(address_id).value;
+    var phone_id = 'phone' + i;
+    var phone = document.getElementById(phone_id).value;
     console.log('user' + User + '輸入的內容是:' + content);
     let ref = '/動態資料/' + User;
 
@@ -335,6 +346,23 @@ function post_cancel(i) { //發起動態 取消
 function comment_enter(i) {
     var id = 'comment' + i;
     var content = document.getElementById(id).value; //取得評論內容
+    var name_id = 'name' + i;
+    var name = document.getElementById(name_id).value;
+    var address_id = 'address' + i;
+    var address = document.getElementById(address_id).value;
+    var date=new Date();
+    var today=date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate();
+    var ref = '/評論區資料';
+    db.ref(ref).push({
+        UNo: User,
+        Name: name,
+        Address: address,
+        Date: today,
+        Discon:content
+       
+    });
+    console.log(User+'已評論成功! 日期:'+today);
+
 }
 function opt1(i) {
     var id = 'comment' + i;
