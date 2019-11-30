@@ -64,7 +64,7 @@
         </div>
         <div class="clear"></div>
 
-        <div id="friendInfo" style='display:none;'>
+        <div id="friendInfo" style="display:none">
             <button id="close"><img src="img/cross.png" alt=""></button>
             <img src="img/pic.png" alt="" id="image">
             <h3 class="NewName">用戶名</h3>
@@ -73,9 +73,9 @@
 
         <div class="content">
             
-            <ul class="friendlist">
+            <div class="friendlist">
                 
-                <div class="info">
+                <div class="info" style="display:none">
                     <img src="img/pic.png" class="addIcon" id="image3">
                     <h3 class="UserName">用戶名</h3>
                     <button><a href="foodlist.html">查看美食清單</a></button>
@@ -84,7 +84,7 @@
                     <button>刪除</button>
                 </div>
                 
-            </ul>
+            </div>
             
         </div>
 
@@ -98,10 +98,10 @@
             </div>
             
             <div class="right">
-                <textarea style="overflow:auto" class="questionTerm" placeholder="請輸入您的問題"></textarea>
+                <textarea style="overflow:auto" class="questionTerm" placeholder="請輸入您的問題" id="suggestion"></textarea>
                 <div class="emailArea">
                     <input type="email" class="emailTerm" id='emailTerm' placeholder="請輸入您的信箱">
-                    <button type="submit" class="submitBtn" id='submitBtn'><img src="img/send.png" alt="" class="contact"></button>
+                    <button type="submit" class="submitBtn" id='submitBtn' onclick=suggestion()><img src="img/send.png" alt="" class="contact"></button>
                 </div> 
             </div> 
             
@@ -142,7 +142,6 @@
             var frienddata=firebase.database().ref('/好友名單資料/');
             var memberdata=firebase.database().ref('/會員資料/');
             var str='';
-            var str2='';
             var MyID=getCookie('ID');
             var UserName=document.getElementById('UserName');
             var addIcon=document.querySelector('.addIcon')
@@ -155,9 +154,12 @@
                     if(friendInf[i]["ANo"]==MyID&&friendInf[i]["Status"]==true){
                             for(var j in memberInf){
                             if(friendInf[i]["SNo"]==memberInf[j]["ID"]){
-                                str+=memberInf[j]["Name"];
+                                
+                                str+='<div class="info">';
+                                str+='<img src="img/pic.png" class="addIcon" id="img'+memberInf[j]["ID"]+'">';
+                                str+='<h3 class=UserName>'+memberInf[j]["Name"]+'</h3>';
                                 str+='<button onclick=foodlist("'+j+'")>'+"查看美食清單"+'</button>';
-                                str+='<button onclick=delfrined("'+i+'")>'+"刪除好友"+'</button>';
+                                str+='<button onclick=delfrined("'+i+'")>'+"刪除好友"+'</button></div>';
                                 
                             }
                             
@@ -165,21 +167,17 @@
                     }else if(friendInf[i]["SNo"]==MyID&&friendInf[i]["Status"]==true){
                         for(var j in memberInf){
                             if(friendInf[i]["ANo"]==memberInf[j]["ID"]){
-                                str+='<image src='+callimage(memberInf[j]["ID"])+'>';
                                 
-                                    console.log("1");
-                                    str+='<ul class="info"><h3>'+memberInf[j]["Name"];
-                                    str+='<li><button onclick=foodlist("'+j+'")>'+"查看美食清單"+'</button>';
-                                    str+='<button onclick=delfrined("'+i+'")>'+"刪除好友"+'</button></li></ul>';
-                                
-                                
-                           
-                            }
-
-                             list.innerHTML=str;
+                                    str+='<div class="info">';
+                                    str+='<img src="img/pic.png" class="addIcon" id="imag'+memberInf[j]["ID"]+'">';
+                                    str+='<h3 class="UserName">'+memberInf[j]["Name"]+'</h3>';
+                                    str+='<button onclick=foodlist("'+j+'")>'+"查看美食清單"+'</button>';
+                                    str+='<button onclick=delfrined("'+i+'")>'+"刪除好友"+'</button></div>';
+                                }
                         }
                     }
                 }   
+                list.innerHTML=str;
             });
         });
         });
@@ -206,12 +204,25 @@ async function callimage(UID){
            //圖片網址放進img的src裡即可顯示            
     });
 }
+function suggestion(){
+    var suggestion=$('#suggestion').val();
+    var membermail=$('#emailTerm').val();
+    var problem=firebase.database().ref('/問題回報/');
+    problem.push({
+        question:suggestion,
+        email:membermail,
+    })
+    alert("感謝您的意見");
+}  
 function foodlist(j){
     document.cookie="FNo="+j;
     window.location.href="foodlist.html";
 }
 function delfrined(i){
     deldata=firebase.database().ref('/好友名單資料/'+i);
+    var n= document.querySelector('.info');
+    n.style="display:none";
+    alert("好友已刪除");
     deldata.remove();
 
 }
@@ -221,7 +232,6 @@ function friendInfo(){
             
             
             $('.searchBtn').click(function centerHandler(){ 
-                // friendInfo.style.display = "block";
                 var scrollDist = $(window).scrollTop();
                 var myTop = "100px";
                 var myLeft = ($(window).width()-$("#friendInfo").width())/2;
@@ -306,12 +316,14 @@ function friendInfo(){
                                     SNo:ID,
                                 });
                             }
+
+
                             
                         });
                     });
                 });
 
-
+                
             });
         
 }
