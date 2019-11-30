@@ -107,7 +107,7 @@
                     <!-- 若無邀請，顯示：
                     <h2>目前尚無未確認之邀請</h2> -->
 
-                    <div class="info">
+                    <div class="info" style="display:none">
                         <img id="friendphoto" class="addIcon">
                         <h3 id="friendName">用戶名</h3>
                         <button>拒絕</button> 
@@ -123,7 +123,7 @@
                     <!-- 若無評論，顯示：
                     <h2>您目前尚未發表過評論</h2> -->
 
-                    <div class="commentContent">
+                    <div class="commentContent" style="display:none">
                         <img src="" alt="">
                         <h3>餐廳名</h3>
                         <p>內容</p>
@@ -363,8 +363,6 @@
                 
                 for(var comment in commentInf){
                     if(commentInf[comment]["UNo"]==ID){
-                        
-                               
                                     commentcount++;
                                     commentstr+='<div class="commentContent"><h3>'+commentInf[comment]["Name"]+'</h3>';
                                     commentstr+='<p>'+commentInf[comment]["Discon"]+'</p>';
