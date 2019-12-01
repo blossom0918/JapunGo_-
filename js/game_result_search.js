@@ -20,7 +20,7 @@ function getCookie(name) {
     else
         return null;
 }
-var User=getCookie('ID');
+var User = getCookie('ID');
 //var User = 'opop';  //為方便更改功能先設為opop
 var food = getCookie('food');
 document.getElementById('q_answer').innerHTML = food;
@@ -141,11 +141,17 @@ function test(data) { //infowindow點擊後
         document.getElementById('info_detail').style.display = "block";
         console.log('收到data' + data.店名);
         document.getElementById('restaurant').innerHTML = data.店名;
+        document.getElementById('name0').value = data.店名;
         document.getElementById('r_address').innerHTML = data.地址;
+        document.getElementById('address0').value = data.地址;
         document.getElementById('r_tel').innerHTML = data.電話;
+        document.getElementById('phone0').value = data.電話;
         if (data.網址 != 0) {
             document.getElementById('map_recommend_a').href = data.網址;
             document.getElementById('map_recommend_a').target = "_blank";
+            document.getElementById('url0').value = data.網址;
+        } else {
+            document.getElementById('url0').value = 0;
         }
 
 
@@ -290,8 +296,8 @@ function show_option(i) {
 //----發起動態---------
 function post_enter(i) { //發起動態 確定
     var id = 'post' + i;
-    var eatTime_id='eatTime'+i;
-    var eatTime=document.getElementById(eatTime_id).value;
+    var eatTime_id = 'eatTime' + i;
+    var eatTime = document.getElementById(eatTime_id).value;
     var content = document.getElementById(id).value;  //取得動態內容
     var name_id = 'name' + i;
     var name = document.getElementById(name_id).value;
@@ -299,9 +305,9 @@ function post_enter(i) { //發起動態 確定
     var address = document.getElementById(address_id).value;
     var phone_id = 'phone' + i;
     var phone = document.getElementById(phone_id).value;
-    var date=new Date();
-    var today=date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate();
-    var joinKey=User+date.getTime();
+    var date = new Date();
+    var today = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
+    var joinKey = User + date.getTime();
     let ref = '/動態資料';
     db.ref(ref).push({
         UNo: User,
@@ -309,16 +315,16 @@ function post_enter(i) { //發起動態 確定
         Address: address,
         Phone: phone,
         Date: today,
-        Content:content,
-        EatTime:eatTime,
-        JoinKey:joinKey
+        Content: content,
+        EatTime: eatTime,
+        JoinKey: joinKey
     });
     setTimeout(() => {
-    document.getElementById(id).value='';
-    document.getElementById(eatTime_id).value=''
-    document.getElementById(id).placeholder="動態發佈成功!!";
+        document.getElementById(id).value = '';
+        document.getElementById(eatTime_id).value = ''
+        document.getElementById(id).placeholder = today + "動態發佈成功!!";
     }, 0);
-    
+
 
 
 }
@@ -337,20 +343,23 @@ function comment_enter(i) {
     var name = document.getElementById(name_id).value;
     var address_id = 'address' + i;
     var address = document.getElementById(address_id).value;
-    var date=new Date();
-    var today=date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate();
+    var date = new Date();
+    var today = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
     var ref = '/評論區資料';
     db.ref(ref).push({
         UNo: User,
         Name: name,
         Address: address,
         Date: today,
-        Discon:content
-       
+        Discon: content
+
     });
-    console.log(User+'已評論成功! 日期:'+today);
-    document.getElementById(id).value='';
-    document.getElementById(id).placeholder="評論成功!";
+    console.log(User + '已評論成功! 日期:' + today);
+    setTimeout(() => {
+        document.getElementById(id).value = '';
+        document.getElementById(id).placeholder = today + "評論成功!";
+    }, timeout);
+
 }
 function opt1(i) {
     var id = 'comment' + i;

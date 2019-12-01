@@ -186,8 +186,8 @@ function creat_list1(data) {
     <div class="postArea" id="postArea'+ n + '">\
         <div class="postInput">\
             <input type="text" class="eatTimeTerm"  placeholder="請輸入飯局時間" id="eatTime'+ n + '"/>\
-            <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="post'+ n + '"></textarea>\
             <img src="img/pic.png" alt="">\
+            <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="post'+ n + '"></textarea>\
         </div>\
         <div class="btn2">\
             <button onclick="post_enter(\''+ n + '\')">確定</button>\
@@ -306,11 +306,12 @@ function open_info_div(data) { //infowindow點擊後
         document.getElementById('info_detail').style.display = "block";
         console.log('收到data' + data.restaurant);
         document.getElementById('restaurant').innerHTML = data.restaurant;
+        document.getElementById('name0').value = data.restaurant;
         document.getElementById('r_address').innerHTML = data.address;
+        document.getElementById('address0').value = data.address;
         document.getElementById('r_tel').innerHTML = data.phone;
-        $('#info_detail').append('<input type="hidden" id="name'+ n + '" value="' + data.restaurant + '">\
-        <input type="hidden" id="address'+ n + '" value="' + data.address + '">\
-        <input type="hidden" id="phone'+ n + '" value="' + data.phone + '">');
+        document.getElementById('phone0').value = data.phone;
+        
 
     })
 
@@ -348,7 +349,7 @@ function post_enter(i) { //發起動態 確定
     setTimeout(() => {
     document.getElementById(id).value='';
     document.getElementById(eatTime_id).value=''
-    document.getElementById(id).placeholder="動態發佈成功!!";
+    document.getElementById(id).placeholder=today+"動態發佈成功!!";
     }, 0);
     
 
@@ -381,6 +382,8 @@ function comment_enter(i) {
        
     });
     console.log(User+'已評論成功! 日期:'+today);
+    document.getElementById(id).value=''
+    document.getElementById(id).placeholder=today+"評論成功!!"
 
 }
 function opt1(i) {
