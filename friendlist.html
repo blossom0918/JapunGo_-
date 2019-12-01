@@ -144,7 +144,8 @@
             var str='';
             var MyID=getCookie('ID');
             var UserName=document.getElementById('UserName');
-            var addIcon=document.querySelector('.addIcon')
+            var addIcon=document.querySelector('.addIcon');
+            var allimg=[];
             // var image2=document.getElementById('image2');
             frienddata.once('value',function(friendsnapshot){
                 memberdata.once('value',function(membersnapshot){
@@ -154,6 +155,8 @@
                     if(friendInf[i]["ANo"]==MyID&&friendInf[i]["Status"]==true){
                             for(var j in memberInf){
                             if(friendInf[i]["SNo"]==memberInf[j]["ID"]){
+                                allimg.push(memberInf[j]["ID"]);
+                                console.log(allimg);
                                 
                                 str+='<div class="info">';
                                 str+='<img src="img/pic.png" class="addIcon" id="img'+memberInf[j]["ID"]+'">';
@@ -167,9 +170,11 @@
                     }else if(friendInf[i]["SNo"]==MyID&&friendInf[i]["Status"]==true){
                         for(var j in memberInf){
                             if(friendInf[i]["ANo"]==memberInf[j]["ID"]){
+                                allimg.push(memberInf[j]["ID"]);
+                                console.log(allimg);
                                 
                                     str+='<div class="info">';
-                                    str+='<img src="img/pic.png" class="addIcon" id="imag'+memberInf[j]["ID"]+'">';
+                                    str+='<img src="img/pic.png" class="addIcon" id="img'+memberInf[j]["ID"]+'">';
                                     str+='<h3 class="UserName">'+memberInf[j]["Name"]+'</h3>';
                                     str+='<button onclick=foodlist("'+j+'")>'+"查看美食清單"+'</button>';
                                     str+='<button onclick=delfrined("'+i+'")>'+"刪除好友"+'</button></div>';
@@ -178,8 +183,15 @@
                     }
                 }   
                 list.innerHTML=str;
+                setTimeout(() => {
+                    for(i in allimg){
+                        getimg(allimg[i]);
+                    }
+                }, 0);
             });
         });
+            
+            
         });
 function getCookie(name) {
             var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
@@ -190,6 +202,17 @@ function getCookie(name) {
         else
             return null;
 }
+
+function getimg(id){
+    var img_id='img'+id;
+    var storageRef=firebase.storage().ref();
+    var img_ref='user/'+id;
+    var pathReference = storageRef.child(img_ref);
+    pathReference.getDownloadURL().then(function(url) {    
+        document.getElementById(img_id).src=url;          
+    });
+}
+
 async function callimage(UID){
     var storage=firebase.storage();
     var storageRef=firebase.storage().ref();
