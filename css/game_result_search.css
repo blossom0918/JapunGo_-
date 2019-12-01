@@ -350,6 +350,22 @@ table {
     margin-left: 20px;
   }
 
+  .eatTimeTerm{
+    width: 280px;
+    height: 30px;
+    float: left;
+    display: table-cell;
+    vertical-align: middle;
+    background-color: aliceblue;  
+    border: 0.5px solid rgb(208, 232, 253);
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    color: dimgray;
+    margin-left: 40px;
+  }
+
   .postTerm{
     width: 280px;
     min-height: 130px;

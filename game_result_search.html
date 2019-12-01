@@ -6,13 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/game_result_search.css">
   <title>結果搜尋</title>
-   <!--firebase核心js-->
-<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
-<!--選擇使用realtime database功能-->
-<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyNHGK5W-UIZrhPqLa2POPnisX6tue7rw&libraries=places" ></script>
-<script defer type="text/javascript" src="js/game_result_search.js"></script>
-<script defer type="text/javascript" src="js/contact_us.js"></script>
+    <!--firebase核心js-->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <!--選擇使用realtime database功能-->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyNHGK5W-UIZrhPqLa2POPnisX6tue7rw&libraries=places" ></script>
+    <script defer type="text/javascript" src="js/game_result_search.js"></script>
+    <script defer type="text/javascript" src="js/contact_us.js"></script>
 </head>
 <body>
     <div class="wrap">
@@ -65,15 +65,13 @@
                         <button id="post">發起動態</button>
                         <button id="comment">我要評論</button>
                         <button>加入清單／自清單移除</button>
-                        <!-- 已在清單內顯示移除，尚未加入顯示加入 -->
                     </div>
         
                     <div class="postArea">
                         <div class="postInput">
-                            <!-- 新增飯局時間 -->
-                            <input type="text" placeholder="請輸入飯局時間" />
-                            <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>
+                            <input type="text" class="eatTimeTerm" placeholder="請輸入飯局時間"/>
                             <img src="img/pic.png" alt="">
+                            <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>                   
                         </div>
                         <div class="btn2">
                             <button>確定</button>
@@ -152,10 +150,9 @@
                     
                 <div class="postArea_map">
                     <div class="postInput_map">
-                        <!-- 新增飯局時間 -->
-                        <input type="text" placeholder="請輸入飯局時間" />
-                        <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>
+                        <input type="text" class="eatTimeTerm" placeholder="請輸入飯局時間"/>
                         <img src="img/pic.png" alt="">
+                        <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>        
                     </div>
                         <div class="btn2_map">
                             <button>確定</button>
