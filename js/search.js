@@ -19,7 +19,7 @@ var currentLocation;
 var mylocation;
 var marker_count = [];
 var list_str = "";
-var User=getCookie('ID');
+var User = getCookie('ID');
 //var User = 'opop';  //為方便更改功能先設為opop
 function getCookie(name) {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
@@ -119,11 +119,13 @@ function initMap() {
 
 function callback(results, status) {
     var resultCount = 0;
-    var clear = '<div style="clear:both;"></div>'
+    
+    var check_id = [];
+    var check_name = [];
     if (status == google.maps.places.PlacesServiceStatus.OK) {
+
         for (var i = 0; i < results.length; i++) {
             if (google.maps.geometry.spherical.computeDistanceBetween(results[i].geometry.location, mylocation) < 3000) {
-                // console.log(results[i]);
                 for (n in results[i].types) {
                     if (results[i].types[n] == 'restaurant') {
 
@@ -137,7 +139,9 @@ function callback(results, status) {
                         } else {
                             service.getDetails(request2, callback2);
                         }
-
+                        //setTimeout(check_favorite(results[i].name,results[i].id),0);
+                        check_id.push(results[i].id);
+                        check_name.push(results[i].name);
 
                         resultCount++;
 
@@ -147,11 +151,36 @@ function callback(results, status) {
             }
         }
         if (resultCount == 0) {
-            document.getElementById('list').innerHTML='<h2 class="inputItem" >範圍裡找不到符合餐廳</h2>';
+            document.getElementById('list').innerHTML = '<h2 class="inputItem" >範圍裡找不到符合餐廳</h2>';
         }
 
     }
+    setTimeout(() => {
+        for (i in check_name) {
+            check_favorite(check_name[i], check_id[i]);
+        }
+    }, 2000);
 }
+
+
+function check_favorite(name, id) {
+    console.log('user' + User);
+    var ref = '/美食清單資料/' + User;
+    db.ref(ref).once('value', function (snapshot) {
+        var mydata = snapshot.val()
+        var f_id = 'favoriten' + id;
+        for (i in mydata) {
+            if (mydata[i].Name == name) {
+                console.log(mydata[i].Name);
+                console.log(f_id);
+                document.getElementById(f_id).innerHTML = '自清單移除';
+                document.getElementById(f_id).setAttribute("onclick", "javascript: favorite_delete('n" + id + "');");
+            }
+        }
+    })
+}
+
+
 
 function callback2(place, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -311,7 +340,7 @@ function open_info_div(data) { //infowindow點擊後
         document.getElementById('address0').value = data.address;
         document.getElementById('r_tel').innerHTML = data.phone;
         document.getElementById('phone0').value = data.phone;
-        
+
 
     })
 
@@ -323,8 +352,8 @@ function open_info_div(data) { //infowindow點擊後
 //----發起動態---------
 function post_enter(i) { //發起動態 確定
     var id = 'post' + i;
-    var eatTime_id='eatTime'+i;
-    var eatTime=document.getElementById(eatTime_id).value;
+    var eatTime_id = 'eatTime' + i;
+    var eatTime = document.getElementById(eatTime_id).value;
     var content = document.getElementById(id).value;  //取得動態內容
     var name_id = 'name' + i;
     var name = document.getElementById(name_id).value;
@@ -332,9 +361,9 @@ function post_enter(i) { //發起動態 確定
     var address = document.getElementById(address_id).value;
     var phone_id = 'phone' + i;
     var phone = document.getElementById(phone_id).value;
-    var date=new Date();
-    var today=date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate();
-    var joinKey=User+date.getTime();
+    var date = new Date();
+    var today = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
+    var joinKey = User + date.getTime();
     let ref = '/動態資料';
     db.ref(ref).push({
         UNo: User,
@@ -342,16 +371,16 @@ function post_enter(i) { //發起動態 確定
         Address: address,
         Phone: phone,
         Date: today,
-        Content:content,
-        EatTime:eatTime,
-        JoinKey:joinKey
+        Content: content,
+        EatTime: eatTime,
+        JoinKey: joinKey
     });
     setTimeout(() => {
-    document.getElementById(id).value='';
-    document.getElementById(eatTime_id).value=''
-    document.getElementById(id).placeholder=today+"動態發佈成功!!";
+        document.getElementById(id).value = '';
+        document.getElementById(eatTime_id).value = ''
+        document.getElementById(id).placeholder = today + "動態發佈成功!!";
     }, 0);
-    
+
 
 
 }
@@ -370,20 +399,20 @@ function comment_enter(i) {
     var name = document.getElementById(name_id).value;
     var address_id = 'address' + i;
     var address = document.getElementById(address_id).value;
-    var date=new Date();
-    var today=date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate();
+    var date = new Date();
+    var today = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
     var ref = '/評論區資料';
     db.ref(ref).push({
         UNo: User,
         Name: name,
         Address: address,
         Date: today,
-        Discon:content
-       
+        Discon: content
+
     });
-    console.log(User+'已評論成功! 日期:'+today);
-    document.getElementById(id).value=''
-    document.getElementById(id).placeholder=today+"評論成功!!"
+    console.log(User + '已評論成功! 日期:' + today);
+    document.getElementById(id).value = ''
+    document.getElementById(id).placeholder = today + "評論成功!!"
 
 }
 function opt1(i) {
@@ -438,14 +467,14 @@ function favorite(i) {
         Name: name,
         Address: address,
         Phone: phone,
-        Url:0
+        Url: 0
     });
     console.log('加入清單ㄌ');
 
     //---將按鈕改成自清單移除-----
     setTimeout(() => {
-        document.getElementById(favorite).innerHTML='自清單移除';
-        document.getElementById(favorite).setAttribute("onclick","javascript: favorite_delete('"+i+"');" );
+        document.getElementById(favorite).innerHTML = '自清單移除';
+        document.getElementById(favorite).setAttribute("onclick", "javascript: favorite_delete('" + i + "');");
     }, 0);
 }
 function favorite_delete(i) {
@@ -454,18 +483,18 @@ function favorite_delete(i) {
     var name = document.getElementById(name_id).value;
     var address_id = 'address' + i;
     var address = document.getElementById(address_id).value;
-    var user_ref = '/美食清單資料/'+User;
+    var user_ref = '/美食清單資料/' + User;
     db.ref(user_ref).once('value', function (snapshot) {
-        var data=snapshot.val();
-        for (i in data){
-            if (data[i].Name==name && data[i].Address==address){
+        var data = snapshot.val();
+        for (i in data) {
+            if (data[i].Name == name && data[i].Address == address) {
                 db.ref(user_ref).child(i).remove();
             }
         }
     })
     setTimeout(() => {
-        document.getElementById(favorite).setAttribute("onclick","javascript: favorite('"+i+"');" );
-        document.getElementById(favorite).innerHTML='加入清單';
+        document.getElementById(favorite).setAttribute("onclick", "javascript: favorite('" + i + "');");
+        document.getElementById(favorite).innerHTML = '加入清單';
     }, 0);
-    
+
 }
