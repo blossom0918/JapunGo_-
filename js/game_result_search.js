@@ -20,8 +20,8 @@ function getCookie(name) {
     else
         return null;
 }
-var User = getCookie('ID');
-//var User = 'opop';  //為方便更改功能先設為opop
+//var User = getCookie('ID');
+var User = 'opop';  //為方便更改功能先設為opop
 var food = getCookie('food');
 document.getElementById('q_answer').innerHTML = food;
 

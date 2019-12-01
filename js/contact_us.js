@@ -7,11 +7,17 @@ var submit=document.getElementById('submitBtn');
 
 
 submit.addEventListener('click',function(){
-    qRef.push({
-        'email':email.value,
-        'question':question.value
-    })
-    alert('回報成功');
-    email.value='';
-    question.value='';
+    if(email.value==''||question.value==""){
+        alert('問題內容&信箱未填完喔!');
+    }else{
+        qRef.push({
+            'email':email.value,
+            'question':question.value
+        })
+        alert('回報成功');
+        setTimeout(() => {
+            email.value='';
+        question.value='';
+        }, 0);
+    } 
 })
