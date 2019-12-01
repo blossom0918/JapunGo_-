@@ -170,8 +170,11 @@
                 storageRef.put(myfile);
               }
               //---------------------------------
-              alert('註冊成功，請登入');
-              setTimeout("location.href='login.html'",300);
+              setTimeout(() => {
+                alert('註冊成功，請登入');
+              setTimeout("location.href='login.html'",1000);
+              }, 500);
+              
 
 
             }
