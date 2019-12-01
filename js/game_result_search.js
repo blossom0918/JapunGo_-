@@ -188,7 +188,7 @@ db.ref(ref).once('value', function (snapshot) {
             </div>\
             <div class="postArea" id="postArea'+ n + '">\
                 <div class="postInput">\
-                    <input type="text"   placeholder="請輸入飯局時間" id="Date_time'+ n + '"/>\
+                    <input type="text" class="eatTimeTerm"  placeholder="請輸入飯局時間" id="eatTime'+ n + '"/>\
                     <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="post'+ n + '"></textarea>\
                     <img src="img/pic.png" alt="">\
                 </div>\
@@ -290,8 +290,8 @@ function show_option(i) {
 //----發起動態---------
 function post_enter(i) { //發起動態 確定
     var id = 'post' + i;
-    var date_time_id='Date_time'+i;
-    var date_time=document.getElementById(date_time_id).value;
+    var eatTime_id='eatTime'+i;
+    var eatTime=document.getElementById(eatTime_id).value;
     var content = document.getElementById(id).value;  //取得動態內容
     var name_id = 'name' + i;
     var name = document.getElementById(name_id).value;
@@ -299,8 +299,26 @@ function post_enter(i) { //發起動態 確定
     var address = document.getElementById(address_id).value;
     var phone_id = 'phone' + i;
     var phone = document.getElementById(phone_id).value;
-    console.log('user' + User + '輸入的內容是:'+date_time+'!!!!' + content);
-    let ref = '/動態資料/' + User;
+    var date=new Date();
+    var today=date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate();
+    var joinKey=User+date.getTime();
+    let ref = '/動態資料';
+    db.ref(ref).push({
+        UNo: User,
+        Name: name,
+        Address: address,
+        Phone: phone,
+        Date: today,
+        Content:content,
+        EatTime:eatTime,
+        JoinKey:joinKey
+    });
+    setTimeout(() => {
+    document.getElementById(id).value='';
+    document.getElementById(eatTime_id).value=''
+    document.getElementById(id).placeholder="動態發佈成功!!";
+    }, 0);
+    
 
 
 }
