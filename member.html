@@ -179,16 +179,16 @@
         }
       });
             if(location.hash == "#1"){
-                $('.friendRequest').hide();
+                $('.friendReqList').hide();
                 $('.comment').hide();
                 $('.reviseInfo').show();
             }else if(location.hash == "#2"){
                 $('.reviseInfo').hide();
                 $('.comment').hide();
-                $('.friendRequest').show();
+                $('.friendReqList').show();
             }else if(location.hash == "#3"){
                 $('.reviseInfo').hide();
-                $('.friendRequest').hide();
+                $('.friendReqList').hide();
                 $('.comment').show();
             }else if(location.hash == "#4"){
                 //登出
@@ -200,16 +200,16 @@
             $('#friendRequest, #friendRequestBtn').click(function() {
                 $('.reviseInfo').hide();
                 $('.comment').hide();
-                $('.friendRequest').show();
+                $('.friendReqList').show();
             });
             $('#reviseInfo, #reviseInfoBtn').click(function() {
-                $('.friendRequest').hide();
+                $('.friendReqList').hide();
                 $('.comment').hide();
                 $('.reviseInfo').show();
             });
             $('#comment, #commentBtn').click(function(){
                 $('.reviseInfo').hide();
-                $('.friendRequest').hide();
+                $('.friendReqList').hide();
                 $('.comment').show();
             });
             $('#logout, #logoutBtn').click(function(){
@@ -315,6 +315,7 @@
     var frienddata=firebase.database().ref('/好友名單資料/');
     var memberdata=firebase.database().ref('/會員資料/');
     var str='';
+    var allimg=[];
     var FriendReqList=document.querySelector('.FriendRequest');
     frienddata.once('value',function(friendsnapshot){
         memberdata.once('value',function(membersnapshot){
@@ -326,9 +327,10 @@
                 console.log("1");
                 for(var k in memberInf){
                     if(memberInf[k]["ID"]==friendInf[j]["SNo"]){
+                        allimg.push(memberInf[k]["ID"]);
                         count++;
                         str+='<div class="info">';
-                        str+='<img src="img/pic.png" id="friendphoto" class="addIcon">';
+                        str+='<img src="img/pic.png" id="friendphoto'+memberInf[k]["ID"]+'" class="addIcon">';
                         str+='<h3 id="friendName">'+memberInf[k]["Name"]+'</h3>';
                         str+='<button onclick=Reject("'+j+'")>'+"拒絕"+'</button>';
                         str+='<button onclick=Accept("'+j+'")>'+"接受"+'</button></div>';
@@ -345,8 +347,25 @@
         }
          
          FriendReqList.innerHTML=str;
+         setTimeout(() => {
+                    for(i in allimg){
+                        getimg(allimg[i]);
+                    }
+                }, 0);
         });
     });
+
+//---------頭貼----------
+function getimg(id){
+    var img_id='friendphoto'+id;
+    var storageRef=firebase.storage().ref();
+    var img_ref='user/'+id;
+    var pathReference = storageRef.child(img_ref);
+    pathReference.getDownloadURL().then(function(url) {    
+        document.getElementById(img_id).src=url;          
+    });
+}
+
 //--------------------------------------------------------------店家評論
     var storedata=firebase.database().ref('/店家資料/');
     var commentdata=firebase.database().ref('/評論區資料/');
