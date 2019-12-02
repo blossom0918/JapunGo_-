@@ -19,8 +19,8 @@ var currentLocation;
 var mylocation;
 var marker_count = [];
 var list_str = "";
-var User = getCookie('ID');
-//var User = 'opop';  //為方便更改功能先設為opop
+//var User = getCookie('ID');
+var User = 'opop';  //為方便更改功能先設為opop
 function getCookie(name) {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
     if (arr = document.cookie.match(reg))
@@ -119,7 +119,7 @@ function initMap() {
 
 function callback(results, status) {
     var resultCount = 0;
-    
+
     var check_id = [];
     var check_name = [];
     if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -155,29 +155,24 @@ function callback(results, status) {
         }
 
     }
-    setTimeout(() => {
-        for (i in check_name) {
-            check_favorite(check_name[i], check_id[i]);
-        }
-    }, 2000);
+
 }
 
 
-function check_favorite(name, id) {
-    console.log('user' + User);
+function check_favorite(name) {
+    //console.log('user' + User);
     var ref = '/美食清單資料/' + User;
     db.ref(ref).once('value', function (snapshot) {
-        var mydata = snapshot.val()
-        var f_id = 'favoriten' + id;
-        for (i in mydata) {
-            if (mydata[i].Name == name) {
-                console.log(mydata[i].Name);
-                console.log(f_id);
-                document.getElementById(f_id).innerHTML = '自清單移除';
-                document.getElementById(f_id).setAttribute("onclick", "javascript: favorite_delete('n" + id + "');");
+        var data = snapshot.val();
+        for (i in data) {
+            if (data[i].Name == name) {
+                console.log(data[i].Name);
+                n += 1;
             }
         }
     })
+    console.log(n);
+
 }
 
 
@@ -185,13 +180,95 @@ function check_favorite(name, id) {
 function callback2(place, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         createMarker(place);
-        creat_list1(place);
-
+        var ref = '/美食清單資料/' + User;
+        db.ref(ref).once('value', function (snapshot) {
+            var n=0;
+            var data = snapshot.val();
+            for (i in data) {
+                if (data[i].Name == place.name) {
+                    n+=1;
+                }
+            }
+            if(n!=0){
+                creat_list1(place);  //已加入清單的按鈕
+            }else{
+                creat_list2(place);
+            }
+        })
     }
 }
 
 
 function creat_list1(data) {
+    var n = 'n' + data.id;
+    var str = '<div class="info">\
+    <input type="hidden" id="name'+ n + '" value="' + data.name + '">\
+    <input type="hidden" id="address'+ n + '" value="' + data.formatted_address + '">\
+    <input type="hidden" id="phone'+ n + '" value="' + data.formatted_phone_number + '">\
+    <h3>'+ data.name + '</h3>\
+    <img src="img/pin.png" class="addIcon">\
+    <p class="address">'+ data.formatted_address + '</p>\
+    <img src="img/tel.png" class="telIcon">\
+    <p class="tel">'+ data.formatted_phone_number + '</p>\
+    <div class="btn0">\
+        <button class="showAllComments" onclick="showallcomment_list(\''+ n + '\')"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>\
+        <a class="recommend" id="recommend_a'+ n + '"><img src="img/best.png" class="bestIcon">查看推薦</a>\
+    </div>\
+    <div class="btn">\
+        <button id="post" onclick="show_post(\''+ n + '\')">發起動態</button>\
+        <button id="comment" onclick="my_comment(\''+ n + '\')">我要評論</button>\
+        <button onclick="favorite_delete(\''+ n + '\')" id="favorite' + n + '">自清單移除</button>\
+        <!-- 已在清單內顯示移除，尚未加入顯示加入 -->\
+    </div>\
+    <div class="postArea" id="postArea'+ n + '">\
+        <div class="postInput">\
+            <input type="text" class="eatTimeTerm"  placeholder="請輸入飯局時間" id="eatTime'+ n + '"/>\
+            <img src="img/pic.png" alt="">\
+            <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="post'+ n + '"></textarea>\
+        </div>\
+        <div class="btn2">\
+            <button onclick="post_enter(\''+ n + '\')">確定</button>\
+            <button onclick="post_cancel(\''+ n + '\')">取消</button>\
+        </div>\
+    </div>\
+    <div class="commentArea" id="commentArea'+ n + '">\
+        <div class="commentInput">\
+            <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容" id="comment'+ n + '"></textarea>\
+            <img src="img/pic.png" alt="">\
+        </div>\
+        <div class="btn3">\
+            <button id="option" onclick="show_option(\''+ n + '\')">評論選項</button>\
+            <button onclick="comment_enter(\''+ n + '\')">我要評論</button>\
+        </div>\
+        <div class="btnOption" id="btnOption'+ n + '">\
+            <button onclick="opt1(\''+ n + '\')">環境乾淨</button>\
+            <button onclick="opt2(\''+ n + '\')">環境骯髒</button>\
+            <button onclick="opt3(\''+ n + '\')">餐點美味</button>\
+            <button onclick="opt4(\''+ n + '\')">餐點糟糕</button>\
+            <button onclick="opt5(\''+ n + '\')">親切店家</button>\
+            <button onclick="opt6(\''+ n + '\')">服務極差</button>\
+        </div>\
+    </div>\
+    <div class="allComments" id="allComments'+ n + '">\
+        <div class="comments">\
+            <img src="img/pic.png" alt="">\
+            <div class="commentContent">\
+                <p>內容</p>\
+            </div>\
+        </div>\
+    </div>\
+</div>';
+
+    $("#list").append(str);
+    setTimeout(() => {
+        //讓所有DIV一開始都收起來
+        $('.commentArea').hide();
+        $('.postArea').hide();
+        $('.allComments').hide();
+        $('.btnOption').hide();
+    }, 0);
+}
+function creat_list2(data) {
     var n = 'n' + data.id;
     var str = '<div class="info">\
     <input type="hidden" id="name'+ n + '" value="' + data.name + '">\
@@ -260,6 +337,7 @@ function creat_list1(data) {
         $('.btnOption').hide();
     }, 0);
 }
+
 
 
 function createMarker(data) {
@@ -341,6 +419,20 @@ function open_info_div(data) { //infowindow點擊後
         document.getElementById('r_tel').innerHTML = data.phone;
         document.getElementById('phone0').value = data.phone;
 
+        var ref = '/美食清單資料/' + User;
+        db.ref(ref).once('value', function (snapshot) {
+            var n=0;
+            var mydata = snapshot.val();
+            for (i in mydata) {
+                if (mydata[i].Name == data.restaurant) {
+                    n+=1;
+                }
+            }
+            if(n!=0){
+                document.getElementById('favorite0').innerHTML = '自清單移除';
+            document.getElementById('favorite0').setAttribute("onclick", "javascript: favorite_delete(0);");  //已加入清單的按鈕
+            }
+        })
 
     })
 
