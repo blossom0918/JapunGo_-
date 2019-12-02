@@ -153,6 +153,23 @@ function test(data) { //infowindow點擊後
         } else {
             document.getElementById('url0').value = 0;
         }
+        var ref = '/美食清單資料/' + User;
+        db.ref(ref).once('value', function (snapshot) {
+            var n = 0;
+            var mydata = snapshot.val();
+            for (i in mydata) {
+                if (mydata[i].Name == data.店名) {
+                    n += 1;
+                }
+            }
+            if (n != 0) {
+                document.getElementById('favorite0').innerHTML = '自清單移除';
+                document.getElementById('favorite0').setAttribute("onclick", "javascript: favorite_delete(0);");  //已加入清單的按鈕
+            }else{
+                document.getElementById('favorite0').innerHTML = '加入清單';
+                document.getElementById('favorite0').setAttribute("onclick", "javascript: favorite(0);");
+            }
+        })
 
 
     })
@@ -163,10 +180,6 @@ function test(data) { //infowindow點擊後
 var ref = '/店家資料/' + food;
 db.ref(ref).once('value', function (snapshot) {
     let data = snapshot.val();
-    let list_content = '';
-    for (i in data) {
-        console.log(data[i].店名);
-    }
     var n = 1;
     var list = '';
     for (i in data) {
@@ -239,6 +252,22 @@ db.ref(ref).once('value', function (snapshot) {
     document.getElementById('list').innerHTML = list;
 
     setTimeout(() => {
+        //判斷有沒有加入美食清單
+        var ref = '/美食清單資料/' + User;
+        db.ref(ref).once('value', function (snapshot) {
+            var n = 1;
+            var mydata = snapshot.val();
+            for (j in data) {
+                for(i in mydata){
+                    if (mydata[i].Name == data[j].店名) {
+                        var f_id='favorite'+n;
+                        document.getElementById(f_id).innerHTML = '自清單移除';
+                        document.getElementById(f_id).setAttribute("onclick", "javascript: favorite_delete("+n+");");  //已加入清單的按鈕  
+                    }
+                }
+                n+=1;
+            }
+        })
         //判斷有沒有網址
         //判斷有沒有加清單也要寫在這裡
         var m = 1;

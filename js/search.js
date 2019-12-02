@@ -19,8 +19,8 @@ var currentLocation;
 var mylocation;
 var marker_count = [];
 var list_str = "";
-//var User = getCookie('ID');
-var User = 'opop';  //為方便更改功能先設為opop
+var User = getCookie('ID');
+//var User = 'opop';  //為方便更改功能先設為opop
 function getCookie(name) {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
     if (arr = document.cookie.match(reg))
@@ -120,8 +120,6 @@ function initMap() {
 function callback(results, status) {
     var resultCount = 0;
 
-    var check_id = [];
-    var check_name = [];
     if (status == google.maps.places.PlacesServiceStatus.OK) {
 
         for (var i = 0; i < results.length; i++) {
@@ -139,9 +137,6 @@ function callback(results, status) {
                         } else {
                             service.getDetails(request2, callback2);
                         }
-                        //setTimeout(check_favorite(results[i].name,results[i].id),0);
-                        check_id.push(results[i].id);
-                        check_name.push(results[i].name);
 
                         resultCount++;
 
@@ -159,39 +154,21 @@ function callback(results, status) {
 }
 
 
-function check_favorite(name) {
-    //console.log('user' + User);
-    var ref = '/美食清單資料/' + User;
-    db.ref(ref).once('value', function (snapshot) {
-        var data = snapshot.val();
-        for (i in data) {
-            if (data[i].Name == name) {
-                console.log(data[i].Name);
-                n += 1;
-            }
-        }
-    })
-    console.log(n);
-
-}
-
-
-
 function callback2(place, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         createMarker(place);
         var ref = '/美食清單資料/' + User;
         db.ref(ref).once('value', function (snapshot) {
-            var n=0;
-            var data = snapshot.val();
-            for (i in data) {
-                if (data[i].Name == place.name) {
-                    n+=1;
+            var n = 0;
+            var mydata = snapshot.val();
+            for (i in mydata) {
+                if (mydata[i].Name == place.name) {
+                    n += 1;
                 }
             }
-            if(n!=0){
+            if (n != 0) {
                 creat_list1(place);  //已加入清單的按鈕
-            }else{
+            } else {
                 creat_list2(place);
             }
         })
@@ -421,16 +398,19 @@ function open_info_div(data) { //infowindow點擊後
 
         var ref = '/美食清單資料/' + User;
         db.ref(ref).once('value', function (snapshot) {
-            var n=0;
+            var n = 0;
             var mydata = snapshot.val();
             for (i in mydata) {
                 if (mydata[i].Name == data.restaurant) {
-                    n+=1;
+                    n += 1;
                 }
             }
-            if(n!=0){
+            if (n != 0) {
                 document.getElementById('favorite0').innerHTML = '自清單移除';
-            document.getElementById('favorite0').setAttribute("onclick", "javascript: favorite_delete(0);");  //已加入清單的按鈕
+                document.getElementById('favorite0').setAttribute("onclick", "javascript: favorite_delete(0);");  //已加入清單的按鈕
+            }else{
+                document.getElementById('favorite0').innerHTML = '加入清單';
+                document.getElementById('favorite0').setAttribute("onclick", "javascript: favorite(0);");
             }
         })
 
