@@ -299,6 +299,7 @@
             var list=document.querySelector('.list');
             var clear='<div style="clear:both;"></div>';
             var count=1;
+            var flag2=0;
             fooddata.once('value',function(snapshot){
                 var foodInf=snapshot.val();
                 for(var i in foodInf){
@@ -310,23 +311,34 @@
                             str+='<img src="img/tel.png" class="telIcon"><p class="tel">'+foodInf[i][j]["Phone"]+'</p>';
                             str+='<div class="btn0"><button class=showAllComments id="showAllComments"><img src="img/show_comment.png" class=commentIcon>'+"顯示評論區"+'</button>';
                             str+='<a class="recommend" href="'+foodInf[i][j]["Url"]+'"><img src="img/best.png" class=bestIcon>'+"查看推薦"+'</a></div>';
-                            str+='<div class="btn"><button onclick=delfoodlist("'+i+','+j+'") id="delete">'+"自清單移除"+'</button>';
-                            str+='<button onclick=declare("'+j+'")>'+"發起動態"+'</button>';
-                            str+='<button onclick=comment("'+j+'") id="comment"> '+"我要評論"+'</button></div></div>';
-                            str+='<div class="commentArea" id="commentArea'+j+'" style="display:none">';
-                            str+='<div class="commentInput"><textarea id="commentTerm'+j+'" style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea><img src="img/pic.png" alt=""></div>';
-                            str+='<div class="btn3" id="btn3'+j+'"><button id="option'+j+'">評論選項</button><button id="commentBtn'+j+'">發表評論</button></div>';
-                            str+='<div class="btnOption" id="btnOption'+j+'"><button onclick=opt1("'+j+'")>環境乾淨</button><button onclick=opt2("'+j+'") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("'+j+'")>餐點美味</button><button value="餐點糟糕" onclick=opt4("'+j+'")>餐點糟糕</button><button value="親切店家" onclick=opt5("'+j+'")>親切店家</button><button value="服務極差" onclick=opt6("'+j+'")> 服務極差</button></div></div>';
+                            str+='<div class="btn"><button onclick=declare("'+j+'") id="post">'+"發起動態"+'</button>';
+                            str+=' ';
+                            str+='<button onclick=comment("'+j+'") id="comment"> '+" 我要評論 "+'</button>';
+                            str+=' ';
+                            str+='<button onclick=delfoodlist("'+i+','+j+'") id="delete">'+"自清單移除"+'</button></div></div>';
                             str+='<div class="postArea" style="display:none" id="postArea'+j+'">\
                                     <div class="postInput">\
-                                    <textarea id="postTerm'+j+'" style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>\
-                                    <img src="img/pic.png" alt="">\
+                                        <input type="text" placeholder="請輸入飯局時間" id="eatTimeTerm'+j+'"/>\
+                                        <textarea id="postTerm'+j+'" style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>\
+                                            <img src="img/pic.png" alt="">\
                                     </div>\
                                     <div class="btn2">\
                                     <button id="sure'+j+'">確定</button>\
                                     <button id="cancel'+j+'">取消</button>\
                                     </div>\
-                                    </div>'
+                                    </div>';                            
+                            str+='<div class="commentArea" id="commentArea'+j+'" style="display:none">';
+                            str+='<div class="commentInput"><textarea id="commentTerm'+j+'" style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea><img src="img/pic.png" alt=""></div>';
+                            str+='<div class="allComments" style="display:none">\
+                                    <img src="img/pic.png" alt="">\
+                                    <ul>\
+                                        <li>"好吃"</li>\
+                                    </ul></div>\
+                                    ';
+                            str+='<div class="btn3" id="btn3'+j+'"><button id="option'+j+'">評論選項</button><button id="commentBtn'+j+'">發表評論</button></div>';
+                            str+='<div class="btnOption" id="btnOption'+j+'"><button onclick=opt1("'+j+'")>環境乾淨</button><button onclick=opt2("'+j+'") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("'+j+'")>餐點美味</button><button value="餐點糟糕" onclick=opt4("'+j+'")>餐點糟糕</button><button value="親切店家" onclick=opt5("'+j+'")>親切店家</button><button value="服務極差" onclick=opt6("'+j+'")> 服務極差</button></div></div>';
+
+
                             count++
                         }
 
@@ -347,70 +359,100 @@
                 var storedata=firebase.database().ref('/店家資料/');
                 storedata.once('value',function(stsnapshot){
                     var stInf=stsnapshot.val();
-                    if(s==search){
                         for(var s in stInf){
-                        
+                            if(s==search){ 
                             for(var s2 in stInf[s]){
                                 for(var f in foodInf){
                                     if(f==ID){
                                         for(var f2 in foodInf[f]){
                                             if(stInf[s][s2]["店名"]==foodInf[f][f2]["Name"]){
 
+
                                                 flag++;
                                                 str+='<div class=info><h3 id="name">'+foodInf[f][f2]["Name"]+'</h3>';
                                                 str+='<img src="img/pin.png" class="addIcon"><p class="address">'+foodInf[f][f2]["Address"]+'</p>';
                                                 str+='<img src="img/tel.png" class="telIcon"><p class="tel">'+foodInf[f][f2]["Phone"]+'</p>';
                                                 str+='<div class="btn0"><button class=showAllComments id="showAllComments"><img src="img/show_comment.png" class=commentIcon>'+"顯示評論區"+'</button>';
                                                 str+='<a class="recommend" href="'+foodInf[f][f2]["Url"]+'"><img src="img/best.png" class=bestIcon>'+"查看推薦"+'</a></div>';
-                                                str+='<div class="btn"><button onclick=delfoodlist("'+f+','+f2+'") id="delete">'+"自清單移除"+'</button>';
-                                                str+='<button>'+"發起動態"+'</button>';
-                                                str+='<button onclick=comment("'+f2+'") id="comment"> '+"我要評論"+'</button></div></div>';
+                                                str+='<div class="btn"><button id="post" onclick=declare("'+f2+'")>'+"發起動態"+'</button>';
+                                                str+=' ';
+                                                str+='<button onclick=comment("'+f2+'") id="comment"> '+" 我要評論 "+'</button>';
+                                                str+=' ';
+                                                str+='<button onclick=delfoodlist("'+f+','+f2+'") id="delete">'+"自清單移除"+'</button></div></div>';
+                                                str+='<div class="postArea" style="display:none" id="postArea'+f2+'">\
+                                                    <div class="postInput">\
+                                                    <input type="text" placeholder="請輸入飯局時間" id="eatTimeTerm'+f2+'"/>\
+                                                    <textarea id="postTerm'+f2+'" style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>\
+                                                    <img src="img/pic.png" alt="">\
+                                                    </div>\
+                                                    <div class="btn2">\
+                                                    <button id="sure'+f2+'">確定</button>\
+                                                    <button id="cancel'+f2+'">取消</button>\
+                                                    </div>\
+                                                    </div>';              
+                                               
                                                 str+='<div class="commentArea" id="commentArea'+f2+'" style="display:none">';
                                                 str+='<div class="commentInput"><textarea id="commentTerm'+f2+'" style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea><img src="img/pic.png" alt=""></div>';
                                                 str+='<div class="btn3" id="btn3'+f2+'"><button id="option'+f2+'">評論選項</button><button id="commentBtn'+f2+'">發表評論</button></div>';
                                                 str+='<div class="btnOption" id="btnOption'+f2+'"><button onclick=opt1("'+f2+'")>環境乾淨</button><button onclick=opt2("'+f2+'") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("'+f2+'")>餐點美味</button><button value="餐點糟糕" onclick=opt4("'+f2+'")>餐點糟糕</button><button value="親切店家" onclick=opt5("'+f2+'")>親切店家</button><button value="服務極差" onclick=opt6("'+f2+'")> 服務極差</button></div></div>';
-                                                            count++
+ 
+                                                            count++;
+                                                            flag2=1;
                                             }
                                         }
                                     }
                                 }
                             }
-                        }
-                        }else{
+                        }else if(flag2==0){
+
                             for(var f in foodInf){
-                                console.log(f);
-                            if(f==ID){
-
+                                if(f==ID){
                                 for(var f2 in foodInf[f]){
-
                                     if(foodInf[f][f2]["Name"]==search){
-                                        
-                                        
                                                 flag++;
                                                 str+='<div class=info><h3 id="name">'+foodInf[f][f2]["Name"]+'</h3>';
                                                 str+='<img src="img/pin.png" class="addIcon"><p class="address">'+foodInf[f][f2]["Address"]+'</p>';
                                                 str+='<img src="img/tel.png" class="telIcon"><p class="tel">'+foodInf[f][f2]["Phone"]+'</p>';
                                                 str+='<div class="btn0"><button class=showAllComments id="showAllComments"><img src="img/show_comment.png" class=commentIcon>'+"顯示評論區"+'</button>';
                                                 str+='<a class="recommend" href="'+foodInf[f][f2]["Url"]+'"><img src="img/best.png" class=bestIcon>'+"查看推薦"+'</a></div>';
-                                                str+='<div class="btn"><button onclick=delfoodlist("'+f+','+f2+'") id="delete">'+"自清單移除"+'</button>';
-                                                str+='<button>'+"發起動態"+'</button>';
-                                                str+='<button onclick=comment("'+f2+'") id="comment"> '+"我要評論"+'</button></div></div>';
+                                                str+='<div class="btn"><button id="post" onclick=declare("'+f2+'")>'+"發起動態"+'</button>';
+                                                str+=' ';
+                                                str+='<button onclick=comment("'+f2+'") id="comment"> '+" 我要評論 "+'</button>';
+                                                str+=' ';
+                                                str+='<button onclick=delfoodlist("'+f+','+f2+'") id="delete">'+"自清單移除"+'</button></div></div>';
+                                                str+='<div class="postArea" style="display:none" id="postArea'+f2+'">\
+                                                    <div class="postInput">\
+                                                    <input type="text" placeholder="請輸入飯局時間" id="eatTimeTerm'+f2+'"/>\
+                                                    <textarea id="postTerm'+f2+'" style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>\
+                                                    <img src="img/pic.png" alt="">\
+                                                    </div>\
+                                                    <div class="btn2">\
+                                                    <button id="sure'+f2+'">確定</button>\
+                                                    <button id="cancel'+f2+'">取消</button>\
+                                                    </div>\
+                                                    </div>';              
+                                               
                                                 str+='<div class="commentArea" id="commentArea'+f2+'" style="display:none">';
                                                 str+='<div class="commentInput"><textarea id="commentTerm'+f2+'" style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea><img src="img/pic.png" alt=""></div>';
                                                 str+='<div class="btn3" id="btn3'+f2+'"><button id="option'+f2+'">評論選項</button><button id="commentBtn'+f2+'">發表評論</button></div>';
-                                                str+='<div class="btnOption" id="btnOption'+f2+'"><button onclick=opt1("'+f2+'")>環境乾淨</button><button onclick=opt2("'+f2+'") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("'+f2+'")>餐點美味</button><button value="餐點糟糕" onclick=opt4("'+f2+'")>餐點糟糕</button><button value="親切店家" onclick=opt5("'+f2+'")>親切店家</button><button value="服務極差" onclick=opt6("'+f2+'")> 服務極差</button></div></div>';
-                                                            count++
+                                                str+='<div class="btnOption" id="btnOption'+f2+'"><button onclick=opt1("'+f2+'")>環境乾淨</button><button onclick=opt2("'+f2+'") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("'+f2+'")>餐點美味</button><button value="餐點糟糕" onclick=opt4("'+f2+'")>餐點糟糕</button><button value="親切店家" onclick=opt5("'+f2+'")>親切店家</button><button value="服務極差" onclick=opt6("'+f2+'")> 服務極差</button></div></div>';    
+                                                            count++;
+                                                            flag2=1;
+
                                     }
                                 }
                                 
                             }
                         }
-                    }
+                        }
+                    
+                }
                     if(flag==0){
                         str+='<h2>'+"查無相關資料"+'</h2>';
                     }
                     list.innerHTML=str;
                 });
+                    flag2=0;
             });
             });
         });
@@ -421,13 +463,20 @@ function declare(i){
     var postTerm='#postTerm'+i;
     var ID=getCookie('ID');
     var Today=new Date();
+    var Today2=+new Date();
+    var newjoin=ID+Today2;
     $(postArea).slideToggle();
     $(sure).on('click',function(){
         var id='postTerm'+i
         var newpost = document.getElementById(id).value;
+        var eatTimeTerm='eatTimeTerm'+i;
+        var neweatTime=document.getElementById(eatTimeTerm).value;
         var postdata=firebase.database().ref('/動態資料/');
-        var fooddata=firebase.database.ref('/美食清單資料/');
-        fooddata.once('value',function(fsnapshot){
+        var fooddata=firebase.database().ref('/美食清單資料/');
+        if(neweatTime==''){
+            alert("請輸入要吃飯的時間");
+        }else{
+            fooddata.once('value',function(fsnapshot){
             var foodInf=fsnapshot.val();
             for(var f in foodInf){
                 for(var f2 in foodInf[f]){
@@ -439,14 +488,23 @@ function declare(i){
                 }
             }
             postdata.push({
+                EatTime:neweatTime,
+                JoinKey:ID+Today2,
                 Address:postAddress,
                 Phone:postPhone,
                 Name:postName,
+                Content:newpost,
                 UNo:ID,
                 PDate:Today.getFullYear()+"/"+(Today.getMonth()+1)+"/"+Today.getDate(),
 
-            })
+            });
+            alert("動態消息已發布");
+            $(postArea).style="display:hide()";
+
         });
+            }
+            
+            firebase.database().ref('/加入飯局資料/"'+newjoin+'/'+"會員一"+'"').set(ID);
 
     });
 
