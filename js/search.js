@@ -230,7 +230,7 @@ function creat_list1(data) {
         <div class="comments">\
             <img src="img/pic.png" alt="">\
             <div class="commentContent">\
-                <p>內容</p>\
+                <p>還沒有人發表評論喔~</p>\
             </div>\
         </div>\
     </div>\
@@ -299,7 +299,7 @@ function creat_list2(data) {
         <div class="comments">\
             <img src="img/pic.png" alt="">\
             <div class="commentContent">\
-                <p>內容</p>\
+                <p>還沒有人發表評論喔~</p>\
             </div>\
         </div>\
     </div>\
