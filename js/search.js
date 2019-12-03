@@ -194,7 +194,6 @@ function creat_list1(data) {
     <p class="tel">'+ data.formatted_phone_number + '</p>\
     <div class="btn0">\
         <button class="showAllComments" onclick="showallcomment_list(\''+ n + '\')"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>\
-        <a class="recommend" id="recommend_a'+ n + '"><img src="img/best.png" class="bestIcon">查看推薦</a>\
     </div>\
     <div class="btn">\
         <button id="post" onclick="show_post(\''+ n + '\')">發起動態</button>\
@@ -305,8 +304,7 @@ function creat_list2(data) {
     <p class="tel">'+ data.formatted_phone_number + '</p>\
     <div class="btn0">\
         <button class="showAllComments" onclick="showallcomment_list(\''+ n + '\')"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>\
-        <a class="recommend" id="recommend_a'+ n + '"><img src="img/best.png" class="bestIcon">查看推薦</a>\
-    </div>\
+        </div>\
     <div class="btn">\
         <button id="post" onclick="show_post(\''+ n + '\')">發起動態</button>\
         <button id="comment" onclick="my_comment(\''+ n + '\')">我要評論</button>\
