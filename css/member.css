@@ -402,7 +402,7 @@ table {
   }
 
   .requestTip{
-    font-size: 36px;
+    font-size: 30px;
     color: dimgray;
     text-align: center;
     padding-top: 50px;
@@ -459,7 +459,7 @@ table {
   }
 
   .commentTip{
-    font-size: 36px;
+    font-size: 30px;
     color: dimgray;
     text-align: center;
     padding-top: 50px;
