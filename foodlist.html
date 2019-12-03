@@ -375,8 +375,11 @@
                         }
                     }
                 }
-                if (flag == 0) {
-                    str += '<h2 class="foodlistTip">' + "查無相關資料" + '</h2>';
+                if(flag==0){
+                    str+='<h2 class="foodlistTip">'+"您目前尚無美食清單資料"+'</h2>>';
+                }             
+                if(count%2==0){
+                    str+=clear;
                 }
 
                 list.innerHTML = str;
