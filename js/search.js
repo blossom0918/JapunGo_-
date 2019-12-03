@@ -19,8 +19,8 @@ var currentLocation;
 var mylocation;
 var marker_count = [];
 var list_str = "";
-var User = getCookie('ID');
-//var User = 'opop';  //為方便更改功能先設為opop
+//var User = getCookie('ID');
+var User = 'opop';  //為方便更改功能先設為opop
 function getCookie(name) {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
     if (arr = document.cookie.match(reg))
@@ -230,7 +230,7 @@ function creat_list1(data) {
         <div class="comments">\
             <img src="img/pic.png" alt="">\
             <div class="commentContent">\
-                <p>內容</p>\
+                <p>還沒有人發表評論喔~</p>\
             </div>\
         </div>\
     </div>\
@@ -299,7 +299,7 @@ function creat_list2(data) {
         <div class="comments">\
             <img src="img/pic.png" alt="">\
             <div class="commentContent">\
-                <p>內容</p>\
+                <p>還沒有人發表評論喔~</p>\
             </div>\
         </div>\
     </div>\
@@ -465,6 +465,7 @@ function post_cancel(i) { //發起動態 取消
 
 //----我要評論---------
 function comment_enter(i) {
+    var allComments = '#allComments' + i;
     var id = 'comment' + i;
     var content = document.getElementById(id).value; //取得評論內容
     var name_id = 'name' + i;
@@ -483,8 +484,23 @@ function comment_enter(i) {
 
     });
     console.log(User + '已評論成功! 日期:' + today);
-    document.getElementById(id).value = ''
-    document.getElementById(id).placeholder = today + "評論成功!!"
+    setTimeout(() => {
+        document.getElementById(id).value = '';
+        document.getElementById(id).placeholder = today + "評論成功!";
+
+        var img_ref = 'user/' + User;       //圖片的路徑
+        var pathReference = firebase.storage().ref().child(img_ref);
+        pathReference.getDownloadURL().then(function (url) {  //將路徑轉換為可使用的URL
+            var str = '<div class="comments">\
+            <img src="'+ url + '" alt="">\
+            <div class="commentContent">\
+                <p>'+ content + '</p>\
+            </div>\
+        </div>';
+            $(allComments).prepend(str);
+        })
+
+    }, 0);
 
 }
 function opt1(i) {

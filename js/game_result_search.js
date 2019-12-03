@@ -165,7 +165,7 @@ function test(data) { //infowindow點擊後
             if (n != 0) {
                 document.getElementById('favorite0').innerHTML = '自清單移除';
                 document.getElementById('favorite0').setAttribute("onclick", "javascript: favorite_delete(0);");  //已加入清單的按鈕
-            }else{
+            } else {
                 document.getElementById('favorite0').innerHTML = '加入清單';
                 document.getElementById('favorite0').setAttribute("onclick", "javascript: favorite(0);");
             }
@@ -238,7 +238,7 @@ db.ref(ref).once('value', function (snapshot) {
                 <div class="comments">\
                     <img src="img/pic.png" alt="">\
                     <div class="commentContent">\
-                        <p>內容</p>\
+                        <p>還沒有人發表評論喔~</p>\
                     </div>\
                 </div>\
             </div>\
@@ -252,20 +252,21 @@ db.ref(ref).once('value', function (snapshot) {
     document.getElementById('list').innerHTML = list;
 
     setTimeout(() => {
+        //抓取評論資料
         //判斷有沒有加入美食清單
         var ref = '/美食清單資料/' + User;
         db.ref(ref).once('value', function (snapshot) {
             var n = 1;
             var mydata = snapshot.val();
             for (j in data) {
-                for(i in mydata){
+                for (i in mydata) {
                     if (mydata[i].Name == data[j].店名) {
-                        var f_id='favorite'+n;
+                        var f_id = 'favorite' + n;
                         document.getElementById(f_id).innerHTML = '自清單移除';
-                        document.getElementById(f_id).setAttribute("onclick", "javascript: favorite_delete("+n+");");  //已加入清單的按鈕  
+                        document.getElementById(f_id).setAttribute("onclick", "javascript: favorite_delete(" + n + ");");  //已加入清單的按鈕  
                     }
                 }
-                n+=1;
+                n += 1;
             }
         })
         //判斷有沒有網址
@@ -366,6 +367,7 @@ function post_cancel(i) { //發起動態 取消
 
 //----我要評論---------
 function comment_enter(i) {
+    var allComments = '#allComments' + i;
     var id = 'comment' + i;
     var content = document.getElementById(id).value; //取得評論內容
     var name_id = 'name' + i;
@@ -387,7 +389,21 @@ function comment_enter(i) {
     setTimeout(() => {
         document.getElementById(id).value = '';
         document.getElementById(id).placeholder = today + "評論成功!";
-    }, timeout);
+
+        var img_ref = 'user/' + User;       //圖片的路徑
+        var pathReference = firebase.storage().ref().child(img_ref);
+        pathReference.getDownloadURL().then(function (url) {  //將路徑轉換為可使用的URL
+            var str = '<div class="comments">\
+            <img src="'+ url + '" alt="">\
+            <div class="commentContent">\
+                <p>'+ content + '</p>\
+            </div>\
+        </div>';
+            $(allComments).prepend(str);
+        })
+
+    }, 0);
+
 
 }
 function opt1(i) {
