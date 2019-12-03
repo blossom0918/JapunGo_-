@@ -29,6 +29,7 @@ function getCookie(name) {
         return null;
 }
 
+var clear = [];
 
 initMap();
 
@@ -88,8 +89,10 @@ function initMap() {
 
 
     button.addEventListener('click', function () {
+        document.getElementById('allList').value='';
         var food = document.getElementById('food').value;
         document.getElementById('input_food').innerHTML = food;
+        document.getElementById('line').style.display = "block";
         document.getElementById('list').innerHTML = '';
         for (var i = 0; i < marker_count.length; i++) {
             marker_count[i].setMap(null);
@@ -133,9 +136,8 @@ function callback(results, status) {
                         service = new google.maps.places.PlacesService(map);
                         if (resultCount % 2 == 1) {
                             service.getDetails(request2, callback2);
-                            setTimeout(() => {
-                                $("#list").append('<div style="clear:both;"></div>');
-                            }, 0);
+                            // $("#list").append('<div style="clear:both;"></div>');
+
                         } else {
                             service.getDetails(request2, callback2);
                         }
@@ -180,7 +182,8 @@ function callback2(place, status) {
 
 function creat_list1(data) {
     var n = 'n' + data.id;
-    var str = '<div class="info">\
+    var allList = document.getElementById("allList").value;
+    var str = allList + '<div class="info">\
     <input type="hidden" id="name'+ n + '" value="' + data.name + '">\
     <input type="hidden" id="address'+ n + '" value="' + data.formatted_address + '">\
     <input type="hidden" id="phone'+ n + '" value="' + data.formatted_phone_number + '">\
@@ -238,7 +241,13 @@ function creat_list1(data) {
     </div>\
 </div>';
 
-    $("#list").append(str);
+    clear.push(data.id);
+    if (clear.length % 2 == 0) {
+        str += '<div style="clear:both;"></div>';
+    }
+    document.getElementById("allList").value = str;
+    document.getElementById('list').innerHTML=str;
+   // $("#list").append(str);
     setTimeout(() => {
         //讓所有DIV一開始都收起來
         $('.commentArea').hide();
@@ -246,45 +255,46 @@ function creat_list1(data) {
         $('.allComments').hide();
         $('.btnOption').hide();
         //---抓評論資料-----------
-    var allcomment_ref = '/評論區資料';
-    db.ref(allcomment_ref).once('value', function (snapshot) {
-        var q = n;
-        var alldata = snapshot.val();
-        var userid = [];
-        var imgid = [];
+        var allcomment_ref = '/評論區資料';
+        db.ref(allcomment_ref).once('value', function (snapshot) {
+            var q = n;
+            var alldata = snapshot.val();
+            var userid = [];
+            var imgid = [];
 
-        var num = 0;
-        for (i in alldata) {
-            if (alldata[i].Name == data.name) {
-                var allComments = '#allComments' + q;
-                var original = 'original' + q;
-                var img = 'img' + q + '_' + num;
-                var str = '<div class="comments">\
+            var num = 0;
+            for (i in alldata) {
+                if (alldata[i].Name == data.name) {
+                    var allComments = '#allComments' + q;
+                    var original = 'original' + q;
+                    var img = 'img' + q + '_' + num;
+                    var str = '<div class="comments">\
                         <img src="img/pic.png"  id="img'+ q + '_' + num + '" alt="">\
                         <div class="commentContent">\
                         <p>'+ alldata[i].Discon + '</p>\
                         </div>\
                         </div>';
-                $(allComments).append(str);
-                userid.push(alldata[i].UNo);
-                imgid.push(img);
-                num += 1;
+                    $(allComments).append(str);
+                    userid.push(alldata[i].UNo);
+                    imgid.push(img);
+                    num += 1;
 
-                document.getElementById(original).style.display = 'none';
+                    document.getElementById(original).style.display = 'none';
+                }
             }
-        }
 
-        for (i in userid) {
-            getimg(userid[i], imgid[i]);
-        }
+            for (i in userid) {
+                getimg(userid[i], imgid[i]);
+            }
 
 
-    })
+        })
     }, 0);
 }
 function creat_list2(data) {
     var n = 'n' + data.id;
-    var str = '<div class="info">\
+    var allList = document.getElementById("allList").value;
+    var str =allList+ '<div class="info">\
     <input type="hidden" id="name'+ n + '" value="' + data.name + '">\
     <input type="hidden" id="address'+ n + '" value="' + data.formatted_address + '">\
     <input type="hidden" id="phone'+ n + '" value="' + data.formatted_phone_number + '">\
@@ -341,8 +351,13 @@ function creat_list2(data) {
         </div>\
     </div>\
 </div>';
-
-    $("#list").append(str);
+    clear.push(data.id);
+    if (clear.length % 2 == 0) {
+        str += '<div style="clear:both;"></div>';
+    }
+    document.getElementById("allList").value = str;
+    document.getElementById('list').innerHTML=str;
+   // $("#list").append(str);
     setTimeout(() => {
         //讓所有DIV一開始都收起來
         $('.commentArea').hide();
@@ -350,43 +365,43 @@ function creat_list2(data) {
         $('.allComments').hide();
         $('.btnOption').hide();
         //---抓評論資料-----------
-    var allcomment_ref = '/評論區資料';
-    db.ref(allcomment_ref).once('value', function (snapshot) {
-        var q = n;
-        var alldata = snapshot.val();
-        var userid = [];
-        var imgid = [];
+        var allcomment_ref = '/評論區資料';
+        db.ref(allcomment_ref).once('value', function (snapshot) {
+            var q = n;
+            var alldata = snapshot.val();
+            var userid = [];
+            var imgid = [];
 
-        var num = 0;
-        for (i in alldata) {
-            if (alldata[i].Name == data.name) {
-                var allComments = '#allComments' + q;
-                var original = 'original' + q;
-                var img = 'img' + q + '_' + num;
-                var str = '<div class="comments">\
+            var num = 0;
+            for (i in alldata) {
+                if (alldata[i].Name == data.name) {
+                    var allComments = '#allComments' + q;
+                    var original = 'original' + q;
+                    var img = 'img' + q + '_' + num;
+                    var str = '<div class="comments">\
                         <img src="img/pic.png"  id="img'+ q + '_' + num + '" alt="">\
                         <div class="commentContent">\
                         <p>'+ alldata[i].Discon + '</p>\
                         </div>\
                         </div>';
-                $(allComments).append(str);
-                userid.push(alldata[i].UNo);
-                imgid.push(img);
-                num += 1;
+                    $(allComments).append(str);
+                    userid.push(alldata[i].UNo);
+                    imgid.push(img);
+                    num += 1;
 
-                document.getElementById(original).style.display = 'none';
+                    document.getElementById(original).style.display = 'none';
+                }
             }
-        }
 
-        for (i in userid) {
-            getimg(userid[i], imgid[i]);
-        }
+            for (i in userid) {
+                getimg(userid[i], imgid[i]);
+            }
 
 
-    })
+        })
     }, 0);
 
-    
+
 }
 
 
