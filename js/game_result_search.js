@@ -170,6 +170,51 @@ function test(data) { //infowindow點擊後
                 document.getElementById('favorite0').setAttribute("onclick", "javascript: favorite(0);");
             }
         })
+        //-------抓評論--------
+        document.getElementById('allComments0').innerHTML='<div class="allComments_map" id="allComments0">\
+        <div class="comments_map" id="original0">\
+            <img src="img/pic.png" alt="">\
+            <div class="commentContent_map">\
+                <p>還沒有人發表評論喔~</p>\
+            </div>\
+        </div>\
+    </div>';
+        var allcomment_ref = '/評論區資料';
+        db.ref(allcomment_ref).once('value', function (snapshot) {
+            
+            var allcommentdata = snapshot.val();
+            var userid = [];
+            var imgid = [];
+
+            var num = 0;
+            for (i in allcommentdata) {
+                if (allcommentdata[i].Name == data.店名) {
+                    var allComments = '#allComments' + 0;
+                    var original = 'original' + 0;
+                    var img = 'img' + 0 + '_' + num;
+                    var str = '<div class="comments">\
+                        <img src="img/pic.png"  id="img'+ 0 + '_' + num + '" alt="">\
+                        <div class="commentContent">\
+                        <p>'+ allcommentdata[i].Discon + '</p>\
+                        </div>\
+                        </div>';
+                    $(allComments).append(str);
+                    userid.push(allcommentdata[i].UNo);
+                    imgid.push(img);
+                    num += 1;
+
+                    document.getElementById(original).style.display = 'none';
+                }
+            }
+
+
+            for (i in userid) {
+                getimg(userid[i], imgid[i]);
+            }
+
+
+        })
+
 
 
     })
@@ -235,7 +280,7 @@ db.ref(ref).once('value', function (snapshot) {
                 </div>\
             </div>\
             <div class="allComments" id="allComments'+ n + '">\
-                <div class="comments">\
+                <div class="comments" id="original'+ n + '">\
                     <img src="img/pic.png" alt="">\
                     <div class="commentContent">\
                         <p>還沒有人發表評論喔~</p>\
@@ -250,12 +295,47 @@ db.ref(ref).once('value', function (snapshot) {
         n += 1;
     }
     document.getElementById('list').innerHTML = list;
-
+    //抓取評論資料
     setTimeout(() => {
-        //抓取評論資料
+        var allcomment_ref = '/評論區資料';
+        db.ref(allcomment_ref).once('value', function (snapshot) {
+            var q = 1;
+            var alldata = snapshot.val();
+            var userid = [];
+            var imgid = [];
+            for (j in data) {
+                var num = 0;
+                for (i in alldata) {
+                    if (alldata[i].Name == data[j].店名) {
+                        var allComments = '#allComments' + q;
+                        var original = 'original' + q;
+                        var img = 'img' + q + '_' + num;
+                        var str = '<div class="comments">\
+                        <img src="img/pic.png"  id="img'+ q + '_' + num + '" alt="">\
+                        <div class="commentContent">\
+                        <p>'+ alldata[i].Discon + '</p>\
+                        </div>\
+                        </div>';
+                        $(allComments).append(str);
+                        userid.push(alldata[i].UNo);
+                        imgid.push(img);
+                        num += 1;
+
+                        document.getElementById(original).style.display = 'none';
+                    }
+                }
+                q += 1;
+            }
+            for (i in userid) {
+                getimg(userid[i], imgid[i]);
+            }
+
+
+        })
+
         //判斷有沒有加入美食清單
-        var ref = '/美食清單資料/' + User;
-        db.ref(ref).once('value', function (snapshot) {
+        var favorite_ref = '/美食清單資料/' + User;
+        db.ref(favorite_ref).once('value', function (snapshot) {
             var n = 1;
             var mydata = snapshot.val();
             for (j in data) {
@@ -288,8 +368,17 @@ db.ref(ref).once('value', function (snapshot) {
     }, 0);
 })
 
+function getimg(user, imgid) {
+    var img_id = imgid;
+    var storageRef = firebase.storage().ref();
+    var img_ref = 'user/' + user;
+    var pathReference = storageRef.child(img_ref);
+    pathReference.getDownloadURL().then(function (url) {
+        document.getElementById(img_id).src = url;
+    });
+}
 
-
+//--------排版DIV收縮------------------------------------------------------
 function showallcomment_list(i) {
     var allComments = '#allComments' + i;
     var postArea = '#postArea' + i;
