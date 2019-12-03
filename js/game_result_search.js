@@ -456,6 +456,7 @@ function post_cancel(i) { //發起動態 取消
 
 //----我要評論---------
 function comment_enter(i) {
+    var original='original'+i;
     var allComments = '#allComments' + i;
     var id = 'comment' + i;
     var content = document.getElementById(id).value; //取得評論內容
@@ -476,6 +477,7 @@ function comment_enter(i) {
     });
     console.log(User + '已評論成功! 日期:' + today);
     setTimeout(() => {
+        document.getElementById(original).style.display = 'none';
         document.getElementById(id).value = '';
         document.getElementById(id).placeholder = today + "評論成功!";
 
