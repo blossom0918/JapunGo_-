@@ -149,6 +149,7 @@ function test(Name,Address,Phone,Url) { //infowindow點擊後
             document.getElementById('url_map').value = Url;
         } else {
             document.getElementById('url_map').value = 0;
+            document.getElementById('map_recommend_a').style.display='none';
         }
         var ref = '/美食清單資料/' + User;
         db.ref(ref).once('value', function (snapshot) {

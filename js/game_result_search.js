@@ -152,6 +152,7 @@ function test(data) { //infowindow點擊後
             document.getElementById('url0').value = data.網址;
         } else {
             document.getElementById('url0').value = 0;
+            document.getElementById('map_recommend_a').style.display='none';
         }
         var ref = '/美食清單資料/' + User;
         db.ref(ref).once('value', function (snapshot) {
@@ -357,6 +358,10 @@ db.ref(ref).once('value', function (snapshot) {
                 var a_id = 'recommend_a' + m;
                 document.getElementById(a_id).href = data[i].網址;
                 document.getElementById(a_id).target = "_blank";
+            }
+            if(data[i].網址 == 0){
+                var a_id = 'recommend_a' + m;
+                document.getElementById(a_id).style.display='none';
             }
             m += 1;
         }
