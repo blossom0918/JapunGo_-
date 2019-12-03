@@ -69,7 +69,7 @@
 
         <div class="content">
             <div class="list">
-                <div class="info">
+                <div class="info" style="display: none">
                     <h3 id="name">餐廳名</h3>
 
                     <img src="img/pin.png" class="addIcon">
@@ -262,6 +262,11 @@
                 $('#mapView').toggle();
             });
 
+            $('.commentArea').hide();
+            $('.postArea').hide();
+            $('.allComments').hide();
+            $('.btnOption').hide();
+            //---map---
             $('.postArea_map').hide();
             $('.commentArea_map').hide();
             $('.btnOption_map').hide();
@@ -530,7 +535,12 @@
                             PDate: Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate(),
 
                         });
-                        alert("動態消息已發布");
+                        setTimeout(() => {
+        document.getElementById(id).value = '';
+        document.getElementById(eatTimeTerm).value = ''
+        document.getElementById(id).placeholder = Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate() + "動態發佈成功!!";
+    }, 0);
+                       // alert("動態消息已發布"); //出現很多次
 
                     });
                 }
