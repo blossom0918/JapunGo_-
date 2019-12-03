@@ -90,6 +90,7 @@ function initMap() {
     button.addEventListener('click', function () {
         var food = document.getElementById('food').value;
         document.getElementById('input_food').innerHTML = food;
+        document.getElementById('line').style.display = "block";
         document.getElementById('list').innerHTML = '';
         for (var i = 0; i < marker_count.length; i++) {
             marker_count[i].setMap(null);
