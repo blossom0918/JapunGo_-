@@ -280,7 +280,21 @@ table {
     margin-right: 3px;
   }
 
-  #showAllComments{
+  .showAllComments{
+    float: right;
+    margin-top: 15px;
+    margin-right: 15px;
+    line-height: 28px;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    color: rgb(138, 138, 138);
+    font-size: 18px;
+    text-align: center;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+  }
+
+  .showAllComments_map{
     float: right;
     margin-top: 15px;
     margin-right: 15px;

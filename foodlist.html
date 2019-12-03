@@ -80,9 +80,9 @@
                     </div>
                     
                     <div class="btn">
-                        <button id="post">發起動態</button>
-                        <button id="comment">我要評論</button>
-                        <button id="delete">自清單移除</button>
+                        <button class="post">發起動態</button>
+                        <button class="comment">我要評論</button>
+                        <button class="delete">自清單移除</button>
                     </div>
 
                     <div class="postArea">
@@ -102,7 +102,7 @@
                             <img src="img/pic.png" alt="">
                         </div>
                         <div class="btn3">
-                            <button id="option">評論選項</button>
+                            <button class="option">評論選項</button>
                             <button id="commentBtn">我要評論</button>
                         </div>
                         <div class="btnOption">
@@ -155,13 +155,13 @@
                 <p id='r_tel' class="tel">電話</p>
 
                 <div class="btn0_map">
-                    <button class="showAllComments" id="showAllComments_map"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>                   
+                    <button class="showAllComment_maps"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>                   
                     <a class="recommend" id="map_recommend_a"><img src="img/best.png" class="bestIcon">查看推薦</a>
                 </div>
 
                 <div class="btn_map">
-                    <button id="post_map">發起動態</button>
-                    <button id="comment_map">我要評論</button>
+                    <button class="post_map">發起動態</button>
+                    <button class="comment_map">我要評論</button>
                     <button>加入清單／自清單移除</button>
                 </div>
                     
@@ -182,7 +182,7 @@
                         <img src="img/pic.png" alt="">
                     </div>                    
                     <div class="btn3_map">
-                        <button id="option_map">評論選項</button>
+                        <button class="option_map">評論選項</button>
                         <button>我要評論</button>
                     </div>
                     <div class="btnOption_map">
@@ -253,26 +253,26 @@
             });
 
             $('.postArea').hide();
-            $('#post').click(function() {
+            $('.post').click(function() {
                 $('.postArea').slideToggle();
                 $('.commentArea').hide();
                 $('.allComments').hide();
             });
 
             $('.commentArea').hide();
-            $('#comment').click(function() {
+            $('.comment').click(function() {
                 $('.commentArea').slideToggle();
                 $('.postArea').hide();
                 $('.allComments').hide();
             });
 
             $('.btnOption').hide();
-            $('#option').click(function() {
+            $('.option').click(function() {
                 $('.btnOption').slideToggle();
             });
 
             $('.allComments').hide();
-            $('#showAllComments').click(function() {
+            $('.showAllComments').click(function() {
                 $('.allComments').slideToggle();
                 $('.commentArea').hide();
                 $('.postArea').hide();
@@ -313,9 +313,9 @@
                             str+='<img src="img/tel.png" class="telIcon"><p class="tel">'+foodInf[i][j]["Phone"]+'</p>';
                             str+='<div class="btn0"><button class=showAllComments id="showAllComments"><img src="img/show_comment.png" class=commentIcon>'+"顯示評論區"+'</button>';
                             str+='<a class="recommend" href="'+foodInf[i][j]["Url"]+'"><img src="img/best.png" class=bestIcon>'+"查看推薦"+'</a></div>';
-                            str+='<div class="btn"><button onclick=declare("'+j+'") id="post">'+"發起動態"+'</button>';
+                            str+='<div class="btn"><button onclick=declare("'+j+'") class="post">'+"發起動態"+'</button>';
                             str+=' ';
-                            str+='<button onclick=comment("'+j+'") id="comment"> '+" 我要評論 "+'</button>';
+                            str+='<button onclick=comment("'+j+'") class="comment"> '+" 我要評論 "+'</button>';
                             str+=' ';
                             str+='<button onclick=delfoodlist("'+i+','+j+'") id="delete">'+"自清單移除"+'</button></div>';
                             str+='<div class="postArea" style="display:none" id="postArea'+j+'">\
@@ -337,7 +337,7 @@
                                         <li>"好吃"</li>\
                                     </ul></div>\
                                     ';
-                            str+='<div class="btn3" id="btn3'+j+'"><button id="option'+j+'">評論選項</button><button id="commentBtn'+j+'">發表評論</button></div>';
+                            str+='<div class="btn3" id="btn3'+j+'"><button class="option" id="option'+j+'">評論選項</button><button id="commentBtn'+j+'">發表評論</button></div>';
                             str+='<div class="btnOption" id="btnOption'+j+'"><button onclick=opt1("'+j+'")>環境乾淨</button><button onclick=opt2("'+j+'") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("'+j+'")>餐點美味</button><button value="餐點糟糕" onclick=opt4("'+j+'")>餐點糟糕</button><button value="親切店家" onclick=opt5("'+j+'")>親切店家</button><button value="服務極差" onclick=opt6("'+j+'")> 服務極差</button></div></div></div>';
 
                             count++
