@@ -12,6 +12,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
     <script src="http://code.changer.hk/jquery/plugins/jquery.cookie.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-storage.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyNHGK5W-UIZrhPqLa2POPnisX6tue7rw&libraries=places" ></script>
   <script type="text/javascript">
     const firebaseConfig = {
         apiKey: "AIzaSyCcIFB1orespqziBWnX8kUWyihopdBw8jM",
@@ -25,6 +26,7 @@
       // Initialize Firebase 初始化
       firebase.initializeApp(firebaseConfig);
       </script>
+      <script defer type="text/javascript" src="js/foodlist_map.js"></script>
   
 </head>
 <body>
@@ -128,83 +130,88 @@
         </div>
          
         <div class="mapContent">
-            <div  class='map' id='map'>
-                <!-- 自己 -->
-                <img src="img/me.png" style="height: 80px;">
-                <!-- 餐廳 -->
-                <img src="img/restaurant.png" style="height: 55px;">
-            </div>
- 
-            <div class="info_map" id='info_map' style="display: none;">
-                <ul>
-                    <li>餐廳名</li>
-                    <li>地址</li>
-                    <li>電話</li>
-                </ul>
-                <button id="viewMore">查看更多</button>
-            </div>
-
-            <div class="info_detail" id="info_detail" style="display: none;">
-                <button id="close"><img src="img/cross.png"></button>
-                <h3 id='restaurant'>餐廳名</h3>
-
-                <img src="img/pin.png" class="addIcon">
-                <p id='r_address' class="address">地址</p>
-
-                <img src="img/tel.png" class="telIcon">
-                <p id='r_tel' class="tel">電話</p>
-
-                <div class="btn0_map">
-                    <button class="showAllComments" id="showAllComments_map"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>                   
-                    <a class="recommend" id="map_recommend_a"><img src="img/best.png" class="bestIcon">查看推薦</a>
+                <div class='map' id='map'>
+                    <!-- 自己 -->
+                    <img src="img/me.png" style="height: 80px;">
+                    <!-- 餐廳 -->
+                    <img src="img/restaurant.png" style="height: 55px;">
                 </div>
-
-                <div class="btn_map">
-                    <button id="post_map">發起動態</button>
-                    <button id="comment_map">我要評論</button>
-                    <button>加入清單／自清單移除</button>
+    
+                <div class="info_map" id='info_map' style="display: none;">
+                    <ul>
+                        <li>餐廳名</li>
+                        <li>地址</li>
+                        <li>電話</li>
+                    </ul>
+                    <button id="viewMore">查看更多</button>
                 </div>
-                    
-                <div class="postArea_map">
-                    <div class="postInput_map">
-                        <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>
-                        <img src="img/pic.png" alt="">
+    
+                <div class="info_detail" id="info_detail" style="display: none;">
+                    <input type="hidden" id="name_map" value="">
+                    <input type="hidden" id="address_map" value="">
+                    <input type="hidden" id="phone_map" value="">
+                    <input type="hidden" id="url_map" value="">
+                    <button id="close"><img src="img/cross.png"></button>
+                    <h3 id='restaurant'>餐廳名</h3>
+    
+                    <img src="img/pin.png" class="addIcon">
+                    <p id='r_address' class="address">地址</p>
+    
+                    <img src="img/tel.png" class="telIcon">
+                    <p id='r_tel' class="tel">電話</p>
+    
+                    <div class="btn0_map">
+                        <button class="showAllComments" id="showAllComments_map" onclick="showallcomment_list('map')"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>
+                        <a class="recommend" id="map_recommend_a"><img src="img/best.png" class="bestIcon">查看推薦</a>
                     </div>
+    
+                    <div class="btn_map">
+                        <button id="post_map" onclick="show_post('map')">發起動態</button>
+                        <button id="comment_map" onclick="my_comment('map')">我要評論</button>
+                        <button onclick="favorite(0)" id="favoritemap">加入清單</button>
+                    </div>
+    
+                    <div class="postArea_map" id="postAreamap">
+                        <div class="postInput_map">
+                            <input type="text" class="eatTimeTerm" placeholder="請輸入飯局時間" id="eatTimemap"/>
+                            <img src="img/pic.png" alt="">
+                            <textarea style="overflow:auto" class="postTerm" id="postmap" placeholder="請輸入動態內容"></textarea>                       
+                        </div>
                         <div class="btn2_map">
-                            <button>確定</button>
-                            <button>取消</button>
-                       </div>
-                </div>
-                                        
-                <div class="commentArea_map" style="display:none">
-                    <div class="commentInput_map">
-                        <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容" id="comment"></textarea>
-                        <img src="img/pic.png" alt="">
-                    </div>                    
-                    <div class="btn3_map">
-                        <button id="option_map">評論選項</button>
-                        <button>我要評論</button>
+                            <button onclick="post_enter('map')">確定</button>
+                            <button onclick="post_cancel('map')">取消</button>
+                        </div>
                     </div>
-                    <div class="btnOption_map">
-                        <button>環境乾淨</button>
-                        <button>環境骯髒</button>
-                        <button>餐點美味</button>
-                        <button>餐點糟糕</button>
-                        <button>親切店家</button>
-                        <button>服務極差</button>
+    
+                    <div class="commentArea_map" id="commentAreamap">
+                        <div class="commentInput_map">
+                            <textarea style="overflow:auto" class="commentTerm" id="commentmap" placeholder="請輸入評論內容"></textarea>
+                            <img src="img/pic.png" alt="">
+                        </div>
+                        <div class="btn3_map">
+                            <button id="option_map" onclick="show_option('map')">評論選項</button>
+                            <button onclick="comment_enter('map')">我要評論</button>
+                        </div>
+                        <div class="btnOption_map" id="btnOptionmap">
+                            <button onclick="opt1('map')">環境乾淨</button>
+                            <button onclick="opt2('map')">環境骯髒</button>
+                            <button onclick="opt3('map')">餐點美味</button>
+                            <button onclick="opt4('map')">餐點糟糕</button>
+                            <button onclick="opt5('map')">親切店家</button>
+                            <button onclick="opt6('map')">服務極差</button>
+                        </div>
                     </div>
-                </div>            
-                    
-                <div class="allComments_map">
-                    <div class="comments_map">
-                        <img src="img/pic.png" alt="">
-                        <div class="commentContent_map">
-                            <p>內容</p>
+    
+                    <div class="allComments_map" id="allCommentsmap">
+                        <div class="comments_map" id='originalmap'>
+                            <img src="img/pic.png" alt="">
+                            <div class="commentContent_map">
+                                <p>還沒有人發表評論喔~</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         <div class="clear"></div>
         
         <div class="footer">
@@ -215,7 +222,7 @@
             </div>
             
             <div class="right">
-                    <textarea id="suggestion" style="overflow:auto" class="questionTerm" placeholder="請輸入您的問題"></textarea>
+                    <textarea id="suggestion" style="overflow:auto" class="questionTerm"  placeholder="請輸入您的問題"></textarea>
                     <div class="emailArea">
                     <input type="email" class="emailTerm" placeholder="請輸入您的信箱" id="membermail">
                     <button type="submit" class="submitBtn" onclick=suggestion()><img src="img/send.png" alt="" class="contact"></button>
@@ -252,31 +259,50 @@
                 $('#mapView').toggle();
             });
 
-            $('.postArea').hide();
-            $('#post').click(function() {
-                $('.postArea').slideToggle();
-                $('.commentArea').hide();
-                $('.allComments').hide();
+            $('.postArea_map').hide();
+            $('.commentArea_map').hide();
+            $('.btnOption_map').hide();
+            $('.allComments_map').hide();
+            $(function(){
+            $('#viewMore').click(function centerHandler() {
+                document.getElementById('info_detail').style.display = "block";
+                var scrollDist = $(window).scrollTop();
+                var myTop = ($(window).height())/2;
+                var myLeft = ($(window).width()-$('#info_detail').width())/2;
+                $('#info_detail').offset({top:myTop, left:myLeft});
+                
+                $(window).resize(centerHandler);
             });
+ 
+            $('#close').click(function(){
+                document.getElementById('info_detail').style.display = "none";
+            });
+        });
+            // $('.postArea').hide();
+            // $('#post').click(function() {
+            //     $('.postArea').slideToggle();
+            //     $('.commentArea').hide();
+            //     $('.allComments').hide();
+            // });
 
-            $('.commentArea').hide();
-            $('#comment').click(function() {
-                $('.commentArea').slideToggle();
-                $('.postArea').hide();
-                $('.allComments').hide();
-            });
+            // $('.commentArea').hide();
+            // $('#comment').click(function() {
+            //     $('.commentArea').slideToggle();
+            //     $('.postArea').hide();
+            //     $('.allComments').hide();
+            // });
 
-            $('.btnOption').hide();
-            $('#option').click(function() {
-                $('.btnOption').slideToggle();
-            });
+            // $('.btnOption').hide();
+            // $('#option').click(function() {
+            //     $('.btnOption').slideToggle();
+            // });
 
-            $('.allComments').hide();
-            $('#showAllComments').click(function() {
-                $('.allComments').slideToggle();
-                $('.commentArea').hide();
-                $('.postArea').hide();
-            });
+            // $('.allComments').hide();
+            // $('#showAllComments').click(function() {
+            //     $('.allComments').slideToggle();
+            //     $('.commentArea').hide();
+            //     $('.postArea').hide();
+            // });
         });
 
         $(function(){
