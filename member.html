@@ -213,7 +213,7 @@
                 $('.comment').show();
             });
             $('#logout, #logoutBtn').click(function(){
-                登出
+                //登出
             });
         });
         $(function(){
@@ -342,7 +342,7 @@
         
         if(count==0){
             
-            str+='<h2>'+"目前尚無未確認之邀請"+'</h2>';
+            str+='<h2 class="requestTip">'+"目前尚無未確認之邀請"+'</h2>';
             
         }
          
@@ -383,17 +383,17 @@ function getimg(id){
                 
                 for(var comment in commentInf){
                     if(commentInf[comment]["UNo"]==ID){
-                                    commentcount++;
-                                    commentstr+='<div class="commentContent"><h3>'+commentInf[comment]["Name"]+'</h3>';
-                                    commentstr+='<p>'+commentInf[comment]["Discon"]+'</p>';
-                                    commentstr+='<button onclick=delcomment("'+comment+'")>'+"刪除"+'</button>';
-                                    commentstr+='<button onclick=changecomment("'+comment+'")>'+"修改"+'</button></div>';
+                        commentcount++;
+                        commentstr+='<div class="commentContent"><h3>'+commentInf[comment]["Name"]+'</h3>';
+                        commentstr+='<p>'+commentInf[comment]["Discon"]+'</p>';
+                        commentstr+='<button onclick=delcomment("'+comment+'")>'+"刪除"+'</button>';
+                        commentstr+='<button onclick=changecomment("'+comment+'")>'+"修改"+'</button></div>';
                                
 
                     }
                 }
                 if(commentcount==0){
-                    commentstr+='<h2>'+"您目前尚未發表過評論"+'</h2>';
+                    commentstr+='<h2 class="commentTip">'+"您目前尚未發表過評論"+'</h2>';
                 }
                 commentContent.innerHTML=commentstr;
             });
@@ -401,18 +401,24 @@ function getimg(id){
     });
 });
 function changecomment(comment){
-    var newcomment=window.prompt('請輸入新的評論:');
-    var flag=1;
-    if(newcomment){
-        var commentdata=firebase.database().ref('/評論區資料/'+comment);
-        commentdata.update({
-            Discon:newcomment,
-        })
-        alert("修改成功");
-    }else{
-        console.log("2");
-        alert("尚未修改原本資料");
-    }
+    var commentdata=firebase.database().ref('/評論區資料/');
+    commentdata.once('value',function(commentsnapshot){
+        var commentInf=commentsnapshot.val();
+        var nowcomment=commentInf[comment]["Discon"];
+        var newcomment=window.prompt('原評論內容：\r\n'+nowcomment+'\r\n請輸入新的評論：');
+        var flag=1;
+        if(newcomment){
+            var commentdata=firebase.database().ref('/評論區資料/'+comment);
+            commentdata.update({
+                Discon:newcomment,
+            })
+            alert("修改成功");
+        }else{
+            console.log("2");
+            alert("尚未修改原本資料");
+        }
+
+  });
 
     
         
