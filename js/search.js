@@ -132,9 +132,11 @@ function callback(results, status) {
                             placeId: results[i].place_id,
                         };
                         service = new google.maps.places.PlacesService(map);
-                        if (resultCount % 2 == 0) {
-                            $("#list").append('<div style="clear:both;"></div>');
+                        if (resultCount % 2 == 1) {
                             service.getDetails(request2, callback2);
+                            setTimeout(() => {
+                                $("#list").append('<div style="clear:both;"></div>');
+                            }, 0);
                         } else {
                             service.getDetails(request2, callback2);
                         }
@@ -228,7 +230,7 @@ function creat_list1(data) {
         </div>\
     </div>\
     <div class="allComments" id="allComments'+ n + '">\
-        <div class="comments">\
+        <div class="comments" id="original'+ n + '">\
             <img src="img/pic.png" alt="">\
             <div class="commentContent">\
                 <p>還沒有人發表評論喔~</p>\
@@ -244,6 +246,41 @@ function creat_list1(data) {
         $('.postArea').hide();
         $('.allComments').hide();
         $('.btnOption').hide();
+        //---抓評論資料-----------
+    var allcomment_ref = '/評論區資料';
+    db.ref(allcomment_ref).once('value', function (snapshot) {
+        var q = n;
+        var alldata = snapshot.val();
+        var userid = [];
+        var imgid = [];
+
+        var num = 0;
+        for (i in alldata) {
+            if (alldata[i].Name == data.name) {
+                var allComments = '#allComments' + q;
+                var original = 'original' + q;
+                var img = 'img' + q + '_' + num;
+                var str = '<div class="comments">\
+                        <img src="img/pic.png"  id="img'+ q + '_' + num + '" alt="">\
+                        <div class="commentContent">\
+                        <p>'+ alldata[i].Discon + '</p>\
+                        </div>\
+                        </div>';
+                $(allComments).append(str);
+                userid.push(alldata[i].UNo);
+                imgid.push(img);
+                num += 1;
+
+                document.getElementById(original).style.display = 'none';
+            }
+        }
+
+        for (i in userid) {
+            getimg(userid[i], imgid[i]);
+        }
+
+
+    })
     }, 0);
 }
 function creat_list2(data) {
@@ -297,7 +334,7 @@ function creat_list2(data) {
         </div>\
     </div>\
     <div class="allComments" id="allComments'+ n + '">\
-        <div class="comments">\
+        <div class="comments" id="original'+ n + '">\
             <img src="img/pic.png" alt="">\
             <div class="commentContent">\
                 <p>還沒有人發表評論喔~</p>\
@@ -313,7 +350,44 @@ function creat_list2(data) {
         $('.postArea').hide();
         $('.allComments').hide();
         $('.btnOption').hide();
+        //---抓評論資料-----------
+    var allcomment_ref = '/評論區資料';
+    db.ref(allcomment_ref).once('value', function (snapshot) {
+        var q = n;
+        var alldata = snapshot.val();
+        var userid = [];
+        var imgid = [];
+
+        var num = 0;
+        for (i in alldata) {
+            if (alldata[i].Name == data.name) {
+                var allComments = '#allComments' + q;
+                var original = 'original' + q;
+                var img = 'img' + q + '_' + num;
+                var str = '<div class="comments">\
+                        <img src="img/pic.png"  id="img'+ q + '_' + num + '" alt="">\
+                        <div class="commentContent">\
+                        <p>'+ alldata[i].Discon + '</p>\
+                        </div>\
+                        </div>';
+                $(allComments).append(str);
+                userid.push(alldata[i].UNo);
+                imgid.push(img);
+                num += 1;
+
+                document.getElementById(original).style.display = 'none';
+            }
+        }
+
+        for (i in userid) {
+            getimg(userid[i], imgid[i]);
+        }
+
+
+    })
     }, 0);
+
+    
 }
 
 
@@ -409,14 +483,65 @@ function open_info_div(data) { //infowindow點擊後
             if (n != 0) {
                 document.getElementById('favorite0').innerHTML = '自清單移除';
                 document.getElementById('favorite0').setAttribute("onclick", "javascript: favorite_delete(0);");  //已加入清單的按鈕
-            }else{
+            } else {
                 document.getElementById('favorite0').innerHTML = '加入清單';
                 document.getElementById('favorite0').setAttribute("onclick", "javascript: favorite(0);");
             }
         })
+        //-------抓評論--------
+        document.getElementById('allComments0').innerHTML = '<div class="allComments_map" id="allComments0">\
+            <div class="comments_map" id="original0">\
+            <img src="img/pic.png" alt="">\
+            <div class="commentContent_map">\
+            <p>還沒有人發表評論喔~</p>\
+            </div>\
+            </div>\
+            </div>';
+        var allcomment_ref = '/評論區資料';
+        db.ref(allcomment_ref).once('value', function (snapshot) {
+            var allcommentdata = snapshot.val();
+            var userid = [];
+            var imgid = [];
+            var num = 0;
+            for (i in allcommentdata) {
+                if (allcommentdata[i].Name == data.restaurant) {
+                    var allComments = '#allComments' + 0;
+                    var original = 'original' + 0;
+                    var img = 'img' + 0 + '_' + num;
+                    var str = '<div class="comments">\
+                 <img src="img/pic.png"  id="img'+ 0 + '_' + num + '" alt="">\
+                 <div class="commentContent">\
+                 <p>'+ allcommentdata[i].Discon + '</p>\
+                 </div>\
+                 </div>';
+                    $(allComments).append(str);
+                    userid.push(allcommentdata[i].UNo);
+                    imgid.push(img);
+                    num += 1;
 
+                    document.getElementById(original).style.display = 'none';
+                }
+            }
+
+
+            for (i in userid) {
+                getimg(userid[i], imgid[i]);
+            }
+
+
+        })
     })
 
+}
+
+function getimg(user, imgid) {
+    var img_id = imgid;
+    var storageRef = firebase.storage().ref();
+    var img_ref = 'user/' + user;
+    var pathReference = storageRef.child(img_ref);
+    pathReference.getDownloadURL().then(function (url) {
+        document.getElementById(img_id).src = url;
+    });
 }
 
 
@@ -466,6 +591,7 @@ function post_cancel(i) { //發起動態 取消
 
 //----我要評論---------
 function comment_enter(i) {
+    var original = 'original' + i;
     var allComments = '#allComments' + i;
     var id = 'comment' + i;
     var content = document.getElementById(id).value; //取得評論內容
@@ -486,6 +612,7 @@ function comment_enter(i) {
     });
     console.log(User + '已評論成功! 日期:' + today);
     setTimeout(() => {
+        document.getElementById(original).style.display = 'none';
         document.getElementById(id).value = '';
         document.getElementById(id).placeholder = today + "評論成功!";
 
