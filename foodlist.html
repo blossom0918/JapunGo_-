@@ -340,20 +340,16 @@
                             str+='<div class="btn3" id="btn3'+j+'"><button id="option'+j+'">評論選項</button><button id="commentBtn'+j+'">發表評論</button></div>';
                             str+='<div class="btnOption" id="btnOption'+j+'"><button onclick=opt1("'+j+'")>環境乾淨</button><button onclick=opt2("'+j+'") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("'+j+'")>餐點美味</button><button value="餐點糟糕" onclick=opt4("'+j+'")>餐點糟糕</button><button value="親切店家" onclick=opt5("'+j+'")>親切店家</button><button value="服務極差" onclick=opt6("'+j+'")> 服務極差</button></div></div></div>';
 
-                            
+                            count++;
                         }
-
-                    }
-                    if(count%2==0){
-                        str+=clear;
-                    }
-                    count++
-
+                    }   
                 }
                 if(flag==0){
-                        str+='<h2>'+"查無相關資料"+'</h2>';
+                    str+='<h2 class="foodlistTip">'+"查無相關資料"+'</h2>';
                 }             
-
+                if(count%2==0){
+                    str+=clear;
+                }
                 list.innerHTML=str;
 
             $('#searchBtn').on('click',function(){
@@ -449,7 +445,7 @@
                     }
                 }
                 if(flag==0){
-                    str+='<h2>'+"查無相關資料"+'</h2>';
+                    str+='<h2 class="foodlistTip">'+"查無相關資料"+'</h2>';
                 }
                 list.innerHTML=str;
                 });
@@ -457,6 +453,7 @@
             });
             });
         });
+        
 function declare(i){
     var postArea='#postArea'+i;
     var sure='#sure'+i;

@@ -206,6 +206,14 @@ table {
     float: left;
     width: 100%;
     background-color: #FFF;
+    padding-bottom: 50px;
+  }
+
+  .foodlistTip{
+    font-size: 36px;
+    color: dimgray;
+    text-align: center;
+    padding-top: 50px;
   }
   
   .info{
@@ -553,7 +561,7 @@ table {
     border-radius: 5px;
     text-align: center;
     padding: 5px;
-    margin-top: 5px;
+    margin-right: 5px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
@@ -575,7 +583,7 @@ table {
     border-radius: 5px;
     text-align: center;
     padding: 5px;
-    margin-top: 5px;
+    margin-right: 5px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
@@ -598,6 +606,7 @@ table {
     text-align: center;
     padding: 5px;
     margin-top: 8px;
+    margin-right: 5px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
@@ -620,6 +629,7 @@ table {
     text-align: center;
     padding: 5px;
     margin-top: 8px;
+    margin-right: 5px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 

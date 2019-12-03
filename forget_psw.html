@@ -103,8 +103,12 @@
                     }
 
                     if(flag == 0){
-                        alert("輸入的帳號或信箱有誤，請再次輸入");
-                        window.location.reload();
+                        var yes = confirm("輸入的帳號和信箱有誤，請點擊「確定」再次輸入；若還不是會員請點擊「取消」前往註冊");
+                        if(yes) {
+                            window.location.reload();
+                        }else{
+                            window.location.href="sign_in.html";
+                        }
                     }else if(flag == 2){
                         alert("輸入的帳號有誤，請再次輸入");
                         window.location.reload();
