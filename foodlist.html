@@ -300,7 +300,7 @@
             var flag=0;
             var list=document.querySelector('.list');
             var clear='<div style="clear:both;"></div>';
-            var count=0;
+            var count=1;
             var flag2=0;
             fooddata.once('value',function(snapshot){
                 var foodInf=snapshot.val();
@@ -345,7 +345,7 @@
                     }   
                 }
                 if(flag==0){
-                        str+='<h2 class="foodlistTip">'+"查無相關資料"+'</h2>';
+                    str+='<h2 class="foodlistTip">'+"查無相關資料"+'</h2>';
                 }             
                 if(count%2==0){
                     str+=clear;
@@ -453,6 +453,7 @@
             });
             });
         });
+        
 function declare(i){
     var postArea='#postArea'+i;
     var sure='#sure'+i;
