@@ -158,6 +158,18 @@ table {
     font-size: 18px;
     margin-top: 20px;
   }
+
+  .title_friend h1{
+    text-align: center;
+    font-size: 50px;
+    padding-top: 145px;
+  }
+
+  .title_friend p{
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+  }
   
   .inputArea{
     width: 340px;
