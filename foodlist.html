@@ -64,11 +64,8 @@
         <div class="clear"></div>
 
         <div class="content">
-               
             <div class="list">
-                <!-- <ul class="foodlist"> -->
                 <div class="info">
-                    
                     <h3 id="name">餐廳名</h3>
 
                     <img src="img/pin.png" class="addIcon">
@@ -126,11 +123,8 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <!-- </ul> -->
             </div>
-       
         </div>
          
         <div class="mapContent">
@@ -241,6 +235,7 @@
             $('#toggle').click(function() {
                 $('#menu').slideToggle();
             });
+
             $('#listView').hide();
             $('.mapContent').hide();
             $('#mapView').click(function() {
@@ -249,28 +244,33 @@
                 $('.list').hide();
                 $('#mapView').hide();
             });
+
             $('#listView').click(function() {
                 $('#listView').hide();
                 $('.mapContent').hide();
                 $('.list').toggle();
                 $('#mapView').toggle();
             });
+
             $('.postArea').hide();
             $('#post').click(function() {
                 $('.postArea').slideToggle();
                 $('.commentArea').hide();
                 $('.allComments').hide();
             });
+
             $('.commentArea').hide();
             $('#comment').click(function() {
                 $('.commentArea').slideToggle();
                 $('.postArea').hide();
                 $('.allComments').hide();
             });
+
             $('.btnOption').hide();
             $('#option').click(function() {
                 $('.btnOption').slideToggle();
             });
+
             $('.allComments').hide();
             $('#showAllComments').click(function() {
                 $('.allComments').slideToggle();
@@ -278,6 +278,7 @@
                 $('.postArea').hide();
             });
         });
+
         $(function(){
             $('#backTop').click(function(){ 
                 $('html,body').animate({scrollTop:0}, 333);
@@ -290,6 +291,7 @@
                 }
             }).scroll();
         });
+
         //-------------------------------------------後端
         $(document).ready(function(){
             var fooddata=firebase.database().ref('/美食清單資料/');
@@ -315,12 +317,12 @@
                             str+=' ';
                             str+='<button onclick=comment("'+j+'") id="comment"> '+" 我要評論 "+'</button>';
                             str+=' ';
-                            str+='<button onclick=delfoodlist("'+i+','+j+'") id="delete">'+"自清單移除"+'</button></div></div>';
+                            str+='<button onclick=delfoodlist("'+i+','+j+'") id="delete">'+"自清單移除"+'</button></div>';
                             str+='<div class="postArea" style="display:none" id="postArea'+j+'">\
                                     <div class="postInput">\
-                                        <input type="text" placeholder="請輸入飯局時間" id="eatTimeTerm'+j+'"/>\
+                                        <input type="text" class="eatTimeTerm" placeholder="請輸入飯局時間" id="eatTimeTerm'+j+'"/>\
                                         <textarea id="postTerm'+j+'" style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>\
-                                            <img src="img/pic.png" alt="">\
+                                        <img src="img/pic.png" alt="">\
                                     </div>\
                                     <div class="btn2">\
                                     <button id="sure'+j+'">確定</button>\
@@ -336,8 +338,7 @@
                                     </ul></div>\
                                     ';
                             str+='<div class="btn3" id="btn3'+j+'"><button id="option'+j+'">評論選項</button><button id="commentBtn'+j+'">發表評論</button></div>';
-                            str+='<div class="btnOption" id="btnOption'+j+'"><button onclick=opt1("'+j+'")>環境乾淨</button><button onclick=opt2("'+j+'") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("'+j+'")>餐點美味</button><button value="餐點糟糕" onclick=opt4("'+j+'")>餐點糟糕</button><button value="親切店家" onclick=opt5("'+j+'")>親切店家</button><button value="服務極差" onclick=opt6("'+j+'")> 服務極差</button></div></div>';
-
+                            str+='<div class="btnOption" id="btnOption'+j+'"><button onclick=opt1("'+j+'")>環境乾淨</button><button onclick=opt2("'+j+'") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("'+j+'")>餐點美味</button><button value="餐點糟糕" onclick=opt4("'+j+'")>餐點糟糕</button><button value="親切店家" onclick=opt5("'+j+'")>親切店家</button><button value="服務極差" onclick=opt6("'+j+'")> 服務極差</button></div></div></div>';
 
                             count++
                         }
@@ -367,7 +368,6 @@
                                         for(var f2 in foodInf[f]){
                                             if(stInf[s][s2]["店名"]==foodInf[f][f2]["Name"]){
 
-
                                                 flag++;
                                                 str+='<div class=info><h3 id="name">'+foodInf[f][f2]["Name"]+'</h3>';
                                                 str+='<img src="img/pin.png" class="addIcon"><p class="address">'+foodInf[f][f2]["Address"]+'</p>';
@@ -378,10 +378,10 @@
                                                 str+=' ';
                                                 str+='<button onclick=comment("'+f2+'") id="comment"> '+" 我要評論 "+'</button>';
                                                 str+=' ';
-                                                str+='<button onclick=delfoodlist("'+f+','+f2+'") id="delete">'+"自清單移除"+'</button></div></div>';
+                                                str+='<button onclick=delfoodlist("'+f+','+f2+'") id="delete">'+"自清單移除"+'</button></div>';
                                                 str+='<div class="postArea" style="display:none" id="postArea'+f2+'">\
                                                     <div class="postInput">\
-                                                    <input type="text" placeholder="請輸入飯局時間" id="eatTimeTerm'+f2+'"/>\
+                                                    <input type="text" class="eatTimeTerm" placeholder="請輸入飯局時間" id="eatTimeTerm'+f2+'"/>\
                                                     <textarea id="postTerm'+f2+'" style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>\
                                                     <img src="img/pic.png" alt="">\
                                                     </div>\
@@ -394,10 +394,10 @@
                                                 str+='<div class="commentArea" id="commentArea'+f2+'" style="display:none">';
                                                 str+='<div class="commentInput"><textarea id="commentTerm'+f2+'" style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea><img src="img/pic.png" alt=""></div>';
                                                 str+='<div class="btn3" id="btn3'+f2+'"><button id="option'+f2+'">評論選項</button><button id="commentBtn'+f2+'">發表評論</button></div>';
-                                                str+='<div class="btnOption" id="btnOption'+f2+'"><button onclick=opt1("'+f2+'")>環境乾淨</button><button onclick=opt2("'+f2+'") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("'+f2+'")>餐點美味</button><button value="餐點糟糕" onclick=opt4("'+f2+'")>餐點糟糕</button><button value="親切店家" onclick=opt5("'+f2+'")>親切店家</button><button value="服務極差" onclick=opt6("'+f2+'")> 服務極差</button></div></div>';
+                                                str+='<div class="btnOption" id="btnOption'+f2+'"><button onclick=opt1("'+f2+'")>環境乾淨</button><button onclick=opt2("'+f2+'") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("'+f2+'")>餐點美味</button><button value="餐點糟糕" onclick=opt4("'+f2+'")>餐點糟糕</button><button value="親切店家" onclick=opt5("'+f2+'")>親切店家</button><button value="服務極差" onclick=opt6("'+f2+'")> 服務極差</button></div></div></div>';
  
-                                                            count++;
-                                                            flag2=1;
+                                                count++;
+                                                flag2=1;
                                             }
                                         }
                                     }
@@ -419,10 +419,10 @@
                                                 str+=' ';
                                                 str+='<button onclick=comment("'+f2+'") id="comment"> '+" 我要評論 "+'</button>';
                                                 str+=' ';
-                                                str+='<button onclick=delfoodlist("'+f+','+f2+'") id="delete">'+"自清單移除"+'</button></div></div>';
+                                                str+='<button onclick=delfoodlist("'+f+','+f2+'") id="delete">'+"自清單移除"+'</button></div>';
                                                 str+='<div class="postArea" style="display:none" id="postArea'+f2+'">\
                                                     <div class="postInput">\
-                                                    <input type="text" placeholder="請輸入飯局時間" id="eatTimeTerm'+f2+'"/>\
+                                                    <input type="text" class="eatTimeTerm" placeholder="請輸入飯局時間" id="eatTimeTerm'+f2+'"/>\
                                                     <textarea id="postTerm'+f2+'" style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>\
                                                     <img src="img/pic.png" alt="">\
                                                     </div>\
@@ -435,24 +435,22 @@
                                                 str+='<div class="commentArea" id="commentArea'+f2+'" style="display:none">';
                                                 str+='<div class="commentInput"><textarea id="commentTerm'+f2+'" style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea><img src="img/pic.png" alt=""></div>';
                                                 str+='<div class="btn3" id="btn3'+f2+'"><button id="option'+f2+'">評論選項</button><button id="commentBtn'+f2+'">發表評論</button></div>';
-                                                str+='<div class="btnOption" id="btnOption'+f2+'"><button onclick=opt1("'+f2+'")>環境乾淨</button><button onclick=opt2("'+f2+'") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("'+f2+'")>餐點美味</button><button value="餐點糟糕" onclick=opt4("'+f2+'")>餐點糟糕</button><button value="親切店家" onclick=opt5("'+f2+'")>親切店家</button><button value="服務極差" onclick=opt6("'+f2+'")> 服務極差</button></div></div>';    
-                                                            count++;
-                                                            flag2=1;
-
+                                                str+='<div class="btnOption" id="btnOption'+f2+'"><button onclick=opt1("'+f2+'")>環境乾淨</button><button onclick=opt2("'+f2+'") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("'+f2+'")>餐點美味</button><button value="餐點糟糕" onclick=opt4("'+f2+'")>餐點糟糕</button><button value="親切店家" onclick=opt5("'+f2+'")>親切店家</button><button value="服務極差" onclick=opt6("'+f2+'")> 服務極差</button></div></div></div>';    
+                                                
+                                                count++;
+                                                flag2=1;
                                     }
-                                }
-                                
+                                }   
                             }
                         }
-                        }
-                    
-                }
-                    if(flag==0){
-                        str+='<h2>'+"查無相關資料"+'</h2>';
                     }
-                    list.innerHTML=str;
+                }
+                if(flag==0){
+                    str+='<h2>'+"查無相關資料"+'</h2>';
+                }
+                list.innerHTML=str;
                 });
-                    flag2=0;
+                flag2=0;
             });
             });
         });
