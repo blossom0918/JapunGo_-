@@ -323,13 +323,13 @@
         var friendInf=friendsnapshot.val();
         var count=0;
         for(var j in friendInf){
-            if(friendInf[j]["ANo"]==ID&&friendInf[j]["Status"]==false){
+            if(friendInf[j]["ANo"]==ID&&friendInf[j]["Status"]=='false'){
                 console.log("1");
                 for(var k in memberInf){
                     if(memberInf[k]["ID"]==friendInf[j]["SNo"]){
                         allimg.push(memberInf[k]["ID"]);
                         count++;
-                        str+='<div class="info">';
+                        str+='<div class="info" id="'+j+'">';
                         str+='<img src="img/pic.png" id="friendphoto'+memberInf[k]["ID"]+'" class="addIcon">';
                         str+='<h3 id="friendName">'+memberInf[k]["Name"]+'</h3>';
                         str+='<button onclick=Reject("'+j+'")>'+"拒絕"+'</button>';
@@ -432,14 +432,16 @@ function delcomment(comment){
     delcommentdata.remove();
 }
 function Reject(j){
-    var n=document.querySelector('.info');
+    var id='#'+j;
+    var n=document.querySelector(id);
     n.style="display:none";
     alert("好友邀請已拒絕");
     var Rejectdata=firebase.database().ref('/好友名單資料/'+j);
     Rejectdata.remove();
 }
 function Accept(j){
-    var n=document.querySelector('.info');
+    var id='#'+j;
+    var n=document.querySelector(id);
     n.style="display:none";
     alert("好友邀請已接受");
     var Acceptdata=firebase.database().ref('/好友名單資料/'+j);

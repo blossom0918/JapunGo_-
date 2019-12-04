@@ -30,6 +30,9 @@ db.ref('會員資料/').once('value', function (snapshot) {
     for(i in data){
         if(data[i].ID==friendId){
             document.getElementById('title_h1').innerHTML= data[i].Name +'的美食清單';
+            
+            document.title=  data[i].Name +'的美食清單';
+           
         }
     }
 })
