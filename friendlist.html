@@ -161,7 +161,7 @@
                                     str += '<div class="info" id="' + i + '">';
                                     str += '<img src="img/pic.png" class="addIcon" id="img' + memberInf[j]["ID"] + '">';
                                     str += '<h3 class=UserName>' + memberInf[j]["Name"] + '</h3>';
-                                    str += '<button onclick=foodlist("' + j + '")>' + "查看美食清單" + '</button>';
+                                    str += '<button onclick=foodlist("' + memberInf[j]["ID"] + '")>' + "查看美食清單" + '</button>';
                                     str += '<button onclick=delfrined("' + i + '")>' + "刪除好友" + '</button></div>';
 
                                 }
@@ -175,7 +175,7 @@
                                     str += '<div class="info" id="' + i + '">';
                                     str += '<img src="img/pic.png" class="addIcon" id="img' + memberInf[j]["ID"] + '">';
                                     str += '<h3 class="UserName">' + memberInf[j]["Name"] + '</h3>';
-                                    str += '<button onclick=foodlist("' + j + '")>' + "查看美食清單" + '</button>';
+                                    str += '<button onclick=foodlist("' + memberInf[j]["ID"] + '")>' + "查看美食清單" + '</button>';
                                     str += '<button onclick=delfrined("' + i + '")>' + "刪除好友" + '</button></div>';
                                 }
                             }
@@ -223,9 +223,9 @@
             })
             alert("感謝您的意見");
         }
-        function foodlist(j) {
-            document.cookie = "friendId=" + j;
-            window.location.href = "foodlist.html";
+        function foodlist(id) {
+            document.cookie = "friendId=" + id;
+            window.open("friend_foodlist.html");
         }
         function delfrined(i) {
             var id = '#' + i;
