@@ -74,7 +74,12 @@
                     <img src="img/pic.png" class="writerImg">
                     <h3 class="writer">發布者</h3>
                     <p class="time">時間</p>
-                    <p class="postContent">內容</p>
+                    <div class="post_detail">
+                        <div class="eatTime" id="eatTime">飯局時間</div>
+                        <div class="postContent" id="postContent">內容</div>
+                        <button id="confirmEdit">確認修改</button>
+                        <button id="cancelEdit">取消修改</button>
+                    </div>                  
 
                     <div class="bottom">
                         <button id="restaurant">餐廳名</button>
@@ -82,7 +87,7 @@
                         <!-- 自己的動態顯示<div class="btn_my_posts">，別人的顯示<div class="btn_others_posts"> -->
                         <div class="btn_my_posts">
                             <button>刪除</button>
-                            <button>修改</button>
+                            <button id="edit">修改</button>
                         </div>
 
                         <div class="btn_others_posts">
@@ -209,8 +214,9 @@
                 $('.commentArea').hide();
                 $('.postArea').hide();
             });
-        });
 
+        });
+        
         $(function(){
             var moreCompanion = document.getElementById('moreCompanion');
             
@@ -252,6 +258,7 @@
                 document.getElementById('info').style.display = "none";
             });
         });
+
 //-----------------------------------------------後端
         var statusdata=firebase.database().ref('/動態資料/');
         var memberdata=firebase.database().ref('/會員資料/');
@@ -279,13 +286,17 @@
                                 str+='</div>';
                                 str+='<img src="img/pic.png" class="writerImg">';
                                 str+='<h3 class="writer">自己</h3>';
-                                str+='<p class="time">'+statusInf[s]["EatTime"]+'</p>';
-                                str+='<p class="postContent">'+statusInf[s]["Content"]+'</p>';
+                                str+='<p class="time">'+statusInf[s]["Date"]+'</p>';
+
+                                str+='<div class="post_detail"><p class="eatTime" id="eatTime'+s+'">'+statusInf[s]["EatTime"]+'</p>';
+                                str+='<p class="postContent" id="postContent'+s+'">'+statusInf[s]["Content"]+'</p>';
+                                str+='<button class="confirmEdit" id="confirmEdit'+s+'">確認修改</button><button class="cancelEdit" id="cancelEdit'+s+'">取消修改</button></div>';
+
                                 str+='<div class="bottom">';
                                 str+='<button id="restaurant" onclick=showInf("'+s+'")>'+statusInf[s]["Name"]+'</button>';             
                                 str+='<div class="btn_my_posts">';//自己的動態                                                    
                                 str+='<button onclick=delpost("'+s+'")>刪除</button>';
-                                str+='<button>修改</button>';
+                                str+='<button onclick=edit("'+s+'")>修改</button>';
                                 str+='</div>';
                                 str+='</div></div>';
                                 str+='<div class="info" id="info'+s+'" style="display: none;">';
@@ -333,13 +344,57 @@
                                 str+='<p>內容</p>';
                                 str+='</div></div></div></div></div>';
                             }
+                        
                         }
                         status.innerHTML=str;
-                        
+
+                        $('.confirmEdit').hide();
+                        $('.cancelEdit').hide();
                     });
                 });
             });
         });
+
+
+function edit(i){
+    var confirmEdit = "#confirmEdit" + i;
+    $(confirmEdit).show();
+    var cancelEdit = "#cancelEdit" + i;
+    $(cancelEdit).show();
+
+    var eatTime = "#eatTime" + i;
+    var postContent = "#postContent" + i;
+    
+    var input = $("<textarea class='textarea'></textarea>");
+    var oldtext = $(eatTime).html();
+    input.width($(eatTime).width());
+    input.val($(eatTime).html());
+    $(eatTime).html("");
+    input.appendTo($(eatTime)).focus().select();
+    
+    var input2 = $("<textarea class='textarea'></textarea>");
+    var oldtext2 = $(postContent).html();
+    input2.width($(postContent).width());
+    input2.val($(postContent).html());
+    $(postContent).html("");
+    input2.appendTo($(postContent)).focus().select();
+
+    $(confirmEdit).click(function(){
+        $(eatTime).html(input.val());
+        $(postContent).html(input2.val());
+        $(confirmEdit).hide();
+        $(cancelEdit).hide();
+    });
+
+     $(cancelEdit).click(function(){
+        $(eatTime).html(oldtext);
+        $(postContent).html(oldtext2);
+        $(confirmEdit).hide();
+        $(cancelEdit).hide();
+    });
+       
+}
+
 function post(i){
     var commentArea = '#commentArea' + i;
             $(commentArea).hide();

@@ -251,15 +251,62 @@ table {
     margin-left: 22px;
   }
 
-  .postContent{
+  .post_detail{
+    float: left;
+    width: 365px;
+  }
+
+  .eatTime{
     float: left;
     font-size: 20px;
     margin-top: 20px;
     margin-left: 20px;
-    margin-bottom: 20px;
-    width: 365px;
+    width: 100%;
     max-height: 100px;
     word-wrap: break-word;
+  }
+
+  .postContent{
+    float: left;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-height: 100px;
+    word-wrap: break-word;
+  }
+
+  .textarea{
+    overflow: auto; 
+    width: 365px; 
+    font-size: 18px;
+    max-height: 100px;
+    display: table-cell;
+    vertical-align: middle;
+    background-color: rgb(255, 255, 255);  
+    border: 0.5px solid rgb(144, 144, 144);
+    border-radius: 3px;
+    outline: none;
+    font-size: 18px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    color: dimgray;
+  }
+
+  .post_detail button{
+    float: left;
+    outline: none;
+    border: 0;
+    background-color: aliceblue;
+    color: dimgray;
+    font-size: 16px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
   .bottom{
@@ -820,11 +867,6 @@ table {
     }
     
     .time{
-      width: 60%;
-      margin-left: 3%;
-    }
-    
-    .postContent{
       width: 60%;
       margin-left: 3%;
     }
