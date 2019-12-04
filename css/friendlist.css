@@ -197,6 +197,9 @@ table {
 
   #friendInfo{
     z-index: 1;
+    position: absolute;
+    left: 50%;
+    margin-left:-200px;
     width: 400px;
     min-height: 300px;
     box-shadow: 3px 3px 3px gray;
