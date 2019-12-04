@@ -252,79 +252,153 @@
                 document.getElementById('info').style.display = "none";
             });
         });
-
-        var storedata=firebase.database().ref('/店家資料/');
+//-----------------------------------------------後端
         var statusdata=firebase.database().ref('/動態資料/');
         var memberdata=firebase.database().ref('/會員資料/');
-        var statusstr='';
-        var statusContent=document.querySelector('.statusContent');
-        memberdata.once('value',function(membersnapshot){
-            statusdata.once('value',function(statussnapshot){
-                storedata.once('value',function(storesnapshot){
-                    var storeInf=storesnapshot.val();
-                    var memberInf=membersnapshot.val();
-                    var statusInf=statussnapshot.val();
-                    var ID=getCookie('ID');
-                    var count=0;
-                    // for(var k in storeInf){
-                    //     for(var i in storeInf[k]){
-                    //         console.log(storeInf[k][i]["店名"]);
-                    //     }
-                    // }
-                    for(var status in statusInf){
-                        if(statusInf[status]["UNo"]==ID){
-                            for(var store in storeInf){
-                                for(var instore in storeInf[store]){
-                                    if(storeInf[store][instore]["店名"]==statusInf[status]["Name"]&&statusInf[status]["UNo"]==ID){
-                                        statusstr+='<div class="content"><div class="status"><div class="statusContent"><h3>'+statusInf[status]["Name"]+'</br>';
-                                        statusstr+='<p>'+statusInf[status]["Date_time"]+'</p></br>';
-                                        statusstr+='<button onclick=delcomment("'+status+'")>'+"刪除"+'</button>';
-                                        statusstr+='<button onclick=changecomment("'+status+'")>'+"修改"+'</button></div></div></div>';
-                                        count++;
-                                    }
-                                }
+        var frienddata=firebase.database().ref('/好友名單資料/');
+        $( document ).ready(function() {
+            var status=document.querySelector('.status');
+            memberdata.once('value',function(membersnapshot){
+                statusdata.once('value',function(statussnapshot){
+                    frienddata.once('value',function(fsnapshot){
+                        var friendInf=fsnapshot.val();
+                        var memberInf=membersnapshot.val();
+                        var statusInf=statussnapshot.val();
+                        var ID=getCookie('ID');
+                        var str=''; 
+                        for(var s in statusInf){
+                            if(statusInf[s]["UNo"]==ID){
+                                // str+='<div class="status">';
+                                str+='<div class="statusContent" id="statusContent'+s+'">';
+                                str+='<div class="moreCompanion" id="moreCompanion" style="display: none;"><img src="img/pic.png" alt=""></div>';
+                                str+='<div class="companion">';
+                                        // <!-- 放已加入者頭貼處，超過五人顯示
+                                        // 按下後顯示<div class="moreCompanion" style="display: none;"></div>裡頭為剩下未顯示的加入者頭貼-->\
+                                str+=' <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg"></button>';      
+                                str+='<img src="img/pic.png" alt="">';
+                                str+='</div>';
+                                str+='<img src="img/pic.png" class="writerImg">';
+                                str+='<h3 class="writer">自己</h3>';
+                                str+='<p class="time">'+statusInf[s]["EatTime"]+'</p>';
+                                str+='<p class="postContent">'+statusInf[s]["Content"]+'</p>';
+                                str+='<div class="bottom">';
+                                str+='<button id="restaurant" onclick=showInf("'+s+'")>'+statusInf[s]["Name"]+'</button>';             
+                                str+='<div class="btn_my_posts">';//自己的動態                                                    
+                                str+='<button onclick=delpost("'+s+'")>刪除</button>';
+                                str+='<button>修改</button>';
+                                str+='</div>';
+                                str+='</div></div>';
+                                str+='<div class="info" id="info'+s+'" style="display: none;">';
+                                str+='<button id="close"><img src="img/cross.png"></button>';
+                                str+='<h3>'+statusInf[s]["Name"]+'</h3>';
+                                str+='<img src="img/pin.png" class="addIcon">';
+                                str+='<p class="address">'+statusInf[s]["Address"]+'</p>';
+                                str+='<img src="img/tel.png" class="telIcon">';
+                                str+='<p class="tel">'+statusInf[s]["Phone"]+'</p>';
+                                str+='<div class="btn0">';
+                                str+='<button class="showAllComments" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>';
+                                str+='<a class="recommend"><img src="img/best.png" class="bestIcon">查看推薦</a></div>';
+                                str+='<div class="btn">';
+                                str+='<button id="post" onclick=post("'+s+'")>發起動態</button>';
+                                str+='<button id="comment">我要評論</button>';
+                                str+='<button>加入清單／自清單移除</button></div>';
+                                str+='<div class="postArea" style="display: none;" id="postArea'+s+'">';
+                                str+='<div class="postInput">';
+                                str+='<input type="text" class="eatTimeTerm" placeholder="請輸入飯局時間" id="eatTimeTerm'+ s + '">';
+                                str+='<textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="postTerm'+s+'"></textarea>';
+                                str+='<img src="img/pic.png" alt=""></div>';
+                                str+='<div class="btn2">';
+                                str+='<button id="sure'+s+'">確定</button>';
+                                str+='<button id="cancel'+s+'">取消</button>';
+                                str+='</div></div>';
+                                str+='<div class="commentArea" style="display: none;" id="commentArea'+s+'">';
+                                str+='<div class="commentInput">';
+                                str+='<textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea>';
+                                str+='<img src="img/pic.png" alt=""></div>';
+                                str+='<div class="btn3">';
+                                str+='<button id="option">評論選項</button>';
+                                str+='<button>我要評論</button>';
+                                str+='</div>';
+                                str+='<div class="btnOption" style="display: none;">';
+                                str+='<button>環境乾淨</button>\
+                                    <button>環境骯髒</button>\
+                                    <button>餐點美味</button>\
+                                    <button>餐點糟糕</button>\
+                                    <button>親切店家</button>\
+                                    <button>服務極差</button></div></div>';
+                                str+='<div class="allComments" style="display: none;">';
+                                str+='<div class="comments">';
+                                str+='<img src="img/pic.png" alt="">';
+                                str+='<div class="commentContent">';
+                                str+='<p>內容</p>';
+                                str+='</div></div></div></div></div>';
                             }
                         }
-                    }
-                    console.log(count);
-                    statusContent.innerHTML=statusstr;
+                        status.innerHTML=str;
+                        
+                    });
                 });
             });
         });
+function post(i){
+    var commentArea = '#commentArea' + i;
+            $(commentArea).hide();
+            var postArea = '#postArea' + i;
+            var sure = '#sure' + i;
+            var cancel = '#cancel' + i;
+            var postTerm = '#postTerm' + i;
+            var ID = getCookie('ID');
+            var Today = new Date();
+            var Today2 = +new Date();
+            var newjoin = ID + Today2;
+            $(postArea).slideToggle();
+            $(sure).on('click', function () {
+                var id = 'postTerm' + i
+                var newpost = document.getElementById(id).value;
+                var eatTimeTerm = 'eatTimeTerm' + i;
+                var neweatTime = document.getElementById(eatTimeTerm).value;
+                var postdata = firebase.database().ref('/動態資料/');
+                var fooddata = firebase.database().ref('/美食清單資料/');
+                if (neweatTime == '') {
+                    alert("請輸入要吃飯的時間");
+                } else {
+                    fooddata.once('value', function (fsnapshot) {
+                        var foodInf = fsnapshot.val();
+                        for (var f in foodInf) {
+                            for (var f2 in foodInf[f]) {
+                                if (f2 == i) {
+                                    var postAddress = foodInf[f][f2]["Address"];
+                                    var postPhone = foodInf[f][f2]["Phone"];
+                                    var postName = foodInf[f][f2]["Name"];
+                                }
+                            }
+                        }
+                        postdata.push({
+                            EatTime: neweatTime,
+                            JoinKey: ID + Today2,
+                            Address: postAddress,
+                            Phone: postPhone,
+                            Name: postName,
+                            Content: newpost,
+                            UNo: ID,
+                            PDate: Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate(),
 
-        function changecomment(comment){
-            var newcomment=window.prompt('請輸入新的新的:');
-            var flag=1;
-            if(newcomment){
-                var commentdata=firebase.database().ref('/評論區資料/'+comment);
-                commentdata.update({
-                    Discon:newcomment,
-                })
-                alert("修改成功");
-            }else{
-                console.log("2");
-                alert("尚未修改原本資料");
-            }         
-                
-        }
+                        });
+                        setTimeout(() => {
+        document.getElementById(id).value = '';
+        document.getElementById(eatTimeTerm).value = ''
+        document.getElementById(id).placeholder = Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate() + "動態發佈成功!!";
+    }, 0);
+                       
 
-        function delcomment(comment){
-            var delcommentdata=firebase.database().ref('/評論區資料/'+comment);
-            delcommentdata.remove();
-        }
+                    });
+                }
 
-        function Reject(j){
-            var Rejectdata=firebase.database().ref('/好友名單資料/'+j);
-            Rejectdata.remove();
-        }
-
-        function Accept(j){
-            var Acceptdata=firebase.database().ref('/好友名單資料/'+j);
-            Acceptdata.update({
-                Status:"true",
+                firebase.database().ref('/加入飯局資料/"' + newjoin + '"').push(ID);
+                $(postArea).style = "display:none";
             });
-        }
 
+        }
         function getCookie(name) {
             var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
             if (arr = document.cookie.match(reg))
@@ -332,17 +406,48 @@
             else
                 return null;
         }
+        function delfoodlist(j) {
+            var ID=getCookie('ID');
+            document.querySelector('.info').style="display:none";
+            var delfood = firebase.database().ref('/美食清單資料/'+ID+'/'+j);
+            delfood.remove();
+            alert("此清單已刪除");
+}
+function delpost(s){
+    var statusContent='#statusContent'+s;
+    $(statusContent).hide();
+    firebase.database().ref('/動態資料/'+s).remove();
+    alert("動態已刪除");
 
-        function suggestion(){
-            var suggestion=$('#suggestion').val();
-            var membermail=$('#membermail').val();
-            var problem=firebase.database().ref('/問題回報/');
-            problem.push({
-                question:suggestion,
-                email:membermail,
-            })
-            alert("你問題真多");
-        } 
+}
+function showInf(s){
+    var info='#info'+s;
+    $(info).show();
+}
+
+
+
+
+
+function getCookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg))
+        return unescape(arr[2]);
+    else{
+                return null;
+    }
+}
+
+function suggestion(){
+    var suggestion=$('#suggestion').val();
+    var membermail=$('#membermail').val();
+    var problem=firebase.database().ref('/問題回報/');
+    problem.push({
+        question:suggestion,
+        email:membermail,
+    });
+    alert("感謝您的意見！");
+} 
 
     </script>
 </body>
