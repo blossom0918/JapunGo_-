@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,38 +9,39 @@
     <title>我的好友清單</title>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="jquery-3.3.1.min.js"></script>
-  <!--選擇使用realtime database功能-->
+    <!--選擇使用realtime database功能-->
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
-    <script src="http://code.changer.hk/jquery/plugins/jquery.cookie.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-storage.js"></script>
-  <script type="text/javascript">
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyCcIFB1orespqziBWnX8kUWyihopdBw8jM",
-        authDomain: "japungo.firebaseapp.com",
-        databaseURL: "https://japungo.firebaseio.com",
-        projectId: "japungo",
-        storageBucket: "japungo.appspot.com",
-        messagingSenderId: "238647383425",
-        appId: "1:238647383425:web:cd43c3708893b6e052c480"
-      };
-      // Initialize Firebase 初始化
-      firebase.initializeApp(firebaseConfig);
-      </script>
-  <script defer type="text/javascript" src='js/contact_us.js'></script>    
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-storage.js"></script>
+    <script type="text/javascript">
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCcIFB1orespqziBWnX8kUWyihopdBw8jM",
+            authDomain: "japungo.firebaseapp.com",
+            databaseURL: "https://japungo.firebaseio.com",
+            projectId: "japungo",
+            storageBucket: "japungo.appspot.com",
+            messagingSenderId: "238647383425",
+            appId: "1:238647383425:web:cd43c3708893b6e052c480"
+        };
+        // Initialize Firebase 初始化
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script defer type="text/javascript" src='js/contact_us.js'></script>
 </head>
+
 <body>
     <div class="wrap">
         <div class="header">
             <img src="img/logo_header.png" class="logo">
             <div id="toggle">
-                    <div class="one"></div>
-                    <div class="two"></div>
-                    <div class="three"></div>
+                <div class="one"></div>
+                <div class="two"></div>
+                <div class="three"></div>
             </div>
 
             <nav id="menu">
-                 <ul>
+                <ul>
                     <li><a href="game.html"><img src="img/game.png" alt="">今天吃什麼</a></li>
                     <li><a href="posts.html"><img src="img/posts.png" alt="">我的動態</a></li>
                     <li><a href="search.html"><img src="img/search.png" alt="">搜尋美食</a></li>
@@ -49,7 +51,7 @@
                     <li><a href="member.html#2"><img src="img/friend_request.png" alt="">好友邀請</a></li>
                     <li><a href="member.html#3"><img src="img/comment.png" alt="">我的評論</a></li>
                     <li><a href="member.html#4"><img src="img/logout.png" alt="">登出</a></li>
-               </ul>
+                </ul>
             </nav>
         </div>
         <div class="clear"></div>
@@ -58,6 +60,7 @@
             <h1>我的好友清單</h1>
             <p>以帳號搜尋好友，立即發送好友邀請</p>
             <div class="inputArea">
+                    <input type="hidden" id="search_id" value="">
                 <input type="text" class="searchTerm" id="search">
                 <button type="submit" class="searchBtn" onclick="friendInfo()"><img src="img/search.png" alt=""></button>
             </div>
@@ -68,13 +71,13 @@
             <button id="close"><img src="img/cross.png" alt=""></button>
             <img src="img/pic.png" alt="" id="image">
             <h3 class="NewName">用戶名</h3>
-            <button id="addFriend">加入好友</button>
+            <button id="addFriend" onclick="addFriend()">加入好友</button>
         </div>
 
         <div class="content">
-            
-            <div class="friendlist">
-                
+
+            <div class="friendlist" id='list'>
+
                 <div class="info" style="display:none">
                     <img src="img/pic.png" class="addIcon" id="image3">
                     <h3 class="UserName">用戶名</h3>
@@ -83,50 +86,51 @@
                         改<title>xxx的美食清單</title>和<h1>xxx的美食清單</h1>-->
                     <button>刪除</button>
                 </div>
-                
+
             </div>
-            
+
         </div>
 
         <div class="clear"></div>
-        
+
         <div class="footer">
             <div class="left">
                 <img src="img/logo_mini.png" alt="" class="logo_footer">
                 <h3>聯絡我們</h3>
                 <p>如有任何問題，請留下您的問題與聯絡信箱，我們將儘速與您聯繫</p>
             </div>
-            
+
             <div class="right">
                 <textarea style="overflow:auto" class="questionTerm" placeholder="請輸入您的問題" id="suggestion"></textarea>
                 <div class="emailArea">
                     <input type="email" class="emailTerm" id='emailTerm' placeholder="請輸入您的信箱">
-                    <button type="submit" class="submitBtn" id='submitBtn' onclick=suggestion()><img src="img/send.png" alt="" class="contact"></button>
-                </div> 
-            </div> 
-            
+                    <button type="submit" class="submitBtn" id='submitBtn' onclick=suggestion()><img src="img/send.png"
+                            alt="" class="contact"></button>
+                </div>
+            </div>
+
             <button id="backTop" class="toTop"></button>
         </div>
     </div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script>
-        $( document ).ready(function() {
+        $(document).ready(function () {
             $('#menu').hide();
-            $('#toggle').click(function() {
+            $('#toggle').click(function () {
                 $('#menu').slideToggle();
             });
         });
 
-        
 
-        $(function(){
-            $('#backTop').click(function(){ 
-                $('html,body').animate({scrollTop:0}, 333);
+
+        $(function () {
+            $('#backTop').click(function () {
+                $('html,body').animate({ scrollTop: 0 }, 333);
             });
 
-            $(window).scroll(function() {
-                if ( $(this).scrollTop() > 300 ){
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 300) {
                     $('#backTop').fadeIn(222);
                 } else {
                     $('#backTop').stop().fadeOut(222);
@@ -136,218 +140,213 @@
         });
     </script>
     <script type="text/javascript">
-        
-        $(document).ready(function(){
-            var list=document.querySelector('.friendlist');
-            var frienddata=firebase.database().ref('/好友名單資料/');
-            var memberdata=firebase.database().ref('/會員資料/');
-            var str='';
-            var MyID=getCookie('ID');
-            var UserName=document.getElementById('UserName');
-            var addIcon=document.querySelector('.addIcon');
-            var allimg=[];
-            // var image2=document.getElementById('image2');
-            frienddata.once('value',function(friendsnapshot){
-                memberdata.once('value',function(membersnapshot){
-                var memberInf=membersnapshot.val();
-                var friendInf=friendsnapshot.val();
-                for(var i in friendInf){
-                    if(friendInf[i]["ANo"]==MyID&&friendInf[i]["Status"]==true){
-                            for(var j in memberInf){
-                            if(friendInf[i]["SNo"]==memberInf[j]["ID"]){
-                                allimg.push(memberInf[j]["ID"]);
-                                
-                                str+='<div class="info">';
-                                str+='<img src="img/pic.png" class="addIcon" id="img'+memberInf[j]["ID"]+'">';
-                                str+='<h3 class=UserName>'+memberInf[j]["Name"]+'</h3>';
-                                str+='<button onclick=foodlist("'+j+'")>'+"查看美食清單"+'</button>';
-                                str+='<button onclick=delfrined("'+i+'")>'+"刪除好友"+'</button></div>';
-                                
-                            }
-                            
-                        }
-                    }else if(friendInf[i]["SNo"]==MyID&&friendInf[i]["Status"]==true){
-                        for(var j in memberInf){
-                            if(friendInf[i]["ANo"]==memberInf[j]["ID"]){
-                                allimg.push(memberInf[j]["ID"]);
-                                
-                                    str+='<div class="info">';
-                                    str+='<img src="img/pic.png" class="addIcon" id="img'+memberInf[j]["ID"]+'">';
-                                    str+='<h3 class="UserName">'+memberInf[j]["Name"]+'</h3>';
-                                    str+='<button onclick=foodlist("'+j+'")>'+"查看美食清單"+'</button>';
-                                    str+='<button onclick=delfrined("'+i+'")>'+"刪除好友"+'</button></div>';
+
+        $(document).ready(function () {
+            var list = document.querySelector('#list');
+            var frienddata = firebase.database().ref('/好友名單資料/');
+            var memberdata = firebase.database().ref('/會員資料/');
+            var str = '';
+            var MyID = getCookie('ID');
+            var allimg = [];
+            frienddata.once('value', function (friendsnapshot) {
+                memberdata.once('value', function (membersnapshot) {
+                    var memberInf = membersnapshot.val();
+                    var friendInf = friendsnapshot.val();
+                    for (i in friendInf) {
+                        if (friendInf[i]["ANo"] == MyID && friendInf[i]["Status"] == 'true') {
+                            for (j in memberInf) {
+                                if (friendInf[i]["SNo"] == memberInf[j]["ID"]) {
+                                    allimg.push(memberInf[j]["ID"]);
+
+                                    str += '<div class="info" id="' + i + '">';
+                                    str += '<img src="img/pic.png" class="addIcon" id="img' + memberInf[j]["ID"] + '">';
+                                    str += '<h3 class=UserName>' + memberInf[j]["Name"] + '</h3>';
+                                    str += '<button onclick=foodlist("' + j + '")>' + "查看美食清單" + '</button>';
+                                    str += '<button onclick=delfrined("' + i + '")>' + "刪除好友" + '</button></div>';
+
                                 }
+
+                            }
+                        } else if (friendInf[i]["SNo"] == MyID && friendInf[i]["Status"] == 'true') {
+                            for (j in memberInf) {
+                                if (friendInf[i]["ANo"] == memberInf[j]["ID"]) {
+                                    allimg.push(memberInf[j]["ID"]);
+
+                                    str += '<div class="info" id="' + i + '">';
+                                    str += '<img src="img/pic.png" class="addIcon" id="img' + memberInf[j]["ID"] + '">';
+                                    str += '<h3 class="UserName">' + memberInf[j]["Name"] + '</h3>';
+                                    str += '<button onclick=foodlist("' + j + '")>' + "查看美食清單" + '</button>';
+                                    str += '<button onclick=delfrined("' + i + '")>' + "刪除好友" + '</button></div>';
+                                }
+                            }
                         }
                     }
-                }   
-                list.innerHTML=str;
-                setTimeout(() => {
-                    for(i in allimg){
-                        getimg(allimg[i]);
-                    }
-                }, 0);
+                    list.innerHTML = str;
+                    setTimeout(() => {
+                        for (i in allimg) {
+                            console.log(allimg[i]);
+                            getimg(allimg[i]);
+                        }
+                    }, 0);
+                });
             });
+
+
         });
-            
-            
-        });
-function getCookie(name) {
+        function getCookie(name) {
             var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
 
-        if (arr = document.cookie.match(reg))
+            if (arr = document.cookie.match(reg))
 
-            return unescape(arr[2]);
-        else
-            return null;
-}
+                return unescape(arr[2]);
+            else
+                return null;
+        }
 
-function getimg(id){
-    var img_id='img'+id;
-    var storageRef=firebase.storage().ref();
-    var img_ref='user/'+id;
-    var pathReference = storageRef.child(img_ref);
-    pathReference.getDownloadURL().then(function(url) {    
-        document.getElementById(img_id).src=url;          
-    });
-}
+        function getimg(id) {
+            var img_id = 'img' + id;
+            var storageRef = firebase.storage().ref();
+            var img_ref = 'user/' + id;
+            var pathReference = storageRef.child(img_ref);
+            pathReference.getDownloadURL().then(function (url) {
+                document.getElementById(img_id).src = url;
+            });
+        }
 
-async function callimage(UID){
-    var storage=firebase.storage();
-    var storageRef=firebase.storage().ref();
-    var img_ref='user/'+UID;
-    var pathReference = storageRef.child(img_ref);
-    var str='';
-    var addIcon=document.querySelector('.addIcon');
-    // var image2=document.getElementById('image2');
-    pathReference.getDownloadURL().then(function(url) {  //將路徑轉換為可使用的URL
-        
-            return url;
-           //圖片網址放進img的src裡即可顯示            
-    });
-}
-function suggestion(){
-    var suggestion=$('#suggestion').val();
-    var membermail=$('#emailTerm').val();
-    var problem=firebase.database().ref('/問題回報/');
-    problem.push({
-        question:suggestion,
-        email:membermail,
-    })
-    alert("感謝您的意見");
-}  
-function foodlist(j){
-    document.cookie="FNo="+j;
-    window.location.href="foodlist.html";
-}
-function delfrined(i){
-    deldata=firebase.database().ref('/好友名單資料/'+i);
-    var n= document.querySelector('.info');
-    n.style="display:none";
-    alert("好友已刪除");
-    deldata.remove();
+        function suggestion() {
+            var suggestion = $('#suggestion').val();
+            var membermail = $('#emailTerm').val();
+            var problem = firebase.database().ref('/問題回報/');
+            problem.push({
+                question: suggestion,
+                email: membermail,
+            })
+            alert("感謝您的意見");
+        }
+        function foodlist(j) {
+            document.cookie = "friendId=" + j;
+            window.location.href = "foodlist.html";
+        }
+        function delfrined(i) {
+            var id = '#' + i;
+            deldata = firebase.database().ref('/好友名單資料/' + i);
+            var n = document.querySelector(id);
+            n.style = "display:none";
+            alert("好友已刪除");
+            deldata.remove();
 
-}
-function friendInfo(){
-
+        }
+        function friendInfo() {
+            document.getElementById('search_id').value = $('#search').val();
+            document.getElementById('addFriend').innerHTML = '加入好友';
             var friendInfo = document.getElementById("friendInfo");
-            
-            
-            $('.searchBtn').click(function centerHandler(){ 
+
+
+            $('.searchBtn').click(function centerHandler() {
                 var scrollDist = $(window).scrollTop();
                 var myTop = "100px";
-                var myLeft = ($(window).width()-$("#friendInfo").width())/2;
-                $("#friendInfo").offset({left:myLeft});
-                
+                var myLeft = ($(window).width() - $("#friendInfo").width()) / 2;
+                $("#friendInfo").offset({ left: myLeft });
+
                 $(window).resize(centerHandler);
             });
- 
-            $('#close').click(function(){
+
+            $('#close').click(function () {
                 friendInfo.style.display = "none";
             });
-            $( document ).ready(function() {
-                var storageRef=firebase.storage().ref();
-                var search=$('#search').val();
-                var NewName=document.querySelector('.NewName');
-                var frienddata=firebase.database().ref('好友名單資料');
-                var memberdata=firebase.database().ref('會員資料');
-                var str='';
-                var count=0;
-                var flag=0;
-                var ID=getCookie('ID');
-                var image=document.getElementById('image');
-                var storage=firebase.storage();
-                        var img_ref='user/'+search;
-                        var pathReference = storageRef.child(img_ref);
-                        pathReference.getDownloadURL().then(function(url) {  //將路徑轉換為可使用的URL
-                                image.src = url;   //圖片網址放進img的src裡即可顯示
-                        })
-                frienddata.once('value',function(fsnapshot){
-                    memberdata.once('value',function(msnapshot){
-                        var friendInf=fsnapshot.val();
-                        var memberInf=msnapshot.val();
-                        for(var m in memberInf){
-                            if(memberInf[m]["ID"]==search){
+            $(document).ready(function () {
+                var storageRef = firebase.storage().ref();
+                var search = $('#search').val();
+                var NewName = document.querySelector('.NewName');
+                var frienddata = firebase.database().ref('好友名單資料');
+                var memberdata = firebase.database().ref('會員資料');
+                var str = '';
+                var count = 0;
+
+                var ID = getCookie('ID');
+                var image = document.getElementById('image');
+                var storage = firebase.storage();
+                var img_ref = 'user/' + search;
+                var pathReference = storageRef.child(img_ref);
+                pathReference.getDownloadURL().then(function (url) {  //將路徑轉換為可使用的URL
+                    image.src = url;   //圖片網址放進img的src裡即可顯示
+                })
+                frienddata.once('value', function (fsnapshot) {
+                    memberdata.once('value', function (msnapshot) {
+                        var friendInf = fsnapshot.val();
+                        var memberInf = msnapshot.val();
+                        for (var m in memberInf) {
+                            if (memberInf[m]["ID"] == search) {
                                 count++;
-                                var newID=m;
+                                var newID = m;
                             }
                         }
-                        if(count==0){
-                            friendInfo.style.display="none";
+                        if (count == 0) {
+                            friendInfo.style.display = "none";
                             alert("查無此帳號");
-                        }else{
-                            friendInfo.style.display="block";
-                            str+=memberInf[newID]["Name"];
+                        } else {
+                            friendInfo.style.display = "block";
+                            str += memberInf[newID]["Name"];
                         }
-                        
-                        NewName.innerHTML=str;
-                        $('#addFriend').on('click',function(){
-                            if(ID==search){
-                                flag=1;
-                                alert("請不要加自己好友好嗎?");
-                            }else{
-                            for(var i in friendInf){
-                                if(friendInf[i]["ANo"]==search&&friendInf[i]["SNo"]==ID){
-                                    if(friendInf[i]["Status"]==true){
-                                        alert("你們已經是好友囉");
-                                        flag=1;
-                                        break;
-                                    }else{
-                                        alert("已送出邀請，等待對方回應");
-                                        flag=1;
-                                        break;
-                                    }
-                                }else if(friendInf[i]["SNo"]==search&&friendInf[i]["ANo"]==ID){
-                                    if(friendInf[i]["Status"]==true){
-                                        alert("你們已經是好友囉");                                        
-                                        flag=1;
-                                        break;
-                                    }else{
-                                        alert("對方已對您發出邀請，請至好友邀請中確認");                                        
-                                        flag=1;
-                                        break;
-                                    }
-                                }
-                            }
-                            }
-                            if(flag!=1){
-                                alert("已發出交友邀請！");
-                                frienddata.push({
-                                    Status:false,
-                                    ANo:search,
-                                    SNo:ID,
-                                });
-                            }
 
+                        NewName.innerHTML = str;
 
-                            
-                        });
                     });
                 });
 
-                
+
             });
-        
-}
+
+        }
+
+        function addFriend() {
+            var frienddata = firebase.database().ref('好友名單資料');
+            var ID = getCookie('ID');
+            var search = document.getElementById('search_id').value;
+            frienddata.once('value', function (fsnapshot) {
+                var friendInf = fsnapshot.val();
+                var flag = 0;
+            if (ID == search) {
+                flag = 1;
+                alert("請不要加自己好友好嗎?");
+            } else {
+                for (i in friendInf) {
+                    if (friendInf[i]["ANo"] == search && friendInf[i]["SNo"] == ID) {
+                        if (friendInf[i]["Status"] == 'true') {
+
+                            alert("你們已經是好友囉");
+                            flag = 1;
+                            break;
+                        } else {
+
+                            alert("已送出邀請，等待對方回應");
+                            flag = 1;
+                            break;
+                        }
+                    } else if (friendInf[i]["SNo"] == search && friendInf[i]["ANo"] == ID) {
+                        if (friendInf[i]["Status"] == 'true') {
+                            alert("你們已經是好友囉");
+                            flag = 1;
+                            break;
+                        } else {
+                            alert("對方已對您發出邀請，請至好友邀請中確認");
+                            flag = 1;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (flag != 1) {
+                alert("已發出交友邀請！");
+                frienddata.push({
+                    Status: 'false',
+                    ANo: search,
+                    SNo: ID,
+                });
+            }
+            })
+            
+        }
     </script>
 </body>
 
