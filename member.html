@@ -193,6 +193,7 @@
             }else if(location.hash == "#4"){
                 //登出
             }
+
             $('#menu').hide();
             $('#toggle').click(function() {
                 $('#menu').slideToggle();
@@ -455,16 +456,16 @@ function getCookie(name) {
         return unescape(arr[2]);
     else
         return null;
-    }
+}
 function suggestion(){
     var suggestion=$('#suggestion').val();
     var membermail=$('#membermail').val();
     var problem=firebase.database().ref('/問題回報/');
     problem.push({
         question:suggestion,
-        email:membermail,
+        email:membermail
     })
-    alert("你問題真多");
+    alert("感謝您的意見");
 }  
     </script>
 </body>
