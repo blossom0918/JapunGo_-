@@ -404,9 +404,8 @@
                                 str+='<button class="confirmEdit" id="confirmEdit'+s+'">確認修改</button><button class="cancelEdit" id="cancelEdit'+s+'">取消修改</button></div>';
                                 str+='<div class="bottom">';
                                 str+='<button id="restaurant" onclick=showInf("'+s+'")>'+statusInf[s]["Name"]+'</button>';
-                                str+='<div class="btn_my_posts">';//自己的動態                                                    
-                                str+='<button onclick=delpost("'+s+'")>刪除</button>';
-                                str+='<button onclick=edit("'+s+'")>修改</button>';
+                                str+='<div class="btn_my_posts">';                                                  
+                                str+='<button onclick=join("'+s+'")>加入飯局</button>';
                                 str+='</div>';
                                 str+='</div></div>';
                                 str+='<div class="info" id="info'+s+'" style="display: none;">';
@@ -516,9 +515,8 @@
                                 str+='<button class="confirmEdit" id="confirmEdit'+s+'">確認修改</button><button class="cancelEdit" id="cancelEdit'+s+'">取消修改</button></div>';
                                 str+='<div class="bottom">';
                                 str+='<button id="restaurant" onclick=showInf("'+s+'")>'+statusInf[s]["Name"]+'</button>';
-                                str+='<div class="btn_my_posts">';//自己的動態                                                    
-                                str+='<button onclick=delpost("'+s+'")>刪除</button>';
-                                str+='<button onclick=edit("'+s+'")>修改</button>';
+                                str+='<div class="btn_my_posts">';                                                  
+                                str+='<button onclick=join("'+s+'")>加入飯局</button>';
                                 str+='</div>';
                                 str+='</div></div>';
                                 str+='<div class="info" id="info'+s+'" style="display: none;">';
@@ -612,6 +610,28 @@
                 });
             });
         });
+function join(i){
+    var postdata=firebase.database().ref('/動態資料/');
+    var joindata=firebase.database().ref('/加入飯局資料/');
+    var ID=getCookie("ID");
+
+    postdata.once('value',function(psnapshot){
+        joindata.once('value',function(jsnapshot){
+            var postInf=psnapshot.val();
+            var joinInf=jsnapshot.val();
+            for(var p in postInf){
+                if(p==i){
+                    for(var j in joinInf){
+                        if(postInf[p]["JoinKey"]==j){
+                            firebase.database().ref('/加入飯局資料/'+j).push(ID);
+                            alert("加入飯局成功");
+                        }
+                    }
+                }
+            }
+        })
+    })
+}
 function addlist(i){
     var fooddata=firebase.database().ref('/美食清單資料/');
     var postdata=firebase.database().ref('/動態資料/');
