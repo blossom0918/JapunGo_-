@@ -350,7 +350,7 @@
                                 str += '<div class=info id="info' + j + '"><h3 id="name">' + foodInf[i][j]["Name"] + '</h3>';
                                 str += '<img src="img/pin.png" class="addIcon"><p class="address">' + foodInf[i][j]["Address"] + '</p>';
                                 str += '<img src="img/tel.png" class="telIcon"><p class="tel">' + foodInf[i][j]["Phone"] + '</p>';
-
+                                str+='<input type="hidden" id="get_name'+ j + '" value="' + foodInf[i][j]["Name"] + '">';
                                 for (var r in resInf) {
                                     for (var r2 in resInf[r]) {
                                         if (resInf[r][r2]["店名"] == foodInf[i][j]["Name"]) {
@@ -395,10 +395,10 @@
                                 str += '<div class="btn3" id="btn3' + j + '"><button id="option' + j + '">評論選項</button><button id="commentBtn' + j + '">我要評論</button></div>';
                                 str += '<div class="btnOption" id="btnOption' + j + '"><button onclick=opt1("' + j + '")>環境乾淨</button><button onclick=opt2("' + j + '") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("' + j + '")>餐點美味</button><button value="餐點糟糕" onclick=opt4("' + j + '")>餐點糟糕</button><button value="親切店家" onclick=opt5("' + j + '")>親切店家</button><button value="服務極差" onclick=opt6("' + j + '")> 服務極差</button></div></div>';
                                 str += '<div class="allComments" id="allComments' + j + '">\
-                                        <div class="comments" id="comments'+ j + '">\
+                                        <div class="comments" id="original'+ j+ '">\
                                             <img src="img/pic.png" alt="">\
                                             <div class="commentContent">\
-                                                <p>內容</p>\
+                                                <p>還沒有人發表評論喔~</p>\
                                             </div>\
                                         </div>\
                                     </div></div>';
@@ -444,6 +444,7 @@
                                                         str += '<div class=info><h3 id="name">' + foodInf[f][f2]["Name"] + '</h3>';
                                                         str += '<img src="img/pin.png" class="addIcon"><p class="address">' + foodInf[f][f2]["Address"] + '</p>';
                                                         str += '<img src="img/tel.png" class="telIcon"><p class="tel">' + foodInf[f][f2]["Phone"] + '</p>';
+                                                        str+='<input type="hidden" id="get_name'+ f2 + '" value="' + foodInf[f][f2]["Name"] + '">';
                                                         for (var r in resInf) {
                                                             for (var r2 in resInf[r]) {
                                                                 if (resInf[r][r2]["店名"] == foodInf[f][f2]["Name"]) {
@@ -487,10 +488,10 @@
                                                         str += '<div class="btn3" id="btn3' + f2 + '"><button id="option' + f2 + '">評論選項</button><button id="commentBtn' + f2 + '">發表評論</button></div>';
                                                         str += '<div class="btnOption" id="btnOption' + f2 + '"><button onclick=opt1("' + f2 + '")>環境乾淨</button><button onclick=opt2("' + f2 + '") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("' + f2 + '")>餐點美味</button><button value="餐點糟糕" onclick=opt4("' + f2 + '")>餐點糟糕</button><button value="親切店家" onclick=opt5("' + f2 + '")>親切店家</button><button value="服務極差" onclick=opt6("' + f2 + '")> 服務極差</button></div></div></div>';
                                                         str += '<div class="allComments" id="allComments' + f2 + '" >\
-                                                            <div class="comments">\
+                                                            <div class="comments" id="original'+ f2 + '">\
                                                                 <img src="img/pic.png" alt="">\
                                                                 <div class="commentContent">\
-                                                                    <p>內容</p>\
+                                                                    <p>還沒有人發表評論喔~</p>\
                                                                 </div>\
                                                             </div>\
                                                         </div>';
@@ -512,6 +513,7 @@
                                                     str += '<div class=info><h3 id="name">' + foodInf[f][f2]["Name"] + '</h3>';
                                                     str += '<img src="img/pin.png" class="addIcon"><p class="address">' + foodInf[f][f2]["Address"] + '</p>';
                                                     str += '<img src="img/tel.png" class="telIcon"><p class="tel">' + foodInf[f][f2]["Phone"] + '</p>';
+                                                    str+='<input type="hidden" id="get_name'+ f2 + '" value="' + foodInf[f][f2]["Name"] + '">';
                                                     for (var r in resInf) {
                                                         for (var r2 in resInf[r]) {
                                                             if (resInf[r][r2]["店名"] == foodInf[f][f2]["Name"]) {
@@ -552,10 +554,10 @@
                                                     str += '<div class="btn3" id="btn3' + f2 + '"><button id="option' + f2 + '">評論選項</button><button id="commentBtn' + f2 + '">發表評論</button></div>';
                                                     str += '<div class="btnOption" id="btnOption' + f2 + '"><button onclick=opt1("' + f2 + '")>環境乾淨</button><button onclick=opt2("' + f2 + '") button value="環境骯髒">環境骯髒</button><button value="餐點美味" onclick=opt3("' + f2 + '")>餐點美味</button><button value="餐點糟糕" onclick=opt4("' + f2 + '")>餐點糟糕</button><button value="親切店家" onclick=opt5("' + f2 + '")>親切店家</button><button value="服務極差" onclick=opt6("' + f2 + '")> 服務極差</button></div></div></div>';
                                                     str += '<div class="allComments" id="allComments' + f2 + '" >\
-                                                            <div class="comments">\
+                                                            <div class="comments" id="original'+ f2 + '">\
                                                                 <img src="img/pic.png" alt="">\
                                                                 <div class="commentContent">\
-                                                                    <p>內容</p>\
+                                                                    <p>還沒有人發表評論喔~</p>\
                                                                 </div>\
                                                             </div>\
                                                         </div>';
@@ -598,36 +600,55 @@
             var commentdata = firebase.database().ref('/評論區資料/');
             var fooddata = firebase.database().ref('/美食清單資料/');
             var allComments = '#allComments' + j;
+            $(allComments)[0].innerHTML='<div class="comments" id="original'+ j + '">\
+                                                                <img src="img/pic.png" alt="">\
+                                                                <div class="commentContent">\
+                                                                    <p>還沒有人發表評論喔~</p>\
+                                                                </div>\
+                                                            </div>';
             $(allComments).slideToggle();
             var postArea = '#postArea' + j;
             var commentArea = '#commentArea' + j;
             $(postArea).hide();
             $(commentArea).hide();
 
+            var nameid='get_name'+j;
+            var restaurant=document.getElementById(nameid).value;
+            var allcomment_ref = '/評論區資料';
+            db.ref(allcomment_ref).once('value', function (snapshot) {
+                var alldata = snapshot.val();
+                var userid = [];
+                var imgid = [];
+                
+                    var num = 0;
+                    for (i in alldata) {
+                        if (alldata[i].Name == restaurant) {
+                            var allComments = '#allComments' + j;
+                            var original = 'original' + j;
+                            var img = 'img' + j + '_' + num;
+                            var str = '<div class="comments">\
+                        <img src="img/pic.png"  id="img'+ j + '_' + num + '" alt="">\
+                        <div class="commentContent">\
+                        <p>'+ alldata[i].Discon + '</p>\
+                        </div>\
+                        </div>';
+                            $(allComments).append(str);
+                            userid.push(alldata[i].UNo);
+                            imgid.push(img);
+                            num += 1;
 
-            // var comments = '#comments' + j;
-            // var str = '';
-            // commentdata.once('value', function (csnapshot) {
-            //     fooddata.once('value', function (fsnapshot) {
-            //         var commentInf = csnapshot.val();
-            //         var foodInf = fsnapshot.val();
-            //         for (var f in foodInf) {
-            //             for (var f2 in foodInf[f]) {
-            //                 if (f2 == j) {
-            //                     var restaurant = foodInf[f][f2]["Name"];
-            //                 }
-            //             }
-            //         }
-            //         for (var c in commentInf) {
-            //             if (commentInf[c]["Name"] == restaurant) {
-            //                 str += '<img src="img/pic.png">';
-            //                 str += '<div class="commentContent"><p>' + commentInf[c]["Discon"] + '<p></div>';
-            //             }
-            //         }
+                            document.getElementById(original).style.display = 'none';
+                        }
+                    }
+                    
+                
+                for (i in userid) {
+                    getimg(userid[i], imgid[i]);
+                }
 
-            //     });
-            // });
-            // comments.innerHTML = str;
+
+            })
+
         }
 
         function declare(i) {
@@ -810,7 +831,15 @@
             content = content + ' 服務極差 ';
             document.getElementById(id).value = content;
         }
-
+        function getimg(user, imgid) {
+            var img_id = imgid;
+            var storageRef = firebase.storage().ref();
+            var img_ref = 'user/' + user;
+            var pathReference = storageRef.child(img_ref);
+            pathReference.getDownloadURL().then(function (url) {
+                document.getElementById(img_id).src = url;
+            });
+        }
     </script>
 </body>
 
