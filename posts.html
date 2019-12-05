@@ -243,22 +243,6 @@
             }).scroll();
         });
 
-        $(function(){
-            $('#restaurant').click(function centerHandler() {
-                document.getElementById('info').style.display = "block";
-                var scrollDist = $(window).scrollTop();
-                var myTop = ($(window).height()-$('#info').height())/2;
-                var myLeft = ($(window).width()-$('#info').width())/2;
-                $('#info').offset({top:myTop, left:myLeft});
-                
-                $(window).resize(centerHandler);
-            });
- 
-            $('#close').click(function(){
-                document.getElementById('info').style.display = "none";
-            });
-        });
-
 //-----------------------------------------------後端
         var statusdata=firebase.database().ref('/動態資料/');
         var memberdata=firebase.database().ref('/會員資料/');
@@ -302,7 +286,7 @@
                                 str+='</div>';
                                 str+='</div></div>';
                                 str+='<div class="info" id="info'+s+'" style="display: none;">';
-                                str+='<button id="close"><img src="img/cross.png"></button>';
+                                str+='<button id="close" onclick=closeInf("'+s+'")><img src="img/cross.png"></button>';
                                 str+='<h3>'+statusInf[s]["Name"]+'</h3>';
                                 str+='<img src="img/pin.png" class="addIcon">';
                                 str+='<p class="address">'+statusInf[s]["Address"]+'</p>';
@@ -409,7 +393,7 @@
                                 str+='</div>';
                                 str+='</div></div>';
                                 str+='<div class="info" id="info'+s+'" style="display: none;">';
-                                str+='<button id="close"><img src="img/cross.png"></button>';
+                                str+='<button id="close" onclick=closeInf("'+s+'")><img src="img/cross.png"></button>';
                                 str+='<h3>'+statusInf[s]["Name"]+'</h3>';
                                 str+='<img src="img/pin.png" class="addIcon">';
                                 str+='<p class="address">'+statusInf[s]["Address"]+'</p>';
@@ -520,7 +504,7 @@
                                 str+='</div>';
                                 str+='</div></div>';
                                 str+='<div class="info" id="info'+s+'" style="display: none;">';
-                                str+='<button id="close"><img src="img/cross.png"></button>';
+                                str+='<button id="close" onclick=closeInf("'+s+'")><img src="img/cross.png"></button>';
                                 str+='<h3>'+statusInf[s]["Name"]+'</h3>';
                                 str+='<img src="img/pin.png" class="addIcon">';
                                 str+='<p class="address">'+statusInf[s]["Address"]+'</p>';
@@ -866,14 +850,19 @@ function delpost(s){
 
 }
 function showInf(s){
+    var post = "#statusContent" + s;
     var info='#info'+s;
     $(info).show();
+    
+    var myTop = ($(post).offset().top);
+    var myLeft = ($(window).width()-$(info).width())/2;
+    $(info).offset({top:myTop, left:myLeft});
+
 }
-
-
-
-
-
+function closeInf(s){
+    var info='#info'+s;
+    $(info).hide();
+}
 function getCookie(name) {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
     if (arr = document.cookie.match(reg))
@@ -889,9 +878,9 @@ function suggestion(){
     var problem=firebase.database().ref('/問題回報/');
     problem.push({
         question:suggestion,
-        email:membermail,
+        email:membermail
     });
-    alert("感謝您的意見！");
+    alert("感謝您的意見");
 }
  function opt1(i) {
             var id = 'commentTerm' + i;
