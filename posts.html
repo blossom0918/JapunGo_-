@@ -186,35 +186,6 @@
             $('#toggle').click(function() {
                 $('#menu').slideToggle();
             });
-
-            // 以下這些要改成以各別id判斷要不要展開
-
-            $('.postArea').hide();
-            $('#post').click(function() {
-                $('.postArea').slideToggle();
-                $('.commentArea').hide();
-                $('.allComments').hide();
-            });
-
-            $('.commentArea').hide();
-            $('#comment').click(function() {
-                $('.commentArea').slideToggle();
-                $('.postArea').hide();
-                $('.allComments').hide();
-            });
-
-            $('.btnOption').hide();
-            $('#option').click(function() {
-                $('.btnOption').slideToggle();
-            });
-
-            $('.allComments').hide();
-            $('#showAllComments').click(function() {
-                $('.allComments').slideToggle();
-                $('.commentArea').hide();
-                $('.postArea').hide();
-            });
-
         });
         
         $(function(){

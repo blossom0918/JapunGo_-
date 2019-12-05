@@ -494,6 +494,7 @@ table {
     border-radius: 5px;
     text-align: center;
     padding: 5px;
+    margin-right: 3px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
@@ -515,6 +516,23 @@ table {
     display:table-cell;
     vertical-align: middle;
     margin-left: 20px;
+  }
+
+  .eatTimeTerm{
+    width: 280px;
+    height: 30px;
+    float: left;
+    display: table-cell;
+    vertical-align: middle;
+    background-color: aliceblue;  
+    border: 0.5px solid rgb(208, 232, 253);
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    color: dimgray;
+    margin-left: 40px;
+    margin-bottom: 20px;
   }
 
   .postTerm{
@@ -544,6 +562,7 @@ table {
     text-align: center;
     padding: 5px;
     margin-top: 5px;
+    margin-right: 5px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
@@ -608,6 +627,7 @@ table {
     text-align: center;
     padding: 5px;
     margin-top: 5px;
+    margin-right: 5px;
     font-family: "Microsoft JhengHei UI", sans-serif;
   }
 
@@ -869,6 +889,75 @@ table {
     .time{
       width: 60%;
       margin-left: 3%;
+    }
+
+    .info{
+      width: 90%;
+      margin-left: 5%;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    .postArea{
+      width: 90%;
+    }
+
+    .postArea img{
+      width: 18%;
+      height: auto;
+      margin-left: 5%;
+    }
+  
+    .eatTimeTerm{
+      width: 70%;
+      margin-left: 5%;
+    }
+    
+    .postTerm{
+      width: 70%;
+      margin-left: 5%;
+    }
+  
+    .btn2{
+      margin-left: 10%;
+    }
+
+    .commentArea{
+      width: 90%;
+    }
+
+    .commentArea img{
+      width: 18%;
+      height: auto;
+      margin-left: 5%;
+    }
+
+    .commentTerm{
+      width: 70%;
+      margin-left: 5%;
+    }
+    
+    .btn3{
+      margin-left: 8%;
+    }
+
+    .btnOption{
+      margin-left: 8%;
+    }
+
+    .allComments{
+      width: 90%;
+    }
+  
+    .comments img{
+      width: 18%;
+      height: auto;
+      margin-left: 5%;
+    }
+  
+    .commentContent{
+      width: 70%;
+      margin-left: 5%;
     }
 
     .left{
