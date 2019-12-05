@@ -38,7 +38,7 @@
                     <li><a href="member.html#1"><img src="img/member.png" alt="">修改會員資料</a></li>
                     <li><a href="member.html#2"><img src="img/friend_request.png" alt="">好友邀請</a></li>
                     <li><a href="member.html#3"><img src="img/comment.png" alt="">我的評論</a></li>
-                    <li><a href="member.html#4"><img src="img/logout.png" alt="">登出</a></li>
+                    <li><a href="" onclick="delCookie('ID')"><img src="img/logout.png" alt="">登出</a></li>
                 </ul>
             </nav>
         </div>
@@ -285,6 +285,13 @@
             });
         });
 
+        function delCookie(name){
+            var exp = new Date();
+            exp.setTime(exp.getTime() - 1);
+            var cval = getCookie(name);
+            document.cookie = escape(name) + "=" + cval + "; expires=" + exp.toGMTString();
+            window.location.href="login.html";
+        }
     </script>
 
 </body>

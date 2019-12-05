@@ -45,7 +45,7 @@
                     <li><a href="member.html#1"><img src="img/member.png" alt="">修改會員資料</a></li>
                     <li><a href="member.html#2"><img src="img/friend_request.png" alt="">好友邀請</a></li>
                     <li><a href="member.html#3"><img src="img/comment.png" alt="">我的評論</a></li>
-                    <li><a href="member.html#4"><img src="img/logout.png" alt="">登出</a></li>
+                    <li><a href="" onclick="delCookie('ID')"><img src="img/logout.png" alt="">登出</a></li>
                 </ul>
             </nav>
         </div>
@@ -734,8 +734,6 @@ function edit(i){
         window.location.reload();
     })
 
-    
-
      $(cancelEdit).click(function(){
         $(eatTime).html(oldtext);
         $(postContent).html(oldtext2);
@@ -772,46 +770,46 @@ function post(i){
                 if (neweatTime == '') {
                     alert("請輸入要吃飯的時間");
                 } else {
-                        postdata.push({
-                            EatTime: neweatTime,
-                            JoinKey: ID + Today2,
-                            Address: postInf[i]["Address"],
-                            Phone: postInf[i]["Phone"],
-                            Name: postInf[i]["Name"],
-                            Content: newpost,
-                            UNo: ID,
-                            PDate: Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate(),
-
-                        });
-                        setTimeout(() => {
-        document.getElementById(id).value = '';
-        document.getElementById(eatTimeTerm).value = ''
-        document.getElementById(id).placeholder = Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate() + "動態發佈成功!!";
-    }, 0);
-                       
-                    
-                    
+                    postdata.push({
+                        EatTime: neweatTime,
+                        JoinKey: ID + Today2,
+                        Address: postInf[i]["Address"],
+                        Phone: postInf[i]["Phone"],
+                        Name: postInf[i]["Name"],
+                        Content: newpost,
+                        UNo: ID,
+                        PDate: Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate(),
+                    });
+                    setTimeout(() => {
+                        document.getElementById(id).value = '';
+                        document.getElementById(eatTimeTerm).value = ''
+                        document.getElementById(id).placeholder = Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate() + "動態發佈成功!!";
+                    }, 0);   
                 }
-                })
-
-                firebase.database().ref('/加入飯局資料/"' + newjoin + '"').push(ID);
-                
-            });
-
-        }
-        function getCookie(name) {
-            var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-            if (arr = document.cookie.match(reg))
-                return unescape(arr[2]);
-            else
-                return null;
-        }
-        function delfoodlist(j) {
-            var ID=getCookie('ID');
-            document.querySelector('.info').style="display:none";
-            var delfood = firebase.database().ref('/美食清單資料/'+ID+'/'+j);
-            delfood.remove();
-            alert("此清單已刪除");
+            })
+            firebase.database().ref('/加入飯局資料/"' + newjoin + '"').push(ID);              
+        });
+    }
+function getCookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg))
+        return unescape(arr[2]);
+    else
+        return null;
+}
+function delCookie(name){
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = getCookie(name);
+    document.cookie = escape(name) + "=" + cval + "; expires=" + exp.toGMTString();
+    window.location.href="login.html";
+}        
+function delfoodlist(j) {
+    var ID=getCookie('ID');
+    document.querySelector('.info').style="display:none";
+    var delfood = firebase.database().ref('/美食清單資料/'+ID+'/'+j);
+    delfood.remove();
+    alert("此清單已刪除");
 }
 function delpost(s){
     var statusContent='#statusContent'+s;
@@ -839,10 +837,16 @@ function getCookie(name) {
     if (arr = document.cookie.match(reg))
         return unescape(arr[2]);
     else{
-                return null;
+        return null;
     }
 }
-
+function delCookie(name){
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = getCookie(name);
+    document.cookie = escape(name) + "=" + cval + "; expires=" + exp.toGMTString();
+    window.location.href="login.html";
+}
 function suggestion(){
     var suggestion=$('#suggestion').val();
     var membermail=$('#membermail').val();
