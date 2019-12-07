@@ -443,6 +443,10 @@ function post_enter(i) { //發起動態 確定
         EatTime: eatTime,
         JoinKey: joinKey
     });
+    let joinkey_ref='/加入飯局資料/'+joinKey;
+    db.ref(joinkey_ref).set({
+        CreatID:User
+    })
     setTimeout(() => {
         document.getElementById(id).value = '';
         document.getElementById(eatTime_id).value = ''
