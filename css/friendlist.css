@@ -142,7 +142,7 @@ table {
     margin: auto;
     width: 98%;
     height: 350px;
-    background-image: url("../img/bg.png");
+    background-image: url("../img/bg9.png");
     background-repeat:no-repeat;
     background-size: cover;
   }
@@ -258,6 +258,13 @@ table {
     width: 98%;
     margin: auto;
     background-color:	#fff;
+  }
+
+  .friendlistTip{
+    font-size: 30px;
+    color: dimgray;
+    text-align: center;
+    padding-top: 50px;
   }
 
   .friendlist{
