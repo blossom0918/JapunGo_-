@@ -569,23 +569,24 @@ function join(i){
     var postdata=firebase.database().ref('/動態資料/');
     var joindata=firebase.database().ref('/加入飯局資料/');
     var ID=getCookie("ID");
-
     postdata.once('value',function(psnapshot){
         joindata.once('value',function(jsnapshot){
             var postInf=psnapshot.val();
             var joinInf=jsnapshot.val();
-            for(var p in postInf){
+            for(var p in postInf){                
                 if(p==i){
                     for(var j in joinInf){
                         if(postInf[p]["JoinKey"]==j){
+                            console.log("1");
                             firebase.database().ref('/加入飯局資料/'+j).push(ID);
                             alert("加入飯局成功");
                         }
                     }
                 }
             }
-        })
-    })
+            
+        });
+    });
 }
 function addlist(i){
     var fooddata=firebase.database().ref('/美食清單資料/');
