@@ -148,6 +148,7 @@
             var str = '';
             var MyID = getCookie('ID');
             var allimg = [];
+            var flag = 0;
             frienddata.once('value', function (friendsnapshot) {
                 memberdata.once('value', function (membersnapshot) {
                     var memberInf = membersnapshot.val();
@@ -156,6 +157,7 @@
                         if (friendInf[i]["ANo"] == MyID && friendInf[i]["Status"] == 'true') {
                             for (j in memberInf) {
                                 if (friendInf[i]["SNo"] == memberInf[j]["ID"]) {
+                                    flag++;
                                     allimg.push(memberInf[j]["ID"]);
 
                                     str += '<div class="info" id="' + i + '">';
@@ -165,11 +167,11 @@
                                     str += '<button onclick=delfrined("' + i + '")>' + "刪除好友" + '</button></div>';
 
                                 }
-
                             }
                         } else if (friendInf[i]["SNo"] == MyID && friendInf[i]["Status"] == 'true') {
                             for (j in memberInf) {
                                 if (friendInf[i]["ANo"] == memberInf[j]["ID"]) {
+                                    flag++;
                                     allimg.push(memberInf[j]["ID"]);
 
                                     str += '<div class="info" id="' + i + '">';
@@ -181,6 +183,10 @@
                             }
                         }
                     }
+                    if(flag == 0){
+                        str += '<h2 class="friendlistTip">' + "您目前尚無好友清單資料" + '</h2>';    
+                    }
+
                     list.innerHTML = str;
                     setTimeout(() => {
                         for (i in allimg) {
