@@ -1,6 +1,15 @@
 db = firebase.database();
 
 
+function showallcomment_list(i) {
+    var allComments = '#allComments' + i;
+    var postArea = '#postArea' + i;
+    var commentArea = '#commentArea' + i;
+    $(allComments).slideToggle();
+    $(postArea).hide();
+    $(commentArea).hide();
+
+}
 
 function more(key) {
     var join_ref='/加入飯局資料/'+key;
