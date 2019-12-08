@@ -237,16 +237,16 @@
                             if(statusInf[s]["UNo"]==ID){
                                 str+='<div class="statusContent" id="statusContent'+s+'">';
                                 str+='<div class="moreCompanion" id="moreCompanion" style="display: none;"><img src="img/pic.png" alt=""></div>';
-                                str+='<div class="companion">';
+                                str+='<div class="companion" id="companion'+statusInf[s]["JoinKey"]+'" >';
                                         // <!-- 放已加入者頭貼處，超過五人顯示
                                         // 按下後顯示<div class="moreCompanion" style="display: none;"></div>裡頭為剩下未顯示的加入者頭貼-->\
-                                str+=' <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg"></button>';      
-                                str+='<img src="img/pic.png" alt="">';
+                                str+='<button id="viewMore"><img src="img/view_more.png" id="viewMoreImg"></button>';      
+                                str+='<img id="myself'+statusInf[s]["JoinKey"]+'" src="img/pic.png" alt="">';
                                 str+='</div>';
                                 str+='<img src="img/pic.png" class="writerImg">';
                                 str+='<h3 class="writer">自己</h3>';
-                                str+='<p class="time">'+statusInf[s]["EatTime"]+'</p>';
-                                str+='<div class="post_detail"><p class="eatTime" id="eatTime'+s+'"></p>';
+                                str+='<p class="time">'+statusInf[s]["Date"]+'</p>';
+                                str+='<div class="post_detail"><p class="eatTime" id="eatTime'+s+'">'+statusInf[s]["EatTime"]+'</p>';
                                 str+='<p class="postContent" id="postContent'+s+'">'+statusInf[s]["Content"]+'</p>';
                                 str+='<button class="confirmEdit" id="confirmEdit'+s+'">確認修改</button><button class="cancelEdit" id="cancelEdit'+s+'">取消修改</button></div>';
                                 str+='<div class="bottom">';
@@ -345,16 +345,16 @@
                                             }
                                             str+='<div class="statusContent" id="statusContent'+s+'">';
                                 str+='<div class="moreCompanion" id="moreCompanion" style="display: none;"><img src="img/pic.png" alt=""></div>';
-                                str+='<div class="companion">';
+                                str+='<div class="companion" id="companion'+statusInf[s]["JoinKey"]+'">';
                                         // <!-- 放已加入者頭貼處，超過五人顯示
                                         // 按下後顯示<div class="moreCompanion" style="display: none;"></div>裡頭為剩下未顯示的加入者頭貼-->\
                                 str+=' <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg"></button>';      
-                                str+='<img src="img/pic.png" alt="">';
+                                str+='<img id="myself'+statusInf[s]["JoinKey"]+'" src="img/pic.png"  alt="">';
                                 str+='</div>';
                                 str+='<img src="img/pic.png" class="writerImg">';
                                 str+='<h3 class="writer">'+UserName+'</h3>';
-                                str+='<p class="time">'+statusInf[s]["EatTime"]+'</p>';
-                                str+='<div class="post_detail"><p class="eatTime" id="eatTime'+s+'"></p>';
+                                str+='<p class="time">'+statusInf[s]["Date"]+'</p>';
+                                str+='<div class="post_detail"><p class="eatTime" id="eatTime'+s+'">'+statusInf[s]["EatTime"]+'</p>';
                                 str+='<p class="postContent" id="postContent'+s+'">'+statusInf[s]["Content"]+'</p>';
                                 str+='<button class="confirmEdit" id="confirmEdit'+s+'">確認修改</button><button class="cancelEdit" id="cancelEdit'+s+'">取消修改</button></div>';
                                 str+='<div class="bottom">';
@@ -456,11 +456,11 @@
                                             }
                                             str+='<div class="statusContent" id="statusContent'+s+'">';
                                 str+='<div class="moreCompanion" id="moreCompanion" style="display: none;"><img src="img/pic.png" alt=""></div>';
-                                str+='<div class="companion">';
+                                str+='<div class="companion" id="companion'+statusInf[s]["JoinKey"]+'">';
                                         // <!-- 放已加入者頭貼處，超過五人顯示
                                         // 按下後顯示<div class="moreCompanion" style="display: none;"></div>裡頭為剩下未顯示的加入者頭貼-->\
-                                str+=' <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg"></button>';      
-                                str+='<img src="img/pic.png" alt="">';
+                                str+=' <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg" ></button>';      
+                                str+='<img id="myself'+statusInf[s]["JoinKey"]+'" src="img/pic.png" alt="">';
                                 str+='</div>';
                                 str+='<img src="img/pic.png" class="writerImg">';
                                 str+='<h3 class="writer">'+UserName+'</h3>';
