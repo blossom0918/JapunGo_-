@@ -11,6 +11,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
     <script src="http://code.changer.hk/jquery/plugins/jquery.cookie.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-storage.js"></script>
+    <script defer type="text/javascript" src='js/post_companion.js'></script>
     <script type="text/javascript">
     var firebaseConfig = {
         apiKey: "AIzaSyCcIFB1orespqziBWnX8kUWyihopdBw8jM",
@@ -67,7 +68,7 @@
                     <div class="companion">
                         <!-- 放已加入者頭貼處，超過五人顯示<button><img src="img/view_more.png" id="viewMore"></button>
                                 按下後顯示<div class="moreCompanion" style="display: none;"></div>裡頭為剩下未顯示的加入者頭貼-->
-                        <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg"></button>                                             
+                        <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg" ></button>                                             
                         <img src="img/pic.png" alt="">
                     </div>
 
@@ -236,11 +237,11 @@
                         for(var s in statusInf){
                             if(statusInf[s]["UNo"]==ID){
                                 str+='<div class="statusContent" id="statusContent'+s+'">';
-                                str+='<div class="moreCompanion" id="moreCompanion" style="display: none;"><img src="img/pic.png" alt=""></div>';
-                                str+='<div class="companion" id="companion'+statusInf[s]["JoinKey"]+'" >';
+                                str+='<div class="moreCompanion" id="moreCompanion'+statusInf[s]["JoinKey"]+'" ><img src="img/pic.png" alt=""></div>';
+                                str+='<div class="companion" id="companion'+statusInf[s]["JoinKey"]+'">';
                                         // <!-- 放已加入者頭貼處，超過五人顯示
                                         // 按下後顯示<div class="moreCompanion" style="display: none;"></div>裡頭為剩下未顯示的加入者頭貼-->\
-                                str+='<button id="viewMore"><img src="img/view_more.png" id="viewMoreImg"></button>';      
+                                str+='<button id="viewMore"><img src="img/view_more.png" id="viewMoreImg" onclick="more(\''+statusInf[s]["JoinKey"]+'\')"></button>';      
                                 str+='<img id="myself'+statusInf[s]["JoinKey"]+'" src="img/pic.png" alt="">';
                                 str+='</div>';
                                 str+='<img src="img/pic.png" class="writerImg">';
@@ -344,11 +345,11 @@
                                                 }
                                             }
                                             str+='<div class="statusContent" id="statusContent'+s+'">';
-                                str+='<div class="moreCompanion" id="moreCompanion" style="display: none;"><img src="img/pic.png" alt=""></div>';
+                                str+='<div class="moreCompanion" id="moreCompanion'+statusInf[s]["JoinKey"]+'" ><img src="img/pic.png" alt=""></div>';
                                 str+='<div class="companion" id="companion'+statusInf[s]["JoinKey"]+'">';
                                         // <!-- 放已加入者頭貼處，超過五人顯示
                                         // 按下後顯示<div class="moreCompanion" style="display: none;"></div>裡頭為剩下未顯示的加入者頭貼-->\
-                                str+=' <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg"></button>';      
+                                str+=' <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg" onclick="more(\''+statusInf[s]["JoinKey"]+'\')"></button>';      
                                 str+='<img id="myself'+statusInf[s]["JoinKey"]+'" src="img/pic.png"  alt="">';
                                 str+='</div>';
                                 str+='<img src="img/pic.png" class="writerImg">';
@@ -455,11 +456,11 @@
                                                 }
                                             }
                                             str+='<div class="statusContent" id="statusContent'+s+'">';
-                                str+='<div class="moreCompanion" id="moreCompanion" style="display: none;"><img src="img/pic.png" alt=""></div>';
+                                str+='<div class="moreCompanion" id="moreCompanion'+statusInf[s]["JoinKey"]+'" ><img src="img/pic.png" alt=""></div>';
                                 str+='<div class="companion" id="companion'+statusInf[s]["JoinKey"]+'">';
                                         // <!-- 放已加入者頭貼處，超過五人顯示
                                         // 按下後顯示<div class="moreCompanion" style="display: none;"></div>裡頭為剩下未顯示的加入者頭貼-->\
-                                str+=' <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg" ></button>';      
+                                str+=' <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg" onclick="more(\''+statusInf[s]["JoinKey"]+'\')" ></button>';      
                                 str+='<img id="myself'+statusInf[s]["JoinKey"]+'" src="img/pic.png" alt="">';
                                 str+='</div>';
                                 str+='<img src="img/pic.png" class="writerImg">';
@@ -560,6 +561,7 @@
 
                         $('.confirmEdit').hide();
                         $('.cancelEdit').hide();
+                        $('.moreCompanion').hide();
                     });
                     });
                 });
