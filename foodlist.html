@@ -336,13 +336,13 @@
                                 for (var r in resInf) {
                                     for (var r2 in resInf[r]) {
                                         if (resInf[r][r2]["店名"] == foodInf[i][j]["Name"]) {
-                                            if (resInf[r][r2]["Url"] != 0) {
+                                            if (resInf[r][r2]["網址"] != 0) {
                                                 str += '<div class="btn0"><button class=showAllComments id="showAllComments' + j + '" onclick=showAllComments("' + j + '")><img src="img/show_comment.png" class=commentIcon>' + "顯示評論區" + '</button>';
                                                 flag3++;
-                                                str += '<a class="recommend" href="' + foodInf[i][j]["Url"] + '"><img src="img/best.png" class=bestIcon>' + "查看推薦" + '</a></div>';
+                                                str += '<a class="recommend" href="' + resInf[r][r2]["網址"] + '"><img src="img/best.png" class=bestIcon>' + "查看推薦" + '</a></div>';
 
 
-                                            } else if (resInf[r][r2]["Url"] == 0 || resInf[r][r2]["Url"] == undefined) {
+                                            } else {
                                                 str += '<div class="btn0"><button class=showAllComments id="showAllComments' + j + '" onclick=showAllComments("' + j + '")><img src="img/show_comment.png" class=commentIcon>' + "顯示評論區" + '</button></div>';
                                                 flag3++;
 
@@ -478,12 +478,12 @@
                                                         for (var r in resInf) {
                                                             for (var r2 in resInf[r]) {
                                                                 if (resInf[r][r2]["店名"] == foodInf[f][f2]["Name"]) {
-                                                                    if (resInf[r][r2]["Url"] != 0) {
+                                                                    if (resInf[r][r2].網址 != 0) {
                                                                         str += '<div class="btn0"><button class=showAllComments id="showAllComments" onclick=showAllComments("' + f2 + '")><img src="img/show_comment.png" class=commentIcon>' + "顯示評論區" + '</button>';
-                                                                        str += '<a class="recommend" href="' + foodInf[f][f2]["Url"] + '"><img src="img/best.png" class=bestIcon>' + "查看推薦" + '</a></div>';
+                                                                        str += '<a class="recommend" href="' + resInf[r][r2].網址 + '"><img src="img/best.png" class=bestIcon>' + "查看推薦" + '</a></div>';
                                                                         flag3++
 
-                                                                    } else if (resInf[r][r2]["Url"] == 0 || resInf[r][r2]["Url"] == undefined) {
+                                                                    } else  {
 
                                                                         str += '<div class="btn0"><button class=showAllComments id="showAllComments" onclick=showAllComments("' + f2 + '")><img src="img/show_comment.png" class=commentIcon>' + "顯示評論區" + '</button></div>';
                                                                         flag3++;
@@ -555,11 +555,11 @@
                                                     for (var r in resInf) {
                                                         for (var r2 in resInf[r]) {
                                                             if (resInf[r][r2]["店名"] == foodInf[f][f2]["Name"]) {
-                                                                if (resInf[r][r2]["Url"] != 0) {
+                                                                if (resInf[r][r2].網址 != 0) {
                                                                     str += '<div class="btn0"><button class=showAllComments id="showAllComments" onclick=showAllComments("' + f2 + '")><img src="img/show_comment.png" class=commentIcon>' + "顯示評論區" + '</button>';
-                                                                    str += '<a class="recommend" href="' + foodInf[f][f2]["Url"] + '"><img src="img/best.png" class=bestIcon>' + "查看推薦" + '</a></div>';
+                                                                    str += '<a class="recommend" href="' + resInf[r][r2].網址 + '"><img src="img/best.png" class=bestIcon>' + "查看推薦" + '</a></div>';
                                                                     flag3++;
-                                                                } else if (resInf[r][r2]["Url"] == 0 || resInf[r][r2]["Url"] == undefined) {
+                                                                } else {
                                                                     str += '<div class="btn0"><button class=showAllComments id="showAllComments" onclick=showAllComments("' + f2 + '")><img src="img/show_comment.png" class=commentIcon>' + "顯示評論區" + '</button></div>';
                                                                     flag3++;
                                                                 }
