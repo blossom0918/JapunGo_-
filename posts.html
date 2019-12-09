@@ -224,6 +224,8 @@
         var fooddata = firebase.database().ref('/美食清單資料/');
         var post_name = [];   //存餐廳的名字
         var commit_id = [];   //存要放入的commit div的id
+        var join_key = []; //放joinkey
+        var post_id = []; //放post者的id
         $(document).ready(function () {
             var status = document.querySelector('.status');
             memberdata.once('value', function (membersnapshot) {
@@ -242,15 +244,17 @@
                                 if (statusInf[s]["UNo"] == ID) {
                                     post_name.push(statusInf[s].Name);
                                     commit_id.push(s);
+                                    join_key.push(statusInf[s].JoinKey);
+                                    post_id.push(statusInf[s]["UNo"]);
                                     str += '<div class="statusContent" id="statusContent' + s + '">';
                                     str += '<div class="moreCompanion" id="moreCompanion' + statusInf[s]["JoinKey"] + '" ><img src="img/pic.png" alt=""></div>';
                                     str += '<div class="companion" id="companion' + statusInf[s]["JoinKey"] + '">';
                                     // <!-- 放已加入者頭貼處，超過五人顯示
                                     // 按下後顯示<div class="moreCompanion" style="display: none;"></div>裡頭為剩下未顯示的加入者頭貼-->\
                                     str += '<button id="viewMore"><img src="img/view_more.png" id="viewMoreImg" onclick="more(\'' + statusInf[s]["JoinKey"] + '\')"></button>';
-                                    str += '<img id="myself' + statusInf[s]["JoinKey"] + '" src="img/pic.png" alt="">';
+                                    str += '<img id="myself' + statusInf[s]["JoinKey"] + '" src="img/pic.png" alt="" style="display:none">';
                                     str += '</div>';
-                                    str += '<img src="img/pic.png" class="writerImg">';
+                                    str += '<img src="img/pic.png" class="writerImg" id="post_img'+s+'">';
                                     str += '<h3 class="writer">自己</h3>';
                                     str += '<p class="time">' + statusInf[s]["Date"] + '</p>';
                                     str += '<div class="post_detail"><p class="eatTime" id="eatTime' + s + '">' + statusInf[s]["EatTime"] + '</p>';
@@ -332,7 +336,7 @@
                                     <button onclick=opt5("' + s + '")>親切店家</button>\
                                     <button onclick=opt6("' + s + '")>服務極差</button></div></div>';
                                     str += '<div class="allComments" id="allComments' + s + '" style="display: none;">';
-                                    str += '<div class="comments" id="original'+s+'">';
+                                    str += '<div class="comments" id="original' + s + '">';
                                     str += '<img src="img/pic.png" alt="">';
                                     str += '<div class="commentContent">';
                                     str += '<p>還沒有人發表評論喔~</p>';
@@ -352,15 +356,17 @@
                                                 }
                                                 post_name.push(statusInf[s].Name);
                                                 commit_id.push(s);
+                                                join_key.push(statusInf[s].JoinKey);
+                                                post_id.push(statusInf[s]["UNo"]);
                                                 str += '<div class="statusContent" id="statusContent' + s + '">';
                                                 str += '<div class="moreCompanion" id="moreCompanion' + statusInf[s]["JoinKey"] + '" ><img src="img/pic.png" alt=""></div>';
                                                 str += '<div class="companion" id="companion' + statusInf[s]["JoinKey"] + '">';
                                                 // <!-- 放已加入者頭貼處，超過五人顯示
                                                 // 按下後顯示<div class="moreCompanion" style="display: none;"></div>裡頭為剩下未顯示的加入者頭貼-->\
                                                 str += ' <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg" onclick="more(\'' + statusInf[s]["JoinKey"] + '\')"></button>';
-                                                str += '<img id="myself' + statusInf[s]["JoinKey"] + '" src="img/pic.png"  alt="">';
+                                                str += '<img id="myself' + statusInf[s]["JoinKey"] + '" src="img/pic.png"  alt="" style="display:none">';
                                                 str += '</div>';
-                                                str += '<img src="img/pic.png" class="writerImg">';
+                                                str += '<img src="img/pic.png" class="writerImg" id="post_img'+s+'">';
                                                 str += '<h3 class="writer">' + UserName + '</h3>';
                                                 str += '<p class="time">' + statusInf[s]["Date"] + '</p>';
                                                 str += '<div class="post_detail"><p class="eatTime" id="eatTime' + s + '">' + statusInf[s]["EatTime"] + '</p>';
@@ -441,7 +447,7 @@
                                     <button onclick=opt5("' + s + '")>親切店家</button>\
                                     <button onclick=opt6("' + s + '")>服務極差</button></div></div>';
                                                 str += '<div class="allComments" id="allComments' + s + '" style="display: none;">';
-                                                str += '<div class="comments" id="original'+s+'">';
+                                                str += '<div class="comments" id="original' + s + '">';
                                                 str += '<img src="img/pic.png" alt="">';
                                                 str += '<div class="commentContent">';
                                                 str += '<p>還沒有人發表評論喔~</p>';
@@ -465,15 +471,17 @@
                                                 }
                                                 post_name.push(statusInf[s].Name);
                                                 commit_id.push(s);
+                                                join_key.push(statusInf[s].JoinKey);
+                                                post_id.push(statusInf[s]["UNo"]);
                                                 str += '<div class="statusContent" id="statusContent' + s + '">';
                                                 str += '<div class="moreCompanion" id="moreCompanion' + statusInf[s]["JoinKey"] + '" ><img src="img/pic.png" alt=""></div>';
                                                 str += '<div class="companion" id="companion' + statusInf[s]["JoinKey"] + '">';
                                                 // <!-- 放已加入者頭貼處，超過五人顯示
                                                 // 按下後顯示<div class="moreCompanion" style="display: none;"></div>裡頭為剩下未顯示的加入者頭貼-->\
                                                 str += ' <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg" onclick="more(\'' + statusInf[s]["JoinKey"] + '\')" ></button>';
-                                                str += '<img id="myself' + statusInf[s]["JoinKey"] + '" src="img/pic.png" alt="">';
+                                                str += '<img id="myself' + statusInf[s]["JoinKey"] + '" src="img/pic.png" alt="" style="display:none">';
                                                 str += '</div>';
-                                                str += '<img src="img/pic.png" class="writerImg">';
+                                                str += '<img src="img/pic.png" class="writerImg" id="post_img'+s+'">';
                                                 str += '<h3 class="writer">' + UserName + '</h3>';
                                                 str += '<p class="time">' + statusInf[s]["Date"] + '</p>';
                                                 str += '<div class="post_detail"><p class="eatTime" id="eatTime' + s + '">' + statusInf[s]["EatTime"] + '</p>';
@@ -554,7 +562,7 @@
                                     <button onclick=opt5("' + s + '")>親切店家</button>\
                                     <button onclick=opt6("' + s + '")>服務極差</button></div></div>';
                                                 str += '<div class="allComments"  id="allComments' + s + '" style="display: none;">';
-                                                str += '<div class="comments" id="original'+s+'">';
+                                                str += '<div class="comments" id="original' + s + '">';
                                                 str += '<img src="img/pic.png" alt="">';
                                                 str += '<div class="commentContent">';
                                                 str += '<p>還沒有人發表評論喔~</p>';
@@ -573,8 +581,13 @@
                             $('.cancelEdit').hide();
                             $('.moreCompanion').hide();
                             setTimeout(() => {
+                                //-----發佈者的頭貼-----
+                                for (p in post_id){
+                                    post_img(post_id[p], commit_id[p]);
+                                }
+                                
 
-
+                                //-----店家的評論區-----
                                 var allcomment_ref = '/評論區資料';
 
                                 db.ref(allcomment_ref).once('value', function (snapshot) {
@@ -613,6 +626,26 @@
 
                                     }
                                 })
+                                //------加入飯局的頭貼------
+                                var join_ref = '/加入飯局資料/';
+                                db.ref(join_ref).once('value', function (snapshot) {
+                                    var data = snapshot.val();
+                                    for (i in join_key) {
+                                        if (i <= 4) {
+                                            for (d in data[join_key[i]]) {
+                                                console.log(d + ':' + data[join_key[i]][d]);
+                                                join_img(data[join_key[i]][d], join_key[i]);
+                                            }
+                                        } else {
+                                            for (d in data[join_key[i]]) {
+                                                console.log(d + ':' + data[join_key[i]][d]);
+                                                join_img_more(data[join_key[i]][d], join_key[i]);
+                                            }
+                                        }
+
+                                    }
+                                })
+
 
 
                             }, 0);
@@ -954,6 +987,35 @@
 
         function getimg(user, imgid) {
             var img_id = imgid;
+            var storageRef = firebase.storage().ref();
+            var img_ref = 'user/' + user;
+            var pathReference = storageRef.child(img_ref);
+            pathReference.getDownloadURL().then(function (url) {
+                document.getElementById(img_id).src = url;
+            });
+        }
+        function join_img(user, imgid) {
+            var img_id = '#companion' + imgid;
+            var storageRef = firebase.storage().ref();
+            var img_ref = 'user/' + user;
+            var pathReference = storageRef.child(img_ref);
+            pathReference.getDownloadURL().then(function (url) {
+                var str = '<img  src="' + url + '" alt="">';
+                $(img_id).append(str);
+            });
+        }
+        function join_img_more(user, imgid) {
+            var img_id = '#moreCompanion' + imgid;
+            var storageRef = firebase.storage().ref();
+            var img_ref = 'user/' + user;
+            var pathReference = storageRef.child(img_ref);
+            pathReference.getDownloadURL().then(function (url) {
+                var str = '<img  src="' + url + '" alt="">';
+                $(img_id).append(str);
+            });
+        }
+        function post_img(user, imgid) {
+            var img_id = 'post_img' + imgid;
             var storageRef = firebase.storage().ref();
             var img_ref = 'user/' + user;
             var pathReference = storageRef.child(img_ref);
