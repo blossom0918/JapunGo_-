@@ -429,6 +429,8 @@ function post_enter(i) { //發起動態 確定
     var address = document.getElementById(address_id).value;
     var phone_id = 'phone' + i;
     var phone = document.getElementById(phone_id).value;
+    var url_id = 'url' + i;
+    var url = document.getElementById(url_id).value;
     var date = new Date();
     var today = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
     var joinKey = User + date.getTime();
@@ -441,7 +443,8 @@ function post_enter(i) { //發起動態 確定
         Date: today,
         Content: content,
         EatTime: eatTime,
-        JoinKey: joinKey
+        JoinKey: joinKey,
+        Url:url
     });
     let joinkey_ref='/加入飯局資料/'+joinKey;
     db.ref(joinkey_ref).set({
