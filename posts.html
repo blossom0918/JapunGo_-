@@ -222,6 +222,8 @@
         var memberdata = firebase.database().ref('/會員資料/');
         var frienddata = firebase.database().ref('/好友名單資料/');
         var fooddata = firebase.database().ref('/美食清單資料/');
+        var post_name = [];   //存餐廳的名字
+        var commit_id = [];   //存要放入的commit div的id
         $(document).ready(function () {
             var status = document.querySelector('.status');
             memberdata.once('value', function (membersnapshot) {
@@ -238,6 +240,8 @@
                             var flag2 = 0;//判斷顯示刪除或新增
                             for (var s in statusInf) {
                                 if (statusInf[s]["UNo"] == ID) {
+                                    post_name.push(statusInf[s].Name);
+                                    commit_id.push(s);
                                     str += '<div class="statusContent" id="statusContent' + s + '">';
                                     str += '<div class="moreCompanion" id="moreCompanion' + statusInf[s]["JoinKey"] + '" ><img src="img/pic.png" alt=""></div>';
                                     str += '<div class="companion" id="companion' + statusInf[s]["JoinKey"] + '">';
@@ -272,10 +276,10 @@
                                             for (f2 in foodInf[f]) {
                                                 if (foodInf[f][f2]["Name"] == statusInf[s]["Name"]) {
                                                     if (foodInf[f][f2]["Url"] == 0 || foodInf[f][f2]["Url"] == undefined) {
-                                                        str += '<button class="showAllComments" onclick="showallcomment_list(\''+s+'\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button></div>';
+                                                        str += '<button class="showAllComments" onclick="showallcomment_list(\'' + s + '\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button></div>';
                                                         flag++;
                                                     } else {
-                                                        str += '<button class="showAllComments" onclick="showallcomment_list(\''+s+'\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>';
+                                                        str += '<button class="showAllComments" onclick="showallcomment_list(\'' + s + '\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>';
                                                         str += '<a class="recommend"><img src="img/best.png" class="bestIcon">查看推薦</a></div>';
                                                         flag++;
                                                     }
@@ -284,7 +288,7 @@
                                         }
                                     }
                                     if (flag == 0) {
-                                        str += '<button class="showAllComments" onclick="showallcomment_list(\''+s+'\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button></div>';
+                                        str += '<button class="showAllComments" onclick="showallcomment_list(\'' + s + '\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button></div>';
                                     }
                                     flag = 0;
                                     str += '<div class="btn">';
@@ -327,11 +331,11 @@
                                     <button onclick=opt4("' + s + '")>餐點糟糕</button>\
                                     <button onclick=opt5("' + s + '")>親切店家</button>\
                                     <button onclick=opt6("' + s + '")>服務極差</button></div></div>';
-                                    str += '<div class="allComments" id="allComments'+s+'" style="display: none;">';
-                                    str += '<div class="comments">';
+                                    str += '<div class="allComments" id="allComments' + s + '" style="display: none;">';
+                                    str += '<div class="comments" id="original'+s+'">';
                                     str += '<img src="img/pic.png" alt="">';
                                     str += '<div class="commentContent">';
-                                    str += '<p>內容</p>';
+                                    str += '<p>還沒有人發表評論喔~</p>';
                                     str += '</div></div></div></div></div>';
                                 }
 
@@ -346,6 +350,8 @@
                                                         var UserName = memberInf[m]["Name"];
                                                     }
                                                 }
+                                                post_name.push(statusInf[s].Name);
+                                                commit_id.push(s);
                                                 str += '<div class="statusContent" id="statusContent' + s + '">';
                                                 str += '<div class="moreCompanion" id="moreCompanion' + statusInf[s]["JoinKey"] + '" ><img src="img/pic.png" alt=""></div>';
                                                 str += '<div class="companion" id="companion' + statusInf[s]["JoinKey"] + '">';
@@ -379,10 +385,10 @@
                                                         for (f2 in foodInf[f]) {
                                                             if (foodInf[f][f2]["Name"] == statusInf[s]["Name"]) {
                                                                 if (foodInf[f][f2]["Url"] == 0 || foodInf[f][f2]["Url"] == undefined) {
-                                                                    str += '<button class="showAllComments" onclick="showallcomment_list(\''+s+'\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button></div>';
+                                                                    str += '<button class="showAllComments" onclick="showallcomment_list(\'' + s + '\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button></div>';
                                                                     flag++;
                                                                 } else {
-                                                                    str += '<button class="showAllComments" onclick="showallcomment_list(\''+s+'\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>';
+                                                                    str += '<button class="showAllComments" onclick="showallcomment_list(\'' + s + '\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>';
                                                                     str += '<a class="recommend"><img src="img/best.png" class="bestIcon">查看推薦</a></div>';
                                                                     flag++;
                                                                 }
@@ -391,7 +397,7 @@
                                                     }
                                                 }
                                                 if (flag == 0) {
-                                                    str += '<button class="showAllComments" onclick="showallcomment_list(\''+s+'\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button></div>';
+                                                    str += '<button class="showAllComments" onclick="showallcomment_list(\'' + s + '\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button></div>';
                                                 }
                                                 flag = 0;
                                                 str += '<div class="btn">';
@@ -434,11 +440,11 @@
                                     <button onclick=opt4("' + s + '")>餐點糟糕</button>\
                                     <button onclick=opt5("' + s + '")>親切店家</button>\
                                     <button onclick=opt6("' + s + '")>服務極差</button></div></div>';
-                                                str += '<div class="allComments" id="allComments'+s+'" style="display: none;">';
-                                                str += '<div class="comments">';
+                                                str += '<div class="allComments" id="allComments' + s + '" style="display: none;">';
+                                                str += '<div class="comments" id="original'+s+'">';
                                                 str += '<img src="img/pic.png" alt="">';
                                                 str += '<div class="commentContent">';
-                                                str += '<p>內容</p>';
+                                                str += '<p>還沒有人發表評論喔~</p>';
                                                 str += '</div></div></div></div></div>';
                                             }
                                         }
@@ -457,6 +463,8 @@
                                                         var UserName = memberInf[m]["Name"];
                                                     }
                                                 }
+                                                post_name.push(statusInf[s].Name);
+                                                commit_id.push(s);
                                                 str += '<div class="statusContent" id="statusContent' + s + '">';
                                                 str += '<div class="moreCompanion" id="moreCompanion' + statusInf[s]["JoinKey"] + '" ><img src="img/pic.png" alt=""></div>';
                                                 str += '<div class="companion" id="companion' + statusInf[s]["JoinKey"] + '">';
@@ -490,10 +498,10 @@
                                                         for (f2 in foodInf[f]) {
                                                             if (foodInf[f][f2]["Name"] == statusInf[s]["Name"]) {
                                                                 if (foodInf[f][f2]["Url"] == 0 || foodInf[f][f2]["Url"] == undefined) {
-                                                                    str += '<button class="showAllComments" onclick="showallcomment_list(\''+s+'\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button></div>';
+                                                                    str += '<button class="showAllComments" onclick="showallcomment_list(\'' + s + '\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button></div>';
                                                                     flag++;
                                                                 } else {
-                                                                    str += '<button class="showAllComments" onclick="showallcomment_list(\''+s+'\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>';
+                                                                    str += '<button class="showAllComments" onclick="showallcomment_list(\'' + s + '\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>';
                                                                     str += '<a class="recommend"><img src="img/best.png" class="bestIcon">查看推薦</a></div>';
                                                                     flag++;
                                                                 }
@@ -502,7 +510,7 @@
                                                     }
                                                 }
                                                 if (flag == 0) {
-                                                    str += '<button class="showAllComments" onclick="showallcomment_list(\''+s+'\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button></div>';
+                                                    str += '<button class="showAllComments" onclick="showallcomment_list(\'' + s + '\')" id="showAllComments"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button></div>';
                                                 }
                                                 flag = 0;
                                                 str += '<div class="btn">';
@@ -545,11 +553,11 @@
                                     <button onclick=opt4("' + s + '")>餐點糟糕</button>\
                                     <button onclick=opt5("' + s + '")>親切店家</button>\
                                     <button onclick=opt6("' + s + '")>服務極差</button></div></div>';
-                                                str += '<div class="allComments"  id="allComments'+s+'" style="display: none;">';
-                                                str += '<div class="comments">';
+                                                str += '<div class="allComments"  id="allComments' + s + '" style="display: none;">';
+                                                str += '<div class="comments" id="original'+s+'">';
                                                 str += '<img src="img/pic.png" alt="">';
                                                 str += '<div class="commentContent">';
-                                                str += '<p>內容</p>';
+                                                str += '<p>還沒有人發表評論喔~</p>';
                                                 str += '</div></div></div></div></div>';
                                             }
                                         }
@@ -564,27 +572,31 @@
                             $('.confirmEdit').hide();
                             $('.cancelEdit').hide();
                             $('.moreCompanion').hide();
-                            /* setTimeout(() => {
-                                for (f in foodInf)
+                            setTimeout(() => {
+
+
                                 var allcomment_ref = '/評論區資料';
+
                                 db.ref(allcomment_ref).once('value', function (snapshot) {
-                                    var q = 1;
-                                    var alldata = snapshot.val();
-                                    var userid = [];
-                                    var imgid = [];
-                                    for (j in data) {
+                                    for (p in post_name) {
+                                        var q = commit_id[p];
+                                        var alldata = snapshot.val();
+                                        var userid = [];
+                                        var imgid = [];
+
                                         var num = 0;
                                         for (i in alldata) {
-                                            if (alldata[i].Name == foodInf[f].店名) {
+                                            if (alldata[i].Name == post_name[p]) {
+
                                                 var allComments = '#allComments' + q;
                                                 var original = 'original' + q;
                                                 var img = 'img' + q + '_' + num;
                                                 var str = '<div class="comments">\
-                        <img src="img/pic.png"  id="img'+ q + '_' + num + '" alt="">\
-                        <div class="commentContent">\
-                        <p>'+ alldata[i].Discon + '</p>\
-                        </div>\
-                        </div>';
+                                                    <img src="img/pic.png"  id="img'+ q + '_' + num + '" alt="">\
+                                                    <div class="commentContent">\
+                                                    <p>'+ alldata[i].Discon + '</p>\
+                                                    </div>\
+                                                    </div>';
                                                 $(allComments).append(str);
                                                 userid.push(alldata[i].UNo);
                                                 imgid.push(img);
@@ -593,15 +605,17 @@
                                                 document.getElementById(original).style.display = 'none';
                                             }
                                         }
-                                        q += 1;
-                                    }
-                                    for (i in userid) {
-                                        getimg(userid[i], imgid[i]);
-                                    }
 
 
+                                        for (i in userid) {
+                                            getimg(userid[i], imgid[i]);
+                                        }
+
+                                    }
                                 })
-                            }, 0);*/
+
+
+                            }, 0);
                         });
                     });
                 });
