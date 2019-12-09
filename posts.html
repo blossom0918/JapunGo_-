@@ -254,7 +254,7 @@
                                     str += '<button id="viewMore"><img src="img/view_more.png" id="viewMoreImg" onclick="more(\'' + statusInf[s]["JoinKey"] + '\')"></button>';
                                     str += '<img id="myself' + statusInf[s]["JoinKey"] + '" src="img/pic.png" alt="" style="display:none">';
                                     str += '</div>';
-                                    str += '<img src="img/pic.png" class="writerImg" id="post_img'+s+'">';
+                                    str += '<img src="img/pic.png" class="writerImg" id="post_img' + s + '">';
                                     str += '<h3 class="writer">自己</h3>';
                                     str += '<p class="time">' + statusInf[s]["Date"] + '</p>';
                                     str += '<div class="post_detail"><p class="eatTime" id="eatTime' + s + '">' + statusInf[s]["EatTime"] + '</p>';
@@ -269,6 +269,9 @@
                                     str += '</div></div>';
                                     str += '<div class="info" id="info' + s + '" style="display: none;">';
                                     str += '<button id="close" onclick=closeInf("' + s + '")><img src="img/cross.png"></button>';
+                                    str += '<input type="hidden" id="name' + s + '" value="' + statusInf[s]["Name"] + '">\
+                                                    <input type="hidden" id="address'+ s + '" value="' + statusInf[s]["Address"] + '">\
+                                                    <input type="hidden" id="phone'+ s + '" value="' + statusInf[s]["Phone"] + '">';
                                     str += '<h3>' + statusInf[s]["Name"] + '</h3>';
                                     str += '<img src="img/pin.png" class="addIcon">';
                                     str += '<p class="address">' + statusInf[s]["Address"] + '</p>';
@@ -317,7 +320,7 @@
                                     str += '<textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="postTerm' + s + '"></textarea>';
                                     str += '<img src="img/pic.png" alt=""></div>';
                                     str += '<div class="btn2">';
-                                    str += '<button id="sure' + s + '">確定</button>';
+                                    str += '<button id="sure' + s + '" onclick="addpost(\''+s+'\')">確定</button>';
                                     str += '<button id="cancel' + s + '">取消</button>';
                                     str += '</div></div>';
                                     str += '<div class="commentArea" style="display: none;" id="commentArea' + s + '">';
@@ -325,8 +328,8 @@
                                     str += '<textarea style="overflow:auto" class="commentTerm" id="commentTerm' + s + '"placeholder="請輸入評論內容"></textarea>';
                                     str += '<img src="img/pic.png" alt=""></div>';
                                     str += '<div class="btn3" id="btn3' + s + '">';
-                                    str += '<button id="option' + s + '">評論選項</button>';
-                                    str += '<button id="commentBtn' + s + '">我要評論</button>';
+                                    str += '<button id="option' + s + '" onclick="option(\'' + s + '\')">評論選項</button>';
+                                    str += '<button id="commentBtn' + s + '" onclick="comment_enter(\'' + s + '\')">我要評論</button>';
                                     str += '</div>';
                                     str += '<div class="btnOption" style="display: none;" id="btnOption' + s + '">';
                                     str += '<button onclick=opt1("' + s + '")>環境乾淨</button>\
@@ -366,7 +369,7 @@
                                                 str += ' <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg" onclick="more(\'' + statusInf[s]["JoinKey"] + '\')"></button>';
                                                 str += '<img id="myself' + statusInf[s]["JoinKey"] + '" src="img/pic.png"  alt="" style="display:none">';
                                                 str += '</div>';
-                                                str += '<img src="img/pic.png" class="writerImg" id="post_img'+s+'">';
+                                                str += '<img src="img/pic.png" class="writerImg" id="post_img' + s + '">';
                                                 str += '<h3 class="writer">' + UserName + '</h3>';
                                                 str += '<p class="time">' + statusInf[s]["Date"] + '</p>';
                                                 str += '<div class="post_detail"><p class="eatTime" id="eatTime' + s + '">' + statusInf[s]["EatTime"] + '</p>';
@@ -380,6 +383,9 @@
                                                 str += '</div></div>';
                                                 str += '<div class="info" id="info' + s + '" style="display: none;">';
                                                 str += '<button id="close" onclick=closeInf("' + s + '")><img src="img/cross.png"></button>';
+                                                str += '<input type="hidden" id="name' + s + '" value="' + statusInf[s]["Name"] + '">\
+                                                    <input type="hidden" id="address'+ s + '" value="' + statusInf[s]["Address"] + '">\
+                                                    <input type="hidden" id="phone'+ s + '" value="' + statusInf[s]["Phone"] + '">';
                                                 str += '<h3>' + statusInf[s]["Name"] + '</h3>';
                                                 str += '<img src="img/pin.png" class="addIcon">';
                                                 str += '<p class="address">' + statusInf[s]["Address"] + '</p>';
@@ -428,7 +434,7 @@
                                                 str += '<textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="postTerm' + s + '"></textarea>';
                                                 str += '<img src="img/pic.png" alt=""></div>';
                                                 str += '<div class="btn2">';
-                                                str += '<button id="sure' + s + '">確定</button>';
+                                                str += '<button id="sure' + s + '" onclick="addpost(\''+s+'\')">確定</button>';
                                                 str += '<button id="cancel' + s + '">取消</button>';
                                                 str += '</div></div>';
                                                 str += '<div class="commentArea" style="display: none;" id="commentArea' + s + '">';
@@ -436,8 +442,8 @@
                                                 str += '<textarea style="overflow:auto" class="commentTerm" id="commentTerm' + s + '"placeholder="請輸入評論內容"></textarea>';
                                                 str += '<img src="img/pic.png" alt=""></div>';
                                                 str += '<div class="btn3" id="btn3' + s + '">';
-                                                str += '<button id="option' + s + '">評論選項</button>';
-                                                str += '<button id="commentBtn' + s + '">我要評論</button>';
+                                                str += '<button id="option' + s + '" onclick="option(\'' + s + '\')">評論選項</button>';
+                                                str += '<button id="commentBtn' + s + '" onclick="comment_enter(\'' + s + '\')">我要評論</button>';
                                                 str += '</div>';
                                                 str += '<div class="btnOption" style="display: none;" id="btnOption' + s + '">';
                                                 str += '<button onclick=opt1("' + s + '")>環境乾淨</button>\
@@ -481,7 +487,7 @@
                                                 str += ' <button id="viewMore"><img src="img/view_more.png" id="viewMoreImg" onclick="more(\'' + statusInf[s]["JoinKey"] + '\')" ></button>';
                                                 str += '<img id="myself' + statusInf[s]["JoinKey"] + '" src="img/pic.png" alt="" style="display:none">';
                                                 str += '</div>';
-                                                str += '<img src="img/pic.png" class="writerImg" id="post_img'+s+'">';
+                                                str += '<img src="img/pic.png" class="writerImg" id="post_img' + s + '">';
                                                 str += '<h3 class="writer">' + UserName + '</h3>';
                                                 str += '<p class="time">' + statusInf[s]["Date"] + '</p>';
                                                 str += '<div class="post_detail"><p class="eatTime" id="eatTime' + s + '">' + statusInf[s]["EatTime"] + '</p>';
@@ -495,6 +501,9 @@
                                                 str += '</div></div>';
                                                 str += '<div class="info" id="info' + s + '" style="display: none;">';
                                                 str += '<button id="close" onclick=closeInf("' + s + '")><img src="img/cross.png"></button>';
+                                                str += '<input type="hidden" id="name' + s + '" value="' + statusInf[s]["Name"] + '">\
+                                                    <input type="hidden" id="address'+ s + '" value="' + statusInf[s]["Address"] + '">\
+                                                    <input type="hidden" id="phone'+ s + '" value="' + statusInf[s]["Phone"] + '">';
                                                 str += '<h3>' + statusInf[s]["Name"] + '</h3>';
                                                 str += '<img src="img/pin.png" class="addIcon">';
                                                 str += '<p class="address">' + statusInf[s]["Address"] + '</p>';
@@ -543,7 +552,7 @@
                                                 str += '<textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="postTerm' + s + '"></textarea>';
                                                 str += '<img src="img/pic.png" alt=""></div>';
                                                 str += '<div class="btn2">';
-                                                str += '<button id="sure' + s + '">確定</button>';
+                                                str += '<button id="sure' + s + '" onclick="addpost(\''+s+'\')">確定</button>';
                                                 str += '<button id="cancel' + s + '">取消</button>';
                                                 str += '</div></div>';
                                                 str += '<div class="commentArea" style="display: none;" id="commentArea' + s + '">';
@@ -551,8 +560,8 @@
                                                 str += '<textarea style="overflow:auto" class="commentTerm" id="commentTerm' + s + '"placeholder="請輸入評論內容"></textarea>';
                                                 str += '<img src="img/pic.png" alt=""></div>';
                                                 str += '<div class="btn3" id="btn3' + s + '">';
-                                                str += '<button id="option' + s + '">評論選項</button>';
-                                                str += '<button id="commentBtn' + s + '">我要評論</button>';
+                                                str += '<button id="option' + s + '" onclick="option(\'' + s + '\')">評論選項</button>';
+                                                str += '<button id="commentBtn' + s + '" onclick="comment_enter(\'' + s + '\')">我要評論</button>';
                                                 str += '</div>';
                                                 str += '<div class="btnOption" style="display: none;" id="btnOption' + s + '">';
                                                 str += '<button onclick=opt1("' + s + '")>環境乾淨</button>\
@@ -582,10 +591,10 @@
                             $('.moreCompanion').hide();
                             setTimeout(() => {
                                 //-----發佈者的頭貼-----
-                                for (p in post_id){
+                                for (p in post_id) {
                                     post_img(post_id[p], commit_id[p]);
                                 }
-                                
+
 
                                 //-----店家的評論區-----
                                 var allcomment_ref = '/評論區資料';
@@ -666,9 +675,20 @@
                         if (p == i) {
                             for (var j in joinInf) {
                                 if (postInf[p]["JoinKey"] == j) {
-                                    console.log("1");
-                                    firebase.database().ref('/加入飯局資料/' + j).push(ID);
-                                    alert("加入飯局成功");
+                                    var num = 0;
+                                    for (a in joinInf[j]) {
+                                        console.log(joinInf[j][a]);
+                                        if (joinInf[j][a] == ID) {
+
+                                            alert('已經加入飯局囉~~記得赴約!');
+                                            num += 1;
+                                        }
+                                    }
+                                    if (num == 0) {
+                                        firebase.database().ref('/加入飯局資料/' + j).push(ID);
+                                        alert("加入飯局成功");
+                                    }
+
                                 }
                             }
                         }
@@ -736,6 +756,8 @@
         }
 
         function comment(i) {
+            var allComments = '#allComments' + i;
+            $(allComments).hide();
             var postArea = '#postArea' + i;
             $(postArea).hide();
 
@@ -752,39 +774,12 @@
 
             $(commentArea).slideToggle();
             $(btnOption).hide();
-            $(option).on('click', function () {
-                $(btnOption).slideToggle();
-            });
-            $(commentBtn).on('click', function () {
-                var id = 'commentTerm' + i
-                var newcomment = document.getElementById(id).value;
-
-                var fooddata = firebase.database().ref('/美食清單資料/');
-                var postdata = firebase.database().ref('/動態資料/');
-                var commentdata = firebase.database().ref('/評論區資料/');
-                fooddata.once('value', function (fsnapshot) {
-                    postdata.once('value', function (psnapshot) {
-                        foodInf = fsnapshot.val();
-                        postInf = psnapshot.val();
-                        var newName = postInf[i]["Name"];
-                        var newAddress = postInf[i]["Address"];
-                        commentdata.push({
-                            Date: Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate(),
-                            UNo: ID,
-                            Name: newName,
-                            Address: newAddress,
-                            Discon: newcomment,
-
-                        });
-                        alert("評論已發表並被記錄");
-                        $(commentArea).hide();
-
-
-                    });
-                });
-
-            });
         }
+        function option(i) {
+            var btnOption = '#btnOption' + i;
+            $(btnOption).slideToggle();
+        }
+
 
 
         function edit(i) {
@@ -835,6 +830,8 @@
 
         function post(i) {
             var commentArea = '#commentArea' + i;
+            var allComments = '#allComments' + i;
+            $(allComments).hide();
             $(commentArea).hide();
             var postArea = '#postArea' + i;
             var sure = '#sure' + i;
@@ -845,40 +842,49 @@
             var Today2 = +new Date();
             var newjoin = ID + Today2;
             $(postArea).slideToggle();
-            $(sure).on('click', function () {
-                var id = 'postTerm' + i
-                var newpost = document.getElementById(id).value;
-                var eatTimeTerm = 'eatTimeTerm' + i;
-                var neweatTime = document.getElementById(eatTimeTerm).value;
-                var postdata = firebase.database().ref('/動態資料/');
-                var fooddata = firebase.database().ref('/美食清單資料/');
-                postdata.once('value', function (psnapshot) {
-                    postInf = psnapshot.val();
+        }
+        function addpost(i) {
+            var postArea = '#postArea' + i;
+            var sure = '#sure' + i;
+            var cancel = '#cancel' + i;
+            var postTerm = '#postTerm' + i;
+            var ID = getCookie('ID');
+            var Today = new Date();
+            var Today2 = +new Date();
+            var newjoin = ID + Today2;
+            var id = 'postTerm' + i
+            var newpost = document.getElementById(id).value;
+            var eatTimeTerm = 'eatTimeTerm' + i;
+            var neweatTime = document.getElementById(eatTimeTerm).value;
+            var postdata = firebase.database().ref('/動態資料/');
+            var fooddata = firebase.database().ref('/美食清單資料/');
+            postdata.once('value', function (psnapshot) {
+                postInf = psnapshot.val();
 
 
 
-                    if (neweatTime == '') {
-                        alert("請輸入要吃飯的時間");
-                    } else {
-                        postdata.push({
-                            EatTime: neweatTime,
-                            JoinKey: ID + Today2,
-                            Address: postInf[i]["Address"],
-                            Phone: postInf[i]["Phone"],
-                            Name: postInf[i]["Name"],
-                            Content: newpost,
-                            UNo: ID,
-                            PDate: Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate(),
-                        });
-                        setTimeout(() => {
-                            document.getElementById(id).value = '';
-                            document.getElementById(eatTimeTerm).value = ''
-                            document.getElementById(id).placeholder = Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate() + "動態發佈成功!!";
-                        }, 0);
-                    }
-                })
-                firebase.database().ref('/加入飯局資料/"' + newjoin + '"').push(ID);
-            });
+                if (neweatTime == '') {
+                    alert("請輸入要吃飯的時間");
+                } else {
+                    postdata.push({
+                        EatTime: neweatTime,
+                        JoinKey: ID + Today2,
+                        Address: postInf[i]["Address"],
+                        Phone: postInf[i]["Phone"],
+                        Name: postInf[i]["Name"],
+                        Content: newpost,
+                        UNo: ID,
+                        Date: Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate(),
+                    });
+                    setTimeout(() => {
+                        document.getElementById(id).value = '';
+                        document.getElementById(eatTimeTerm).value = ''
+                        document.getElementById(id).placeholder = Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate() + "動態發佈成功!!";
+                    }, 0);
+                }
+            })
+            firebase.database().ref('/加入飯局資料/"' + newjoin + '"').push(ID);
+
         }
         function getCookie(name) {
             var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
@@ -1022,6 +1028,49 @@
             pathReference.getDownloadURL().then(function (url) {
                 document.getElementById(img_id).src = url;
             });
+        }
+        function comment_enter(i) {
+            var User = getCookie('ID');
+            var original = 'original' + i;
+            var allComments = '#allComments' + i;
+            var id = 'commentTerm' + i;
+            var content = document.getElementById(id).value; //取得評論內容
+            var name_id = 'name' + i;
+            var name = document.getElementById(name_id).value;
+            var address_id = 'address' + i;
+            var address = document.getElementById(address_id).value;
+            var date = new Date();
+            var today = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
+            var ref = '/評論區資料';
+            db.ref(ref).push({
+                UNo: User,
+                Name: name,
+                Address: address,
+                Date: today,
+                Discon: content
+
+            });
+            console.log(User + '已評論成功! 日期:' + today);
+            setTimeout(() => {
+                document.getElementById(original).style.display = 'none';
+                document.getElementById(id).value = '';
+                document.getElementById(id).placeholder = today + "評論成功!";
+
+                var img_ref = 'user/' + User;       //圖片的路徑
+                var pathReference = firebase.storage().ref().child(img_ref);
+                pathReference.getDownloadURL().then(function (url) {  //將路徑轉換為可使用的URL
+                    var str = '<div class="comments">\
+            <img src="'+ url + '" alt="">\
+            <div class="commentContent">\
+                <p>'+ content + '</p>\
+            </div>\
+        </div>';
+                    $(allComments).prepend(str);
+                })
+
+            }, 0);
+
+
         }
     </script>
 </body>

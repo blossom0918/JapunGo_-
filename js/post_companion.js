@@ -1,6 +1,14 @@
 db = firebase.database();
+var User=getCooike('ID');
+function getCookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
 
+    if (arr = document.cookie.match(reg))
 
+        return unescape(arr[2]);
+    else
+        return null;
+}
 function showallcomment_list(i) {
     var allComments = '#allComments' + i;
     var postArea = '#postArea' + i;
