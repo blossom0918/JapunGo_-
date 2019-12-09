@@ -1,5 +1,5 @@
 db = firebase.database();
-var User=getCooike('ID');
+var User=getCookie('ID');
 function getCookie(name) {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
 

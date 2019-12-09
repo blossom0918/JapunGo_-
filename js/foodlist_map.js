@@ -311,7 +311,7 @@ function post_cancel(i) { //發起動態 取消
 }
 
 //----我要評論---------
-function comment_enter(i) {
+function comment_enterm(i) {
     var original='original'+i;
     var allComments = '#allComments' + i;
     var id = 'comment' + i;
@@ -353,37 +353,37 @@ function comment_enter(i) {
 
 
 }
-function opt1(i) {
+function opt1m(i) {
     var id = 'comment' + i;
     var content = document.getElementById(id).value;
     content = content + ' 環境乾淨 ';
     document.getElementById(id).value = content;
 }
-function opt2(i) {
+function opt2m(i) {
     var id = 'comment' + i;
     var content = document.getElementById(id).value;
     content = content + ' 環境骯髒 ';
     document.getElementById(id).value = content;
 }
-function opt3(i) {
+function opt3m(i) {
     var id = 'comment' + i;
     var content = document.getElementById(id).value;
     content = content + ' 餐點美味 ';
     document.getElementById(id).value = content;
 }
-function opt4(i) {
+function opt4m(i) {
     var id = 'comment' + i;
     var content = document.getElementById(id).value;
     content = content + ' 餐點糟糕 ';
     document.getElementById(id).value = content;
 }
-function opt5(i) {
+function opt5m(i) {
     var id = 'comment' + i;
     var content = document.getElementById(id).value;
     content = content + ' 親切店家 ';
     document.getElementById(id).value = content;
 }
-function opt6(i) {
+function opt6m(i) {
     var id = 'comment' + i;
     var content = document.getElementById(id).value;
     content = content + ' 服務極差 ';
