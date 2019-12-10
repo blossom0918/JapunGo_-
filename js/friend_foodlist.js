@@ -283,8 +283,8 @@ db.ref(ref).once('value', function (snapshot) {
             <div class="postArea" id="postArea'+ n + '">\
                 <div class="postInput">\
                     <input type="text" class="eatTimeTerm"  placeholder="請輸入飯局時間" id="eatTime'+ n + '"/>\
-                    <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="post'+ n + '"></textarea>\
                     <img src="img/pic.png" alt="">\
+                    <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="post'+ n + '"></textarea>\
                 </div>\
                 <div class="btn2">\
                     <button onclick="post_enter(\''+ n + '\')">確定</button>\

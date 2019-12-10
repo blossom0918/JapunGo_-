@@ -132,10 +132,15 @@ function test(Name,Address,Phone,Url) { //infowindow點擊後
     Userimg(User, 0);
     document.getElementById('viewMore').addEventListener('click', function () {
         $('.postArea_map').hide();
-            $('.commentArea_map').hide();
-            $('.btnOption_map').hide();
-            $('.allComments_map').hide();
+        $('.commentArea_map').hide();
+        $('.btnOption_map').hide();
+        $('.allComments_map').hide();
         document.getElementById('info_detail').style.display = "block";
+        var scrollDist = $(window).scrollTop();
+        var myTop = ($(window).height()) / 2;
+        var myLeft = ($(window).width() - document.getElementById('info_detail').width()) / 2;
+        document.getElementById('info_detail').offset({ top: myTop, left: myLeft });
+
         console.log('收到data' + Name);
         document.getElementById('restaurant').innerHTML = Name;
         document.getElementById('name_map').value = Name;
