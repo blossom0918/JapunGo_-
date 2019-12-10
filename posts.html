@@ -270,8 +270,8 @@
                                     str += '<div class="info" id="info' + s + '" style="display: none;">';
                                     str += '<button id="close" onclick=closeInf("' + s + '")><img src="img/cross.png"></button>';
                                     str += '<input type="hidden" id="name' + s + '" value="' + statusInf[s]["Name"] + '">\
-                                                    <input type="hidden" id="address'+ s + '" value="' + statusInf[s]["Address"] + '">\
-                                                    <input type="hidden" id="phone'+ s + '" value="' + statusInf[s]["Phone"] + '">';
+                                            <input type="hidden" id="address'+ s + '" value="' + statusInf[s]["Address"] + '">\
+                                            <input type="hidden" id="phone'+ s + '" value="' + statusInf[s]["Phone"] + '">';
                                     str += '<h3>' + statusInf[s]["Name"] + '</h3>';
                                     str += '<img src="img/pin.png" class="addIcon">';
                                     str += '<p class="address">' + statusInf[s]["Address"] + '</p>';
@@ -318,7 +318,7 @@
                                     str += '<div class="postInput">';
                                     str += '<input type="text" class="eatTimeTerm" placeholder="請輸入飯局時間" id="eatTimeTerm' + s + '">';
                                     str += '<textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="postTerm' + s + '"></textarea>';
-                                    str += '<img src="img/pic.png" alt=""></div>';
+                                    str += '<img id="myimg1' + s + '" src="img/pic.png" alt=""></div>';
                                     str += '<div class="btn2">';
                                     str += '<button id="sure' + s + '" onclick="addpost(\''+s+'\')">確定</button>';
                                     str += '<button id="cancel' + s + '">取消</button>';
@@ -326,7 +326,7 @@
                                     str += '<div class="commentArea" style="display: none;" id="commentArea' + s + '">';
                                     str += '<div class="commentInput">';
                                     str += '<textarea style="overflow:auto" class="commentTerm" id="commentTerm' + s + '"placeholder="請輸入評論內容"></textarea>';
-                                    str += '<img src="img/pic.png" alt=""></div>';
+                                    str += '<img id="myimg2' + s + '" src="img/pic.png" alt=""></div>';
                                     str += '<div class="btn3" id="btn3' + s + '">';
                                     str += '<button id="option' + s + '" onclick="option(\'' + s + '\')">評論選項</button>';
                                     str += '<button id="commentBtn' + s + '" onclick="comment_enter(\'' + s + '\')">我要評論</button>';
@@ -384,8 +384,8 @@
                                                 str += '<div class="info" id="info' + s + '" style="display: none;">';
                                                 str += '<button id="close" onclick=closeInf("' + s + '")><img src="img/cross.png"></button>';
                                                 str += '<input type="hidden" id="name' + s + '" value="' + statusInf[s]["Name"] + '">\
-                                                    <input type="hidden" id="address'+ s + '" value="' + statusInf[s]["Address"] + '">\
-                                                    <input type="hidden" id="phone'+ s + '" value="' + statusInf[s]["Phone"] + '">';
+                                                        <input type="hidden" id="address'+ s + '" value="' + statusInf[s]["Address"] + '">\
+                                                        <input type="hidden" id="phone'+ s + '" value="' + statusInf[s]["Phone"] + '">';
                                                 str += '<h3>' + statusInf[s]["Name"] + '</h3>';
                                                 str += '<img src="img/pin.png" class="addIcon">';
                                                 str += '<p class="address">' + statusInf[s]["Address"] + '</p>';
@@ -432,7 +432,7 @@
                                                 str += '<div class="postInput">';
                                                 str += '<input type="text" class="eatTimeTerm" placeholder="請輸入飯局時間" id="eatTimeTerm' + s + '">';
                                                 str += '<textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="postTerm' + s + '"></textarea>';
-                                                str += '<img src="img/pic.png" alt=""></div>';
+                                                str += '<img id="myimg1' + s + '" src="img/pic.png" alt=""></div>';
                                                 str += '<div class="btn2">';
                                                 str += '<button id="sure' + s + '" onclick="addpost(\''+s+'\')">確定</button>';
                                                 str += '<button id="cancel' + s + '">取消</button>';
@@ -440,18 +440,18 @@
                                                 str += '<div class="commentArea" style="display: none;" id="commentArea' + s + '">';
                                                 str += '<div class="commentInput">';
                                                 str += '<textarea style="overflow:auto" class="commentTerm" id="commentTerm' + s + '"placeholder="請輸入評論內容"></textarea>';
-                                                str += '<img src="img/pic.png" alt=""></div>';
+                                                str += '<img id="myimg2' + s + '" src="img/pic.png" alt=""></div>';
                                                 str += '<div class="btn3" id="btn3' + s + '">';
                                                 str += '<button id="option' + s + '" onclick="option(\'' + s + '\')">評論選項</button>';
                                                 str += '<button id="commentBtn' + s + '" onclick="comment_enter(\'' + s + '\')">我要評論</button>';
                                                 str += '</div>';
                                                 str += '<div class="btnOption" style="display: none;" id="btnOption' + s + '">';
                                                 str += '<button onclick=opt1("' + s + '")>環境乾淨</button>\
-                                    <button onclick=opt2("' + s + '")>環境骯髒</button>\
-                                    <button onclick=opt3("' + s + '")>餐點美味</button>\
-                                    <button onclick=opt4("' + s + '")>餐點糟糕</button>\
-                                    <button onclick=opt5("' + s + '")>親切店家</button>\
-                                    <button onclick=opt6("' + s + '")>服務極差</button></div></div>';
+                                                        <button onclick=opt2("' + s + '")>環境骯髒</button>\
+                                                        <button onclick=opt3("' + s + '")>餐點美味</button>\
+                                                        <button onclick=opt4("' + s + '")>餐點糟糕</button>\
+                                                        <button onclick=opt5("' + s + '")>親切店家</button>\
+                                                        <button onclick=opt6("' + s + '")>服務極差</button></div></div>';
                                                 str += '<div class="allComments" id="allComments' + s + '" style="display: none;">';
                                                 str += '<div class="comments" id="original' + s + '">';
                                                 str += '<img src="img/pic.png" alt="">';
@@ -550,7 +550,7 @@
                                                 str += '<div class="postInput">';
                                                 str += '<input type="text" class="eatTimeTerm" placeholder="請輸入飯局時間" id="eatTimeTerm' + s + '">';
                                                 str += '<textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="postTerm' + s + '"></textarea>';
-                                                str += '<img src="img/pic.png" alt=""></div>';
+                                                str += '<img id="myimg1' + s + '" src="img/pic.png" alt=""></div>';
                                                 str += '<div class="btn2">';
                                                 str += '<button id="sure' + s + '" onclick="addpost(\''+s+'\')">確定</button>';
                                                 str += '<button id="cancel' + s + '">取消</button>';
@@ -558,18 +558,18 @@
                                                 str += '<div class="commentArea" style="display: none;" id="commentArea' + s + '">';
                                                 str += '<div class="commentInput">';
                                                 str += '<textarea style="overflow:auto" class="commentTerm" id="commentTerm' + s + '"placeholder="請輸入評論內容"></textarea>';
-                                                str += '<img src="img/pic.png" alt=""></div>';
+                                                str += '<img id="myimg2' + s + '" src="img/pic.png" alt=""></div>';
                                                 str += '<div class="btn3" id="btn3' + s + '">';
                                                 str += '<button id="option' + s + '" onclick="option(\'' + s + '\')">評論選項</button>';
                                                 str += '<button id="commentBtn' + s + '" onclick="comment_enter(\'' + s + '\')">我要評論</button>';
                                                 str += '</div>';
                                                 str += '<div class="btnOption" style="display: none;" id="btnOption' + s + '">';
                                                 str += '<button onclick=opt1("' + s + '")>環境乾淨</button>\
-                                    <button onclick=opt2("' + s + '")>環境骯髒</button>\
-                                    <button onclick=opt3("' + s + '")>餐點美味</button>\
-                                    <button onclick=opt4("' + s + '")>餐點糟糕</button>\
-                                    <button onclick=opt5("' + s + '")>親切店家</button>\
-                                    <button onclick=opt6("' + s + '")>服務極差</button></div></div>';
+                                                        <button onclick=opt2("' + s + '")>環境骯髒</button>\
+                                                        <button onclick=opt3("' + s + '")>餐點美味</button>\
+                                                        <button onclick=opt4("' + s + '")>餐點糟糕</button>\
+                                                        <button onclick=opt5("' + s + '")>親切店家</button>\
+                                                        <button onclick=opt6("' + s + '")>服務極差</button></div></div>';
                                                 str += '<div class="allComments"  id="allComments' + s + '" style="display: none;">';
                                                 str += '<div class="comments" id="original' + s + '">';
                                                 str += '<img src="img/pic.png" alt="">';
