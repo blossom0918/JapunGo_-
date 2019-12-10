@@ -136,7 +136,7 @@ function creat_infowindow(position, marker) {
 }
 
 function test(data) { //infowindow點擊後
-
+    Userimg(User, 0);
     document.getElementById('viewMore').addEventListener('click', function () {
         document.getElementById('info_detail').style.display = "block";
         console.log('收到data' + data.店名);
@@ -255,7 +255,7 @@ db.ref(ref).once('value', function (snapshot) {
                 <div class="postInput">\
                     <input type="text" class="eatTimeTerm"  placeholder="請輸入飯局時間" id="eatTime'+ n + '"/>\
                     <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="post'+ n + '"></textarea>\
-                    <img src="img/pic.png" alt="">\
+                    <img id="myimg1'+n+'" src="img/pic.png" alt="">\
                 </div>\
                 <div class="btn2">\
                     <button onclick="post_enter(\''+ n + '\')">確定</button>\
@@ -265,7 +265,7 @@ db.ref(ref).once('value', function (snapshot) {
             <div class="commentArea" id="commentArea'+ n + '">\
                 <div class="commentInput">\
                     <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容" id="comment'+ n + '"></textarea>\
-                    <img src="img/pic.png" alt="">\
+                    <img id="myimg2'+n+'" src="img/pic.png" alt="">\
                 </div>\
                 <div class="btn3">\
                     <button id="option" onclick="show_option('+ n + ')">評論選項</button>\
@@ -294,10 +294,13 @@ db.ref(ref).once('value', function (snapshot) {
             list += clear;
         }
         n += 1;
-    }
+    } 
     document.getElementById('list').innerHTML = list;
     //抓取評論資料
     setTimeout(() => {
+        for(let i=1;i<n;i++){
+            Userimg(User,i);
+        }
         var allcomment_ref = '/評論區資料';
         db.ref(allcomment_ref).once('value', function (snapshot) {
             var q = 1;
@@ -380,6 +383,17 @@ function getimg(user, imgid) {
     var pathReference = storageRef.child(img_ref);
     pathReference.getDownloadURL().then(function (url) {
         document.getElementById(img_id).src = url;
+    });
+}
+function Userimg(user, i) {
+    var img1 = 'myimg1'+i;
+    var img2 = 'myimg2'+i;
+    var storageRef = firebase.storage().ref();
+    var img_ref = 'user/' + user;
+    var pathReference = storageRef.child(img_ref);
+    pathReference.getDownloadURL().then(function (url) {
+        document.getElementById(img1).src = url;
+        document.getElementById(img2).src = url;
     });
 }
 
