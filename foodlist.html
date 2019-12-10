@@ -365,7 +365,7 @@
                                     <div class="postInput">\
                                         <input type="text" class="eatTimeTerm" placeholder="請輸入飯局時間" id="eatTimeTerm'+ j + '"/>\
                                         <textarea id="postTerm'+ j + '" style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>\
-                                        <img src="img/pic.png" alt="">\
+                                        <img id="myimg1'+j+'" src="img/pic.png" alt="">\
                                     </div>\
                                     <div class="btn2">\
                                     <button id="sure'+ j + '" onclick="addpost(\'' + j + '\')">確定</button>\
@@ -373,7 +373,7 @@
                                     </div>\
                                     </div>';
                                 str += '<div class="commentArea" id="commentArea' + j + '" style="display:none">';
-                                str += '<div class="commentInput"><textarea id="commentTerm' + j + '" style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea><img src="img/pic.png" alt=""></div>';
+                                str += '<div class="commentInput"><textarea id="commentTerm' + j + '" style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea><img id="myimg2'+j+'" src="img/pic.png" alt=""></div>';
                                 str += '<div class="btn3" id="btn3' + j + '"><button id="option' + j + '" onclick="option(\'' + j + '\')">評論選項</button><button id="commentBtn' + j + '" onclick="comment_enter(\''+j+'\')">我要評論</button></div>';
                                 str += '<div class="btnOption" style="display: none;" id="btnOption' + j + '">';
                                 str += '<button onclick=opt1("' + j + '")>環境乾淨</button>\
@@ -409,6 +409,11 @@
                         $('.postArea').hide();
                         $('.allComments').hide();
                         $('.btnOption').hide();
+                        var ID = getCookie('ID');
+                        for(i in commit_id){
+                            Userimg(ID, commit_id[i]);
+                        }
+                        
                         var allcomment_ref = '/評論區資料';
 
                                 db.ref(allcomment_ref).once('value', function (snapshot) {
@@ -505,7 +510,7 @@
                                                     <div class="postInput">\
                                                     <input type="text" class="eatTimeTerm" placeholder="請輸入飯局時間" id="eatTimeTerm'+ f2 + '"/>\
                                                     <textarea id="postTerm'+ f2 + '" style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>\
-                                                    <img src="img/pic.png" alt="">\
+                                                    <img id="myimg1'+f2+'" src="img/pic.png" alt="">\
                                                     </div>\
                                                     <div class="btn2">\
                                                     <button id="sure'+ f2 + '" onclick="addpost(\'' + f2 + '\')">確定</button>\
@@ -514,7 +519,7 @@
                                                     </div>';
 
                                                         str += '<div class="commentArea" id="commentArea' + f2 + '" style="display:none">';
-                                                        str += '<div class="commentInput"><textarea id="commentTerm' + f2 + '" style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea><img src="img/pic.png" alt=""></div>';
+                                                        str += '<div class="commentInput"><textarea id="commentTerm' + f2 + '" style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea><img id="myimg2'+f2+'" src="img/pic.png" alt=""></div>';
                                                         str += '<div class="btn3" id="btn3' + f2 + '"><button id="option' + f2 + '" onclick="option(\'' + f2 + '\')">評論選項</button><button id="commentBtn' + f2 + '" onclick="comment_enter(\''+f2+'\')">發表評論</button></div>';
                                                         str += '<div class="btnOption" style="display: none;" id="btnOption' + f2 + '">';
                                                         str += '<button onclick=opt1("' + f2 + '")>環境乾淨</button>\
@@ -579,7 +584,7 @@
                                                     <div class="postInput">\
                                                     <input type="text" class="eatTimeTerm" placeholder="請輸入飯局時間" id="eatTimeTerm'+ f2 + '"/>\
                                                     <textarea id="postTerm'+ f2 + '" style="overflow:auto" class="postTerm" placeholder="請輸入動態內容"></textarea>\
-                                                    <img src="img/pic.png" alt="">\
+                                                    <img id="myimg1'+f2+'" src="img/pic.png" alt="">\
                                                     </div>\
                                                     <div class="btn2">\
                                                     <button id="sure'+ f2 + '" onclick="addpost(\'' + f2 + '\')">確定</button>\
@@ -588,7 +593,7 @@
                                                     </div>';
 
                                                     str += '<div class="commentArea" id="commentArea' + f2 + '" style="display:none">';
-                                                    str += '<div class="commentInput"><textarea id="commentTerm' + f2 + '" style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea><img src="img/pic.png" alt=""></div>';
+                                                    str += '<div class="commentInput"><textarea id="commentTerm' + f2 + '" style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容"></textarea><img id="myimg2'+f2+'" src="img/pic.png" alt=""></div>';
                                                     str += '<div class="btn3" id="btn3' + f2 + '"><button id="option' + f2 + '" onclick="option(\'' + f2 + '\')">評論選項</button><button id="commentBtn' + f2 + '" onclick="comment_enter(\''+f2+'\')">發表評論</button></div>';
 
                                                     str += '<div class="btnOption" style="display: none;" id="btnOption' + f2 + '">';
