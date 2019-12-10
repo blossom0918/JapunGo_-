@@ -548,6 +548,12 @@ table {
       min-width: 60%;
     }
 
+    #friendInfo{
+      width: 90%;
+      margin-left: 5%;
+      left: unset;
+    }
+
     .info{
       width: 90%;
       margin-top: 30px;
