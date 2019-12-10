@@ -157,6 +157,8 @@ table {
     text-align: center;
     font-size: 18px;
     margin-top: 20px;
+    margin-left: 2px;
+    margin-right: 2px;
   }
 
   .content{
@@ -279,7 +281,7 @@ table {
 
   .textarea{
     overflow: auto; 
-    width: 365px; 
+    width: 100%; 
     font-size: 18px;
     max-height: 100px;
     display: table-cell;
