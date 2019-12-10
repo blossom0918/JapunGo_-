@@ -129,7 +129,7 @@ function creat_infowindow(position, marker) {
 }
 
 function test(Name,Address,Phone,Url) { //infowindow點擊後
-
+    Userimg(User, 0);
     document.getElementById('viewMore').addEventListener('click', function () {
         $('.postArea_map').hide();
             $('.commentArea_map').hide();
@@ -227,6 +227,17 @@ function getimg(user, imgid) {
     var pathReference = storageRef.child(img_ref);
     pathReference.getDownloadURL().then(function (url) {
         document.getElementById(img_id).src = url;
+    });
+}
+function Userimg(user, i) {
+    var img1 = 'myimg1'+i;
+    var img2 = 'myimg2'+i;
+    var storageRef = firebase.storage().ref();
+    var img_ref = 'user/' + user;
+    var pathReference = storageRef.child(img_ref);
+    pathReference.getDownloadURL().then(function (url) {
+        document.getElementById(img1).src = url;
+        document.getElementById(img2).src = url;
     });
 }
 
