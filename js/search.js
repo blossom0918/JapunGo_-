@@ -204,7 +204,7 @@ function creat_list1(data) {
     <div class="postArea" id="postArea'+ n + '">\
         <div class="postInput">\
             <input type="text" class="eatTimeTerm"  placeholder="請輸入飯局時間" id="eatTime'+ n + '"/>\
-            <img src="img/pic.png" alt="">\
+            <img  id="myimg1'+ n + '" src="img/pic.png" alt="">\
             <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="post'+ n + '"></textarea>\
         </div>\
         <div class="btn2">\
@@ -215,7 +215,7 @@ function creat_list1(data) {
     <div class="commentArea" id="commentArea'+ n + '">\
         <div class="commentInput">\
             <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容" id="comment'+ n + '"></textarea>\
-            <img src="img/pic.png" alt="">\
+            <img id="myimg2'+ n + '" src="img/pic.png" alt="">\
         </div>\
         <div class="btn3">\
             <button id="option" onclick="show_option(\''+ n + '\')">評論選項</button>\
@@ -253,6 +253,7 @@ function creat_list1(data) {
         $('.postArea').hide();
         $('.allComments').hide();
         $('.btnOption').hide();
+        Userimg(User,n);
         //---抓評論資料-----------
         var allcomment_ref = '/評論區資料';
         db.ref(allcomment_ref).once('value', function (snapshot) {
@@ -314,7 +315,7 @@ function creat_list2(data) {
     <div class="postArea" id="postArea'+ n + '">\
         <div class="postInput">\
             <input type="text" class="eatTimeTerm"  placeholder="請輸入飯局時間" id="eatTime'+ n + '"/>\
-            <img src="img/pic.png" alt="">\
+            <img id="myimg1'+ n + '" src="img/pic.png" alt="">\
             <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="post'+ n + '"></textarea>\
         </div>\
         <div class="btn2">\
@@ -325,7 +326,7 @@ function creat_list2(data) {
     <div class="commentArea" id="commentArea'+ n + '">\
         <div class="commentInput">\
             <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容" id="comment'+ n + '"></textarea>\
-            <img src="img/pic.png" alt="">\
+            <img id="myimg2'+ n + '" src="img/pic.png" alt="">\
         </div>\
         <div class="btn3">\
             <button id="option" onclick="show_option(\''+ n + '\')">評論選項</button>\
@@ -362,6 +363,7 @@ function creat_list2(data) {
         $('.postArea').hide();
         $('.allComments').hide();
         $('.btnOption').hide();
+        Userimg(User,n);
         //---抓評論資料-----------
         var allcomment_ref = '/評論區資料';
         db.ref(allcomment_ref).once('value', function (snapshot) {
@@ -472,7 +474,7 @@ function show_option(i) {
 }
 
 function open_info_div(data) { //infowindow點擊後
-
+    Userimg(User, 0);
     document.getElementById('viewMore').addEventListener('click', function () {
         document.getElementById('info_detail').style.display = "block";
         console.log('收到data' + data.restaurant);
@@ -553,6 +555,17 @@ function getimg(user, imgid) {
     var pathReference = storageRef.child(img_ref);
     pathReference.getDownloadURL().then(function (url) {
         document.getElementById(img_id).src = url;
+    });
+}
+function Userimg(user, i) {
+    var img1 = 'myimg1'+i;
+    var img2 = 'myimg2'+i;
+    var storageRef = firebase.storage().ref();
+    var img_ref = 'user/' + user;
+    var pathReference = storageRef.child(img_ref);
+    pathReference.getDownloadURL().then(function (url) {
+        document.getElementById(img1).src = url;
+        document.getElementById(img2).src = url;
     });
 }
 
