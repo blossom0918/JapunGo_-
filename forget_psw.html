@@ -62,46 +62,48 @@
                 $("#confirm").on('click',function(){
                     var id= $("#id").val();
                     var email=$("#email").val();         
-                    var obj = Object.keys(data).map(function(_) { return data[_]; });
+                   // var obj = Object.keys(data).map(function(_) { return data[_]; });
                     var flag = 0;
-
-                    for(var i = 0; i < obj.length; i++){
-                        if(id == obj[i].ID && email == obj[i].Email){
+                    var pwd = "";
+                    for(i in data){
+                        if(id == data[i].ID && email == data[i].Email){
                             flag = 1;
-                            var len = 12;
-                            var chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
-                            var charsLen = chars.length;
-                            var pwd = "";
-                            for (i = 0; i <= len; i++) {
-                        　　    pwd += chars.charAt(Math.floor(Math.random() * charsLen));
-                            }
-
-                            for(var j in data){
-                                if(data[j]["ID"] == id){
-                                    var oldData = firebase.database().ref('/會員資料/'+j);
-                                    oldData.update({
-                                        PassWd:pwd
-                                    })
-                                }
-                            }
-
-                            Email.send({
-                                SecureToken : "6b160564-f392-4a71-9448-e167760c70ce",
-                                To : email,
-                                From : "japungoservice@gmail.com",
-                                Subject : "JapunGo臨時密碼",
-                                Body :  "親愛的會員您好，" + pwd + "是您的臨時密碼，請在登入後至「修改會員資料」重新設置密碼。"
-                            }).then(
-                                alert("臨時密碼郵件已寄出，請至信箱查詢"),
-                                window.location.href="login.html"
-                            );
-                        }else if(id != obj[i].ID && email == obj[i].Email){
+                        }else if(id != data[i].ID && email == data[i].Email){
                             flag = 2;    
-                        }else if(id == obj[i].ID && email != obj[i].Email){
+                        }else if(id == data[i].ID && email != data[i].Email){
                             flag = 3;
                         }
                     }
+                    if (flag == 1){
+                        
+                         var len = 12;
+                             var chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
+                             var charsLen = chars.length;
+                            
+                             for (i = 0; i <= len; i++) {
+                         　　    pwd += chars.charAt(Math.floor(Math.random() * charsLen));
+                             }
 
+                             for(var j in data){
+                                 if(data[j]["ID"] == id){
+                                     var oldData = firebase.database().ref('/會員資料/'+j);
+                                     oldData.update({
+                                         PassWd:pwd
+                                     })
+                                 }
+                             }
+                        console.log(email+'******'+pwd);
+                         Email.send({
+                                 SecureToken : "6b160564-f392-4a71-9448-e167760c70ce",
+                                 To : email,
+                                 From : "japungoservice@gmail.com",
+                                 Subject : "JapunGo臨時密碼",
+                                 Body :  "親愛的會員您好，" + pwd + "是您的臨時密碼，請在登入後至「修改會員資料」重新設置密碼。"
+                             }).then(
+                                 alert("臨時密碼郵件已寄出，請至信箱查詢"),
+                                 window.location.href="login.html"
+                             );
+                    }
                     if(flag == 0){
                         var yes = confirm("輸入的帳號和信箱有誤，請點擊「確定」再次輸入；若還不是會員請點擊「取消」前往註冊");
                         if(yes) {
