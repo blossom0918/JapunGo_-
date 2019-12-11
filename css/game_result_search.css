@@ -1019,6 +1019,12 @@ table {
       width: 70%;
       margin-left: 5%;
     }
+    
+    .info_detail{
+      width: 90%;
+      margin-left: 5%;
+      left: unset;
+    }
 
     .postArea_map{
         width: 90%;
