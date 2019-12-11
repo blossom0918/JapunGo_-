@@ -295,61 +295,61 @@ function creat_list2(data) {
     var n = 'n' + data.id;
     var allList = document.getElementById("allList").value;
     var str =allList+ '<div class="info">\
-    <input type="hidden" id="name'+ n + '" value="' + data.name + '">\
-    <input type="hidden" id="address'+ n + '" value="' + data.formatted_address + '">\
-    <input type="hidden" id="phone'+ n + '" value="' + data.formatted_phone_number + '">\
-    <h3>'+ data.name + '</h3>\
-    <img src="img/pin.png" class="addIcon">\
-    <p class="address">'+ data.formatted_address + '</p>\
-    <img src="img/tel.png" class="telIcon">\
-    <p class="tel">'+ data.formatted_phone_number + '</p>\
-    <div class="btn0">\
-        <button class="showAllComments" onclick="showallcomment_list(\''+ n + '\')"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>\
-        </div>\
-    <div class="btn">\
-        <button id="post" onclick="show_post(\''+ n + '\')">發起動態</button>\
-        <button id="comment" onclick="my_comment(\''+ n + '\')">我要評論</button>\
-        <button onclick="favorite(\''+ n + '\')" id="favorite' + n + '">加入清單</button>\
-        <!-- 已在清單內顯示移除，尚未加入顯示加入 -->\
-    </div>\
-    <div class="postArea" id="postArea'+ n + '">\
-        <div class="postInput">\
-            <input type="text" class="eatTimeTerm"  placeholder="請輸入飯局時間" id="eatTime'+ n + '"/>\
-            <img id="myimg1'+ n + '" src="img/pic.png" alt="">\
-            <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="post'+ n + '"></textarea>\
-        </div>\
-        <div class="btn2">\
-            <button onclick="post_enter(\''+ n + '\')">確定</button>\
-            <button onclick="post_cancel(\''+ n + '\')">取消</button>\
-        </div>\
-    </div>\
-    <div class="commentArea" id="commentArea'+ n + '">\
-        <div class="commentInput">\
-            <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容" id="comment'+ n + '"></textarea>\
-            <img id="myimg2'+ n + '" src="img/pic.png" alt="">\
-        </div>\
-        <div class="btn3">\
-            <button id="option" onclick="show_option(\''+ n + '\')">評論選項</button>\
-            <button onclick="comment_enter(\''+ n + '\')">我要評論</button>\
-        </div>\
-        <div class="btnOption" id="btnOption'+ n + '">\
-            <button onclick="opt1(\''+ n + '\')">環境乾淨</button>\
-            <button onclick="opt2(\''+ n + '\')">環境骯髒</button>\
-            <button onclick="opt3(\''+ n + '\')">餐點美味</button>\
-            <button onclick="opt4(\''+ n + '\')">餐點糟糕</button>\
-            <button onclick="opt5(\''+ n + '\')">親切店家</button>\
-            <button onclick="opt6(\''+ n + '\')">服務極差</button>\
-        </div>\
-    </div>\
-    <div class="allComments" id="allComments'+ n + '">\
-        <div class="comments" id="original'+ n + '">\
-            <img src="img/pic.png" alt="">\
-            <div class="commentContent">\
-                <p>還沒有人發表評論喔~</p>\
-            </div>\
-        </div>\
-    </div>\
-</div>';
+                        <input type="hidden" id="name'+ n + '" value="' + data.name + '">\
+                        <input type="hidden" id="address'+ n + '" value="' + data.formatted_address + '">\
+                        <input type="hidden" id="phone'+ n + '" value="' + data.formatted_phone_number + '">\
+                        <h3>'+ data.name + '</h3>\
+                        <img src="img/pin.png" class="addIcon">\
+                        <p class="address">'+ data.formatted_address + '</p>\
+                        <img src="img/tel.png" class="telIcon">\
+                        <p class="tel">'+ data.formatted_phone_number + '</p>\
+                        <div class="btn0">\
+                            <button class="showAllComments" onclick="showallcomment_list(\''+ n + '\')"><img src="img/show_comment.png" class="commentIcon">顯示評論區</button>\
+                            </div>\
+                        <div class="btn">\
+                            <button id="post" onclick="show_post(\''+ n + '\')">發起動態</button>\
+                            <button id="comment" onclick="my_comment(\''+ n + '\')">我要評論</button>\
+                            <button onclick="favorite(\''+ n + '\')" id="favorite' + n + '">加入清單</button>\
+                            <!-- 已在清單內顯示移除，尚未加入顯示加入 -->\
+                        </div>\
+                        <div class="postArea" id="postArea'+ n + '">\
+                        <div class="postInput">\
+                            <input type="text" class="eatTimeTerm"  placeholder="請輸入飯局時間" id="eatTime'+ n + '"/>\
+                            <img id="myimg1'+ n + '" src="img/pic.png" alt="">\
+                            <textarea style="overflow:auto" class="postTerm" placeholder="請輸入動態內容" id="post'+ n + '"></textarea>\
+                        </div>\
+                        <div class="btn2">\
+                            <button onclick="post_enter(\''+ n + '\')">確定</button>\
+                            <button onclick="post_cancel(\''+ n + '\')">取消</button>\
+                        </div>\
+                    </div>\
+                    <div class="commentArea" id="commentArea'+ n + '">\
+                        <div class="commentInput">\
+                            <textarea style="overflow:auto" class="commentTerm" placeholder="請輸入評論內容" id="comment'+ n + '"></textarea>\
+                            <img id="myimg2'+ n + '" src="img/pic.png" alt="">\
+                        </div>\
+                        <div class="btn3">\
+                            <button id="option" onclick="show_option(\''+ n + '\')">評論選項</button>\
+                            <button onclick="comment_enter(\''+ n + '\')">我要評論</button>\
+                        </div>\
+                        <div class="btnOption" id="btnOption'+ n + '">\
+                            <button onclick="opt1(\''+ n + '\')">環境乾淨</button>\
+                            <button onclick="opt2(\''+ n + '\')">環境骯髒</button>\
+                            <button onclick="opt3(\''+ n + '\')">餐點美味</button>\
+                            <button onclick="opt4(\''+ n + '\')">餐點糟糕</button>\
+                            <button onclick="opt5(\''+ n + '\')">親切店家</button>\
+                            <button onclick="opt6(\''+ n + '\')">服務極差</button>\
+                        </div>\
+                    </div>\
+                    <div class="allComments" id="allComments'+ n + '">\
+                        <div class="comments" id="original'+ n + '">\
+                            <img src="img/pic.png" alt="">\
+                            <div class="commentContent">\
+                                <p>還沒有人發表評論喔~</p>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </div>';
     clear.push(data.id);
     if (clear.length % 2 == 0) {
         str += '<div style="clear:both;"></div>';

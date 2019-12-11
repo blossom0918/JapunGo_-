@@ -246,13 +246,13 @@ table {
   .address{
     font-size: 20px;
     margin-top: 25px;
+    margin-left: 45px;
+    margin-right: 15px;
   }
 
   .tel{
     font-size: 20px;
     margin-top: 25px;
-    margin-left: 45px;
-    margin-right: 15px;
   }
 
   .recommend{
