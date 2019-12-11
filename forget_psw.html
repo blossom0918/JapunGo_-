@@ -99,9 +99,11 @@
                                  Subject : "JapunGo臨時密碼",
                                  Body :  "親愛的會員您好，" + pwd + "是您的臨時密碼，請在登入後至「修改會員資料」重新設置密碼。"
                              }).then(
-                                 alert("臨時密碼郵件已寄出，請至信箱查詢"),
-                                 window.location.href="login.html"
+                                 alert("臨時密碼郵件已寄出，請至信箱查詢"),  
                              );
+                             setTimeout(() => {
+                                window.location.href="login.html"
+                             }, 3000);
                     }
                     if(flag == 0){
                         var yes = confirm("輸入的帳號和信箱有誤，請點擊「確定」再次輸入；若還不是會員請點擊「取消」前往註冊");
