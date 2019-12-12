@@ -974,6 +974,11 @@ table {
       height: auto;
       margin-left: 5%;
     }
+
+    .eatTimeTerm{
+      width: 70%;
+      margin-left: 5%;
+    }
   
     .postTerm{
       width: 70%;
