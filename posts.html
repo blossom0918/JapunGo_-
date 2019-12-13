@@ -242,7 +242,6 @@
                             var flag2 = 0;//判斷顯示刪除或新增
                             for (var s in statusInf) {
                                 if (statusInf[s]["UNo"] == ID) {
-                                    flag2 = 0;
                                     post_name.push(statusInf[s].Name);
                                     commit_id.push(s);
                                     join_key.push(statusInf[s].JoinKey);
@@ -307,13 +306,13 @@
                                             for (var f2 in foodInf[f]) {
                                                 if (foodInf[f][f2]["Name"] == statusInf[s]["Name"]) {
                                                     flag2++;
-                                                    str += '<button id="addbtn'+s+'" onclick=Dellist("' + s + '")>自清單移除</button></div>';
+                                                    str += '<button onclick=Dellist("' + s + '")>自清單移除</button></div>';
                                                 }
                                             }
                                         }
                                     }
                                     if (flag2 == 0) {
-                                        str += '<button id="addbtn'+s+'" onclick=addlist("' + s + '")>加入清單</button></div>';
+                                        str += '<button onclick=addlist("' + s + '")>加入清單</button></div>';
                                     }
                                     str += '<div class="postArea" style="display: none;" id="postArea' + s + '">';
                                     str += '<div class="postInput">';
@@ -358,7 +357,6 @@
                                                         var UserName = memberInf[m]["Name"];
                                                     }
                                                 }
-                                                flag2 = 0;
                                                 post_name.push(statusInf[s].Name);
                                                 commit_id.push(s);
                                                 join_key.push(statusInf[s].JoinKey);
@@ -422,13 +420,13 @@
                                                         for (var f2 in foodInf[f]) {
                                                             if (foodInf[f][f2]["Name"] == statusInf[s]["Name"]) {
                                                                 flag2++;
-                                                                str += '<button id="addbtn'+s+'" onclick=Dellist("' + s + '")>自清單移除</button></div>';
+                                                                str += '<button onclick=Dellist("' + s + '")>自清單移除</button></div>';
                                                             }
                                                         }
                                                     }
                                                 }
                                                 if (flag2 == 0) {
-                                                    str += '<button id="addbtn'+s+'" onclick=addlist("' + s + '")>加入清單</button></div>';
+                                                    str += '<button onclick=addlist("' + s + '")>加入清單</button></div>';
                                                 }
                                                 str += '<div class="postArea" style="display: none;" id="postArea' + s + '">';
                                                 str += '<div class="postInput">';
@@ -477,7 +475,6 @@
                                                         var UserName = memberInf[m]["Name"];
                                                     }
                                                 }
-                                                flag2 = 0;
                                                 post_name.push(statusInf[s].Name);
                                                 commit_id.push(s);
                                                 join_key.push(statusInf[s].JoinKey);
@@ -541,13 +538,13 @@
                                                         for (var f2 in foodInf[f]) {
                                                             if (foodInf[f][f2]["Name"] == statusInf[s]["Name"]) {
                                                                 flag2++;
-                                                                str += '<button id="addbtn'+s+'" onclick=Dellist("' + s + '")>自清單移除</button></div>';
+                                                                str += '<button onclick=Dellist("' + s + '")>自清單移除</button></div>';
                                                             }
                                                         }
                                                     }
                                                 }
                                                 if (flag2 == 0) {
-                                                    str += '<button id="addbtn'+s+'" onclick=addlist("' + s + '")>加入清單</button></div>';
+                                                    str += '<button onclick=addlist("' + s + '")>加入清單</button></div>';
                                                 }
                                                 str += '<div class="postArea" style="display: none;" id="postArea' + s + '">';
                                                 str += '<div class="postInput">';
@@ -592,6 +589,18 @@
                             $('.confirmEdit').hide();
                             $('.cancelEdit').hide();
                             $('.moreCompanion').hide();
+
+                            $(document).ready(function(){
+                                var post = $('.statusContent');                           
+                                var myLeft = ($(window).width() - post.width()) / 2;
+                                post.offset({left: myLeft});
+
+                                $(window).resize(function() {
+                                    myLeft = ($(window).width() - post.width()) / 2;
+                                    post.offset({left: myLeft});
+                                });
+                            });
+
                             setTimeout(() => {
                                 //-----發佈者的頭貼-----
                                 for (p in post_id) {
@@ -705,7 +714,6 @@
             });
         }
         function addlist(i) {
-            var btn='addbtn'+i;
             var fooddata = firebase.database().ref('/美食清單資料/');
             var postdata = firebase.database().ref('/動態資料/');
             var ID = getCookie('ID');
@@ -740,12 +748,9 @@
 
                 });
             })
-            document.getElementById(btn).setAttribute("onclick", "javascript: Dellist('" + i + "');");
-            document.getElementById(btn).innerHTML = '自清單移除';
         }
 
         function Dellist(i) {
-            var btn='addbtn'+i;
             var fooddata = firebase.database().ref('/美食清單資料/');
             var postdata = firebase.database().ref('/動態資料/');
             var flag = 0;
@@ -764,9 +769,6 @@
                     }
                 });
             });
-            document.getElementById(btn).setAttribute("onclick", "javascript: addlist('" + i + "');");
-            document.getElementById(btn).innerHTML = '加入清單';
-
         }
 
         function comment(i) {
@@ -793,8 +795,6 @@
             var btnOption = '#btnOption' + i;
             $(btnOption).slideToggle();
         }
-
-
 
         function edit(i) {
             var confirmEdit = "#confirmEdit" + i;
@@ -875,8 +875,6 @@
             postdata.once('value', function (psnapshot) {
                 postInf = psnapshot.val();
 
-
-
                 if (neweatTime == '') {
                     alert("請輸入要吃飯的時間");
                 } else {
@@ -936,6 +934,12 @@
             var myTop = ($(post).offset().top);
             var myLeft = ($(window).width() - $(info).width()) / 2;
             $(info).offset({ top: myTop, left: myLeft });
+
+            $(window).resize(function() {
+                var myTop = ($(post).offset().top);
+                var myLeft = ($(window).width() - $(info).width()) / 2;
+                $(info).offset({ top: myTop, left: myLeft });
+            });
 
         }
         function closeInf(s) {
