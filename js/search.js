@@ -20,7 +20,7 @@ var mylocation;
 var marker_count = [];
 var list_str = "";
 var User = getCookie('ID');
-//var User = 'opop';  //為方便更改功能先設為opop
+
 function getCookie(name) {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
     if (arr = document.cookie.match(reg))
@@ -33,17 +33,17 @@ var clear = [];
 
 initMap();
 
-//未寫清除標記，若多次搜尋會覆蓋 sad
+
 
 //用Text Search來搜尋使用者輸入的關鍵字
 //https://developers.google.com/maps/documentation/javascript/places?hl=zh-TW#TextSearchRequests
 
 function initMap() {
-    start_map = new google.maps.Map(document.getElementById('map'), {
+    start_map = new google.maps.Map(document.getElementById('map'), { //畫起始地圖
         center: { lat: 22.8, lng: 120.20 },
         zoom: 10
     });
-    navigator.geolocation.getCurrentPosition(function (position) {
+    navigator.geolocation.getCurrentPosition(function (position) { //定位
         my_lat = Number(position.coords.latitude);
         my_lng = Number(position.coords.longitude);
         currentLocation = {
@@ -51,7 +51,7 @@ function initMap() {
             lng: position.coords.longitude
         };
         mylocation = new google.maps.LatLng(my_lat, my_lng);
-        map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), { //定位地圖
             center: currentLocation,
             zoom: 14,
             mapTypeControl: false,
@@ -126,7 +126,7 @@ function callback(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
 
         for (var i = 0; i < results.length; i++) {
-            if (google.maps.geometry.spherical.computeDistanceBetween(results[i].geometry.location, mylocation) < 3000) {
+            if (google.maps.geometry.spherical.computeDistanceBetween(results[i].geometry.location, mylocation) < 3000) {  //篩選3公里內餐廳
                 for (n in results[i].types) {
                     if (results[i].types[n] == 'restaurant') {
 
@@ -139,7 +139,7 @@ function callback(results, status) {
                             // $("#list").append('<div style="clear:both;"></div>');
 
                         } else {
-                            service.getDetails(request2, callback2);
+                            service.getDetails(request2, callback2);  //取得餐廳詳細資料並標記
                         }
 
                         resultCount++;
